@@ -1,1 +1,1 @@
-[{"pk": 1, "model": "municipales2012.region", "fields": {"nombre": "Metropolitana"}}, {"pk": 1, "model": "municipales2012.comuna", "fields": {"nombre": "Santiago", "region": 1}}]
+[{"pk": 1, "model": "municipales2012.region", "fields": {"nombre": "Metropolitana"}}, {"pk": 1, "model": "municipales2012.comuna", "fields": {"nombre": "Santiago", "region": 1 , "slug": "santiago"}}]
