@@ -16,11 +16,12 @@
 
 /*-----HOME  -----------*/
 .buscadorPpal {
-	background-color: #EEEEEE;
+	background-color: #26B4E9;
     border-radius: 6px 6px 6px 6px;
     margin-bottom: 30px;
     padding: 60px;
-	margin-top:120px;
+	margin-top:128px;
+	color:white;
 	}
 	
 .menuPpal {
@@ -123,13 +124,24 @@
 
 .itemFooter{
 	list-style: none outside none;
-    margin-left: 13px;
+    margin-left: 11px;
     margin-right: 13px;
-    margin-top: 43px;
+    margin-top: 28px;
 	}
 	
 .flotarIzq{
 	float:left;
+	}
+
+.footerTexto {
+	font-family:Georgia, "Times New Roman", Times, serif;
+	font-size:10px;
+	font-style:italic;
+	color: #FFFFFF;
+	margin-top:10px;
+	float:left;
+	margin-left: 17px;
+    margin-right: 129px;
 	}
 	
 /* -------- MUNICIPALIDADES ---------- */	
