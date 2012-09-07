@@ -41,7 +41,7 @@ class HomeTestCase(TestCase):
 		self.assertTemplateUsed(response, 'home.html')
 
 	
-	def test_trae_los_nombres_de_las_comunas(self):
+	def test_trae_los_nombres_de_las_comunas_y_las_regiones(self):
 		region = Region.objects.create(nombre=u"La región")
 		comuna1 = Comuna.objects.create(nombre=u"La comuna1", slug=u"la-comuna1", region=region)
 		comuna2 = Comuna.objects.create(nombre=u"La comuna2", slug=u"la-comuna2", region=region)
@@ -51,6 +51,9 @@ class HomeTestCase(TestCase):
 		self.assertTrue('comunas' in response.context)
 		self.assertTrue(comuna1 in response.context["comunas"])
 		self.assertTrue(comuna2 in response.context["comunas"])
+
+		self.assertTrue('regiones' in response.context)
+		self.assertTrue(region in response.context["regiones"])
 
 
 class ComunaViewTestCase(TestCase):
