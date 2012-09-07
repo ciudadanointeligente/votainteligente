@@ -1,5 +1,5 @@
 # Create your views here.
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from models import Comuna
 
 class HomeTemplateView(TemplateView):
@@ -8,3 +8,6 @@ class HomeTemplateView(TemplateView):
 		comunas = Comuna.objects.all()
 		context['comunas'] = comunas
 		return context
+
+class ComunaOverview(DetailView):
+	model = Comuna

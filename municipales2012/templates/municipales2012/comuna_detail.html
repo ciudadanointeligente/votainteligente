@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<head>
+    <title>Municipalidades2012 - {{comuna}}</title>
+    <!-- Bootstrap -->
+    <link href="{{ STATIC_URL }}kathe.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.tools.min.js" language="JavaScript"> </script>
+    <!--<script src="js/jquery.tools.min2.js" language="JavaScript"></script> -->
+   
+</head>
+
+
+
+
+
+<body>
+ 		<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+            	<div class="container">
+                    <div class="nav-collapse collapse">
+                  
+                        <ul class="menuPpal nav">
+                        <li class="pull-left"><a href="http://www.votainteligente.cl"><img src="{{ STATIC_URL }}images/logoVotaMunicipales.png" style="margin-left: -16px; margin-right: 169px;"></a> </li>
+                        <li class="dentroMenu pull-right"><a href="#">¿Quiénes Somos?</a></li>
+                        <li class="dentroMenu pull-right"><a href="#">Metodología</a></li>
+                        
+                        <li class="dentroMenu pull-right"><form class="navbar-search pull-right">
+                            <input type="text" class="search-query" placeholder="Buscar una comuna">
+                           	</form></li>
+                        </ul>
+                            
+                    </div>
+           		 </div>
+             </div>
+        </div>
+		
+       
+       
+        <div class="container">
+             <div class="contenidoMunicipalidades">
+                <div class="container-fluid">
+                    <div class="row-fluid">
+                                  <div class="span8"> 
+                                    <h2> <span>{{comuna}} </span></h2>
+                                        <div> 
+                                        
+                                        <iframe src="http://www.candideit.org/lfalvarez/rayo-x-politico/embeded" style="width:580px;" height="600px" frameborder="0" scrolling="no"> </iframe>
+                                        </div>
+                                  </div>
+                                   
+                          
+                                          <div class="span4">  
+                                                <div class="sidebar-nav sidebarDerecha">  
+                                                   <ul class="thumbnails">
+                                                        
+                                                        <li class="span6">
+                                                            <div class="well thumbnail">
+                                                            <button class="btn btn-block btn-info  type=button"><a href class="btnMunicipales"="#">¡Pregúntale!</a></button>
+                                                           <p class="textoBTN">A tus candidatos los que quieras</p>
+                                                            
+                                                            <button class="btn btn-block btn-mini"> <a href=""> Ver las <span> <strong>20 </strong></span> preguntas que se han realizado </a></button>
+                                                            
+                                                            </div>
+                                                        </li>
+                                                       
+                                                        <li class="span6">
+                                                            <div class="well thumbnail">
+                                                           <button class="btn btn-block btn-info  type=button"><a href class="btnMunicipales"="#">Reporta</a></button>
+                                                           <p class="textoBTN">Problemas en tu comuna</p>
+                                                           
+                                                            <button class="btn btn-block btn-mini"><a href= ""> Ver las <span> <strong> 0 </strong></span> reportes que se han realizado  </a></button>
+                                                        </div>
+                                                        </li>
+ 
+                                                    </ul>
+                                                </div>
+                                            
+                                            
+                                            <div style="margin-top: -10px;">
+                                             <h4>Los datos de <span>{{comuna}}</span> en <span>{{comuna.region}}</span></h4>
+                                             
+											
+											
+											<script>
+												$(document).ready(function() {
+													// Handler for .ready() called.
+													 $("#dyna img[title]").tooltip({
+											   		offset: [10, 2],
+											  		 effect: 'slide'
+														});
+												});
+											</script>
+											
+                                            <script>
+											// custom easing called "custom"
+											$.easing.custom = function (x, t, b, c, d) {
+												var s = 1.70158;
+												if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
+												return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
+											}
+											 </script>
+											
+										
+																						 
+                                            
+											 <div class="navi"> 
+                                              <a  href="1" rel="tooltip" title="Área: Caracterización"</a>
+                                              <a href="2" rel="tooltip" title="Área: Caracterización" />
+                                              <a href="3" rel="tooltip" title="Área: Administración" />
+                                              <a href="4" rel="tooltip" title="Área: Educación"/>
+                                              <a href="5" rel="tooltip" title="Área: Salud" />
+                                              <a href="6" rel="tooltip" title="Área: Salud" />
+                                              <a href="7" rel="tooltip" title="Área: Salud" />
+                                              <a href="8" rel="tooltip" title="Área: Seguridad" />
+                                              <a href="9" rel="tooltip" title="Área: Urbanismo" />
+                                              <a href="10" rel="tooltip" title="Área: Transparencia" />
+                                              <a href="11" rel="tooltip" title="Área: Participación Ciudadana"/>
+                                              <a href="12" rel="tooltip" title="Área: Presupuesto" />
+                                              </div> 
+                                              
+												<!--<div class="navi"> 
+                                                    </div>	  -->
+											  
+                                               <script>
+													$(document).ready(function() {
+													  // initialize scrollable
+													  $(".scrollable").scrollable({circular: true}).autoscroll({ autoplay: true }).navigator(".navi");
+													});
+													
+												</script>
+                                            
+											 <div class="Carrusel">
+                                                    <!-- "previous page" action -->
+                                                    <a class="prev browse left"><img id="flechitaIzquierda" src="{{ STATIC_URL }}images/flechaIzquierda.png" /></a>
+                                                     
+                                                    <!-- root element for scrollable -->
+                                                    <div class="scrollable" id="scrollable">
+                                                    
+                                                    
+                                                     
+                                                      <!-- root element for the items -->
+                                                      <div class="items">
+                                                     
+                                                        <!--CARACTERIZACION -->
+                                                      <div>
+													    <article>
+                                                             <div class="articulokathe wellKathe">
+                                                                 <header class="tituloCarrusel" id="fondoCeleste"> 
+                                                                     <p>Pobreza</p>
+                                                                     <div class="signoInterrogacion" id="dyna">
+                                                                     <a href="./metodologia.html#Pobreza"><img src="{{ STATIC_URL }}images/signoInterrogacion.png" title="¿Cómo se calculó?"/> </a>
+                                                                     </div>
+																</header>
+                                                                <section>
+                                                                     <div class="epigrafe colorCeleste"> </div>
+                                                                     <br />
+                                                                     <div class="categoria categoriaPobreza">  
+                                                                        <span class="numeroGrandeCategoria colorCeleste"> 7%</span> 
+                                                                        <br /> <br />
+                                                                       de los habitantes de la comuna son pobres. Esto es similar a los que pasa en  <span class="colorCeleste">Tumbuctú 		 																		</span>
+                                                                     </div>
+                                                                 </section>
+                                                                 <section class="infoNacional">
+                                                                 </span>
+                                                                 </section>
+                                                            </div>
+                                                            
+                                                        </article>
+													</div>
+                                                     
+                                                        <!--CARACTERIZACION -->
+                                                        <div>
+                                                          <article>
+                                                             <div class="articulokathe wellKathe">
+                                                                 <header class="tituloCarrusel" id="fondoCeleste"> 
+                                                                     <p>Desigualdad</p> 
+                                                                     <div class="signoInterrogacion" id="dyna">
+                                                                     <a href="#"><img src="{{ STATIC_URL }}images/signoInterrogacion.png" title="¿Cómo se calculó?"/> 
+                                                                     </a>
+                                                                     </div>
+																</header>
+                                                                 <section>
+                                                                     <div class="epigrafe colorCeleste"> 
+                                                                     </div>
+                                                                     <br />
+                                                                     <div class="categoria categoriaDesigualdad">  
+                                                                        <span class="numeroGrandeCategoria colorCeleste"> 20º</span> 
+                                                                        <br /> <br />  	lugar ocupa la comuna en el ránking de desigualdad  <span> </span>
+                                                                     </div>
+                                                                 </section>
+                                                                 <section class="infoNacional">
+                                                                 El coeficiente de Gini (desigualdad) de la comuna es similar al de  <span class="colorCeleste">Nombre país </span>
+                                                                 </section>
+                                                            </div>
+                                                        </article>
+                                                      </div>
+                                                     
+                                                        <!-- ADMINISTRACION-->
+                                                        <div>
+                                                          <article>
+                                                             <div class="articulokathe wellKathe">
+																<header class="tituloCarrusel" id="fondoGris"> <p>Funcionarios</p> 														  																	<div class="signoInterrogacion" id="dyna">
+												  					<a href="./metodologia.html#Funcionarios"><img src="{{ STATIC_URL }}images/signoInterrogacion.png" title="¿Cómo se calculó?"/> </a>
+																	</div>
+																</header>
+                                                                <section>
+                                                                     <div class="epigrafe colorGris"> 
+                                                                     </div>
+                                                                     <br />
+                                                                     <div class="categoria categoriaFuncionarios">  
+                                                                        <span class="numeroGrandeCategoria colorGris"> 1</span> 
+                                                                        <br /> <br />  	funcionario tiene la municipalidad cada  <span class=" colorGris">  1.542 </span> habitantes.
+                                                                     </div>
+                                                                 </section>
+                                                                 <section class="infoNacional">
+                                                                 El promedio nacional es de  <span class="colorGris">460 </span>
+                                                                habitantes por cada funcionario municipal 
+                                                                 </section>
+                                                            </div>
+                                                        </article>
+                                                      </div>
+                                                     
+                                                      <!-- EDUCACION-->
+                                                        <div>
+                                                          <article>
+                                                             <div class="articulokathe wellKathe">
+                                                                 <header class="tituloCarrusel" id="fondoBurdeo"> 
+																 	<p>SIMCE</p>
+																   	<div class="signoInterrogacion" id="dyna">
+												  					<a href="#"><img src="{{ STATIC_URL }}images/signoInterrogacion.png" title="¿Cómo se calculó?"/> 
+                                                                	</a>
+																	</div>
+																 </header>
+                                                                 <section>
+                                                                     <div class="epigrafe colorBurdeo"></div>
+                                                                     <br />
+                                                                     <div class="categoria categoriaEducacion">  
+                                                                        <span class="numeroGrandeCategoria colorBurdeo"> xx%</span> 
+                                                                        <br /> <br /> Ha sido la variación del puntaje SIMCE obtenido por las escuelas municipales de la comuna entre <br />el<span class="colorBurdeo"> 2008 y el 2011 </span> 
+                                                                     </div>
+                                                                 </section>
+                                                                 <section class="infoNacional">
+                                                                 El nivel SIMCE de la comuna, en relación al resto del país, ha sido  <span class="colorBurdeo">Medio </span>
+                                                                 </section>
+                                                            </div>
+                                                        </article>
+                                                     </div>
+                                                        
+                                                         <!-- SALUD-->
+                                                        <div>
+                                                          <article>
+                                                             <div class="articulokathe wellKathe">
+                                                                 <header class="tituloCarrusel" id="fondoRojo"> 
+																 	<p>Servicios de salud </p>
+																  	<div class="signoInterrogacion" id="dyna">
+												  						<a href="#"><img src="{{ STATIC_URL }}images/signoInterrogacion.png" title="¿Cómo se calculó?"/> 
+                                                                		</a>
+																	</div>
+																 </header>
+                                                                 <section>
+                                                                     <div class="epigrafe colorRojo">
+                                                                     </div>
+                                                                     <br /> 
+                                                                     <div class="categoria servicioSalud">  
+                                                                        <span class="numeroGrandeCategoria colorRojo"> 10</span> 
+                                                                        <br /> <br /> servicios de salud municipal tiene la comuna cada  <span class="colorRojo"> 3.981 </span> habitantes inscritos en FONASA.
+                                                                     </div>
+                                                                 </section>
+                                                                 <section class="infoNacional">
+                                                                El promedio nacional es de <span class="colorRojo"> 8.413 </span>
+                                                                habitantes inscritos en FONASA por cada servicio de salud.
+                                                                 </section>
+                                                            </div>
+                                                        </article>
+                                                     </div>
+                                                        
+                                                        <!-- SALUD-->
+                                                        <div>
+                                                          <article>
+                                                             <div class="articulokathe wellKathe">
+                                                                 <header class="tituloCarrusel" id="fondoRojo">
+																  	<p>Obesidad infantil </p>
+																   	<div class="signoInterrogacion" id="dyna">
+												  						<a href="#"><img src="{{ STATIC_URL }}images/signoInterrogacion.png" title="¿Cómo se calculó?"/> 
+                                                                		</a>
+																	</div>
+																</header>
+                                                                <section>
+                                                                     <div class="epigrafe colorRojo"> 
+                                                                     </div>
+                                                                     <br />
+                                                                     <div class="categoria categoriaObesidad">  
+                                                                        <span class="numeroGrandeCategoria colorRojo"> 21.5% </span> 
+                                                                        <br /> <br /> es el porcentaje de niños de educación básica con obesidad infantil en la comuna. <span></span> 
+                                                                     </div>
+                                                                 </section>
+                                                                 <section class="infoNacional">
+                                                                 En el ranking de obesidad infantil de niños de educación básica la comuna está en el lugar  <span class="colorRojo">210</span>
+                                                                 </section>
+                                                            </div>
+                                                        </article>
+                                                     </div>
+                                                        
+                                                        <!-- SALUD-->
+                                                        <div>
+                                                          <article>
+                                                             <div class="articulokathe wellKathe">
+                                                                 <header class="tituloCarrusel" id="fondoRojo"> 
+																 	<p>Obesidad Infantil </p>
+																  	<div class="signoInterrogacion" id="dyna">
+												  						<a href="#"><img src="{{ STATIC_URL }}images/signoInterrogacion.png" title="¿Cómo se calculó?"/> 
+                                                                		</a>
+																	</div>
+																</header>
+                                                                 <section>
+                                                                     <div class="epigrafe colorRojo"> 
+                                                                     </div>
+                                                                     <br />
+                                                                     <div class="categoria categoriaObesidad">  
+                                                                        <span class="numeroGrandeCategoria colorRojo"> 6,52%</span> 
+                                                                        <br /> <br /> es el porcentaje de niños de educación media con obesidad infantil en la comuna  <span> </span> 
+                                                                     </div>
+                                                                 </section>
+                                                                 <section class="infoNacional">
+                                                                En el ranking de obesidad infantil de niños de educación media la comuna está en el lugar  <span class="colorRojo">220 </span>
+                                                                </section>
+                                                            </div>
+                                                        </article>
+                                                     </div>
+                                                        
+                                                        
+                                                        
+                                                        <!-- SEGURIDAD-->
+                                                        <div>
+                                                          <article>
+                                                             <div class="articulokathe wellKathe">
+                                                                 <header class="tituloCarrusel" id="fondoAzul"> 			 																						 																	<p>Variación de delitos con mayor connotación social</p>
+																   	<div class="signoInterrogacion" id="dyna">
+												  						<a href="#"><img src="{{ STATIC_URL }}images/signoInterrogacion.png" title="¿Cómo se calculó?"/> 
+                                                                		</a>
+																	</div>
+																 </header>
+                                                                 <section>
+                                                                     <div class="epigrafe colorAzul">
+                                                                     </div>
+                                                                     <br />
+                                                                     <div class="categoria categoriaSeguridad">  
+                                                                        <span class="numeroGrandeCategoria colorAzul"> -3,99%</span> 
+                                                                        <br /> <br /> Ha variado el número de delitos con mayor connotación social entre el 2007 y el 2010 en la comuna<span>   </span> 
+                                                                     </div>
+                                                                 </section>
+                                                                 <section class="infoNacional">
+                                                                 En el ranking de variación de delitos con mayor connotación social la comuna está en el lugar  <span class="numeroInfoNacional colorAzul">92 </span>
+																 </section>
+                                                            </div>
+                                                        </article>
+                                                     </div>
+                                                        
+                                                        <!-- URBANISMO-->
+                                                        <div>
+                                                          <article>
+                                                             <div class="articulokathe wellKathe">
+                                                                 <header class="tituloCarrusel" id="fondoVerde"> 			 													
+                                                                 	<p>Mantención de áreas <br /> públicas </p>
+																  	<div class="signoInterrogacion" id="dyna">
+												  						<a href="#"><img src="{{ STATIC_URL }}images/signoInterrogacion.png" title="¿Cómo se calculó?"/> 
+                                                                		</a>
+																	</div>
+																 </header>
+                                                                 <section>
+                                                                     <div class="epigrafe colorVerde"> 
+                                                                     </div>
+                                                                     <br />
+                                                                     <div class="categoria categoriaAreasPublicas">  
+                                                                        <span class="numeroGrandeCategoria colorVerde"> 10</span> 
+                                                                        <br /> <br /> servicios de salud por cada <span> 5000</span> habitantes.
+                                                                     </div>
+                                                                 </section>
+                                                                 <section class="infoNacional">
+                                                                 El promedio nacional es de <span>30</span>
+                                                                 servicios de salud por 300.000 habitantes inscritos en FONASA
+                                                                 </section>
+                                                            </div>
+                                                        </article>
+                                                     </div>
+                                                        
+                                                         <!-- TRANSPARENCIA-->
+                                                        <div>
+                                                          <article>
+                                                             <div class="articulokathe wellKathe">
+                                                                 <header class="tituloCarrusel" id="fondoNaranjo"> 
+																 	<p>ranking del consejo para <br />la transparencia</p> 
+																  	<div class="signoInterrogacion" id="dyna">
+												  						<a href="#"><img src="{{ STATIC_URL }}images/signoInterrogacion.png" title="¿Cómo se calculó?"/> 
+                                                                		</a>
+																	</div>
+																  </header>                                                                
+                                                                 <section>
+                                                                     <div class="epigrafe colorNaranjo"> 
+                                                                     </div>
+                                                                     <br />
+                                                                     <div class="categoria categoriaRanking">  
+                                                                        <span class="numeroGrandeCategoria colorNaranjo"> 10</span> 
+                                                                        <br /> <br /> servicios de salud por cada <span> 5000</span> habitantes.
+                                                                     </div>
+                                                                 </section>
+                                                                 <section class="infoNacional">
+                                                                 El promedio nacional es de <span>30</span>
+                                                                 servicios de salud por 300.000 habitantes inscritos en FONASA
+                                                                 </section>
+                                                            </div>
+                                                        </article>
+                                                     </div>
+                                                        
+                                                         <!-- PARTICIPACION-->
+                                                        <div>
+                                                          <article>
+                                                             <div class="articulokathe wellKathe">
+                                                                 <header class="tituloCarrusel" id="fondoMorado"> 
+																 	<p>Organizaciones <br /> comunitarias </p>
+																 	<div class="signoInterrogacion" id="dyna">
+												  						<a href="#"><img src="{{ STATIC_URL }}images/signoInterrogacion.png" title="¿Cómo se calculó?"/> 
+                                                                		</a>
+																	</div>
+																 </header>
+                                                                 <section>
+                                                                     <div class="epigrafe colorMorado"> 
+                                                                     </div>
+                                                                     <br />
+                                                                     <div class="categoria categoriaOrganizaciones">  
+                                                                        <span class="numeroGrandeCategoria colorMorado"> 220</span> 
+                                                                        <br /> <br />  	habitantes en la comuna hay por cada organización comunitaria  <span> </span>
+                                                                     </div>
+                                                                 </section>
+                                                                 <section class="infoNacional">
+                                                                 En el ranking de nacional de habitantes por organizaciones comunitarias la comuna está en el lugar  <span class="colorMorado">283 </span>
+                                                           
+                                                                 </section>
+                                                            </div>
+                                                        </article>
+                                                     </div>
+                                                     
+                                                     <!-- PRESUPUESTO-->
+                                                        <div>
+                                                          <article>
+                                                             <div class="articulokathe wellKathe">
+                                                                 <header class="tituloCarrusel" id="fondoMorado"> 
+																 	<p> Semáforos Contraloría </p>
+																  	<div class="signoInterrogacion" id="dyna">
+												  					<a href="#"><img src="{{ STATIC_URL }}images/signoInterrogacion.png" title="¿Cómo se calculó?"/> 
+                                                               		</a>
+																	</div>
+																 </header>
+                                                                 <section>
+                                                                     <div class="epigrafe colorMorado"> 
+                                                                     </div>
+                                                                     <br />
+                                                                     <div class="categoria categoriaSemaforoRojo">  
+                                                                        <span class="numeroGrandeCategoria colorMorado"> 10</span> 
+                                                                        <br /> <br /> servicios de salud por cada <span> 5000</span> habitantes.
+                                                                     </div>
+                                                                 </section>
+                                                                 <section class="infoNacional">
+                                                                 El promedio nacional es de <span>30</span>
+                                                                 servicios de salud por 300.000 habitantes inscritos en FONASA
+                                                                 </section>
+                                                            </div>
+                                                        </article>
+                                                    </div>
+                                                     
+                                                     
+                                                     
+                                                     
+                                                     
+                                                      </div>
+                                                     
+                                                    </div>
+                                                     
+                                                    <!-- "next page" action -->
+                                                    <a class="next browse right"><img id="flechitaDerecha" src="images/flechaDerecha.png" /></a>
+                                                    
+                                                    </div> 
+                                           </div>
+                    
+            
+              </div>
+            </div>
+           </div>
+          </div>
+        </div>  
+            
+<div class="container"> <br />
+						
+                        </div>
+
+            <footer class="footer">
+                    <div class="container">
+                    	<div class="pull-left">
+                        <ul class="footer">
+                            <li> <a href="http://www.videocampaña.cl"> link camapaña </a> </li>
+                            <li> <a href="http://www.videocampaña.cl"> Municipales en el vaso</a> </li>
+                            <li> <a href="http://www.videocampaña.cl"> link camapaña </a> </li>
+                            <li> <a href="http://www.videocampaña.cl"> Municipales en el vaso</a> </li>
+                        </ul>
+                        </div>
+                        
+                        <div>
+                        <ul>
+                            <li class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/techoLogo.png"/> </a> </li>
+                            <li class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/igualesLogo.png"/></a> </li>
+                            <li class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/casaPazLogo.png"/></a> </li>
+                            <li class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/educacionLogo.png"/></a> </li>
+                            <li class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/FCILogo.png"/></a> </li>
+                        </ul>
+                        </div>
+                  </div>
+            </footer>
+	
+<script src="bootstrap/js/bootstrap.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+
+
+</body>
+</html>
