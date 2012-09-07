@@ -8,10 +8,12 @@
     <title>Home</title>
     <!-- Bootstrap -->
     <link href="{{ STATIC_URL }}kathe.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js" ></script>
     <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.8.23.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    
     <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
 	<script src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script>
     </head>
@@ -50,10 +52,31 @@
                 
                 <div class="buscadorPpal">
                 
-                <h3> <center>Conoce a tus candidatos y elige a tu media naranja </center></h3>
-                <center><form class="form-search"> <p> Escribe el nombre de la comuna que te interesa</p>
-                <input type="text" id="comunas-search" class="input-xxlarge search-query"> 
-                </form> </center> </div> 
+                <h3> <center>Conoce a tus candidatos y elige a tu media naranja en cada comúna</center></h3>
+                <center>
+                    <div class="accordion" id="accordion2">
+                    {% for region in regiones %}
+                      <div class="accordion-group">
+                        <div class="accordion-heading">
+                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                            {{region}}
+                          </a>
+                        </div>
+                        <div id="collapseOne" class="accordion-body collapse">
+                          <div class="accordion-inner">
+                            {% for comuna in region.comuna_set.all %}
+                                <a href="{% url comuna-overview slug=comuna.slug %}">{{comuna}}</a>
+                            {% endfor %}
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                    </div>
+
+
+                    
+
+                 </center> </div> 
         
          <div class=" alertaVota alert fade in">
                         <button class="close" data-dismiss="alert" type="button"> × </button>
