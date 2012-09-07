@@ -53,7 +53,6 @@
                 <h3> <center>Conoce a tus candidatos y elige a tu media naranja </center></h3>
                 <center><form class="form-search"> <p> Escribe el nombre de la comuna que te interesa</p>
                 <input type="text" id="comunas-search" class="input-xxlarge search-query"> 
-                <button type="submit" class="btn">Buscar</button>
                 </form> </center> </div> 
         
          <div class=" alertaVota alert fade in">
@@ -161,7 +160,7 @@
 		$( "#comunas-search" ).autocomplete({
 		   select: function(event, ui) { 
 		   	$( "#comunas-search" ).val( ui.item.label );
-		   	console.log(ui.item.slug)
+		   	window.location = '/'+ui.item.value; 
 		   	return false;
 		   }
 		});
