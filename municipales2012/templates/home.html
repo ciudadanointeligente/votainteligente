@@ -1,47 +1,6 @@
+{% extends "base.html" %}
 {% load jsonify %}
-<!DOCTYPE html>
-
-<html lang="en">
-<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-
-	<head>
-    <title>Home</title>
-    <!-- Bootstrap -->
-    <link href="{{ STATIC_URL }}kathe.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js" ></script>
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.8.23.css" rel="stylesheet">
-    
-    <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
-	<script src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script>
-    </head>
-    
-    
-<body>
-
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-            	<div class="container">
-                    <div class="nav-collapse collapse">
-                  
-                        <ul class="menuPpal nav">
-                        <li class="pull-left"><a href="http://www.votainteligente.cl"><img src="{{ STATIC_URL }}images/logoVotaMunicipales.png" style="margin-left: -16px; margin-right: 169px;"></a> </li>
-                        <li class="dentroMenu pull-right"><a href="#">¿Quiénes Somos?</a></li>
-                        <li class="dentroMenu pull-right"><a href="#">Metodología</a></li>
-                        
-                        <li class="dentroMenu pull-right"><form class="navbar-search pull-right">
-                            <input type="text" class="search-query" placeholder="Buscar una comuna">
-                           	</form></li>
-                        </ul>
-                            
-                    </div>
-           		 </div>
-             </div>
-        </div>
-          
-          
+{% block content %}
          
            
          
@@ -80,8 +39,8 @@
         
          <div class=" alertaVota alert fade in">
                         <button class="close" data-dismiss="alert" type="button"> × </button>
-                        	<a class="close" data-dismiss="alert" href="https://www.accesointeligente.org/AccesoInteligente/#home" target="_blank"> <img src="{{ STATIC_URL }}images/logoVota.png"/>  ¿Andas en busca de nuestro Vota Inteligente? Encuéntralo aquí! <img src="{{ STATIC_URL }}images/logoVota.png"/>&nbsp; &nbsp;</a>
-                        </div>
+                        	<a class="close" data-dismiss="alert" href="https://www.votainteligente.org" target="_blank"> <img src="{{ STATIC_URL }}images/logoVota.png"/>  ¿Andas en busca de nuestro Vota Inteligente? Encuéntralo aquí! <img src="{{ STATIC_URL }}images/logoVota.png" style="margin-right: 87px;"/>&nbsp; &nbsp;</a>
+        </div>
        
          
        										  <script>
@@ -99,26 +58,26 @@
          <div class="row queHacemos">
                 <div class="span6 subTitulosHomeInfo">
                 
-                 <button class="btn btn-block btn-inverse" id="dyna" <a href="#" title="Completar Buscador Superior"> <img src="{{ STATIC_URL }}images/iconoInfoHome.png" style="float: right;"/> Info Municipal 
-                    </a> </button>
+                 <a href="./buscadorMunicipalidades.html" class="btn btn-block btn-inverse" id="dyna" title="Completar Buscador Superior"> <img src="{{ STATIC_URL }}images/iconoInfoHome.png" style="float: right;"/> Info Municipal 
+                    </a> 
                 
                 <br/>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p> 
+				<p>Encuentra aquí datos relevantes de tu comuna y de la gestión del último alcalde. Descubre más de lo que ha sucedido en tu municipio en temas de transparencia, participación ciudadana, presupuesto, educación, salud, administración, seguridad y urbanismo. </p> 
 				</div>
                
                 
                 <div class="span3 subTitulosHomePreguntar">
                 
-                <button class="btn btn-block btn-inverse"> <a href="#"> Preguntar <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </a></button> 
+                <a href="#" class="btn btn-block btn-inverse" target="_blank"> Preguntar <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </a>
                 <br/>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+				<p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
                 </div>
               
                 
                 <div class="span3 subTitulosHomeReportar"> 
-                <button class="btn btn-block btn-inverse"> <a href="./reporta.html"> Reportar<img src="images/iconoReporta.png" style="float: right;"/> </a></button>
+                <a  href="./reporta.html" class="btn btn-block btn-inverse"> Reportar<img src="{{ STATIC_URL}}images/iconoReporta.png" style="float: right;"/> </a>
                 <br/>
-				<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+				<p>Denuncia todo aquello que quieras mejorar en tu comuna, cuéntanos de lugares públicos en mal estado, propaganda electoral inapropiada, entre otros.</p>
                 </div>
                 
          </div>
@@ -145,31 +104,9 @@
         
         
         
-        
-        <footer class="footer">
-                    <div class="container">
-                    	<div class="pull-left">
-                        <ul class="footer">
-                            <li> <a href="http://www.videocampaña.cl"> link camapaña </a> </li>
-                            <li> <a href="http://www.videocampaña.cl"> Municipales en el vaso</a> </li>
-                            <li> <a href="http://www.videocampaña.cl"> link camapaña </a> </li>
-                            <li> <a href="http://www.videocampaña.cl"> Municipales en el vaso</a> </li>
-                        </ul>
-                        </div>
-                        
-                        <div>
-                        <ul>
-                            <li class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/techoLogo.png"/> </a> </li>
-                            <li class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/igualesLogo.png"/></a> </li>
-                            <li class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/casaPazLogo.png"/></a> </li>
-                            <li class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/educacionLogo.png"/></a> </li>
-                            <li class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/FCILogo.png"/></a> </li>
-                        </ul>
-                        </div>
-                  </div>
-            </footer>
+        {% endblock content %}
 	
-	
+	{% block extra_js %}
 	<script>
 	$(function() {
 		var availableTags = [{% for comuna in comunas %}
@@ -189,10 +126,4 @@
 		});
 	});
 	</script>
-
-	
-    
-   	
-    
-</body>
-</html>
+  {% endblock extra_js %}
