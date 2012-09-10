@@ -22,6 +22,7 @@ class Area(models.Model):
 	nombre = models.CharField(max_length=255)
 	clase_en_carrusel = models.CharField(max_length=255)
 	segunda_clase = models.CharField(max_length=255)
+	link_detalle = models.CharField(max_length=255)
 
 	def __unicode__(self):
 		return self.nombre

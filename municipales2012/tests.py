@@ -38,10 +38,14 @@ class ComunaModelTestCase(TestCase):
 
 class AreaTestCase(TestCase):
 	def test_create_area(self):
-		area, created = Area.objects.get_or_create(nombre=u"Caracterización", clase_en_carrusel=u"fondoCeleste")
+		area, created = Area.objects.get_or_create(
+			nombre=u"Caracterización", 
+			clase_en_carrusel=u"fondoCeleste", 
+			link_detalle=u"./metodologia.html#Pobreza")
 		self.assertTrue(created)
 		self.assertEquals(area.nombre, u'Caracterización')
 		self.assertEquals(area.clase_en_carrusel,u"fondoCeleste")
+		self.assertEquals(area.link_detalle, u"./metodologia.html#Pobreza")
 
 	def test_unicode(self):
 		area = Area.objects.create(nombre=u"Caracterización", clase_en_carrusel=u"fondoCeleste")
@@ -184,7 +188,24 @@ class ComunaViewTestCase(TestCase):
 			numero_pie_pagina_2 = u"X",
 			texto_pie_pagina_3 = u"tpp3",
 			numero_pie_pagina_3 = u"3",
-			en_carrusel = True)
+			en_carrusel = True
+			)
+		self.indice2 = Indice.objects.create(	
+			comuna =self.comuna1,
+			area = self.area,
+			nombre = u"Ingreso por persona",
+			encabezado = u"encabezado",
+			numero_1 = u"$418.891",
+			texto_1 = u"es el promedio de ingreso por persona en la comuna",
+			numero_2 = u"n2",
+			texto_2 = u"t2",
+			texto_pie_pagina_1 = u"En el Ranking nacional de ingreso por persona, la comuna está en el lugar",
+			numero_pie_pagina_1 = u"8",
+			texto_pie_pagina_2 = u"El promedio nacional de ingreso por persona es",
+			numero_pie_pagina_2 = u"X",
+			texto_pie_pagina_3 = u"tpp3",
+			numero_pie_pagina_3 = u"3",
+			en_carrusel = False)
 
 	def test_get_comuna_view(self):
 		url = reverse('comuna-overview', kwargs={
@@ -209,22 +230,7 @@ class ComunaViewTestCase(TestCase):
 		self.assertEquals(response.context['indices'][0], self.indice1)
 
 	def test_muestra_solo_los_indices_que_estan_en_el_carrusel(self):
-		indice2 = Indice.objects.create(	
-			comuna =self.comuna1,
-			area = self.area,
-			nombre = u"Ingreso por persona",
-			encabezado = u"encabezado",
-			numero_1 = u"$418.891",
-			texto_1 = u"es el promedio de ingreso por persona en la comuna",
-			numero_2 = u"n2",
-			texto_2 = u"t2",
-			texto_pie_pagina_1 = u"En el Ranking nacional de ingreso por persona, la comuna está en el lugar",
-			numero_pie_pagina_1 = u"8",
-			texto_pie_pagina_2 = u"El promedio nacional de ingreso por persona es",
-			numero_pie_pagina_2 = u"X",
-			texto_pie_pagina_3 = u"tpp3",
-			numero_pie_pagina_3 = u"3",
-			en_carrusel = False)
+		
 		url = reverse('comuna-overview', kwargs={
 			'slug':self.comuna1.slug
 			})
@@ -233,5 +239,21 @@ class ComunaViewTestCase(TestCase):
 
 		self.assertEquals(response.context['indices'].count(), 1)
 		self.assertEquals(response.context['indices'][0], self.indice1) # y no el indice2 que dice False en su campo en_carrusel
+
+
+	def test_get_todos_los_indices_de_una_comuna(self):
+		url = reverse('comuna-index-detail', kwargs={
+			'slug':self.comuna1.slug
+			})
+		response = self.client.get(url)
+
+		self.assertEquals(response.status_code, 200)
+		self.assertTrue("comuna" in response.context)
+		self.assertEquals(response.context["comuna"], self.comuna1)
+		self.assertTrue("indices" in response.context)
+		self.assertEquals(response.context["indices"].count(), 2)
+		self.assertTrue(self.indice1 in response.context['indices'])
+		self.assertTrue(self.indice2 in response.context['indices'])
+
 
 
