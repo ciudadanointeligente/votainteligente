@@ -131,7 +131,7 @@
         <br/>
         <br />
         
-        <!--<div class="container">
+       <div class="container">
          <div class="row">
                 <div class="span6">
                 <h5>Video 1</h5>
@@ -141,7 +141,7 @@
                 <h5>Video 2</h5>
 				<img src="{{ STATIC_URL }}images/ejemplo-video.png" /> 
 				</div>
-        </div> -->
+        </div> 
         
        </div>
         </div>
@@ -167,10 +167,24 @@
                             
                            
 
-                            <tr>
-                            <th class="footerTexto"> Otro proyecto de: </th>
+                           								 <tr>
+                            <th class="footerTexto"> Otro proyecto de:</th>
+               
                             <th class="footerTexto"> Con la ayuda de: </th>
-                            </tr>
+                    		<th class="footerTexto"style="float: right; margin-right: 44px;"> Redes Sociales: </th>
+                            
+                           			 </tr>
+                                
+                                
+                                <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+                                
                                 
                                 <tr>
                                 <td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/FCILogo.png" style="margin-left: -9px;"/></a> </td> 
@@ -180,7 +194,16 @@
                                
                                <td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/igualesLogo.png"  style="margin-top: -13px;"/></a> </td> 
                                 <td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/casaPazLogo.png"/></a> </td>
-                                <td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/educacionLogo.png"/></a> </td> </tr>
+                                <td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/educacionLogo.png"/></a> </td> 
+                                <td class="itemFooter pull-left"> <a href="https://twitter.com/share" class="twitter-share-button" data-text="¿Conoces a quién votas?... Vota inteligente" data-via="ciudadanoi" data-lang="es" data-hashtags="municipales2012">Twitter</a>
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> </td>
+								<td class="itemFooter pull-left" style="margin-top: -2px;"> <html>
+                                     <div class="fb-like" style="margin-left:0px; margin-top:0px;" data-href="http://www.votainteligente.cl" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial"></div>
+                                </td>
+                                </tr>
+                                
                                 
                                 
                            
