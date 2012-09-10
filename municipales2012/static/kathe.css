@@ -600,39 +600,39 @@ div.navi a.active {
 	min-height: 72px;
 	}	
 	
-#fondoCeleste {
+.fondoCeleste {
 	background-color:#61C0DC;
 	}
 	
-#fondoGris {
+.fondoGris {
 	background-color:#6F7375;
 	}
 	
-#fondoBurdeo {
+.fondoBurdeo {
 	background-color:#CD627D;
 	}
 
-#fondoRojo{
+.fondoRojo{
 	background-color: #E9605E;
 	}
 	
-#fondoAzul{
+.fondoAzul{
 	background-color:#2089C8;
 	}
 	
-#fondoVerde {
+.fondoVerde {
 	background-color:#6CB667;
 	}
 	
-#fondoNaranjo {
+.fondoNaranjo {
 	background-color:#F8B35C;
 	}
 	
-#fondoMorado{
+.fondoMorado{
 	background-color: #A38FC1; 
 	}
 
-#fondoAmarillo {
+.fondoAmarillo {
 	background-color:#FFE578;
 	}
 	
