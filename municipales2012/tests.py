@@ -3,7 +3,7 @@
 
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from models import Comuna, Region, Area, Indice
+from models import Comuna, Region, Area, Indice, Dato
 
 class RegionModelTestCase(TestCase):
 	def test_create_region(self):
@@ -54,12 +54,29 @@ class AreaTestCase(TestCase):
 		self.assertEquals(area.__unicode__(), u"Caracterización")
 
 
+class DatoTestCase(TestCase):
+	def test_create_dato(self):
+		dato, created = Dato.objects.get_or_create(nombre=u"Pobreza", imagen="chanchito.png")
+
+		self.assertTrue(created)
+		self.assertEquals(dato.nombre, u"Pobreza")
+		self.assertEquals(dato.imagen, u"chanchito.png")
+
+
+	def test_unicode(self):
+		dato = Dato.objects.create(nombre=u"Pobreza", imagen="chanchito.png")
+
+
+		self.assertEquals(dato.__unicode__(), u"Pobreza")
+
+
 
 
 
 class IndiceTestCase(TestCase):
 	def test_create_indice(self):
 		area = Area.objects.create(nombre=u"Caracterización", clase_en_carrusel=u"fondoCeleste")
+		pobreza = Dato.objects.create(nombre=u"Pobreza", imagen="chanchito.png")
 		region = Region.objects.create(nombre=u"La región")
 		comuna = Comuna.objects.create(nombre=u"La comuna", 
 										region=region, 
@@ -68,7 +85,7 @@ class IndiceTestCase(TestCase):
 		indice, created = Indice.objects.get_or_create(
 			comuna =comuna,
 			area = area,
-			nombre = u"Pobreza",
+			dato = pobreza,
 			encabezado = u"encabezado",
 			numero_1 = u"7%",
 			texto_1 = u"de los habitantes de la comuna son pobres",
@@ -87,7 +104,7 @@ class IndiceTestCase(TestCase):
 		self.assertTrue(created)
 		self.assertEquals(indice.comuna, comuna)
 		self.assertEquals(indice.area, area)
-		self.assertEquals(indice.nombre, u"Pobreza")
+		self.assertEquals(indice.dato, pobreza)
 		self.assertEquals(indice.encabezado, u"encabezado")
 		self.assertEquals(indice.numero_1, u"7%")
 		self.assertEquals(indice.texto_1, u"de los habitantes de la comuna son pobres")
@@ -103,6 +120,7 @@ class IndiceTestCase(TestCase):
 	def test_unicode(self):
 		area = Area.objects.create(nombre=u"Caracterización", clase_en_carrusel=u"fondoCeleste", segunda_clase=u"colorCeleste")
 		region = Region.objects.create(nombre=u"La región")
+		ingreso_por_persona = Dato.objects.create(nombre=u"Ingreso por persona", imagen="chanchito.png")
 		comuna = Comuna.objects.create(nombre=u"La comuna", 
 										region=region, 
 										slug=u"la-comuna",
@@ -110,7 +128,7 @@ class IndiceTestCase(TestCase):
 		indice = Indice.objects.create(	
 			comuna =comuna,
 			area = area,
-			nombre = u"Ingreso por persona",
+			dato = ingreso_por_persona,
 			encabezado = u"encabezado",
 			numero_1 = u"$418.891",
 			texto_1 = u"es el promedio de ingreso por persona en la comuna",
@@ -157,10 +175,12 @@ class ComunaViewTestCase(TestCase):
 		self.region = Region.objects.create(nombre=u"La región")
 		self.comuna1 = Comuna.objects.create(nombre=u"La comuna1", slug=u"la-comuna1", region=self.region)
 		self.comuna2 = Comuna.objects.create(nombre=u"La comuna2", slug=u"la-comuna2", region=self.region)
+		ingreso_por_persona = Dato.objects.create(nombre=u"Ingreso por persona", imagen="chanchito.png")
+		pobreza = Dato.objects.create(nombre=u"Pobreza", imagen="chanchito.png")
 		self.indice1 = Indice.objects.create(
 			comuna =self.comuna1,
 			area = self.area,
-			nombre = u"Pobreza",
+			dato = pobreza,
 			encabezado = u"encabezado",
 			numero_1 = u"7%",
 			texto_1 = u"de los habitantes de la comuna son pobres",
@@ -178,7 +198,7 @@ class ComunaViewTestCase(TestCase):
 		self.indice2 = Indice.objects.create(	
 			comuna =self.comuna1,
 			area = self.area,
-			nombre = u"Ingreso por persona",
+			dato = pobreza,
 			encabezado = u"encabezado",
 			numero_1 = u"$418.891",
 			texto_1 = u"es el promedio de ingreso por persona en la comuna",
@@ -195,7 +215,7 @@ class ComunaViewTestCase(TestCase):
 		self.indice3 = Indice.objects.create(	
 			comuna =self.comuna2,
 			area = self.area,
-			nombre = u"Ingreso por persona",
+			dato = ingreso_por_persona,
 			encabezado = u"encabezado",
 			numero_1 = u"$418.891",
 			texto_1 = u"es el promedio de ingreso por persona en la comuna",
