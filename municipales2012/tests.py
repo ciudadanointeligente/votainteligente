@@ -175,6 +175,23 @@ class ComunaViewTestCase(TestCase):
 			en_carrusel = True
 			)
 
+		self.indice2 = Indice.objects.create(	
+			comuna =self.comuna1,
+			area = self.area,
+			nombre = u"Ingreso por persona",
+			encabezado = u"encabezado",
+			numero_1 = u"$418.891",
+			texto_1 = u"es el promedio de ingreso por persona en la comuna",
+			numero_2 = u"n2",
+			texto_2 = u"t2",
+			texto_pie_pagina_1 = u"En el Ranking nacional de ingreso por persona, la comuna está en el lugar",
+			numero_pie_pagina_1 = u"8",
+			texto_pie_pagina_2 = u"El promedio nacional de ingreso por persona es",
+			numero_pie_pagina_2 = u"X",
+			texto_pie_pagina_3 = u"tpp3",
+			numero_pie_pagina_3 = u"3",
+			en_carrusel = False)
+
 		self.indice3 = Indice.objects.create(	
 			comuna =self.comuna2,
 			area = self.area,
@@ -192,22 +209,7 @@ class ComunaViewTestCase(TestCase):
 			numero_pie_pagina_3 = u"3",
 			en_carrusel = True
 			)
-		self.indice2 = Indice.objects.create(	
-			comuna =self.comuna1,
-			area = self.area,
-			nombre = u"Ingreso por persona",
-			encabezado = u"encabezado",
-			numero_1 = u"$418.891",
-			texto_1 = u"es el promedio de ingreso por persona en la comuna",
-			numero_2 = u"n2",
-			texto_2 = u"t2",
-			texto_pie_pagina_1 = u"En el Ranking nacional de ingreso por persona, la comuna está en el lugar",
-			numero_pie_pagina_1 = u"8",
-			texto_pie_pagina_2 = u"El promedio nacional de ingreso por persona es",
-			numero_pie_pagina_2 = u"X",
-			texto_pie_pagina_3 = u"tpp3",
-			numero_pie_pagina_3 = u"3",
-			en_carrusel = False)
+		
 
 	def test_get_comuna_view(self):
 		url = reverse('comuna-overview', kwargs={
@@ -256,6 +258,8 @@ class ComunaViewTestCase(TestCase):
 		self.assertEquals(response.context["indices"].count(), 2)
 		self.assertTrue(self.indice1 in response.context['indices'])
 		self.assertTrue(self.indice2 in response.context['indices'])
+		self.assertTemplateUsed(response, "municipales2012/todos_los_indices.html")
+		self.assertTemplateUsed(response, "base.html")
 
 
 
