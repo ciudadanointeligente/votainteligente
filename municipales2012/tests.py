@@ -42,6 +42,8 @@ class AreaTestCase(TestCase):
 			nombre=u"Caracterización", 
 			clase_en_carrusel=u"fondoCeleste", 
 			link_detalle=u"./metodologia.html#Pobreza")
+
+		
 		self.assertTrue(created)
 		self.assertEquals(area.nombre, u'Caracterización')
 		self.assertEquals(area.clase_en_carrusel,u"fondoCeleste")
