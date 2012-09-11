@@ -3,35 +3,22 @@
 
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from models import Comuna, Region, Area, Indice, Dato
-
-class RegionModelTestCase(TestCase):
-	def test_create_region(self):
-		region, created = Region.objects.get_or_create(nombre=u"La región")
-
-
-	def test_region_unicode(self):
-		region = Region.objects.create(nombre=u"Region Metropolitana")
-
-		self.assertEquals(region.__unicode__(), region.nombre)
+from models import Comuna, Area, Indice, Dato
+from management.commands.comunas_importer import *
 
 
 class ComunaModelTestCase(TestCase):
 	def test_create_comuna(self):
-		region = Region.objects.create(nombre=u"La región")
 		comuna, created = Comuna.objects.get_or_create(nombre=u"La comuna", 
-														region=region, 
 														slug=u"la-comuna",
 														candideitorg=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
 		self.assertTrue(created)
 		self.assertEquals(comuna.nombre, u"La comuna")
 		self.assertEquals(comuna.slug, u"la-comuna")
-		self.assertEquals(comuna.region, region)
 		self.assertEquals(comuna.candideitorg, u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
 
 	def test_comuna_unicode(self):
-		region = Region.objects.create(nombre=u"La región")
-		comuna = Comuna.objects.create(nombre=u"La comuna", region=region, slug=u"la-comuna")
+		comuna = Comuna.objects.create(nombre=u"La comuna", slug=u"la-comuna")
 
 		self.assertEquals(comuna.__unicode__(), comuna.nombre)
 
@@ -77,9 +64,7 @@ class IndiceTestCase(TestCase):
 	def test_create_indice(self):
 		area = Area.objects.create(nombre=u"Caracterización", clase_en_carrusel=u"fondoCeleste")
 		pobreza = Dato.objects.create(nombre=u"Pobreza", imagen="chanchito.png")
-		region = Region.objects.create(nombre=u"La región")
 		comuna = Comuna.objects.create(nombre=u"La comuna", 
-										region=region, 
 										slug=u"la-comuna",
 										candideitorg=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
 		indice, created = Indice.objects.get_or_create(
@@ -119,10 +104,8 @@ class IndiceTestCase(TestCase):
 
 	def test_unicode(self):
 		area = Area.objects.create(nombre=u"Caracterización", clase_en_carrusel=u"fondoCeleste", segunda_clase=u"colorCeleste")
-		region = Region.objects.create(nombre=u"La región")
 		ingreso_por_persona = Dato.objects.create(nombre=u"Ingreso por persona", imagen="chanchito.png")
 		comuna = Comuna.objects.create(nombre=u"La comuna", 
-										region=region, 
 										slug=u"la-comuna",
 										candideitorg=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
 		indice = Indice.objects.create(	
@@ -155,9 +138,8 @@ class HomeTestCase(TestCase):
 
 	
 	def test_trae_los_nombres_de_las_comunas_y_las_regiones(self):
-		region = Region.objects.create(nombre=u"La región")
-		comuna1 = Comuna.objects.create(nombre=u"La comuna1", slug=u"la-comuna1", region=region)
-		comuna2 = Comuna.objects.create(nombre=u"La comuna2", slug=u"la-comuna2", region=region)
+		comuna1 = Comuna.objects.create(nombre=u"La comuna1", slug=u"la-comuna1")
+		comuna2 = Comuna.objects.create(nombre=u"La comuna2", slug=u"la-comuna2")
 		url = reverse('home')
 		response = self.client.get(url)
 
@@ -165,16 +147,12 @@ class HomeTestCase(TestCase):
 		self.assertTrue(comuna1 in response.context["comunas"])
 		self.assertTrue(comuna2 in response.context["comunas"])
 
-		self.assertTrue('regiones' in response.context)
-		self.assertTrue(region in response.context["regiones"])
-
 
 class ComunaViewTestCase(TestCase):
 	def setUp(self):
 		self.area = Area.objects.create(nombre=u"Caracterización", clase_en_carrusel=u"fondoCeleste")
-		self.region = Region.objects.create(nombre=u"La región")
-		self.comuna1 = Comuna.objects.create(nombre=u"La comuna1", slug=u"la-comuna1", region=self.region)
-		self.comuna2 = Comuna.objects.create(nombre=u"La comuna2", slug=u"la-comuna2", region=self.region)
+		self.comuna1 = Comuna.objects.create(nombre=u"La comuna1", slug=u"la-comuna1")
+		self.comuna2 = Comuna.objects.create(nombre=u"La comuna2", slug=u"la-comuna2")
 		ingreso_por_persona = Dato.objects.create(nombre=u"Ingreso por persona", imagen="chanchito.png")
 		pobreza = Dato.objects.create(nombre=u"Pobreza", imagen="chanchito.png")
 		self.indice1 = Indice.objects.create(
@@ -280,6 +258,24 @@ class ComunaViewTestCase(TestCase):
 		self.assertTrue(self.indice2 in response.context['indices'])
 		self.assertTemplateUsed(response, "municipales2012/todos_los_indices.html")
 		self.assertTemplateUsed(response, "base.html")
+
+
+
+class CsvReaderTestOneLine(TestCase):
+    def setUp(self):
+	    self.csvreader = CsvReader()
+	    self.line =[u"Algarrobo",u"Caracterización",u"Pobreza",u"","3,97",
+	    			u"Es el porcentaje de habitantes de la comuna que viven bajo la línea de la pobreza",u"",u"",
+				    u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",u""]
+
+
+
+    # def test_detect_comuna_out_of_a_line(self):
+    #     comuna = self.csvreader.detectComuna(self.line)
+
+    #     self.assertEquals(Comuna.objects.count(), 1)
+    #     self.assertEquals(comuna.nombre, u"Algarrobo")
+
 
 
 

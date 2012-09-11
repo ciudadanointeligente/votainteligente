@@ -1,6 +1,6 @@
 # Create your views here.
 from django.views.generic import TemplateView, DetailView
-from models import Comuna, Region, Indice
+from models import Comuna, Indice
 
 class HomeTemplateView(TemplateView):
 	def get_context_data(self, **kwargs):
@@ -8,8 +8,6 @@ class HomeTemplateView(TemplateView):
 		comunas = Comuna.objects.all()
 
 		context['comunas'] = comunas
-		regiones = Region.objects.all()
-		context['regiones'] = regiones
 		return context
 
 class ComunaOverview(DetailView):
