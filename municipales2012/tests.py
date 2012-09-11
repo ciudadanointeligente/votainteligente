@@ -263,19 +263,104 @@ class ComunaViewTestCase(TestCase):
 
 class CsvReaderTestOneLine(TestCase):
     def setUp(self):
-	    self.csvreader = CsvReader()
-	    self.line =[u"Algarrobo",u"Caracterización",u"Pobreza",u"","3,97",
-	    			u"Es el porcentaje de habitantes de la comuna que viven bajo la línea de la pobreza",u"",u"",
-				    u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",u""]
+        self.csvreader = CsvReader()
+        self.line =[u"Algarrobo",u"Caracterización",u"Pobreza",u"encabezado","3,97",
+            u"Es el porcentaje de habitantes de la comuna que viven bajo la línea de la pobreza",u"n2",u"t2",
+            u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",u" y eso es malo"]
+
+        self.line1 =[u"Algarrobo",u"Caracterización",u"Desigualdad",u"encabezado","3,97",
+            		u"Es el porcentaje de habitantes de la comuna que viven bajo la línea de la pobreza",
+            		u"n2",u"t2",u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",
+                    u" y eso es malo"]
+
+        self.line2 =[u"Algarrobo",u"Caracterización",u"Pobreza",u"encabezado2","4",
+            u"texto2",u"n2",u"t2",
+            u"texto nacional 2",u"426",u" y eso es muy malo"]
+
+    def test_actualiza_indice(self):
+        indice = self.csvreader.detectIndice(self.line)
+        indice = self.csvreader.detectIndice(self.line2)
+
+        self.assertEquals(Indice.objects.count(), 1)
+        self.assertEquals(indice.comuna.nombre, u"Algarrobo")
+        self.assertEquals(indice.area.nombre, u"Caracterización")
+        self.assertEquals(indice.dato.nombre, u"Pobreza")
+        self.assertEquals(indice.encabezado, u"encabezado2")
+        self.assertEquals(indice.numero_1, u"4")
+        self.assertEquals(indice.texto_1, u"texto2")
+        self.assertEquals(indice.numero_2, u"n2")
+        self.assertEquals(indice.texto_2, u"t2")
+        self.assertEquals(indice.texto_pie_pagina_1, u"texto nacional 2")
+        self.assertEquals(indice.numero_pie_pagina_1, u"426")
+        self.assertEquals(indice.texto_pie_pagina_2,u" y eso es muy malo")
+    
+    def test_detect_indice(self):
+    	indice = self.csvreader.detectIndice(self.line)
+
+
+        self.assertEquals(indice.comuna.nombre, u"Algarrobo")
+        self.assertEquals(indice.area.nombre, u"Caracterización")
+        self.assertEquals(indice.dato.nombre, u"Pobreza")
+        self.assertEquals(indice.encabezado, u"encabezado")
+        self.assertEquals(indice.numero_1, u"3,97")
+        self.assertEquals(indice.texto_1, u"Es el porcentaje de habitantes de la comuna que viven bajo la línea de la pobreza")
+        self.assertEquals(indice.numero_2, u"n2")
+        self.assertEquals(indice.texto_2, u"t2")
+        self.assertEquals(indice.texto_pie_pagina_1, u"En el ranking nacional de pobreza, la comuna se ubica en el lugar")
+        self.assertEquals(indice.numero_pie_pagina_1, u"326")
+        self.assertEquals(indice.texto_pie_pagina_2,u" y eso es malo")
+
+
+    def test_does_not_create_two_indices_for_the_same_comuna_with_the_same_dato(self):
+    	indice = self.csvreader.detectIndice(self.line)
+        indice = self.csvreader.detectIndice(self.line)
+
+        self.assertEquals(Indice.objects.count(), 1)
+
+    def test_but_it_does_when_different_dato(self):
+        indice = self.csvreader.detectIndice(self.line)
+        indice = self.csvreader.detectIndice(self.line1)
+
+        self.assertEquals(Indice.objects.count(), 2)
 
 
 
-    # def test_detect_comuna_out_of_a_line(self):
-    #     comuna = self.csvreader.detectComuna(self.line)
-
-    #     self.assertEquals(Comuna.objects.count(), 1)
-    #     self.assertEquals(comuna.nombre, u"Algarrobo")
 
 
+
+    def test_detect_comuna_out_of_a_line(self):
+        comuna = self.csvreader.detectComuna(self.line)
+
+        self.assertEquals(Comuna.objects.count(), 1)
+        self.assertEquals(comuna.nombre, u"Algarrobo")
+        self.assertEquals(comuna.slug, u"algarrobo")
+
+    def test_does_not_create_two_comunas(self):
+    	comuna = self.csvreader.detectComuna(self.line)
+    	comuna = self.csvreader.detectComuna(self.line)
+
+
+        self.assertEquals(Comuna.objects.count(), 1)
+
+    def test_detect_area(self):
+        area = self.csvreader.detectArea(self.line)
+
+        self.assertEquals(Area.objects.count(), 1)
+        self.assertEquals(area.nombre, u"Caracterización")
+
+
+    def test_it_does_not_create_two_areas(self):
+        area = self.csvreader.detectArea(self.line)
+        area = self.csvreader.detectArea(self.line)
+
+        self.assertEquals(Area.objects.count(), 1)
+
+
+    def test_detect_dato(self):
+        dato = self.csvreader.detectDato(self.line)
+
+        self.assertEquals(dato.nombre, u"Pobreza")
+
+    
 
 
