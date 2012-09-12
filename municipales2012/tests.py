@@ -11,11 +11,15 @@ class ComunaModelTestCase(TestCase):
 	def test_create_comuna(self):
 		comuna, created = Comuna.objects.get_or_create(nombre=u"La comuna", 
 														slug=u"la-comuna",
-														main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
+														main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+														messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+														mapping_extra_app_url=u"http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
 		self.assertTrue(created)
 		self.assertEquals(comuna.nombre, u"La comuna")
 		self.assertEquals(comuna.slug, u"la-comuna")
 		self.assertEquals(comuna.main_embedded, u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
+		self.assertEquals(comuna.messaging_extra_app_url, u"http://napistejim.cz/address=nachod")
+		self.assertEquals(comuna.mapping_extra_app_url, u"http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
 
 	def test_comuna_unicode(self):
 		comuna = Comuna.objects.create(nombre=u"La comuna", slug=u"la-comuna")
@@ -66,7 +70,9 @@ class IndiceTestCase(TestCase):
 		pobreza = Dato.objects.create(nombre=u"Pobreza", imagen="chanchito.png")
 		comuna = Comuna.objects.create(nombre=u"La comuna", 
 										slug=u"la-comuna",
-										main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
+										main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+										messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+										mapping_extra_app_url=u"http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
 		indice, created = Indice.objects.get_or_create(
 			comuna =comuna,
 			area = area,
@@ -107,7 +113,9 @@ class IndiceTestCase(TestCase):
 		ingreso_por_persona = Dato.objects.create(nombre=u"Ingreso por persona", imagen="chanchito.png")
 		comuna = Comuna.objects.create(nombre=u"La comuna", 
 										slug=u"la-comuna",
-										main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
+										main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+										messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+										mapping_extra_app_url=u"http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
 		indice = Indice.objects.create(	
 			comuna =comuna,
 			area = area,

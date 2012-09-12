@@ -7,7 +7,9 @@ class Comuna(models.Model):
 	nombre =  models.CharField(max_length=255)
 	slug =  models.CharField(max_length=255)
 	main_embedded = models.CharField(max_length=512, blank=True, null=True)
-
+	messaging_extra_app_url = models.CharField(max_length=512, blank=True, null=True)
+	mapping_extra_app_url = models.CharField(max_length=512, blank=True, null=True)
+	
 	def __unicode__(self):
 		return self.nombre
 
