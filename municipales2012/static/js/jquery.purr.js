@@ -57,12 +57,10 @@
 			var close = document.createElement( 'a' );
 			$( close ).attr(	
 				{
-					className: 'close',
-					href: '#close',
-					innerHTML: 'Close'
+					class: 'close',
+					href: '#close'
 				}
-			)
-				.appendTo( notice )
+			).text("x").appendTo( notice )
 					.click( function ()
 						{
 							removeNotice();
