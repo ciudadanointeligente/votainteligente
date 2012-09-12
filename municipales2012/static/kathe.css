@@ -124,9 +124,8 @@
 	}
 
 .itemFooter{
-	list-style: none outside none;
-    margin-left: 19px;
-    margin-top: 21px;
+	 margin-left: 23px;
+	 margin-top: 21px;
 	}
 	
 .flotarIzq{
@@ -134,16 +133,14 @@
 	}
 
 .footerTexto {
-	 color: #FFFFFF;
-    float: left;
-    font-family: Georgia,"Times New Roman",Times,serif;
-    font-size: 10px;
-    font-style: italic;
-    margin-left: 14px;
-    margin-right: 156px;
-    margin-top: 12px;
-	font-weight: lighter;
-
+	color: #FFFFFF;
+	float: left;
+	font-family: Georgia,"Times New Roman",Times,serif;
+	font-size: 10px;
+	font-style: italic;
+	margin-left: 17px;
+	margin-right: 141px;
+	margin-top: 12px;
 	}
 	
 /* -------- MUNICIPALIDADES ---------- */	
