@@ -6,7 +6,7 @@ from django.db import models
 class Comuna(models.Model):
 	nombre =  models.CharField(max_length=255)
 	slug =  models.CharField(max_length=255)
-	candideitorg = models.CharField(max_length=512)
+	main_embedded = models.CharField(max_length=512)
 
 	def __unicode__(self):
 		return self.nombre
