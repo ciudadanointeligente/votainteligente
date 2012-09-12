@@ -369,6 +369,15 @@ class CsvReaderTestOneLine(TestCase):
 
         self.assertEquals(dato.nombre, u"Pobreza")
 
+
+class TemplatesViewsTestCase(TestCase):
+	def test_get_metodologia(self):
+		url = reverse('metodologia')
+		response = self.client.get(url)
+
+		self.assertTemplateUsed(response, 'municipales2012/metodologia.html')
+
+
     
 
 
