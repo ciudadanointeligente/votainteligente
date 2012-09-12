@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+ 
+              <div class="row-fluid">
+                {% for indice in indices %}
+               
+                <div class="span4 well">
+                  <div class="infoCompletaMunicipalidades">
+                    <article>
+                       <div class="">
+                        <header class="tituloCarrusel {{indice.area.clase_en_carrusel}}" > 
+                          <p>{{indice.dato.nombre}}</p>
+                          </header>
+                          <section>
+                              <div class="categoria {{indice.dato.imagen}}">  
+                              <span class="numeroGrandeCategoria {{indice.area.segunda_clase}}"> {{indice.numero_1}}</span> 
+                              <br /> <br />{{indice.texto_1}} <span class="{{indice.area.segunda_clase}}">{{indice.numero_2}}</span> {{indice.texto_2}}
+                               </div>
+                           </section>
+                            <section class="infoNacional"> {{indice.texto_pie_pagina_1}} <span class="{{indice.area.segunda_clase}}">{{indice.numero_pie_pagina_1}}</span> {{indice.texto_pie_pagina_2}}
+                           </section>
+                        </div>
+                    </article>
+                  </div>
+                </div>
+                {% endfor %}
+             </div>
+ 
+
+       {% endblock %}

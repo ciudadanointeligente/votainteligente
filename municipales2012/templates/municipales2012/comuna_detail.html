@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+            <div class="contenidoMunicipalidades">
+                <div class="container-fluid">
+                    <div class="row-fluid">
+                        <div class="span8">
+                            <h2> <span>{{comuna}}</span></h2>
+                            <div> 
+                                <iframe src="{{comuna.candideitorg}}" style="width:580px;" height="600"> </iframe>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div style="margin-top: -10px;">
+                                <h4>Los datos de <span>{{comuna}}</span> en:</h4>
+                                <script>
+                                    $(document).ready(function() {
+                                    // Handler for .ready() called.
+                                    $("#dyna img[title]").tooltip({
+                                    offset: [10, 2],
+                                    effect: 'slide'
+                                    });
+                                    });
+                                </script>
+                                <script>
+                                    // custom easing called "custom"
+                                    $.easing.custom = function (x, t, b, c, d) {
+                                    var s = 1.70158;
+                                    if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
+                                    return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
+                                    }
+                                </script>
+                                <div class="navi"> 
+
+                                    {% for indice in indices %}
+                                    <a href="{{forloop.counter}}" title="{{indice.area.nombre}} - {{indice.nombre}}"></a>
+                                    {% endfor %}
+                                </div>
+                                <!--<div class="navi"> 
+                                    </div>    -->
+                                <script>
+                                    $(document).ready(function() {
+                                    // initialize scrollable
+                                    $(".scrollable").scrollable({circular: true}).autoscroll({ autoplay: true }).navigator(".navi");
+                                    });
+                                    
+                                </script>
+                                <div class="Carrusel">
+                                    <!-- "previous page" action -->
+                                    <a class="prev browse left"><img alt="" id="flechitaIzquierda" src="{{ STATIC_URL }}images/flechaIzquierda.png" /></a>
+                                    <!-- root element for scrollable -->
+                                    <div class="scrollable">
+                                        <!-- root element for the items -->
+                                        <div class="items">
+                                            <!--CARACTERIZACION -->
+
+
+
+
+
+                                            {% for indice in indices %}
+                                            <div>
+
+                                                <article>
+                                                    <div class="articulokathe wellKathe">
+                                                        <header class="tituloCarrusel {{indice.area.clase_en_carrusel}}">
+                                                            <p>{{indice.dato.nombre}}</p>
+                                                            <div class="signoInterrogacion" id="dyna1De">
+                                                                <a href="./metodologia.html#Pobreza"><img alt="" src="{{ STATIC_URL }}images/signoInterrogacion.png" title="&iquest;C&oacute;mo se calcul&oacute;?" /> </a>
+                                                            </div>
+                                                        </header>
+                                                        <section>
+                                                            <div class="epigrafe {{indice.area.segunda_clase}}">{{indice.encabezado}}</div>
+                                                            <br />
+                                                            <div class="categoria {{indice.dato.imagen}}">  
+                                                                <span class="numeroGrandeCategoria {{indice.area.segunda_clase}}"> {{indice.numero_1}}</span> 
+                                                                <br /> <br />{{indice.texto_1}}  <span class="{{indice.area.segunda_clase}}">{{indice.numero_2}}</span> {{indice.texto_2}}
+                                                            </div>
+                                                        </section>
+                                                        <section class="infoNacional">{{indice.texto_pie_pagina_1}}<span class="{{indice.area.segunda_clase}}">{{indice.numero_pie_pagina_1}}</span> {{indice.texto_pie_pagina_2}}</section>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <!-- "next page" action -->
+                                    <a class="next browse right"><img alt="" id="flechitaDerecha" src="{{ STATIC_URL }}images/flechaDerecha.png" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock content %}
+
