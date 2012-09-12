@@ -1,16 +1,10 @@
 from django.db import models
 
 # Create your models here.
-class Region(models.Model):
-	nombre = models.CharField(max_length=255)
-
-	def __unicode__(self):
-		return self.nombre
 
 
 class Comuna(models.Model):
 	nombre =  models.CharField(max_length=255)
-	region = models.ForeignKey(Region)
 	slug =  models.CharField(max_length=255)
 	candideitorg = models.CharField(max_length=512)
 
@@ -27,10 +21,18 @@ class Area(models.Model):
 	def __unicode__(self):
 		return self.nombre
 
+
+class Dato(models.Model):
+	nombre = models.CharField(max_length=255)
+	imagen = models.CharField(max_length=255)
+
+	def __unicode__(self):
+		return self.nombre
+
 class Indice(models.Model):
 	comuna = models.ForeignKey(Comuna)
 	area = models.ForeignKey(Area)
-	nombre = models.CharField(max_length=255)
+	dato = models.ForeignKey(Dato)
 	encabezado = models.CharField(max_length=255)
 	numero_1 = models.CharField(max_length=255)
 	texto_1 = models.CharField(max_length=255)
@@ -46,4 +48,4 @@ class Indice(models.Model):
 
 
 	def __unicode__(self):
-		return self.nombre+' - '+self.comuna.nombre
+		return self.dato.nombre+' - '+self.comuna.nombre

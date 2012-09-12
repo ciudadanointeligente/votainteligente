@@ -12,25 +12,9 @@
                 
                 <h3> <center>Conoce a tus candidatos y elige a tu media naranja en cada comúna</center></h3>
                 <center>
-                    <div class="accordion" id="accordion2">
-                    {% for region in regiones %}
-                      <div class="accordion-group">
-                        <div class="accordion-heading">
-                          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                            {{region}}
-                          </a>
-                        </div>
-                        <div id="collapseOne" class="accordion-body collapse">
-                          <div class="accordion-inner">
-                            {% for comuna in region.comuna_set.all %}
-                                <a href="{% url comuna-overview slug=comuna.slug %}">{{comuna}}</a>
-                            {% endfor %}
-                          </div>
-                        </div>
-                      </div>
-                    {% endfor %}
-                    </div>
-
+                    <form class="form-search"> <p> Escribe el nombre de la comuna que te interesa</p>
+                <input type="text" id="comunas-search" class="input-xxlarge search-query"> 
+                </form>
 
                     
 
