@@ -227,6 +227,8 @@ class ComunaViewTestCase(TestCase):
 		self.assertTemplateUsed(response, 'municipales2012/comuna_detail.html')
 		self.assertTrue('comuna' in response.context)
 		self.assertEquals(response.context['comuna'], self.comuna1)
+		self.assertTrue('title' in response.context)
+		self.assertEquals(response.context['title'], self.comuna1.nombre)
 
 
 	def test_get_indices_comunales(self):
@@ -265,7 +267,9 @@ class ComunaViewTestCase(TestCase):
 		self.assertTrue(self.indice1 in response.context['indices'])
 		self.assertTrue(self.indice2 in response.context['indices'])
 		self.assertTemplateUsed(response, "municipales2012/todos_los_indices.html")
-		self.assertTemplateUsed(response, "base.html")
+		self.assertTemplateUsed(response, "base_sub_menu.html")
+		self.assertTrue('title' in response.context)
+		self.assertEquals(response.context['title'], self.comuna1.nombre + u" índices detallados")
 
 
 
@@ -375,7 +379,19 @@ class TemplatesViewsTestCase(TestCase):
 		url = reverse('metodologia')
 		response = self.client.get(url)
 
+		self.assertTrue('title' in response.context)
+		self.assertEquals(response.context['title'], u"Metodología")
 		self.assertTemplateUsed(response, 'municipales2012/metodologia.html')
+
+	def test_get_quienes_somos(self):
+		url = reverse('somos')
+		response = self.client.get(url)
+
+		self.assertTemplateUsed(response, 'municipales2012/quienesSomos.html')
+		self.assertEquals(response.status_code, 200)
+		self.assertTrue('title' in response.context)
+		self.assertEquals(response.context['title'], u"Quienes somos")
+
 
 
     
