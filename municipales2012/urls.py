@@ -7,7 +7,7 @@ urlpatterns = patterns('',
 	
 
 	#static pages
-	url(r'^metodologia/$', TemplateView.as_view(template_name="municipales2012/metodologia.html"), name="metodologia"),
+	url(r'^metodologia/?$', TemplateView.as_view(template_name="municipales2012/metodologia.html"), name="metodologia"),
 
 	#pages depending on the comuna
 	url(r'^(?P<slug>[-\w]+)/indices/?$', ComunaIndices.as_view(), name='comuna-index-detail'),
