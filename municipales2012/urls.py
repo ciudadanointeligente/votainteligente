@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from views import HomeTemplateView, ComunaOverview, ComunaIndices, MetodologiaView
+from views import HomeTemplateView, ComunaOverview, ComunaIndices, MetodologiaView, QuienesSomosView
 from django.views.generic import TemplateView
 
 urlpatterns = patterns('',
@@ -7,7 +7,8 @@ urlpatterns = patterns('',
 	
 
 	#static pages
-	url(r'^metodologia/$', MetodologiaView.as_view(), name="metodologia"),
+	url(r'^metodologia/?$', MetodologiaView.as_view(), name="metodologia"),
+	url(r'^somos/?$', QuienesSomosView.as_view(), name="somos"),
 
 	#pages depending on the comuna
 	url(r'^(?P<slug>[-\w]+)/indices/?$', ComunaIndices.as_view(), name='comuna-index-detail'),

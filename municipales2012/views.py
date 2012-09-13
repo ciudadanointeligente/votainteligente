@@ -40,3 +40,10 @@ class MetodologiaView(TemplateView):
 
 	def get_context_data(self, **kwargs):
 		return {"title":u'Metodología'}
+
+
+class QuienesSomosView(TemplateView):
+	template_name="municipales2012/quienesSomos.html"
+
+	def get_context_data(self, **kwargs):
+		return {'title': u"Quienes somos"}
