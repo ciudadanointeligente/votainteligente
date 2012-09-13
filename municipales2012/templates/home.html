@@ -116,7 +116,8 @@
 
 		];
 		$( "#comunas-search" ).autocomplete({
-			source: availableTags
+			source: availableTags,
+      autoFocus: true
 		});
 		$( "#comunas-search" ).autocomplete({
 		   select: function(event, ui) { 
