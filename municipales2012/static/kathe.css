@@ -874,7 +874,7 @@ div.navi a.active {
 	background-repeat:no-repeat;
 	}
 	
-.categoriaCracterizacion{
+.categoriaCaracterizacion{
 	background-image: url(./images/caracterizacion.png);
 	background-repeat:no-repeat;
 	}
@@ -897,10 +897,10 @@ div.navi a.active {
 	font-size: 14px;
 	}
 	
-.categoriaSalud {
+/*.categoriaSalud {
 	font-size:15px;
 	font-family:'bebas_neueregular';
-	}	
+	}	*/
 	
 	
 .wellKathe {
