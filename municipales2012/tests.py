@@ -11,11 +11,15 @@ class ComunaModelTestCase(TestCase):
 	def test_create_comuna(self):
 		comuna, created = Comuna.objects.get_or_create(nombre=u"La comuna", 
 														slug=u"la-comuna",
-														candideitorg=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
+														main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+														messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+														mapping_extra_app_url=u"http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
 		self.assertTrue(created)
 		self.assertEquals(comuna.nombre, u"La comuna")
 		self.assertEquals(comuna.slug, u"la-comuna")
-		self.assertEquals(comuna.candideitorg, u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
+		self.assertEquals(comuna.main_embedded, u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
+		self.assertEquals(comuna.messaging_extra_app_url, u"http://napistejim.cz/address=nachod")
+		self.assertEquals(comuna.mapping_extra_app_url, u"http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
 
 	def test_comuna_unicode(self):
 		comuna = Comuna.objects.create(nombre=u"La comuna", slug=u"la-comuna")
@@ -66,7 +70,9 @@ class IndiceTestCase(TestCase):
 		pobreza = Dato.objects.create(nombre=u"Pobreza", imagen="chanchito.png")
 		comuna = Comuna.objects.create(nombre=u"La comuna", 
 										slug=u"la-comuna",
-										candideitorg=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
+										main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+										messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+										mapping_extra_app_url=u"http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
 		indice, created = Indice.objects.get_or_create(
 			comuna =comuna,
 			area = area,
@@ -107,7 +113,9 @@ class IndiceTestCase(TestCase):
 		ingreso_por_persona = Dato.objects.create(nombre=u"Ingreso por persona", imagen="chanchito.png")
 		comuna = Comuna.objects.create(nombre=u"La comuna", 
 										slug=u"la-comuna",
-										candideitorg=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
+										main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+										messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+										mapping_extra_app_url=u"http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
 		indice = Indice.objects.create(	
 			comuna =comuna,
 			area = area,
@@ -219,6 +227,8 @@ class ComunaViewTestCase(TestCase):
 		self.assertTemplateUsed(response, 'municipales2012/comuna_detail.html')
 		self.assertTrue('comuna' in response.context)
 		self.assertEquals(response.context['comuna'], self.comuna1)
+		self.assertTrue('title' in response.context)
+		self.assertEquals(response.context['title'], self.comuna1.nombre)
 
 
 	def test_get_indices_comunales(self):
@@ -257,7 +267,9 @@ class ComunaViewTestCase(TestCase):
 		self.assertTrue(self.indice1 in response.context['indices'])
 		self.assertTrue(self.indice2 in response.context['indices'])
 		self.assertTemplateUsed(response, "municipales2012/todos_los_indices.html")
-		self.assertTemplateUsed(response, "base.html")
+		self.assertTemplateUsed(response, "base_sub_menu.html")
+		self.assertTrue('title' in response.context)
+		self.assertEquals(response.context['title'], self.comuna1.nombre + u" índices detallados")
 
 
 
@@ -360,6 +372,27 @@ class CsvReaderTestOneLine(TestCase):
         dato = self.csvreader.detectDato(self.line)
 
         self.assertEquals(dato.nombre, u"Pobreza")
+
+
+class TemplatesViewsTestCase(TestCase):
+	def test_get_metodologia(self):
+		url = reverse('metodologia')
+		response = self.client.get(url)
+
+		self.assertTrue('title' in response.context)
+		self.assertEquals(response.context['title'], u"Metodología")
+		self.assertTemplateUsed(response, 'municipales2012/metodologia.html')
+
+	def test_get_quienes_somos(self):
+		url = reverse('somos')
+		response = self.client.get(url)
+
+		self.assertTemplateUsed(response, 'municipales2012/quienesSomos.html')
+		self.assertEquals(response.status_code, 200)
+		self.assertTrue('title' in response.context)
+		self.assertEquals(response.context['title'], u"Quienes somos")
+
+
 
     
 

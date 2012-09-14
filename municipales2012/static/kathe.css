@@ -192,7 +192,7 @@
 	font-size: 10px;
 	font-style: italic;
 	margin-left: 14px;
-	margin-right: 129px;
+	margin-right: 124px;
 	margin-top: 12px;
 	}
 	
@@ -760,40 +760,79 @@ div.navi a.active {
     top: 97px;
 	}
 	
+.listaMetodologia {
+	list-style:none;
+	margin:0px;
+	}	
 	
+.itemListaMetodologia {
+	color: grey;
+    float: left;
+    list-style: disc inside none;
+    margin-right: 17px;
+    width: 296px;
+	}
+.itemListaMetodologia a{
+	color:grey;
+	text-decoration:none;
+}
+
+	
+.itemListaMetodologia:hover {
+	color:black;
+	text-decoration:none;
+}
+
+.flechaMetodologia {
+	position: fixed;
+    right: 129px;
+    top: 350px;
+	}
+
 .categoriaPobreza {
-	background-image: url(images/pobreza.png);
+	background-image: url(./images/pobreza.png);
+	background-repeat:no-repeat;
+	}	
+
+.categoriaIngreso {
+	background-image: url(./images/ingresos.png);
 	background-repeat:no-repeat;
 	}	
 	
+	
 .categoriaDesigualdad {
-	background-image: url(images/desigualdad.png);
+	background-image: url(./images/desigualdad.png);
 	background-repeat:no-repeat;
 	}
 
 .categoriaFuncionarios {
-	background-image: url(images/funcionarios.png);
+	background-image: url(./images/funcionarios.png);
 	background-repeat:no-repeat;
 	}
 	
 .categoriaEducacion {
-	background-image: url(images/educacion.png);
+	background-image: url(./images/educacion.png);
 	background-repeat:no-repeat;
 	}
 	
 .categoriaParticipacion {
-	background-image: url(images/casa.png);
+	background-image: url(./images/casa.png);
 	background-repeat:no-repeat;
 	}
 	
 	
-.servicioSalud {
-	background-image: url(images/servicioSalud.png);
+.categoriaServiciosSalud {
+	background-image: url(./images/servicioSalud.png);
+	background-repeat:no-repeat;
+	}
+	
+.categoriaSalud {
+	background-image: url(./images/salud.png);
 	background-repeat:no-repeat;
 	}
 	
 .categoriaObesidad {
-	background-image: url(images/obesidad.png);
+	background-image: url(./images/obesidad.png);
 	background-repeat:no-repeat;
 	}
 	
@@ -802,38 +841,69 @@ div.navi a.active {
 	background-repeat:no-repeat;
 	}
 	
+	
 .categoriaAreasPublicas {
-	background-image: url(images/areasPublicas.png);
+	background-image: url(./images/areasPublicas.png);
+	background-repeat:no-repeat;
+	}
+	
+.categoriaUrbanismo {
+	background-image: url(./images/areasPublicas.png);
 	background-repeat:no-repeat;
 	}
 	
 .categoriaRanking {
-	background-image: url(images/ranking.png);
+	background-image: url(./images/ranking.png);
+	background-repeat:no-repeat;
+	}
+	
+.categoriaTransparencia{
+	background-image: url(./images/transparencia.png);
 	background-repeat:no-repeat;
 	}
 	
 .categoriaOrganizaciones {
-	background-image: url(images/organizaciones.png);
+	background-image: url(./images/organizaciones.png);
+	background-repeat:no-repeat;
+	}
+	
+.categoriaPresupuesto{
+	background-image: url(./images/presupuesto.png);
 	background-repeat:no-repeat;
 	}
 	
 .categoriaSemaforoRojo {
-	background-image: url(images/semaforoRojo.png);
+	background-image: url(./images/semaforoRojo.png);
 	background-repeat:no-repeat;
 	}
 	
 .categoriaSemaforoAmarillo {
-	background-image: url(images/semaforoAmarillo.png);
+	background-image: url(./images/semaforoAmarillo.png);
 	background-repeat:no-repeat;
 	}
 	
 .categoriaSemaforoVerde {
-	background-image: url(images/semaforoVerde.png);
+	background-image: url(./images/semaforoVerde.png);
 	background-repeat:no-repeat;
 	}
 	
-.rankingConsejo {
-	background-image: url(images/rankingConsejo.png);
+.categoriaRankingConsejo {
+	background-image: url(./images/rankingConsejo.png);
+	background-repeat:no-repeat;
+	}
+	
+.categoriaProfesionalizacion{
+	background-image: url(./images/profesionalizacion.png);
+	background-repeat:no-repeat;
+	}
+	
+.categoriaParticipacion{
+	background-image: url(./images/participacion.png);
+	background-repeat:no-repeat;
+	}
+	
+.categoriaCaracterizacion{
+	background-image: url(./images/caracterizacion.png);
 	background-repeat:no-repeat;
 	}
 	
@@ -855,10 +925,10 @@ div.navi a.active {
 	font-size: 14px;
 	}
 	
-.categoriaSalud {
+/*.categoriaSalud {
 	font-size:15px;
 	font-family:'bebas_neueregular';
-	}	
+	}	*/
 	
 	
 .wellKathe {
@@ -880,7 +950,7 @@ div.navi a.active {
 .paginaCompleta {
 	clear:both;
 	margin-left:24%;
-	margin-top:160px;
+	margin-top:20px;
 	}
 	
 .subMenu {

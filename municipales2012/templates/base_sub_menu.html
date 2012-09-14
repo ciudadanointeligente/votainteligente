@@ -5,10 +5,8 @@
 
   <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-
-    <title>Votainteligente Municipales 2012{% if title %} - {{title}}{% endif %}</title>
-
-    
+    <title>Toda la Info por Municipalidad</title>
+    <!-- Bootstrap -->
     <link href="{{ STATIC_URL }}kathe.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js" ></script>
@@ -24,14 +22,15 @@
     
 <body>
 
+
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
               <div class="container">
                     <div class="nav-collapse collapse">
                   
                         <ul class="menuPpal nav">
-                        <li class="pull-left"><a href="{% url home %}"><img alt="" src="{{ STATIC_URL }}images/logoVotaMunicipales.png" style="margin-left: -16px; margin-right: 150px;"></a> </li>
-                        <li class="dentroMenu pull-right"><a href="{% url somos %}">¿Quiénes Somos?</a></li>
+                        <li class="pull-left"><a href="{% url home %}"><img alt="" src="{{ STATIC_URL }}images/logoVotaMunicipales.png" style="margin-left: -16px; margin-right: 160px;"></a> </li>
+                        <li class="dentroMenu pull-right"><a href="http://www.ciudadanointeligente.org/quienes-somos/">¿Quiénes Somos?</a></li>
                         <li class="dentroMenu pull-right"><a href="{% url metodologia %}">Metodología</a></li>
                         
                         <li class="dentroMenu pull-right"><form class="navbar-search pull-right">
@@ -44,7 +43,24 @@
              </div>
         </div>
           
-   
+     
+          
+          
+    <div class="navbar subMenu navbar-fixed-top">
+            <div class="navbar-inner">
+              <div class="container">
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right">
+                         
+                        <li class=""> <a href="#">Info Municipal  <img alt="" src="{{ STATIC_URL }}images/iconoInfoMunicipal.png" /></a></li>
+                        <li class=""> <a href="#">Preguntar <img alt="" src="{{ STATIC_URL }}images/iconoPregunta.png" /></a></li>
+                        <li class=""> <a href="#">Reportar <img alt="" src="{{ STATIC_URL }}images/iconoReporta.png" /></a></li>
+                        </ul>
+                            
+                    </div>
+               </div>
+             </div>
+        </div>
       
         
         
