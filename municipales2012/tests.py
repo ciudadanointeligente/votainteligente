@@ -272,22 +272,35 @@ class ComunaViewTestCase(TestCase):
 		self.assertEquals(response.context['title'], self.comuna1.nombre + u" índices detallados")
 
 
+	def atest_get_todos_los_indices_de_una_comuna_como_json(self):
+		url = reverse('comuna-index-detail-json', kwargs={
+			'slug':self.comuna1.slug
+			})
+		response = self.client.get(url)
+
+		self.assertEquals(response.status_code, 200)
+		self.assertEquals(response.content_type, u'application/json')
+
+
 
 class CsvReaderTestOneLine(TestCase):
     def setUp(self):
         self.csvreader = CsvReader()
-        self.line =[u"Algarrobo",u"Caracterización",u"Pobreza",u"encabezado","3,97",
+        self.line =["Algarrobo","Caracterización",u"Pobreza",u"encabezado","3,97",
             u"Es el porcentaje de habitantes de la comuna que viven bajo la línea de la pobreza",u"n2",u"t2",
             u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",u" y eso es malo"]
 
-        self.line1 =[u"Algarrobo",u"Caracterización",u"Desigualdad",u"encabezado","3,97",
+        self.line1 =["Algarrobo","Caracterización",u"Desigualdad",u"encabezado","3,97",
             		u"Es el porcentaje de habitantes de la comuna que viven bajo la línea de la pobreza",
             		u"n2",u"t2",u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",
                     u" y eso es malo"]
 
-        self.line2 =[u"Algarrobo",u"Caracterización",u"Pobreza",u"encabezado2","4",
+        self.line2 =["Algarrobo","Caracterización",u"Pobreza",u"encabezado2","4",
             u"texto2",u"n2",u"t2",
             u"texto nacional 2",u"426",u" y eso es muy malo"]
+        self.line3 =["Algarrobo  ", "Caracterización ", "Pobreza ","encabezado2","4",
+            "texto2","n2","t2",
+            "texto nacional 2","426"," y eso es muy malo"]
 
     def test_actualiza_indice(self):
         indice = self.csvreader.detectIndice(self.line)
@@ -304,7 +317,7 @@ class CsvReaderTestOneLine(TestCase):
         self.assertEquals(indice.texto_2, u"t2")
         self.assertEquals(indice.texto_pie_pagina_1, u"texto nacional 2")
         self.assertEquals(indice.numero_pie_pagina_1, u"426")
-        self.assertEquals(indice.texto_pie_pagina_2,u" y eso es muy malo")
+        self.assertEquals(indice.texto_pie_pagina_2,u"y eso es muy malo")
     
     def test_detect_indice(self):
     	indice = self.csvreader.detectIndice(self.line)
@@ -320,7 +333,7 @@ class CsvReaderTestOneLine(TestCase):
         self.assertEquals(indice.texto_2, u"t2")
         self.assertEquals(indice.texto_pie_pagina_1, u"En el ranking nacional de pobreza, la comuna se ubica en el lugar")
         self.assertEquals(indice.numero_pie_pagina_1, u"326")
-        self.assertEquals(indice.texto_pie_pagina_2,u" y eso es malo")
+        self.assertEquals(indice.texto_pie_pagina_2,u"y eso es malo")
 
 
     def test_does_not_create_two_indices_for_the_same_comuna_with_the_same_dato(self):
@@ -351,6 +364,12 @@ class CsvReaderTestOneLine(TestCase):
     	comuna = self.csvreader.detectComuna(self.line)
     	comuna = self.csvreader.detectComuna(self.line)
 
+    	self.assertEquals(Comuna.objects.count(), 1)
+
+
+    def test_does_not_create_two_comunas_with_spaces(self):
+    	comuna = self.csvreader.detectComuna(self.line2)
+    	comuna = self.csvreader.detectComuna(self.line3)
 
         self.assertEquals(Comuna.objects.count(), 1)
 
@@ -367,11 +386,26 @@ class CsvReaderTestOneLine(TestCase):
 
         self.assertEquals(Area.objects.count(), 1)
 
+    def test_it_does_not_create_two_areas_even_with_spaces(self):
+    	area = self.csvreader.detectArea(self.line2)
+    	area = self.csvreader.detectArea(self.line3)
+
+    	self.assertEquals(Area.objects.count(), 1)
+    	self.assertEquals(area.nombre, u"Caracterización")
+
 
     def test_detect_dato(self):
         dato = self.csvreader.detectDato(self.line)
 
         self.assertEquals(dato.nombre, u"Pobreza")
+
+
+    def test_it_does_not_create_twice_the_same_dato(self):
+    	dato = self.csvreader.detectDato(self.line2)
+    	dato = self.csvreader.detectDato(self.line3)
+
+    	self.assertEquals(Dato.objects.count(), 1)
+
 
 
 class TemplatesViewsTestCase(TestCase):
