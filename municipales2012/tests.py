@@ -427,6 +427,37 @@ class TemplatesViewsTestCase(TestCase):
 		self.assertEquals(response.context['title'], u"Quienes somos")
 
 
+class MessageTestCase(TestCase):
+
+#Load candidate mailing data
+#Create template
+#Create question mail
+#Send question mail
+#Save question mail in db
+#Retrieve question mail from db
+#Obtain answer mail
+#Save answer mail in db
+#Retrieve answer mail from db
+#Associate quesion and answer mails
+#Display n questions/answers for a given candidate
+
+	def setUp(self):
+		candidate_data = [{'name': 'candidate1', 'mail': 'candidate1@test.com'},{'name': 'candidate2', 'mail': 'candidate2@test.com'}]
+		question1 = 'Why cant we be friends'
+		question2 = 'Who let the dogs out?'
+		
+		
+
+	def test_load_candidate_mailing_data(self):
+		dato, created = Dato.objects.get_or_create(nombre=u"Pobreza", imagen="chanchito.png")
+
+		self.assertTrue(created)
+		self.assertEquals(dato.nombre, u"Pobreza")
+		self.assertEquals(dato.imagen, u"chanchito.png")
+
+	def test_create_template(self):
+
+	def test_create_question_mail(self):
 
     
 
