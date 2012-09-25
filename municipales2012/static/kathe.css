@@ -152,13 +152,23 @@
 	}
 
 .footer {
-	background-color: #222222;
     border-right: 1px solid white;
     list-style: none outside none;
     margin: 40px 0 0px auto;
     padding-right: 17px;
 	padding-bottom: 10px;
+	background-color: #1B1B1B;
+    border-color: #252525;
+	position:fixed;
+	bottom:0px;
+    margin-bottom: 0;
+    position: fixed;
+	overflow: visible;
+	
 	}
+	
+.dentroFooter{
+	width:60px;}
 
 .footer a{
 	color:white;
