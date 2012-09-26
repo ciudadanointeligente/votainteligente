@@ -157,3 +157,10 @@ LOGGING = {
         },
     }
 }
+
+#Added by Marcel
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'mailer@votainteligente.cl'
+EMAIL_HOST_PASSWORD = 'holanda895:Mailer'
+EMAIL_USE_TLS = True
