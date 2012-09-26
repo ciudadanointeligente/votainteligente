@@ -3,7 +3,7 @@
 
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from models import Comuna, Area, Indice, Dato
+from models import Comuna, Area, Indice, Dato, Candidato
 from management.commands.comunas_importer import *
 
 
@@ -430,7 +430,7 @@ class TemplatesViewsTestCase(TestCase):
 class MessageTestCase(TestCase):
 
 #Load candidate mailing data
-#Create template
+#Create mail template
 #Create question mail
 #Send question mail
 #Save question mail in db
@@ -439,26 +439,62 @@ class MessageTestCase(TestCase):
 #Save answer mail in db
 #Retrieve answer mail from db
 #Associate quesion and answer mails
-#Display n questions/answers for a given candidate
+#Obtain questions/answers for a given candidate
+#Calculate response stats
 
 	def setUp(self):
-		candidate_data = [{'name': 'candidate1', 'mail': 'candidate1@test.com'},{'name': 'candidate2', 'mail': 'candidate2@test.com'}]
-		question1 = 'Why cant we be friends'
-		question2 = 'Who let the dogs out?'
+		self.comuna1, created = Comuna.objects.get_or_create(nombre="comuna1", 
+			slug="la-comuna1",
+			main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+			messaging_extra_app_url="http://napistejim.cz/address=nachod",
+			mapping_extra_app_url="http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
+		self.comuna2, created = Comuna.objects.get_or_create(nombre="comuna2", 
+			slug="la-comuna2",
+			main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+			messaging_extra_app_url="http://napistejim.cz/address=nachod",
+			mapping_extra_app_url="http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
+		self.data_candidato = [{'nombre': 'candidato1', 'mail': 'candidato1@test.com', 'comuna': self.comuna1, 'partido':'partido1', 'web': 'web1'},{'nombre': 'candidato2', 'mail': 'candidato2@test.com', 'comuna': self.comuna2, 'partido':'partido2'}]
+		self.question1 = "Why can't we be friends?"
+		self.answer1 = "I'd kinda like to be the President, so I can show you how your money's spent"
+		self.question2 = 'Who let the dogs out?'
+		self.answer2 = 'woof, woof, woof, woof'
+		self.template = '<h3>Hello, this is a test template</h3><br><p>Message goes here</p>'
+		self.mail_user = 'mailer@'
+		self.mail_pass = ''
+
+	def test_create_candidate(self):
+		candidato = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
+
+		self.assertTrue(candidato)
+		self.assertEquals(candidato.nombre, 'candidato1')
+		self.assertEquals(candidato.mail, 'candidato1@test.com')
+		self.assertEquals(candidato.comuna, self.comuna1)
+		self.assertEquals(candidato.partido, 'partido1')
+		self.assertEquals(candidato.web, 'web1')
+
+	#def test_create_mail_template(self):
 		
-		
-
-	def test_load_candidate_mailing_data(self):
-		dato, created = Dato.objects.get_or_create(nombre=u"Pobreza", imagen="chanchito.png")
-
-		self.assertTrue(created)
-		self.assertEquals(dato.nombre, u"Pobreza")
-		self.assertEquals(dato.imagen, u"chanchito.png")
-
-	def test_create_template(self):
-
 	def test_create_question_mail(self):
-
-    
-
-
+		import imaplib
+		connection = imaplib.IMAP4_SSL('imap.gmail.com', 993)
+		connection.login(user, pass)
+'''
+	def test_send_question_mail(self):
+		
+	def test_save_question_mail(self):
+		
+	def test_retrieve_question_mail(self):
+		
+	def test_obtain_answer_mail(self):
+		
+	def test_save_answer_mail(self):
+		
+	def test_retrieve_answer_mail(self):
+		
+	def test_associate_question_answer(self):
+		
+	def test_display_questions_answers(self):
+		
+	def test_calculate_response_stats(self):
+	
+'''	

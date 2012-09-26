@@ -51,3 +51,13 @@ class Indice(models.Model):
 
 	def __unicode__(self):
 		return self.dato.nombre+' - '+self.comuna.nombre
+
+class Candidato(models.Model):
+	nombre = models.CharField(max_length=255)
+	mail = models.CharField(max_length=255)
+	comuna = models.ForeignKey(Comuna)
+	partido = models.CharField(max_length=255)
+	web = models.CharField(max_length=255, blank=True, null=True)
+
+	def __unicode__(self):
+		return self.nombre
