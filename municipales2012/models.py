@@ -62,14 +62,25 @@ class Candidato(models.Model):
 	def __unicode__(self):
 		return self.nombre
 
+class ManagerPregunta(models.Manager):
+	def crear_pregunta(self,texto_pregunta,remitente,destinatarios):
+		pregunta = self.create(remitente=remitente,texto_pregunta=texto_pregunta)
+		for destinatario in destinatarios:
+			Respuesta.objects.create(candidato=destinatario, pregunta=pregunta, texto_respuesta='Sin Respuesta')
+		return pregunta
+	
+
 class Pregunta(models.Model):
 	"""docstring for Pregunta"""
 	candidato = models.ManyToManyField('Candidato', through='Respuesta')
 	remitente = models.CharField(max_length=255)
 	texto_pregunta = models.TextField()
-
+	
+	objects = ManagerPregunta()
+	
 	def __unicode__(self):
 		return self.texto_pregunta
+		
 
 class Respuesta(models.Model):
 	"""docstring for Respuesta"""
