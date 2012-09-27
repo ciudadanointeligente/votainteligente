@@ -8,9 +8,9 @@
                 <div class="container-fluid">
                     <div class="row-fluid">
                         <div class="span8">
-                            <h2> <span>{{comuna}}</span></h2>
+                            <h2>Municipales en <span>{{comuna}}</span></h2>
                           <div> 
-                                <iframe src="{{comuna.main_embedded}}" style="width:580px;" height="600"> </iframe>
+                               <iframe src="http://candideit.org/ciudadanoi/zapallar/embeded" style="width:580px; border:none;" height="600" scrolling="no"> </iframe>
                             </div>
                         </div>
                         
@@ -27,7 +27,7 @@
                                                        
                                                         <li class="span6">
                                                             <div class="well thumbnail">
-                                                           <a href="{% url reporta %}" target="_blank" class="btn btn-block btn-info btnMunicipales">Reporta</a>
+                                                           <a href="{% url reporta %}" target="_blank" class="btn btn-block btn-info btnMunicipales">¡Fiscaliza!</a>
                                                            <p class="textoBTN">Problemas en tu comuna</p>
                                                            
                                                         </div>
@@ -92,7 +92,7 @@
                                                         <header class="tituloCarrusel {{indice.area.clase_en_carrusel}}">
                                                             <p>{{indice.dato.nombre}}</p>
                                                             <div class="signoInterrogacion" id="dyna1De">
-                                                                <a href="./metodologia.html#Pobreza"><img alt="" src="{{ STATIC_URL }}images/signoInterrogacion.png" title="&iquest;C&oacute;mo se calcul&oacute;?" /> </a>
+                                                                <a href="{{indice.area.link_detalle}}"><img alt="" src="{{ STATIC_URL }}images/signoInterrogacion.png" title="&iquest;C&oacute;mo se calcul&oacute;?" /> </a>
                                                             </div>
                                                         </header>
                                                         <section>

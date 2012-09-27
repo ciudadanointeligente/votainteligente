@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
+
+
      <meta property="og:description" content="Todo lo que necesitas saber para votar"/>    
            
          
@@ -10,10 +12,12 @@
                 
                 <div class="buscadorPpal">
                 
-                <h3> <center>Conoce a tus candidatos y elige a tu media naranja en cada comúna</center></h3>
+                <h3> <center>Conoce a tus candidatos y elige a tu media naranja en cada comuna</center></h3>
                 <center>
                     <form class="form-search"> <p> Escribe el nombre de la comuna que te interesa</p>
                 <input type="text" id="comunas-search" class="input-xxlarge search-query"> 
+                <br/> <br/>
+                <p> <em> <small>Encuentra aquí datos relevantes de tu comuna y de la gestión del último alcalde. Descubre más de lo que ha sucedido en tu municipio en temas de transparencia, participación ciudadana, presupuesto, educación, salud, administración, seguridad y urbanismo.</small> </em></p> 
                 </form>
 
                     
@@ -24,7 +28,7 @@
     <script type="text/javascript">
       var notice = '<div class="notice">'
         +'<div class="notice-body">'
-          + '<p>¿Andas en busca de nuestro Vota Inteligente?</p>'
+          + '<p>¿Andas en busca de nuestro antiguo Vota Inteligente? (Información del Congreso)</p>'
         + '</div>'
         + '<div class="notice-bottom">'
           + '<p><a class="btn btn-info" href="http://legislativo.votainteligente.cl" target="_blank">Encuéntralo aquí</a></p>'
@@ -56,37 +60,43 @@
           
     	
     	<div class="container">
-         <div class="row queHacemos">
-                <div class="span6 subTitulosHomeInfo">
+
+            <div class="row-fluid">
                 
-                 <a href="./buscadorMunicipalidades.html" class="btn btn-block btn-inverse" id="dyna" title="Completar Buscador Superior"> <img src="{{ STATIC_URL }}images/iconoInfoHome.png" style="float: right;"/> Info Municipal 
-                    </a> 
+                <div class="span3">
                 
-                <br/>
-				<p>Encuentra aquí datos relevantes de tu comuna y de la gestión del último alcalde. Descubre más de lo que ha sucedido en tu municipio en temas de transparencia, participación ciudadana, presupuesto, educación, salud, administración, seguridad y urbanismo. </p> 
-				</div>
-               
-                
-                <div class="span3 subTitulosHomePreguntar">
-                
-                <a href="#" class="btn btn-block btn-inverse" target="_blank"> Preguntar <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </a>
+                <a href="#" class="btn btn-block btn-inverse" target="_blank"> Pregúntale <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </a>
                 <br/>
 				<p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
                 </div>
               
                 
-                <div class="span3 subTitulosHomeReportar"> 
-                <a  href="./reporta.html" class="btn btn-block btn-inverse"> Reportar<img src="{{ STATIC_URL}}images/iconoReporta.png" style="float: right;"/> </a>
+                <div class="span3"> 
+                <a  href="{% url reporta %}" class="btn btn-block btn-inverse"> Fiscaliza<img src="{{ STATIC_URL}}images/iconoReporta.png" style="float: right;"/> </a>
                 <br/>
 				<p>Denuncia todo aquello que quieras mejorar en tu comuna, cuéntanos de lugares públicos en mal estado, propaganda electoral inapropiada, entre otros.</p>
                 </div>
                 
-         </div>
+                   <div class="span3">
+                
+                <a href="#" class="btn btn-block btn-inverse" target="_blank"> Infografia 1 <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </a>
+                <br/>
+				<p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
+                </div>
+                
+                <div class="span3">
+                
+                <a href="#" class="btn btn-block btn-inverse" target="_blank"> Infografia 2 <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </a>
+                <br/>
+				<p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
+                </div>
+                
+        </div>
         </div>
         
         <br/>
         <br />
-        
+        <!--
        <div class="container">
          <div class="row">
                 <div class="span6">
@@ -98,6 +108,7 @@
 				<img src="{{ STATIC_URL }}images/ejemplo-video.png" /> 
 				</div>
         </div> 
+        -->
         
        </div>
         </div>

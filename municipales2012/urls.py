@@ -9,7 +9,7 @@ urlpatterns = patterns('',
 	#static pages
 	url(r'^metodologia/?$', MetodologiaView.as_view(), name="metodologia"),
 	url(r'^somos/?$', QuienesSomosView.as_view(), name="somos"),
-	url(r'^reporta/?$', TemplateView.as_view(template_name="municipales2012/reporta.html"), name="reporta"),
+	url(r'^fiscaliza/?$', TemplateView.as_view(template_name="municipales2012/reporta.html"), name="reporta"),
 	
 
 	#pages depending on the comuna
