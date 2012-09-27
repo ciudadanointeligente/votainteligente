@@ -129,6 +129,10 @@
 	float:right;
 	z-index:2;
 	} */
+.accordion-toggle {
+  color: black;
+  font-weight:500;
+}
 
 .dentroMenu {
 	margin-top:46px;
@@ -136,6 +140,7 @@
 	
 .contenidoMunicipalidades {
 	margin-top:120px;
+	height:900px;
 	}
 .sidebarDerecha {
 	margin-top:23px;
@@ -152,12 +157,23 @@
 	}
 
 .footer {
-	background-color: #222222;
     border-right: 1px solid white;
     list-style: none outside none;
     margin: 40px 0 0px auto;
     padding-right: 17px;
 	padding-bottom: 10px;
+	background-color: #1B1B1B;
+    border-color: #252525;
+	position:fixed;
+	bottom:0px;
+    margin-bottom: 0;
+    position: relative;
+	overflow: visible;
+	
+	}
+	
+.dentroFooter{
+	margin-left:50px;
 	}
 
 .footer a{
@@ -187,13 +203,13 @@
 
 .footerTexto {
 	color: #FFFFFF;
-	float: left;
-	font-family: Georgia,"Times New Roman",Times,serif;
-	font-size: 10px;
-	font-style: italic;
-	margin-left: 14px;
-	margin-right: 124px;
-	margin-top: 12px;
+    float: left;
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-size: 10px;
+    font-style: italic;
+    margin-left: 0;
+    margin-right: 45px;
+    margin-top: 12px;
 	}
 	
 /* -------- MUNICIPALIDADES ---------- */	
