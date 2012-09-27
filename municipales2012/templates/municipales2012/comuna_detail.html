@@ -8,9 +8,20 @@
                 <div class="container-fluid">
                     <div class="row-fluid">
                         <div class="span8">
-                            <h2>Municipales en <span>{{comuna}}</span></h2>
+                            <h2>Municipales en <span>{{comuna}}</span>
+                                
+                                </h2>
+                                <div class="share_this_comuna">
+                                    <span class='st_facebook_large' displayText='Facebook'></span>
+                                    <span class='st_twitter_large' displayText='Tweet'></span>
+                                    <span class='st_linkedin_large' displayText='LinkedIn'></span>
+                                    <span class='st_pinterest_large' displayText='Pinterest'></span>
+                                    <span class='st_email_large' displayText='Email'></span>
+                                </div>
+                            
                           <div> 
-                               <iframe src="http://candideit.org/ciudadanoi/zapallar/embeded" style="width:580px; border:none;" height="600" scrolling="no"> </iframe>
+                                <iframe src="{{comuna.main_embedded}}" class="candideitorg_embeded" scrolling="no"> </iframe>
+
                             </div>
                         </div>
                         
@@ -67,7 +78,7 @@
                                 <script>
                                     $(document).ready(function() {
                                     // initialize scrollable
-                                    $(".scrollable").scrollable({circular: true}).autoscroll({ autoplay: true }).navigator(".navi");
+                                    $(".scrollable").scrollable({circular: true }).autoscroll({ autoplay: true, interval: 7000 }).navigator(".navi");
                                     });
                                     
                                 </script>
