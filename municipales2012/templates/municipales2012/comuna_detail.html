@@ -8,19 +8,20 @@
                 <div class="container-fluid">
                     <div class="row-fluid">
                         <div class="span8">
-                            <h2> <span>{{comuna}}</span>
-                                <span class="share_this_comuna">
+                            <h2>Municipales en <span>{{comuna}}</span>
+                                
+                                </h2>
+                                <div class="share_this_comuna">
                                     <span class='st_facebook_large' displayText='Facebook'></span>
                                     <span class='st_twitter_large' displayText='Tweet'></span>
                                     <span class='st_linkedin_large' displayText='LinkedIn'></span>
                                     <span class='st_pinterest_large' displayText='Pinterest'></span>
                                     <span class='st_email_large' displayText='Email'></span>
-                                </span>
-                                </h2>
-                                
+                                </div>
                             
                           <div> 
-                                <iframe src="{{comuna.main_embedded}}" class="candideitorg_embeded" height="600"> </iframe>
+                                <iframe src="{{comuna.main_embedded}}" class="candideitorg_embeded" scrolling="no"> </iframe>
+
                             </div>
                         </div>
                         
@@ -37,7 +38,7 @@
                                                        
                                                         <li class="span6">
                                                             <div class="well thumbnail">
-                                                           <a href="{% url reporta %}" target="_blank" class="btn btn-block btn-info btnMunicipales">Reporta</a>
+                                                           <a href="{% url reporta %}" target="_blank" class="btn btn-block btn-info btnMunicipales">¡Fiscaliza!</a>
                                                            <p class="textoBTN">Problemas en tu comuna</p>
                                                            
                                                         </div>
