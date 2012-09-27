@@ -997,3 +997,11 @@ div.navi a.active {
     line-height: 57px;
     padding-left: 78px;
 	}
+
+
+.candideitorg_embeded {
+	width:580px;overflow:hidden;margin-top:5px;
+}
+.share_this_comuna {
+	margin-left: 10px;
+}
