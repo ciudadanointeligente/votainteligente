@@ -143,7 +143,7 @@
 	
 .contenidoMunicipalidades {
 	margin-top:120px;
-	height:900px;
+	height:700px;
 	}
 .sidebarDerecha {
 	margin-top:23px;
@@ -242,7 +242,7 @@
 
 .infoCompletaMunicipalidades{
 	top: 300px;
-	height: 450px;
+	height: 500px;
 	float:left;
 	}
 	
@@ -253,10 +253,10 @@
 }
 	
 .infoCompletaMunicipalidades .categoria {
-	margin-left: 0;
+	margin-left: 10px;
     position: relative;
 	margin-top: -77px;
-	height: 170px;
+	height: 240px;
 	}
 	
 .fondoTitulosh4 {
@@ -703,7 +703,7 @@ div.navi a.active {
 	}
 
 .fondoAmarillo {
-	background-color:#FFE578;
+	background-color:#EFC92F;
 	}
 	
 
@@ -751,7 +751,7 @@ div.navi a.active {
 	}
 
 .colorAmarillo {
-	color:#FFE578;
+	color:#EFC92F;
 	}
 
 
@@ -1001,6 +1001,18 @@ div.navi a.active {
     line-height: 57px;
     padding-left: 78px;
 	}
+
+
+.candideitorg_embeded {
+	overflow:hidden;
+	margin-top:5px;
+	width:580px;
+	border:none;
+	height: 600px;
+}
+.share_this_comuna {
+	margin-left: 10px;
+}
 
 /* AMPOLLETA */
 

@@ -36,7 +36,7 @@
                         <li class="dentroMenu pull-right"><a href="{% url metodologia %}">Metodología</a></li>
                         
                         <li class="dentroMenu pull-right"><form class="navbar-search pull-right">
-                            <input type="text" class="search-query" placeholder="Buscar una comuna">
+                            <input type="text" class="search-query comunas-search" placeholder="Buscar una comuna">
                             </form></li>
                         </ul>
                             
@@ -144,10 +144,29 @@
 </div>
 </footer>
   
-  
+<script>
+$(function() {
+  var availableTags = [{% for comuna in comunas %}
+  {label:"{{comuna.nombre}}",value:"{{comuna.slug}}"}{% if not forloop.last %},{% endif %}
+  {% endfor %}
+
+  ];
+  $( "#comunas-search" ).autocomplete({
+    source: availableTags,
+    autoFocus: true
+  });
+  $( "#comunas-search" ).autocomplete({
+     select: function(event, ui) { 
+      $( "#comunas-search" ).val( ui.item.label );
+      window.location = '/'+ui.item.value; 
+      return false;
+     }
+  });
+});
+</script>  
 {% block extra_js %}
 {% endblock extra_js %}
-  
+
 
 <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>
   
