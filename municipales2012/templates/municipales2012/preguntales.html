@@ -1,0 +1,32 @@
+{% extends "base_sub_menu.html" %}
+{% block content %}
+ 
+ 
+ 
+             
+             
+ <div class="container paginaCompleta">
+  
+             
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+  <br/>
+ <br/>
+ <h3> {{titulo}} </h3>
+ <p>{{pregunta_nueva}}</p>
+ <form action="" method="post">{% csrf_token %}
+    {%for candidato in candidatos%}
+    <input type = "checkbox" name = {{candidato.nombre}} value = {{candidato.pk}}>{{candidato}} ({{candidato.partido}})<br>
+    {%endfor%}
+    {{form.remitente}}
+    <br>
+    {{form.texto_pregunta}}
+    <br>
+<input type="submit" value="He dicho" />
+</form>
+</div>
+       {% endblock %}
+       
+      

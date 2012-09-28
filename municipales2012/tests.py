@@ -4,6 +4,8 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from models import Comuna, Area, Indice, Dato, Candidato, Pregunta, Respuesta
 from management.commands.comunas_importer import *
+from django.test.client import Client
+from django.utils.unittest import skip
 
 
 class ComunaModelTestCase(TestCase):
@@ -452,7 +454,12 @@ class MessageTestCase(TestCase):
 			main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
 			messaging_extra_app_url="http://napistejim.cz/address=nachod",
 			mapping_extra_app_url="http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
-		self.data_candidato = [{'nombre': 'candidato1', 'mail': 'candidato1@test.com', 'comuna': self.comuna1, 'partido':'partido1', 'web': 'web1'},{'nombre': 'candidato2', 'mail': 'candidato2@test.com', 'comuna': self.comuna2, 'partido':'partido2'}]
+		self.comuna3, created = Comuna.objects.get_or_create(nombre="comuna3", 
+			slug="la-comuna3",
+			main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+			messaging_extra_app_url="http://napistejim.cz/address=nachod",
+			mapping_extra_app_url="http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
+		self.data_candidato = [{'nombre': 'candidato1', 'mail': 'candidato1@test.com', 'comuna': self.comuna1, 'partido':'partido1', 'web': 'web1'},{'nombre': 'candidato2', 'mail': 'candidato2@test.com', 'comuna': self.comuna2, 'partido':'partido2'},{'nombre': 'candidato3', 'mail': 'candidato3@test.com', 'comuna': self.comuna3, 'partido':'partido3'}]
 		self.question1 = "Why can't we be friends?"
 		self.answer1 = "I'd kinda like to be the President, so I can show you how your money's spent"
 		self.question2 = 'Who let the dogs out?'
@@ -474,47 +481,74 @@ class MessageTestCase(TestCase):
 	def test_create_question_message(self):
 		candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
 		candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], mail = self.data_candidato[1]['mail'], comuna = self.data_candidato[1]['comuna'], partido = self.data_candidato[1]['partido'])
-		pregunta = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
-		respuesta1 = Respuesta.objects.create(candidato=candidato1, texto_respuesta='sin_respuesta1', pregunta=pregunta)
-		respuesta2 = Respuesta.objects.create(candidato=candidato2, texto_respuesta='sin_respuesta2', pregunta=pregunta)
+		candidato3 = Candidato.objects.create(nombre=self.data_candidato[2]['nombre'], mail = self.data_candidato[2]['mail'], comuna = self.data_candidato[2]['comuna'], partido = self.data_candidato[2]['partido'])
+		pregunta = Pregunta.objects.crear_pregunta('texto_pregunta1', 'remitente1', [candidato1, candidato2])
+		respuesta_no_contestada1 = Respuesta.objects.filter(candidato=candidato1).filter(pregunta=pregunta)[0]
+		respuesta_no_contestada2 = Respuesta.objects.filter(candidato=candidato2).filter(pregunta=pregunta)[0]
+		#Se crea la pregunta con su respectivo texto y remitente
 		self.assertTrue(pregunta)
-		self.assertTrue(respuesta1)
-		self.assertTrue(respuesta2)
-		self.assertEquals(respuesta1.candidato,candidato1)
-		self.assertEquals(respuesta2.candidato,candidato2)
 		self.assertEquals(pregunta.texto_pregunta,'texto_pregunta1')
+		self.assertEquals(pregunta.remitente,'remitente1')
+		#Se crean las respuestas, y se guardan en la bd con los valores iniciales que corresponden
+		self.assertEquals(respuesta_no_contestada1.texto_respuesta,'Sin Respuesta')
+		self.assertEquals(respuesta_no_contestada2.texto_respuesta,'Sin Respuesta')
+		#Existe la asociación entre preguntas y candidatos
+		self.assertEquals(Candidato.objects.filter(pregunta=pregunta).filter(nombre=candidato1.nombre).count(),1)
+		self.assertEquals(Candidato.objects.filter(pregunta=pregunta).filter(nombre=candidato2.nombre).count(),1)
+		#Sólo se agregó la pregunta a 2 candidatos
+		self.assertEquals(Candidato.objects.filter(pregunta=pregunta).count(),2)
+
+
+		
 
 	def test_create_answer_message(self):
-		candidato = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
-		pregunta = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
-		respuesta = Respuesta.objects.create(candidato= candidato, pregunta = pregunta, texto_respuesta = 'sin_respuesta1')
-		self.assertTrue(respuesta)
-		#print Respuesta.objects.filter(candidato=candidato)#.filter(pregunta=pregunta)
-		respuesta_contestada = Respuesta.objects.filter(candidato=candidato).filter(pregunta=pregunta)[0]
-		respuesta_contestada.texto_respuesta ='texto_respuesta1'
-		respuesta_contestada.save()
-		respuesta_contestada_db = Respuesta.objects.filter(candidato=candidato).filter(pregunta=pregunta)[0]
-		self.assertEquals(respuesta_contestada_db.texto_respuesta,'texto_respuesta1')
-		# self.assertEquals(respuesta.pregunta,pregunta)
-		# self.assertEquals(respuesta.respondedor,candidato)
-		# self.assertEquals(respuesta.texto_respuesta,'texto_respuesta1')
+		candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
+		candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], mail = self.data_candidato[1]['mail'], comuna = self.data_candidato[1]['comuna'], partido = self.data_candidato[1]['partido'])
+		candidato3 = Candidato.objects.create(nombre=self.data_candidato[2]['nombre'], mail = self.data_candidato[2]['mail'], comuna = self.data_candidato[2]['comuna'], partido = self.data_candidato[2]['partido'])
+		pregunta1 = Pregunta.objects.crear_pregunta('texto_pregunta1', 'remitente1', [candidato1, candidato2])
+		pregunta2 = Pregunta.objects.crear_pregunta('texto_pregunta2', 'remitente2', [candidato1, candidato3])
+		#validados que se cambia una respuesta
+		respuesta_candidato1_pregunta1 = Respuesta.objects.filter(candidato=candidato1).filter(pregunta=pregunta1)[0]
+		respuesta_candidato1_pregunta1.texto_respuesta ='texto_candidato1_respuesta1'
+		respuesta_candidato1_pregunta1.save()
+		respuesta_candidato1_pregunta1_db = Respuesta.objects.filter(candidato=candidato1).filter(pregunta=pregunta1)[0]
+		self.assertEquals(respuesta_candidato1_pregunta1_db.texto_respuesta,'texto_candidato1_respuesta1')
+		#validamos que no se cambian otras respuestas
+		respuesta_candidato1_pregunta2 = Respuesta.objects.filter(candidato=candidato1).filter(pregunta=pregunta2)[0]
+		self.assertEquals(respuesta_candidato1_pregunta2.texto_respuesta,'Sin Respuesta')
 
 	def no_test_gmail_connection(self):
 		from django.core.mail import EmailMessage
 		email = EmailMessage('Subject', 'Body', 'pdaire@ciudadanointeligente.org', ['test@votainteligente.cl'],[], headers = {'Reply-To' : 'pdaire@votainteligente.cl'})
 		server_response = email.send()
-
 		self.assertEquals(server_response,1)
 		#chequear que el mail llega y lo podemos traer
 
 
-	# def test_submit_question_message(self):
-	# 	candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
-	# 	candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], mail = self.data_candidato[1]['mail'], comuna = self.data_candidato[1]['comuna'], partido = self.data_candidato[1]['partido'])
-	# 	pregunta = Pregunta.objects.create(destinatario=candidato, texto_pregunta='texto_pregunta1', remitente='remitente1')
-	# 	url = reverse('envio_pregunta', kwargs={'pregunta':pregunta.pk})
+	def test_submit_question_message(self):
+		candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
+		candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], mail = self.data_candidato[1]['mail'], comuna = self.data_candidato[1]['comuna'], partido = self.data_candidato[1]['partido'])
+		candidato3 = Candidato.objects.create(nombre=self.data_candidato[2]['nombre'], mail = self.data_candidato[2]['mail'], comuna = self.data_candidato[2]['comuna'], partido = self.data_candidato[2]['partido'])
+		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
+		response = self.client.post(url, {'candidato-0': candidato1.pk, 'candidato-1': candidato2.pk, \
+		            'pregunta-texto': 'Texto Pregunta', 'remitente': 'Remitente 1'})
+				
+		#Se crea la pregunta con su respectivo texto y remitente
+		pregunta_enviada = Pregunta.objects.filter(candidato=candidato1).filter(remitente='Remitente 1')[0]
+		self.assertTrue(pregunta_enviada)
+		self.assertEquals(pregunta_enviada.texto_pregunta,'texto_pregunta1')
+		self.assertEquals(pregunta_enviada.remitente,'remitente1')
+		#Se crean las respuestas, y se guardan en la bd con los valores iniciales que corresponden
+		respuesta_no_contestada1 = Respuesta.objects.filter(candidato=candidato1).filter(pregunta=pregunta_enviada)[0]
+		respuesta_no_contestada2 = Respuesta.objects.filter(candidato=candidato2).filter(pregunta=pregunta_enviada)[0]
+		self.assertEquals(respuesta_no_contestada1.texto_respuesta,'Sin Respuesta')
+		self.assertEquals(respuesta_no_contestada2.texto_respuesta,'Sin Respuesta')
+		#Existe la asociación entre preguntas y candidatos
+		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).filter(nombre=candidato1.nombre).count(),1)
+		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).filter(nombre=candidato2.nombre).count(),1)
+		#Sólo se agregó la pregunta a 2 candidatos
+		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).count(),2)
 
-		
 
 
 	#def test_create_mail_template(self):

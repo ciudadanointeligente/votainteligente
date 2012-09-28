@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # Create your views here.
-from django.views.generic import TemplateView, DetailView
-from models import Comuna, Indice
+from django.views.generic import TemplateView, CreateView, DetailView
+from models import Comuna, Indice, Pregunta, Candidato
+from django.shortcuts import get_object_or_404
 
 class HomeTemplateView(TemplateView):
 	def get_context_data(self, **kwargs):
@@ -33,6 +34,37 @@ class ComunaIndices(DetailView):
 		indices = self.object.indice_set.all()
 		context['indices'] = indices
 		context['title'] = self.object.nombre + u" índices detallados"
+		return context
+
+class ComunaPreguntales(CreateView):
+	model = Pregunta
+
+	def get_template_names(self):
+		return ['municipales2012/preguntales.html']
+
+	def get_context_data(self, **kwargs):
+		comuna_slug = self.kwargs['slug']
+		comuna = get_object_or_404(Comuna, slug = comuna_slug)
+		context = super(ComunaPreguntales, self).get_context_data(**kwargs)
+		candidatos_comuna = Candidato.objects.filter(comuna=comuna)
+		preguntas = Pregunta.objects.filter(candidato__in=candidatos_comuna)
+		conversaciones = {}
+		for pregunta in preguntas:
+			texto_pregunta = pregunta.texto_pregunta
+			respuestas = {}
+			respuestas_pregunta = Respuestas.objects.filter(pregunta=pregunta)
+			for respuesta_pregunta in respuestas_pregunta:
+				texto_respuesta = respuesta_pregunta.texto_respuesta
+				nombre_candidato = respuesta_pregunta.candidato.nombre
+				respuestas[nombre_candidato] = texto_respuesta
+			nombre_emisor = pregunta.remitente
+			mensaje[nombre_emisor] = texto_pregunta
+			conversaciones[mensaje] = respuestas
+
+		context['conversaciones'] = conversaciones
+		context['candidatos'] = candidatos_comuna
+		context['titulo'] = "Preguntas a los Candidatos de " + comuna.nombre
+		
 		return context
 
 class MetodologiaView(TemplateView):
