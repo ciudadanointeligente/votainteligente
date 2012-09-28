@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Create your views here.
 from django.views.generic import TemplateView, CreateView, DetailView
-from models import Comuna, Indice, Pregunta
+from models import Comuna, Indice, Pregunta, Candidato
 from django.shortcuts import get_object_or_404
 
 class HomeTemplateView(TemplateView):
@@ -40,13 +40,14 @@ class ComunaPreguntales(CreateView):
 	model = Pregunta
 
 	def get_template_names(self):
-		return ['municipales2012/todos_los_indices.html']
+		return ['municipales2012/preguntales.html']
 
 	def get_context_data(self, **kwargs):
 		comuna_slug = self.kwargs['slug']
 		comuna = get_object_or_404(Comuna, slug = comuna_slug)
-		context = super(ComunaIndices, self).get_context_data(**kwargs)
-		preguntas = self.object.pregunta_set.all()
+		context = super(ComunaPreguntales, self).get_context_data(**kwargs)
+		candidatos_comuna = Candidato.objects.filter(comuna=comuna)
+		preguntas = Pregunta.objects.filter(candidato__in=candidatos_comuna)
 		conversaciones = {}
 		for pregunta in preguntas:
 			texto_pregunta = pregunta.texto_pregunta
@@ -61,8 +62,8 @@ class ComunaPreguntales(CreateView):
 			conversaciones[mensaje] = respuestas
 
 		context['conversaciones'] = conversaciones
-		context['candidatos'] = candidatos
-		context['title'] = "Preguntas a los Candidatos de " + comuna.nombre
+		context['candidatos'] = candidatos_comuna
+		context['titulo'] = "Preguntas a los Candidatos de " + comuna.nombre
 		
 		return context
 
