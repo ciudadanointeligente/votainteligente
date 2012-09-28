@@ -18,6 +18,11 @@
 /* CSS Document */
 
 /*-----HOME  -----------*/
+iframe {
+	border:none;
+	}
+
+
 .buscadorPpal {
 	background-color: #26B4E9;
     border-radius: 6px;
@@ -1096,3 +1101,17 @@ div.navi a.active {
 	opacity:0.9;
 	border-radius:4px 4px 4px 4px;
 	 border: 1px solid #DDDDDD;}
+	 
+.tituloAcordion {
+	background-color:#F2F2F2;
+	}
+	
+.tituloAcordion:hover {
+	text-decoration:none;
+	}
+	
+span.asterisco {
+	color:#64B700;
+	font-size:16px;
+	font-weight:600;
+	}
