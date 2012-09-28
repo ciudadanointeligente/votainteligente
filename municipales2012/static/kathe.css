@@ -22,6 +22,12 @@ iframe {
 	border:none;
 	}
 
+.jumptarget:before {
+  content:"";
+  display:block;
+  height:50px; /* fixed header height*/
+  margin:-50px 0 0; /* negative fixed header height */
+}
 
 .buscadorPpal {
 	background-color: #26B4E9;
@@ -857,6 +863,9 @@ div.navi a.active {
     text-decoration: none;
     width: 296px;
 	}
+	
+
+	
 	
 .itemListaMetodologia a{
 	color:grey;
