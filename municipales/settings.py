@@ -158,9 +158,14 @@ LOGGING = {
     }
 }
 
-#Added by Marcel
-EMAIL_HOST = 'smtp.gmail.com'
+# Email setting
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'sendgrid_username'
+EMAIL_HOST_PASSWORD = 'sendgrid_password'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'mailer@votainteligente.cl'
-EMAIL_HOST_PASSWORD = 'holanda895:Mailer'
 EMAIL_USE_TLS = True
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from models import Comuna, Area, Indice, Dato, Candidato
+from models import Comuna, Area, Indice, Dato, Candidato, Pregunta, Respuesta
 from management.commands.comunas_importer import *
 
 
@@ -472,12 +471,58 @@ class MessageTestCase(TestCase):
 		self.assertEquals(candidato.partido, 'partido1')
 		self.assertEquals(candidato.web, 'web1')
 
+	def test_create_question_message(self):
+		candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
+		candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], mail = self.data_candidato[1]['mail'], comuna = self.data_candidato[1]['comuna'], partido = self.data_candidato[1]['partido'])
+		pregunta = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
+		respuesta1 = Respuesta.objects.create(candidato=candidato1, texto_respuesta='sin_respuesta1', pregunta=pregunta)
+		respuesta2 = Respuesta.objects.create(candidato=candidato2, texto_respuesta='sin_respuesta2', pregunta=pregunta)
+		self.assertTrue(pregunta)
+		self.assertTrue(respuesta1)
+		self.assertTrue(respuesta2)
+		self.assertEquals(respuesta1.candidato,candidato1)
+		self.assertEquals(respuesta2.candidato,candidato2)
+		self.assertEquals(pregunta.texto_pregunta,'texto_pregunta1')
+
+	def test_create_answer_message(self):
+		candidato = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
+		pregunta = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
+		respuesta = Respuesta.objects.create(candidato= candidato, pregunta = pregunta, texto_respuesta = 'sin_respuesta1')
+		self.assertTrue(respuesta)
+		#print Respuesta.objects.filter(candidato=candidato)#.filter(pregunta=pregunta)
+		respuesta_contestada = Respuesta.objects.filter(candidato=candidato).filter(pregunta=pregunta)[0]
+		respuesta_contestada.texto_respuesta ='texto_respuesta1'
+		respuesta_contestada.save()
+		respuesta_contestada_db = Respuesta.objects.filter(candidato=candidato).filter(pregunta=pregunta)[0]
+		self.assertEquals(respuesta_contestada_db.texto_respuesta,'texto_respuesta1')
+		# self.assertEquals(respuesta.pregunta,pregunta)
+		# self.assertEquals(respuesta.respondedor,candidato)
+		# self.assertEquals(respuesta.texto_respuesta,'texto_respuesta1')
+
+	def no_test_gmail_connection(self):
+		from django.core.mail import EmailMessage
+		email = EmailMessage('Subject', 'Body', 'pdaire@ciudadanointeligente.org', ['test@votainteligente.cl'],[], headers = {'Reply-To' : 'pdaire@votainteligente.cl'})
+		server_response = email.send()
+
+		self.assertEquals(server_response,1)
+		#chequear que el mail llega y lo podemos traer
+
+
+	# def test_submit_question_message(self):
+	# 	candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
+	# 	candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], mail = self.data_candidato[1]['mail'], comuna = self.data_candidato[1]['comuna'], partido = self.data_candidato[1]['partido'])
+	# 	pregunta = Pregunta.objects.create(destinatario=candidato, texto_pregunta='texto_pregunta1', remitente='remitente1')
+	# 	url = reverse('envio_pregunta', kwargs={'pregunta':pregunta.pk})
+
+		
+
+
 	#def test_create_mail_template(self):
 		
-	def test_create_question_mail(self):
-		import imaplib
-		connection = imaplib.IMAP4_SSL('imap.gmail.com', 993)
-		connection.login(user, pass)
+	# def test_create_question_mail(self):
+	# 	import imaplib
+	# 	connection = imaplib.IMAP4_SSL('imap.gmail.com', 993)
+	# 	connection.login(user, pass)
 '''
 	def test_send_question_mail(self):
 		

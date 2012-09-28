@@ -61,3 +61,25 @@ class Candidato(models.Model):
 
 	def __unicode__(self):
 		return self.nombre
+
+class Pregunta(models.Model):
+	"""docstring for Pregunta"""
+	candidato = models.ManyToManyField('Candidato', through='Respuesta')
+	remitente = models.CharField(max_length=255)
+	texto_pregunta = models.TextField()
+
+	def __unicode__(self):
+		return self.texto_pregunta
+
+class Respuesta(models.Model):
+	"""docstring for Respuesta"""
+	pregunta = models.ForeignKey(Pregunta)
+	candidato = models.ForeignKey(Candidato)
+	texto_respuesta = models.TextField()
+
+	def __unicode__(self):
+		return self.texto_respuesta
+
+
+		
+		
