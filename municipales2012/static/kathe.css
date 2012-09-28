@@ -982,6 +982,11 @@ div.navi a.active {
 	background-repeat:no-repeat;
 	}
 	
+.categoriaSemaforoColores {
+	background-image: url(./images/semaforoColores.png);
+	background-repeat:no-repeat;
+	}
+	
 .categoriaRankingConsejo {
 	background-image: url(./images/rankingConsejo.png);
 	background-repeat:no-repeat;
