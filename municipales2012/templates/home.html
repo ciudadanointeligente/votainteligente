@@ -15,7 +15,7 @@
                 <h3> <center>Conoce a tus candidatos y elige a tu media naranja en cada comuna</center></h3>
                 <center>
                     <form class="form-search"> <p> Escribe el nombre de la comuna que te interesa</p>
-                <input type="text" id="comunas-search" class="input-xxlarge search-query"> 
+                <input type="text" id="comunas-search" class="input-xxlarge search-query comunas-search"> 
                 <br/> <br/>
                 <p> <em> <small>También descubre lo que ha sucedido en tu municipio en temas de transparencia, participación, educación, salud, administración, seguridad y más.</small> </em></p> 
                 </form>
@@ -156,24 +156,5 @@
         {% endblock content %}
 	
 	{% block extra_js %}
-	<script>
-	$(function() {
-		var availableTags = [{% for comuna in comunas %}
-		{label:"{{comuna.nombre}}",value:"{{comuna.slug}}"}{% if not forloop.last %},{% endif %}
-		{% endfor %}
-
-		];
-		$( "#comunas-search" ).autocomplete({
-			source: availableTags,
-      autoFocus: true
-		});
-		$( "#comunas-search" ).autocomplete({
-		   select: function(event, ui) { 
-		   	$( "#comunas-search" ).val( ui.item.label );
-		   	window.location = '/'+ui.item.value; 
-		   	return false;
-		   }
-		});
-	});
-	</script>
+	
   {% endblock extra_js %}
