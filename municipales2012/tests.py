@@ -226,6 +226,8 @@ class ComunaViewTestCase(TestCase):
 		self.assertEquals(response.status_code, 200)
 		self.assertTemplateUsed(response, 'municipales2012/comuna_detail.html')
 		self.assertTrue('comuna' in response.context)
+		self.assertTrue('comunas' in response.context)
+		self.assertEquals(response.context['comunas'].count(), 2)
 		self.assertEquals(response.context['comuna'], self.comuna1)
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'], self.comuna1.nombre)
@@ -260,6 +262,8 @@ class ComunaViewTestCase(TestCase):
 		response = self.client.get(url)
 
 		self.assertEquals(response.status_code, 200)
+		self.assertTrue('comunas' in response.context)
+		self.assertEquals(response.context['comunas'].count(), 2)
 		self.assertTrue("comuna" in response.context)
 		self.assertEquals(response.context["comuna"], self.comuna1)
 		self.assertTrue("indices" in response.context)
@@ -409,10 +413,17 @@ class CsvReaderTestOneLine(TestCase):
 
 
 class TemplatesViewsTestCase(TestCase):
+	def setUp(self):
+		self.comuna1 = Comuna.objects.create(nombre=u"La comuna1", slug=u"la-comuna1")
+		self.comuna2 = Comuna.objects.create(nombre=u"La comuna2", slug=u"la-comuna2")
+
+
 	def test_get_metodologia(self):
 		url = reverse('metodologia')
 		response = self.client.get(url)
 
+		self.assertTrue('comunas' in response.context)
+		self.assertEquals(response.context['comunas'].count(), 2)
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'], u"Metodología")
 		self.assertTemplateUsed(response, 'municipales2012/metodologia.html')
@@ -422,9 +433,24 @@ class TemplatesViewsTestCase(TestCase):
 		response = self.client.get(url)
 
 		self.assertTemplateUsed(response, 'municipales2012/quienesSomos.html')
+
 		self.assertEquals(response.status_code, 200)
+		self.assertTrue('comunas' in response.context)
+		self.assertEquals(response.context['comunas'].count(), 2)
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'], u"Quienes somos")
+
+	def test_get_reporta(self):
+		url = reverse('reporta')
+		response = self.client.get(url)
+
+		self.assertTemplateUsed(response, 'municipales2012/reporta.html')
+
+		self.assertEquals(response.status_code, 200)
+		self.assertTrue('comunas' in response.context)
+		self.assertEquals(response.context['comunas'].count(), 2)
+		self.assertTrue('title' in response.context)
+		self.assertEquals(response.context['title'], u"Fiscaliza")
 
 
 

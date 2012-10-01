@@ -17,8 +17,10 @@ class ComunaOverview(DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(ComunaOverview, self).get_context_data(**kwargs)
 		indices = self.object.indice_set.filter(en_carrusel=True)
+		comunas = Comuna.objects.all()
 		context['indices'] = indices
 		context['title'] = self.object.nombre
+		context['comunas'] = comunas
 		return context
 
 
@@ -31,19 +33,40 @@ class ComunaIndices(DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(ComunaIndices, self).get_context_data(**kwargs)
 		indices = self.object.indice_set.all()
+		comunas = Comuna.objects.all()
 		context['indices'] = indices
 		context['title'] = self.object.nombre + u" índices detallados"
+		context['comunas'] = comunas
 		return context
 
 class MetodologiaView(TemplateView):
 	template_name="municipales2012/metodologia.html"
 
 	def get_context_data(self, **kwargs):
-		return {"title":u'Metodología'}
+		context = super(MetodologiaView, self).get_context_data(**kwargs)
+		context['title'] = u"Metodología"
+		comunas = Comuna.objects.all()
+		context['comunas'] = comunas
+		return context
 
 
 class QuienesSomosView(TemplateView):
 	template_name="municipales2012/quienesSomos.html"
 
 	def get_context_data(self, **kwargs):
-		return {'title': u"Quienes somos"}
+		context = super(QuienesSomosView, self).get_context_data(**kwargs)
+		context['title'] = u"Quienes somos"
+		comunas = Comuna.objects.all()
+		context['comunas'] = comunas
+		return context
+
+
+class ReportaView(TemplateView):
+	template_name="municipales2012/reporta.html"
+
+	def get_context_data(self, **kwargs):
+		context = super(ReportaView, self).get_context_data(**kwargs)
+		context['title'] = u"Fiscaliza"
+		comunas = Comuna.objects.all()
+		context['comunas'] = comunas
+		return context
