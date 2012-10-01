@@ -37,18 +37,18 @@ iframe {
 	margin-top:128px;
 	color:white;
 	}
-	
+
 .menuPpal {
 	width:940px;
 	}
-	
+
 .subTitulosHome{
 	background-color:#9D9D9C;
 	color:white;
 	padding: 10px;
 	border-radius: 5px;
 	}
-	
+
 .bannerVota {
 	background-color:#C9C9C9;
 	padding:7px;
@@ -56,23 +56,23 @@ iframe {
 	clear:both;
 	border-radius: 5px;
 	}	
-	
+
 .bannerVotaTexto {
 	background-color: #C9C9C9;
 	padding:7px;
 	border-radius: 5px;}
-	
-	
+
+
 .alertaVota {
 	min-height:22px;
 	}
-	
+
 .queHacemos a {
 	color: white;
 	}
 
 /* POPUP VOTA */
-	
+
 #purr-container {
 	position: absolute;
 	top: 120px;
@@ -119,8 +119,8 @@ iframe {
 	opacity: 1;
 	color: #388EA3;
 }	
-	
-	
+
+
 /*	
 .subTitulosHomeInfo {
 	background-image: url(./images/iconoInfoHome.png);
@@ -151,7 +151,7 @@ iframe {
 .dentroMenu {
 	margin-top:46px;
 	}
-	
+
 .contenidoMunicipalidades {
 	margin-top:120px;
 	height:700px;
@@ -183,9 +183,9 @@ iframe {
     margin-bottom: 0;
     position: relative;
 	overflow: visible;
-	
+
 	}
-	
+
 .dentroFooter{
 	margin-left:50px;
 	}
@@ -196,12 +196,12 @@ iframe {
     font-size: 11px;
     font-style: italic;
 	}
-	
+
 .footer a:hover{
 	color:grey;
 	text-decoration:none;
 	}
-	
+
 .listaLinksFooter{
 	width:100px;
 	}
@@ -210,7 +210,7 @@ iframe {
 	 margin-left:17px;
 	 margin-top: 21px;
 	}
-	
+
 .flotarIzq{
 	float:left;
 	}
@@ -225,7 +225,7 @@ iframe {
     margin-right: 45px;
     margin-top: 12px;
 	}
-	
+
 /* -------- MUNICIPALIDADES ---------- */	
 
 .tuComunaDatos {
@@ -237,12 +237,12 @@ iframe {
     z-index: 1;
 	top: 78px;
 	}
-	
+
 .signoInterrogacion:hover {
 	cursor:pointer;
-	
+
 	}
-	
+
 .items div .signoInterrogacion {
   display: block;
     float: right;
@@ -256,20 +256,20 @@ iframe {
 	height: 500px;
 	float:left;
 	}
-	
+
 
 
 .infoCompletaMunicipalidades  .articulokathe {
 	width:220px;
 }
-	
+
 .infoCompletaMunicipalidades .categoria {
 	margin-left: 10px;
     position: relative;
 	margin-top: -77px;
 	height: 240px;
 	}
-	
+
 .fondoTitulosh4 {
     border-radius: 4px 4px 4px 4px;
     color: white;
@@ -278,7 +278,7 @@ iframe {
     padding-left: 26px;
     padding-top: 7px;
 	}
-	
+
 .infoCompletaMunicipalidades .infoNacional {
 	margin-top: 150px;
 	}
@@ -304,7 +304,7 @@ iframe {
     font-size: 26px;
 }
 
-	
+
 /* Gris */	
 
 .wellAdministracion {
@@ -325,7 +325,7 @@ iframe {
 		  font-family: 'bebas_neueregular';
     font-size: 26px;
 }
-	
+
 /*Burdeo */
 
 .wellEducacion {
@@ -369,7 +369,7 @@ iframe {
     font-size: 26px;
 }
 
-	
+
 /* Azul */
 
 .wellSeguridad {
@@ -390,7 +390,7 @@ iframe {
 		  font-family: 'bebas_neueregular';
     font-size: 26px;
 }
-	
+
 /* VErde */
 
 .wellUrbanismo {
@@ -465,8 +465,8 @@ iframe {
 	background-color: #FFE578;
 }*/
 
-	
-	
+
+
 .infoCompletaMunicipalidades .tituloCarrusel {
 	color: white;
   border: 1px solid #e3e3e3;
@@ -476,7 +476,7 @@ iframe {
 	min-height: 100px;
 	width: 279px;
 	}	
-	
+
 /*------slider----*/
 /* override the arrow image of the tooltip */
 .tooltip.bottom {
@@ -543,7 +543,7 @@ this element is the one that *you* will style the most.
     font-size:1px;
 	border-radius:4px 4px 4px 4px;
 	z-index:2;
-	
+
 }
  
 .navi a:hover {
@@ -565,7 +565,7 @@ div.navi a.active {
 	z-index:-2;
 	-moz-box-shadow: 0 0 0 16px rgba(0, 0, 0, 0.3) inset;
 	}
-	
+
 
 
 /* Celeste */
@@ -575,17 +575,17 @@ div.navi a.active {
 .navi a:nth-child(n+2)  {
 	background-color:#61C0DC;
 	}
-	
+
 /* Gris */	
 .navi a:nth-child(n+3) {
 	background-color:#6F7375;
 	}
-	
+
 /*Burdeo */
 .navi a:nth-child(n+4) {
 	background-color:#CD627D;
 	}
-	
+
 /* Rojo */
 .navi a:nth-child(n+5){
 	background-color:#E9605E;
@@ -596,7 +596,7 @@ div.navi a.active {
 .navi a:nth-child(n+7){
 	background-color:#E9605E;
 	}
-	
+
 /* Azul */
 .navi a:nth-child(n+8) {
 	background-color:#2089C8;
@@ -606,12 +606,12 @@ div.navi a.active {
 .navi a:nth-child(n+9) {
 	background-color:#6CB667;
 	}
-	
+
 /* Naranjo */
 .navi a:nth-child(n+10) {
 	background-color:#F8B35C;
 	}
-	
+
 /* Morado */ 
 .navi a:nth-child(n+11){
 	background-color:#A38FC1;
@@ -645,7 +645,7 @@ div.navi a.active {
 	z-index:1;
 	top:165px;
 	}
-	
+
 #flechitaDerecha {
 	 background-color: #706F6F;
     bottom: 134px;
@@ -669,7 +669,7 @@ div.navi a.active {
   	line-height: 1;
  	text-rendering: optimizelegibility;
 	}
-	
+
 .tituloCarrusel {
 	color: white;
     padding-left: 17px;
@@ -680,15 +680,15 @@ div.navi a.active {
 	margin: -19px;
 	min-height: 72px;
 	}	
-	
+
 .fondoCeleste {
 	background-color:#61C0DC;
 	}
-	
+
 .fondoGris {
 	background-color:#6F7375;
 	}
-	
+
 .fondoBurdeo {
 	background-color:#CD627D;
 	}
@@ -696,19 +696,19 @@ div.navi a.active {
 .fondoRojo{
 	background-color: #E9605E;
 	}
-	
+
 .fondoAzul{
 	background-color:#2089C8;
 	}
-	
+
 .fondoVerde {
 	background-color:#6CB667;
 	}
-	
+
 .fondoNaranjo {
 	background-color:#F8B35C;
 	}
-	
+
 .fondoMorado{
 	background-color: #A38FC1; 
 	}
@@ -716,9 +716,9 @@ div.navi a.active {
 .fondoAmarillo {
 	background-color:#EFC92F;
 	}
-	
 
-	
+
+
 .epigrafe {
 	font-size:12px;
 	font-family:Georgia, "Times New Roman", Times, serif;
@@ -727,24 +727,24 @@ div.navi a.active {
     margin-top: 30px;
 	margin-left: 10px;
 	}
-	
-	
+
+
 .colorCeleste {
 	color:#61C0DC;
 	}
-	
+
 .colorGris{
 	color:#6F7375;
 	}
-	
+
 .colorBurdeo {
 	color:#CD627D;
 	}
-	
+
 .colorRojo{
 	color:#E9605E;
 	}
-	
+
 .colorAzul {
 	color:#2089C8;
 	}
@@ -752,11 +752,11 @@ div.navi a.active {
 .colorVerde {
 	color:#6CB667;
 	}
-	
+
 .colorNaranjo {
 	color:#F8B35C;
 	}
-	
+
 .colorMorado{
 	color:#A38FC1;
 	}
@@ -823,7 +823,7 @@ div.navi a.active {
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff444444', endColorstr='#ff222222', GradientType=0);
   filter: progid:dximagetransform.microsoft.gradient(enabled=false);
 	}
-	
+
 
 .infoNacional {
 	border-top: 1px solid #A6A6A5;
@@ -837,7 +837,7 @@ div.navi a.active {
     padding-top: 6px;
     width: 235px;
 	}
-	
+
 .categoria {
 	font-family: 'bebas_neueregular';
     font-size: 21px;
@@ -847,12 +847,12 @@ div.navi a.active {
 	 position: absolute;
     top: 97px;
 	}
-	
+
 .listaMetodologia {
 	list-style:none;
 	margin:0px;
 	}	
-	
+
 .itemListaMetodologia {
 	color: grey;
     float: left;
@@ -863,16 +863,16 @@ div.navi a.active {
     text-decoration: none;
     width: 296px;
 	}
-	
 
-	
-	
+
+
+
 .itemListaMetodologia a{
 	color:grey;
 	text-decoration:none;
 }
 
-	
+
 .itemListaMetodologia a:hover {
 	color:black;
 	text-decoration:none;
@@ -893,8 +893,8 @@ div.navi a.active {
 	background-image: url(./images/ingresos.png);
 	background-repeat:no-repeat;
 	}	
-	
-	
+
+
 .categoriaDesigualdad {
 	background-image: url(./images/desigualdad.png);
 	background-repeat:no-repeat;
@@ -904,104 +904,104 @@ div.navi a.active {
 	background-image: url(./images/funcionarios.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaEducacion {
 	background-image: url(./images/educacion.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaParticipacion {
 	background-image: url(./images/casa.png);
 	background-repeat:no-repeat;
 	}
-	
-	
+
+
 .categoriaServiciosSalud {
 	background-image: url(./images/servicioSalud.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaSalud {
 	background-image: url(./images/salud.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaObesidad {
 	background-image: url(./images/obesidad.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaSeguridad {
 	background-image: url(images/seguridad.png);
 	background-repeat:no-repeat;
 	}
-	
-	
+
+
 .categoriaAreasPublicas {
 	background-image: url(./images/areasPublicas.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaUrbanismo {
 	background-image: url(./images/areasPublicas.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaRanking {
 	background-image: url(./images/ranking.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaTransparencia{
 	background-image: url(./images/transparencia.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaOrganizaciones {
 	background-image: url(./images/organizaciones.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaPresupuesto{
 	background-image: url(./images/presupuesto.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaSemaforoRojo {
 	background-image: url(./images/semaforoRojo.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaSemaforoAmarillo {
 	background-image: url(./images/semaforoAmarillo.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaSemaforoVerde {
 	background-image: url(./images/semaforoVerde.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaRankingConsejo {
 	background-image: url(./images/rankingConsejo.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaProfesionalizacion{
 	background-image: url(./images/profesionalizacion.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaParticipacion{
 	background-image: url(./images/participacion.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .categoriaCaracterizacion{
 	background-image: url(./images/caracterizacion.png);
 	background-repeat:no-repeat;
 	}
-	
+
 .Morado{
 	color: #6B4C96;
 	}
@@ -1019,13 +1019,13 @@ div.navi a.active {
 	font-weight:300;
 	font-size: 14px;
 	}
-	
+
 /*.categoriaSalud {
 	font-size:15px;
 	font-family:'bebas_neueregular';
 	}	*/
-	
-	
+
+
 .wellKathe {
  	background-color: #F5F5F5;
     border: 1px solid #E3E3E3;
@@ -1047,7 +1047,7 @@ div.navi a.active {
 	margin-left:24%;
 	margin-top:20px;
 	}
-	
+
 .subMenu {
 	margin-top:87px;
 	}
@@ -1055,7 +1055,7 @@ div.navi a.active {
 .primerTabSubMenu {
 	width:400px;
 	}
-	
+
 /*--------BUSCADOR COMUNAS----- */
 .btn-menuComunas {
 	float: right;
@@ -1063,7 +1063,13 @@ div.navi a.active {
     right: 470px;
     top: 418px;
     z-index: 2;
+}
 
+.candidatos {
+	left: 47.5%;
+    position: absolute;
+    top: 175px;
+	opacity: 0.7;
 	}
 
 /*-------- METODOLOGIA---------*/
@@ -1100,27 +1106,114 @@ div.navi a.active {
 	position: relative;
 }
 
+/* FIN AMPOLLETA */
+
 .bannerPropaganda:hover {
 	opacity:1.1;
 	}
-	
+
 .bannerPropaganda {
 	width:965px;
 	height:90px;
 	opacity:0.9;
 	border-radius:4px 4px 4px 4px;
 	 border: 1px solid #DDDDDD;}
-	 
+
 .tituloAcordion {
 	background-color:#F2F2F2;
 	}
-	
+
 .tituloAcordion:hover {
 	text-decoration:none;
 	}
-	
+
 span.asterisco {
 	color:#64B700;
 	font-size:16px;
 	font-weight:600;
 	}
+
+/* POPUPs */
+
+.notice {
+	background-color: #BDE9F4;
+	border: 1px solid #B7DFE9;
+	padding: 10px;
+	box-shadow: 2px 2px 6px #4E91B6;
+	color: #388EA3;
+	position: absolute;
+	top: 0px;
+	left: 20px;
+	width: 280px;
+}
+
+.notice:before {
+	content: url(images/flecha_purr_vota.png);
+	position: absolute;
+	top: -29px;
+	left: 120px;
+}
+
+.notice-body {
+	font-size: 15px;
+	text-shadow: 1px 1px 0px white;
+	font-weight: bold;
+	margin: 5px 10px;
+}
+
+.notice-bottom {
+	text-align: center;
+	margin-top: 15px;
+}
+
+.notice .close {
+	position: absolute;
+	top: 4px;
+	right: 10px;
+	opacity: 0.7;
+	color: #388EA3;
+}	
+
+.notice .close:hover {
+	opacity: 1;
+	color: #388EA3;
+}	
+
+#preguntalesPopup {
+	cursor: pointer;
+}
+
+.notice_preguntales {
+	background-color: #D0FF3C;
+	border: 1px solid #BDE246;
+	padding: 27px 10px;
+	box-shadow: 2px 2px 6px #E1E6D1;
+	color: #8EA030;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	position: absolute;
+	top: 359px;
+	left: 137px;
+	width: 197px;
+}
+
+.notice_preguntales:before {
+	content: url(images/flecha_purr_preguntales.png);
+	position: absolute;
+	top: 149px;
+	left: 89px;
+}
+
+.notice_preguntales .close {
+	position: absolute;
+	top: 4px;
+	right: 10px;
+	opacity: 0.7;
+	color: #A5A5A5;
+}	
+
+.notice_preguntales .close:hover {
+	opacity: 1;
+	color: #C09853;
+}
+
+/* CIERRA POPUPs */
