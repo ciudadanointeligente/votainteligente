@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'django_extensions',
     'municipales2012',
+    'captcha'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -157,7 +158,10 @@ LOGGING = {
         },
     }
 }
-
+# Captcha settings (opcional):
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge' #operaciones matemáticas
+CAPTCHA_LETTER_ROTATION = (-10,10) #rotacion de los numeros
+CAPTCHA_NOISE_FUNCTIONS = () #sin ruido en la imagen
 # Email setting
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'sendgrid_username'

@@ -1,12 +1,15 @@
 from models import Pregunta, Candidato
 from django.forms import ModelForm, ModelMultipleChoiceField
+from captcha.fields import CaptchaField
 
 class PreguntaForm(ModelForm):
+    captcha = CaptchaField()
     class Meta:
         model = Pregunta
 
     # Representing the many to many related field in Pizza
     candidato = ModelMultipleChoiceField(queryset=Candidato.objects.all())
+
     # Overriding __init__ here allows us to provide initial
     # data for 'toppings' field
     def __init__(self, *args, **kwargs):
