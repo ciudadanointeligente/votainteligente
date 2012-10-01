@@ -17,13 +17,7 @@
  <h3> {{titulo}} </h3>
  <p>{{pregunta_nueva}}</p>
  <form action="" method="post">{% csrf_token %}
-    {%for candidato in candidatos%}
-    <input type = "checkbox" name = {{candidato.nombre}} value = {{candidato.pk}}>{{candidato}} ({{candidato.partido}})<br>
-    {%endfor%}
-    {{form.remitente}}
-    <br>
-    {{form.texto_pregunta}}
-    <br>
+    {{form.as_p}}
 <input type="submit" value="He dicho" />
 </form>
 </div>

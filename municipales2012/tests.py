@@ -482,20 +482,26 @@ class MessageTestCase(TestCase):
 		candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
 		candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], mail = self.data_candidato[1]['mail'], comuna = self.data_candidato[1]['comuna'], partido = self.data_candidato[1]['partido'])
 		candidato3 = Candidato.objects.create(nombre=self.data_candidato[2]['nombre'], mail = self.data_candidato[2]['mail'], comuna = self.data_candidato[2]['comuna'], partido = self.data_candidato[2]['partido'])
-		pregunta = Pregunta.objects.crear_pregunta('texto_pregunta1', 'remitente1', [candidato1, candidato2])
-		respuesta_no_contestada1 = Respuesta.objects.filter(candidato=candidato1).filter(pregunta=pregunta)[0]
-		respuesta_no_contestada2 = Respuesta.objects.filter(candidato=candidato2).filter(pregunta=pregunta)[0]
-		#Se crea la pregunta con su respectivo texto y remitente
+		#Se crea la pregunta y las respuestas asociadas
+		pregunta = Pregunta.objects.create(
+											remitente='remitente1', 
+											texto_pregunta='texto_pregunta1')
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta, candidato=candidato1)
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta, candidato=candidato2)
+		#Se crea la pregunta con su respectivo texto y remitente?
 		self.assertTrue(pregunta)
 		self.assertEquals(pregunta.texto_pregunta,'texto_pregunta1')
 		self.assertEquals(pregunta.remitente,'remitente1')
-		#Se crean las respuestas, y se guardan en la bd con los valores iniciales que corresponden
+		#Se crearon las respuestas asociadas a la pregunta?
+		respuesta_no_contestada1 = Respuesta.objects.filter(candidato=candidato1).filter(pregunta=pregunta)[0]
+		respuesta_no_contestada2 = Respuesta.objects.filter(candidato=candidato2).filter(pregunta=pregunta)[0]
+		#Se crean las respuestas, y se guardan en la bd con los valores iniciales que corresponden?
 		self.assertEquals(respuesta_no_contestada1.texto_respuesta,'Sin Respuesta')
 		self.assertEquals(respuesta_no_contestada2.texto_respuesta,'Sin Respuesta')
-		#Existe la asociación entre preguntas y candidatos
+		#Existe la asociación entre preguntas y candidatos?
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta).filter(nombre=candidato1.nombre).count(),1)
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta).filter(nombre=candidato2.nombre).count(),1)
-		#Sólo se agregó la pregunta a 2 candidatos
+		#Sólo se agregó la pregunta a 2 candidatos?
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta).count(),2)
 
 
@@ -505,15 +511,20 @@ class MessageTestCase(TestCase):
 		candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
 		candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], mail = self.data_candidato[1]['mail'], comuna = self.data_candidato[1]['comuna'], partido = self.data_candidato[1]['partido'])
 		candidato3 = Candidato.objects.create(nombre=self.data_candidato[2]['nombre'], mail = self.data_candidato[2]['mail'], comuna = self.data_candidato[2]['comuna'], partido = self.data_candidato[2]['partido'])
-		pregunta1 = Pregunta.objects.crear_pregunta('texto_pregunta1', 'remitente1', [candidato1, candidato2])
-		pregunta2 = Pregunta.objects.crear_pregunta('texto_pregunta2', 'remitente2', [candidato1, candidato3])
-		#validados que se cambia una respuesta
+		#Se crea la pregunta y las respuestas asociadas
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=candidato1)
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=candidato2)
+		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=candidato1)
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=candidato2)
+		#Se cambia la respuesta por defecto a la respuesta obtenida?
 		respuesta_candidato1_pregunta1 = Respuesta.objects.filter(candidato=candidato1).filter(pregunta=pregunta1)[0]
 		respuesta_candidato1_pregunta1.texto_respuesta ='texto_candidato1_respuesta1'
 		respuesta_candidato1_pregunta1.save()
 		respuesta_candidato1_pregunta1_db = Respuesta.objects.filter(candidato=candidato1).filter(pregunta=pregunta1)[0]
 		self.assertEquals(respuesta_candidato1_pregunta1_db.texto_respuesta,'texto_candidato1_respuesta1')
-		#validamos que no se cambian otras respuestas
+		#Se cambian accidentalmente otras respuestas?
 		respuesta_candidato1_pregunta2 = Respuesta.objects.filter(candidato=candidato1).filter(pregunta=pregunta2)[0]
 		self.assertEquals(respuesta_candidato1_pregunta2.texto_respuesta,'Sin Respuesta')
 
@@ -525,19 +536,46 @@ class MessageTestCase(TestCase):
 		#chequear que el mail llega y lo podemos traer
 
 
+	def test_get_question_page(self):
+		candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.comuna1, partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
+		candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], mail = self.data_candidato[1]['mail'], comuna = self.comuna1, partido = self.data_candidato[1]['partido'])
+		candidato3 = Candidato.objects.create(nombre=self.data_candidato[2]['nombre'], mail = self.data_candidato[2]['mail'], comuna = self.comuna3, partido = self.data_candidato[2]['partido'])
+		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
+		response = self.client.post(url)
+
+		self.assertEquals(response.status_code, 200)
+		self.assertTemplateUsed(response, 'municipales2012/preguntales.html')
+		self.assertTrue('form' in response.context)
+		self.assertTrue((candidato1.pk, candidato1.nombre) in response.context['form'].fields['candidato'].choices)
+		self.assertTrue((candidato2.pk, candidato2.nombre) in response.context['form'].fields['candidato'].choices)
+		self.assertTrue((candidato3.pk, candidato3.nombre) not in response.context['form'].fields['candidato'].choices)
+
+
+
+
+
+
 	def test_submit_question_message(self):
 		candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
-		candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], mail = self.data_candidato[1]['mail'], comuna = self.data_candidato[1]['comuna'], partido = self.data_candidato[1]['partido'])
+		candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], mail = self.data_candidato[1]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[1]['partido'])
 		candidato3 = Candidato.objects.create(nombre=self.data_candidato[2]['nombre'], mail = self.data_candidato[2]['mail'], comuna = self.data_candidato[2]['comuna'], partido = self.data_candidato[2]['partido'])
 		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
-		response = self.client.post(url, {'candidato-0': candidato1.pk, 'candidato-1': candidato2.pk, \
-		            'pregunta-texto': 'Texto Pregunta', 'remitente': 'Remitente 1'})
-				
+		response = self.client.post(url, {'candidato': [candidato1.pk, candidato2.pk],
+											'texto_pregunta': 'Texto Pregunta', 
+											'remitente': 'Remitente 1'})
+		self.assertEquals(Pregunta.objects.count(), 1)
+		self.assertEquals(Pregunta.objects.all()[0].texto_pregunta, 'Texto Pregunta')
+		self.assertEquals(Pregunta.objects.all()[0].remitente, 'Remitente 1')
+
+		self.assertEquals(Respuesta.objects.count(), 2)
+
+
+
 		#Se crea la pregunta con su respectivo texto y remitente
 		pregunta_enviada = Pregunta.objects.filter(candidato=candidato1).filter(remitente='Remitente 1')[0]
 		self.assertTrue(pregunta_enviada)
-		self.assertEquals(pregunta_enviada.texto_pregunta,'texto_pregunta1')
-		self.assertEquals(pregunta_enviada.remitente,'remitente1')
+		self.assertEquals(pregunta_enviada.texto_pregunta,'Texto Pregunta')
+		self.assertEquals(pregunta_enviada.remitente,'Remitente 1')
 		#Se crean las respuestas, y se guardan en la bd con los valores iniciales que corresponden
 		respuesta_no_contestada1 = Respuesta.objects.filter(candidato=candidato1).filter(pregunta=pregunta_enviada)[0]
 		respuesta_no_contestada2 = Respuesta.objects.filter(candidato=candidato2).filter(pregunta=pregunta_enviada)[0]

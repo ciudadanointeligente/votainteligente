@@ -63,10 +63,16 @@ class Candidato(models.Model):
 		return self.nombre
 
 class ManagerPregunta(models.Manager):
-	def crear_pregunta(self,texto_pregunta,remitente,destinatarios):
-		pregunta = self.create(remitente=remitente,texto_pregunta=texto_pregunta)
-		for destinatario in destinatarios:
-			Respuesta.objects.create(candidato=destinatario, pregunta=pregunta, texto_respuesta='Sin Respuesta')
+	def create(self, **kwargs):
+		#Crear pregunta
+		destinatarios_pk = kwargs['candidato']
+		del kwargs['candidato']
+		pregunta = super(ManagerPregunta, self).create(**kwargs)
+		pregunta.save()
+		#Asociar respuestas
+		for destinatario_pk in destinatarios_pk:
+			destinatario = Candidato.objects.get(id = destinatario_pk)
+			Respuesta.objects.create(candidato=destinatario, pregunta=pregunta)
 		return pregunta
 	
 
@@ -76,7 +82,7 @@ class Pregunta(models.Model):
 	remitente = models.CharField(max_length=255)
 	texto_pregunta = models.TextField()
 	
-	objects = ManagerPregunta()
+	#objects = ManagerPregunta()
 	
 	def __unicode__(self):
 		return self.texto_pregunta
@@ -86,7 +92,7 @@ class Respuesta(models.Model):
 	"""docstring for Respuesta"""
 	pregunta = models.ForeignKey(Pregunta)
 	candidato = models.ForeignKey(Candidato)
-	texto_respuesta = models.TextField()
+	texto_respuesta = models.TextField(default = 'Sin Respuesta')
 
 	def __unicode__(self):
 		return self.texto_respuesta
