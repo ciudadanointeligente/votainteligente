@@ -23,9 +23,33 @@
                     
 
                  </center> </div> 
+
+
         
 <!-- growl -->
     <script type="text/javascript">
+      $(document).ready(function(){
+        $('#preguntalesPopup').click(function(){
+          var notice = '<div class="notice_preguntales">'
+        +'<div class="notice-body">'
+          + '<p>Hola Cata</p>'
+        + '</div>'
+        + '<div class="notice-bottom">'
+          + '<p><a class="btn btn-info" href="http://legislativo.votainteligente.cl" target="_blank">Encuéntralo aquí</a></p>'
+        + '</div>'
+    + '</div>';
+      $( notice ).purr(
+        {
+          isSticky: true,
+          fadeInSpeed: 4000,
+          fadeOutSpeed: 1000,
+          usingTransparentPNG: true
+        }
+      );
+      return false;
+        })
+      });
+
       var notice = '<div class="notice">'
         +'<div class="notice-body">'
           + '<p>¿Andas en busca de nuestro antiguo Vota Inteligente? (Información del Congreso)</p>'
@@ -63,7 +87,7 @@
 
             <div class="row-fluid">
                 
-                <div class="span3">
+                <div id="preguntalesPopup" class="span3">
                 
                 <a href="#" class="btn btn-block btn-inverse" target="_blank"> Pregúntale <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </a>
                 <br/>
