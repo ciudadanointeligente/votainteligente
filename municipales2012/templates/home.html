@@ -8,12 +8,14 @@
    
            
          
-         <div class="container">  	
+         <div class="container">    
                 
                     
                 
                 
                 <div class="buscadorPpal">
+                
+                <img class="candidatos" src="{{ STATIC_URL }}images/candidatos.png" alt="">
                 
                 <h3> <center>Conoce a tus candidatos y elige a tu media naranja en cada comuna</center></h3>
                 <center>
@@ -29,6 +31,27 @@
         
 <!-- growl -->
     <script type="text/javascript">
+      $(document).ready(function(){
+        $('#preguntalesPopup').click(function(){
+          var notice = '<div class="notice_preguntales">'
+        +'<div class="notice-body">'
+          + '<p>Ingresa en el buscador en nombre de tu comuna y ahí podrás hacer tus preguntas.</p>'
+        + '</div>'
+        + '<div class="notice-bottom">'
+        + '</div>'
+    + '</div>';
+      $( notice ).purr(
+        {
+          isSticky: true,
+          fadeInSpeed: 4000,
+          fadeOutSpeed: 1000,
+          usingTransparentPNG: true
+        }
+      );
+      return false;
+        })
+      });
+
       var notice = '<div class="notice">'
         +'<div class="notice-body">'
           + '<p>¿Andas en busca de nuestro antiguo Vota Inteligente? (Información del Congreso)</p>'
@@ -47,29 +70,27 @@
       );
     </script>
 <!-- growl -->
-
-
        
          
-       										  <script>
-												$(document).ready(function() {
-													// Handler for .ready() called.
-													 $("#dyna img[title]").tooltip({
-											   		offset: [10, 2],
-											  		 effect: 'slide'
-														});
-												});
-											</script>
+                            <script>
+                        $(document).ready(function() {
+                          // Handler for .ready() called.
+                           $("#dyna img[title]").tooltip({
+                            offset: [10, 2],
+                             effect: 'slide'
+                            });
+                        });
+                      </script>
           
-    	
-    	<div class="container">
+      
+      <div class="container">
 
             <div class="row-fluid">
                 
                 
                     <ul class="thumbnails">
                         <li class="span3">
-                        <div class="thumbnail">
+                        <div id="preguntalesPopup" class="thumbnail">
                         <img src="{{ STATIC_URL }}images/preguntale.png" alt="">
                         </div>
                         
@@ -78,7 +99,9 @@
                         </li>
                         
                         <li class="span3">
-                        <a href="#" class="thumbnail">
+
+                        <a href="{% url reporta %}" class="thumbnail">
+
                         <img src="{{ STATIC_URL }}images/fiscaliza.png" alt="">
                         </a> 
                         <h5> Fiscaliza</h5>
@@ -86,7 +109,7 @@
                         </li>
                         
                         <li class="span6">
-                        <a href="#" class="thumbnail">
+                        <a href="http://www.elvaso.cl/2012/10/propaganda-electoral-respetan-la-ley/" target="_blank" class="thumbnail">
                         <img src="{{ STATIC_URL }}images/infografia1.jpg" alt="">
                         </a>
                         <h5> ¿Quieres saber dónde es ilegal poner propaganda electoral?</h5>
@@ -102,33 +125,33 @@
                         <p>Desde tu comuna, escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
                         </li> -->
                        
-                   	</ul>
+                    </ul>
                     
                 
                 <!--<div class="copiaBtn"> Pregúntale <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </div>
                 <br/>
-				<p>Desde tu comuna, escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
+        <p>Desde tu comuna, escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
                 </div>
               
                 
                 <div class="span3"> 
                 <a  href="{% url reporta %}" class="btn btn-block btn-inverse"> Fiscaliza<img src="{{ STATIC_URL}}images/iconoReporta.png" style="float: right;"/> </a>
                 <br/>
-				<p>Denuncia todo aquello que quieras mejorar en tu comuna, cuéntanos de lugares públicos en mal estado, propaganda electoral inapropiada, entre otros.</p>
+        <p>Denuncia todo aquello que quieras mejorar en tu comuna, cuéntanos de lugares públicos en mal estado, propaganda electoral inapropiada, entre otros.</p>
                 </div>
                 
                    <div class="span3">
                 
                 <div class="copiaBtn"> Infografia 1 <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </div>
                 <br/>
-				<p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
+        <p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
                 </div>
                 
                 <div class="span3">
                 
                 <div class="copiaBtn"> Infografia 2 <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </div>
                 <br/>
-				<p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
+        <p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
                 </div> -->
                 
         </div>
@@ -141,12 +164,12 @@
          <div class="row">
                 <div class="span6">
                 <h5>Video 1</h5>
-				<img src="{{ STATIC_URL }}images/ejemplo-video.png" />
-				</div>
+        <img src="{{ STATIC_URL }}images/ejemplo-video.png" />
+        </div>
                 <div class="span6">
                 <h5>Video 2</h5>
-				<img src="{{ STATIC_URL }}images/ejemplo-video.png" /> 
-				</div>
+        <img src="{{ STATIC_URL }}images/ejemplo-video.png" /> 
+        </div>
         </div> 
         -->
         
@@ -157,7 +180,7 @@
         
         
         {% endblock content %}
-	
-	{% block extra_js %}
-	
+
+  {% block extra_js %}
+
   {% endblock extra_js %}

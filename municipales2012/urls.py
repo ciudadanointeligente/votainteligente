@@ -11,6 +11,7 @@ urlpatterns = patterns('',
 	url(r'^somos/?$', QuienesSomosView.as_view(), name="somos"),
 	url(r'^fiscaliza/?$', ReportaView.as_view(), name="reporta"),
 	
+	
 
 	#pages depending on the comuna
 	url(r'^(?P<slug>[-\w]+)/indices/?$', ComunaIndices.as_view(), name='comuna-index-detail'),
