@@ -6,6 +6,10 @@
   <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 
+<meta property="og:description" content="Todo lo que necesitas saber para votar"/>    
+     
+     <meta property="og:image" content="{{ STATIC_URL }}images/portadaFacebook.png"/>
+
     <title>Votainteligente Municipales 2012{% if title %} - {{title}}{% endif %}</title>
 	<link rel="shortcut icon" href="{{ STATIC_URL }}./images/favicon.ico"/>
     
@@ -19,8 +23,14 @@
     <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
   <script src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.purr.js"></script>
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher: "77f6404a-fa4a-4dd0-b303-3eb69851a513"}); </script>
     </head>
-    
+
+<div class="bulb_container">
+<div class="fci-ampolleta-light"><iframe src="http://ciudadanointeligente.org/assets/bulb_light.html?wmode=transparent" width="120px" height="220" frameborder="0"></iframe></div>
+</div>  
     
 <body>
 
@@ -35,7 +45,7 @@
                         <li class="dentroMenu pull-right"><a href="{% url metodologia %}">Metodología</a></li>
                         
                         <li class="dentroMenu pull-right"><form class="navbar-search pull-right">
-                            <input type="text" class="search-query" placeholder="Buscar una comuna">
+                            <input type="text" class="search-query comunas-search" placeholder="Buscar una comuna">
                             </form></li>
                         </ul>
                             
@@ -71,50 +81,44 @@
 
                 </div>
         <footer class="footer">
+                  
                     <div class="container">
                       <div class="pull-left">
                       
-                      <ul class="footer" style="margin-left: 12px;">
+                      <ul class="footer">
+                      
+                                <li> <small> <a href="http://www.elvaso.cl/category/municipales-2012/"> Municipales en el Vaso</a></small></li>
 
-                                <li> <small> <a href="http://www.videocampaña.cl"> link camapaña </a></small></li>
-
-                                <li> <small> <a href="http://www.videocampaña.cl"> Municipales en el vaso</a></small> </li>
-                                <li> <small><a href="http://www.videocampaña.cl"> link camapaña </a></small> </li>
-                                <li> <small> <a href="http://www.videocampaña.cl"> Municipales en el vaso</a></small></li>
+                                <li> <small> <a href="#"> Guía de Fiscalización</a></small> </li>
+                                <li> <small><a href="#"> Qué debe hacer un Alcalde? </a></small> </li>
+                                <li> <small> <a href="http://www.servel.cl/controls/neochannels/neo_ch1/neochn1.aspx"> ¡Infórmate donde votar!</a></small></li>
                             </ul>
                         </div>
-                            
+                           
                             <table>
                       
                       <tr>
                        <th class="footerTexto"> Otro proyecto de:</th>
-                        <th class="footerTexto"> Con la ayuda de: </th>
-                        <th class="footerTexto"style="float: right; margin-right: 59px;"> Redes Sociales: </th>
+                        <th class="footerTexto" style="margin-left:101px;"> Con la ayuda de:
+</th>
+                        <th class="footerTexto"style="float: right; margin-right: 44px;"> Redes Sociales: </th>
                        </tr>
                        
-                       <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-	   fjs.parentNode.insertBefore(js, fjs);
-	   }(document, 'script', 'facebook-jssdk'));</script>
-
+                       
                       
-                    <tr>
+                    <tr class="dentroFooter">
 <td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/FCILogo.png" style="margin-left: -9px;"/></a> </td> 
   <td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/educacionLogo.png"/></a> </td>
 <td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/techoLogo.png"/> </a> </td> 
 <td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/igualesLogo.png"  style="margin-top: -13px;"/></a> </td> 
-<td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/casaPazLogo.png"/></a> </td>
+<td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/casaPazLogo.png" style="margin-right: 20px;"/></a> </td>
 
   <td class="itemFooter pull-left"> <a href="https://twitter.com/share" class="twitter-share-button" data-text="¿Conoces a quién votas?... Vota inteligente" data-via="ciudadanoi" data-lang="es" data-hashtags="municipales2012">Twitter</a>
   
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> </td>
   
   <td class="itemFooter pull-left" style="margin-top: -2px;">
-  <div class="fb-like" style="margin-left:0px; margin-top:0px;" data-href="http://www.votainteligente.cl" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial"> </div> </td>
+  <iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fvotainteligente.cl&amp;send=false&amp;layout=button_count&amp;width=120&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=167673216633674" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:120px; height:21px;" allowTransparency="true"></iframe> </td>
   
  
  </tr>
@@ -125,10 +129,29 @@
 </footer>
   
   
-  
+<script>
+$(function() {
+  var availableTags = [{% for comuna in comunas %}
+  {label:"{{comuna.nombre}}",value:"{{comuna.slug}}"}{% if not forloop.last %},{% endif %}
+  {% endfor %}
+
+  ];
+  $( ".comunas-search" ).autocomplete({
+    source: availableTags,
+    autoFocus: true
+  });
+  $( ".comunas-search" ).autocomplete({
+     select: function(event, ui) { 
+      $( "#comunas-search" ).val( ui.item.label );
+      window.location = '/'+ui.item.value; 
+      return false;
+     }
+  });
+});
+</script>
 {% block extra_js %}
 {% endblock extra_js %}
-  
+
 
 <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>
   

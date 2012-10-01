@@ -1,7 +1,7 @@
 {% extends "base_sub_menu.html" %}
 {% block content %}
  
- 
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
  
              
              
@@ -14,11 +14,10 @@
  <br/>
   <br/>
  <br/>
- <h3> Nombre de la Comuna ej. VITACURA </h3>
-             <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-success" style="float: right; margin-top: -40px;"> Descargar Excel completo </a>
+ <h3> Más información de {{comuna}}</h3>
+             <a href="{{ STATIC_URL }}documentos/BaseDatosMunicipalidades.xlsx" class="btn btn-mini btn-success" style="float: right; margin-top: -40px;"> Descargar Excel completo </a>
              
-             <p> Introducción
-             Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. </p>
+             <p> A continuación se presenta una recopilación de datos a nivel municipal para que puedas evaluar el desempeño de tu municipalidad en distintas áreas, como salud, educación, infraestructura, transparencia, participación ciudadana y presupuestos. Evalúa y comparte los datos! </p>
               
               
               </div>
@@ -34,6 +33,7 @@
                        <div class="">
                         <header class="tituloCarrusel {{indice.area.clase_en_carrusel}}" > 
                           <p>{{indice.dato.nombre}}</p>
+                          <a href="https://twitter.com/share" class="twitter-share-button" data-lang="es" data-text="#{{comuna}} {{indice.numero_1}} {{indice.texto_1}}">Tweetea esto</a>
                           </header>
                           <section>
                               <div class="categoria {{indice.dato.imagen}}">  
@@ -47,6 +47,10 @@
                     </article>
                   </div>
                 </div>
+                {% if forloop.counter|divisibleby:"3" %}
+                </div>
+                <div class="row-fluid">
+                {% endif %}
                 {% endfor %}
              </div>
  
