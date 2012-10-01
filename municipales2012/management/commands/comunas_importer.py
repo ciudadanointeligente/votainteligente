@@ -29,7 +29,7 @@ class CsvReader(object):
 		comuna = self.detectComuna(line)
 		area = self.detectArea(line)
 		dato = self.detectDato(line)
-		en_carrusel_text = line[11].decode('utf-8').strip()
+		en_carrusel_text = line[13].decode('utf-8').strip()
 		en_carrusel = False
 		if en_carrusel_text == u"SI":
 			en_carrusel = True
