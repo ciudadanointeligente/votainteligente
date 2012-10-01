@@ -29,6 +29,27 @@
         
 <!-- growl -->
     <script type="text/javascript">
+      $(document).ready(function(){
+        $('#preguntalesPopup').click(function(){
+          var notice = '<div class="notice_preguntales">'
+        +'<div class="notice-body">'
+          + '<p>Ingresa en el buscador en nombre de tu comuna y ahí podrás hacer tus preguntas.</p>'
+        + '</div>'
+        + '<div class="notice-bottom">'
+        + '</div>'
+    + '</div>';
+      $( notice ).purr(
+        {
+          isSticky: true,
+          fadeInSpeed: 4000,
+          fadeOutSpeed: 1000,
+          usingTransparentPNG: true
+        }
+      );
+      return false;
+        })
+      });
+
       var notice = '<div class="notice">'
         +'<div class="notice-body">'
           + '<p>¿Andas en busca de nuestro antiguo Vota Inteligente? (Información del Congreso)</p>'
@@ -47,8 +68,6 @@
       );
     </script>
 <!-- growl -->
-
-
        
          
                             <script>
@@ -69,7 +88,7 @@
                 
                     <ul class="thumbnails">
                         <li class="span3">
-                        <div class="thumbnail">
+                        <div id="preguntalesPopup" class="thumbnail">
                         <img src="{{ STATIC_URL }}images/preguntale.png" alt="">
                         </div>
                         
