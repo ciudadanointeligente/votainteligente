@@ -6,6 +6,7 @@ from models import Comuna, Area, Indice, Dato, Candidato, Pregunta, Respuesta
 from management.commands.comunas_importer import *
 from django.test.client import Client
 from django.utils.unittest import skip
+from captcha.models import CaptchaStore
 
 
 class ComunaModelTestCase(TestCase):
@@ -469,6 +470,7 @@ class MessageTestCase(TestCase):
 #Obtain questions/answers for a given candidate
 #Calculate response stats
 
+
 	def setUp(self):
 		self.comuna1, created = Comuna.objects.get_or_create(nombre="comuna1", 
 			slug="la-comuna1",
@@ -585,10 +587,20 @@ class MessageTestCase(TestCase):
 		candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
 		candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], mail = self.data_candidato[1]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[1]['partido'])
 		candidato3 = Candidato.objects.create(nombre=self.data_candidato[2]['nombre'], mail = self.data_candidato[2]['mail'], comuna = self.data_candidato[2]['comuna'], partido = self.data_candidato[2]['partido'])
+		#Load URL and check captcha
+		captcha_count = CaptchaStore.objects.count()
+		self.failUnlessEqual(captcha_count, 0)
 		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
+		web = self.client.get(url)
+		captcha_count = CaptchaStore.objects.count()
+		self.failUnlessEqual(captcha_count, 1)
+		captcha = CaptchaStore.objects.all()[0]
+		#Post data
 		response = self.client.post(url, {'candidato': [candidato1.pk, candidato2.pk],
 											'texto_pregunta': 'Texto Pregunta', 
-											'remitente': 'Remitente 1'})
+											'remitente': 'Remitente 1',
+											'captcha_0': captcha.hashkey,
+											'captcha_1': captcha.response})
 		self.assertEquals(Pregunta.objects.count(), 1)
 		self.assertEquals(Pregunta.objects.all()[0].texto_pregunta, 'Texto Pregunta')
 		self.assertEquals(Pregunta.objects.all()[0].remitente, 'Remitente 1')
@@ -613,7 +625,15 @@ class MessageTestCase(TestCase):
 		#Sólo se agregó la pregunta a 2 candidatos
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).count(),2)
 
-
+	def test_display_conversations(self):
+		candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], mail = self.data_candidato[0]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
+		candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], mail = self.data_candidato[1]['mail'], comuna = self.data_candidato[0]['comuna'], partido = self.data_candidato[1]['partido'])
+		candidato3 = Candidato.objects.create(nombre=self.data_candidato[2]['nombre'], mail = self.data_candidato[2]['mail'], comuna = self.data_candidato[2]['comuna'], partido = self.data_candidato[2]['partido'])
+		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
+		response = self.client.post(url, {'candidato': [candidato1.pk, candidato2.pk],
+											'texto_pregunta': 'Texto Pregunta', 
+											'remitente': 'Remitente 1'})
+		self.assertTrue("conversaciones" in response.context)
 
 	#def test_create_mail_template(self):
 		
