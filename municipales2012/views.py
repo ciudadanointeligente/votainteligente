@@ -2,6 +2,7 @@
 # Create your views here.
 from django.views.generic import TemplateView, DetailView
 from models import Comuna, Indice
+from django.core.urlresolvers import reverse
 
 class HomeTemplateView(TemplateView):
 	def get_context_data(self, **kwargs):
@@ -21,6 +22,7 @@ class ComunaOverview(DetailView):
 		context['indices'] = indices
 		context['title'] = self.object.nombre
 		context['comunas'] = comunas
+		context['full_path'] = self.request.build_absolute_uri()
 		return context
 
 
@@ -37,6 +39,11 @@ class ComunaIndices(DetailView):
 		context['indices'] = indices
 		context['title'] = self.object.nombre + u" índices detallados"
 		context['comunas'] = comunas
+		url_comuna = reverse('comuna-overview', kwargs={
+			'slug':self.object.slug
+			})
+		context['full_path'] = self.request.build_absolute_uri(url_comuna)
+		
 		return context
 
 class MetodologiaView(TemplateView):
