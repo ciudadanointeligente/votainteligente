@@ -69,8 +69,8 @@ class ComunaPreguntales(CreateView):
 				nombre_candidato = respuesta_pregunta.candidato.nombre
 				respuestas[nombre_candidato] = texto_respuesta
 			nombre_emisor = pregunta.remitente
-			#mensaje[nombre_emisor] = texto_pregunta
-			#conversaciones[mensaje] = respuestas
+			mensaje[texto_pregunta] = respuestas
+			conversaciones[nombre_emisor] = mensaje
 
 		context['conversaciones'] = conversaciones
 		context['candidatos'] = candidatos_comuna

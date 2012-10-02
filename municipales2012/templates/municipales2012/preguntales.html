@@ -20,7 +20,19 @@
     {{form.as_p}}
 <input type="submit" value="He dicho" />
 </form>
+{% for remitente, mensaje in conversaciones.items %}
+	<b>{{remitente}} </b> preguntó:
+	<br>
+	{% for pregunta, respuestas in mensaje.items %}
+		{{pregunta}}
+		<br>
+		Las respuestas fueron:
+		<br>
+		{% for candidato, respuesta in respuestas.items%}
+			<b>{{candidato}}:</b> {{respuesta}}
+			<br>
+		{% endfor %}
+	{% endfor %}
+{% endfor %}
 </div>
-       {% endblock %}
-       
-      
+{% endblock %}
