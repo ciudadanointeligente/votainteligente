@@ -50,8 +50,8 @@ class CsvReader(object):
 			indice.texto_pie_pagina_2 = line[10].strip()
 
 
-			indice.numero_pie_pagina_2 = line[11].strip(),
-			indice.texto_pie_pagina_3 = line[12].strip(),
+			indice.numero_pie_pagina_2 = line[11].strip()
+			indice.texto_pie_pagina_3 = line[12].strip()
 
 			indice.en_carrusel = en_carrusel
 			indice.save()
@@ -68,7 +68,7 @@ class CsvReader(object):
 				texto_pie_pagina_1 = line[8].strip(),
 				numero_pie_pagina_1 = line[9].strip(),
 				texto_pie_pagina_2 = line[10].strip(),
-				numero_pie_pagina_2 = line[11].decode('utf-8').strip(),
+				numero_pie_pagina_2 = line[11].strip(),
 				texto_pie_pagina_3 = line[12].strip(),
 				en_carrusel = en_carrusel
 				)
