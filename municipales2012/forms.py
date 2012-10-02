@@ -1,24 +1,26 @@
 from models import Pregunta, Candidato
-from django.forms import ModelForm, ModelMultipleChoiceField
+# from django.forms import ModelForm, ModelMultipleChoiceField, CheckboxSelectMultiple
+from django import forms
 from captcha.fields import CaptchaField
 
-class PreguntaForm(ModelForm):
+class PreguntaForm(forms.ModelForm):
     captcha = CaptchaField()
     class Meta:
         model = Pregunta
 
     # Representing the many to many related field in Pizza
-    candidato = ModelMultipleChoiceField(queryset=Candidato.objects.all())
-
     # Overriding __init__ here allows us to provide initial
     # data for 'toppings' field
     def __init__(self, *args, **kwargs):
-	comuna = kwargs['comuna']
-	del kwargs['comuna']
-	super(PreguntaForm, self).__init__(*args, **kwargs)
-	#Falta filtrar los candidatos por comuna
-	candidatos = Candidato.objects.filter(comuna = comuna)
-	self.fields['candidato'].queryset = candidatos
+    	comuna = kwargs['comuna']
+    	del kwargs['comuna']
+    	super(PreguntaForm, self).__init__(*args, **kwargs)
+    	#Falta filtrar los candidatos por comuna
+    	candidatos = Candidato.objects.filter(comuna = comuna)
+        print candidatos
+
+        self.fields['candidato'].widget = forms.CheckboxSelectMultiple()
+        self.fields['candidato'].queryset = candidatos
 
 '''	
     # Overriding save allows us to process the value of 'toppings' field    
