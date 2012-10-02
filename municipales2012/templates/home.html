@@ -2,9 +2,6 @@
 {% block content %}
 
 
-     <meta property="og:description" content="Todo lo que necesitas saber para votar"/>    
-     
-     <meta property="og:image" content="{{ STATIC_URL }}images/portadaFacebook.png"/>
    
            
          
@@ -31,27 +28,6 @@
         
 <!-- growl -->
     <script type="text/javascript">
-      $(document).ready(function(){
-        $('#preguntalesPopup').click(function(){
-          var notice = '<div class="notice_preguntales">'
-        +'<div class="notice-body">'
-          + '<p>Ingresa en el buscador en nombre de tu comuna y ahí podrás hacer tus preguntas.</p>'
-        + '</div>'
-        + '<div class="notice-bottom">'
-        + '</div>'
-    + '</div>';
-      $( notice ).purr(
-        {
-          isSticky: true,
-          fadeInSpeed: 4000,
-          fadeOutSpeed: 1000,
-          usingTransparentPNG: true
-        }
-      );
-      return false;
-        })
-      });
-
       var notice = '<div class="notice">'
         +'<div class="notice-body">'
           + '<p>¿Andas en busca de nuestro antiguo Vota Inteligente? (Información del Congreso)</p>'
@@ -92,11 +68,12 @@
                         
                         
                         <li class="span3">
-                        <div id="preguntalesPopup">
-                        <a class="preguntaleHome">
-                        
-                        <img src="{{ STATIC_URL }}images/preguntale.png" alt="">
-                        </a>
+
+                        <div class="thumbnail">
+
+                            <ul class="tt-wrapper">
+                                <li><a class="tt-preguntales" href="#"><img src="{{ STATIC_URL }}images/preguntale.png" alt=""><span>Ingresa en el buscador el nombre de tu comuna y ahí podrás hacer tus preguntas.</span></a></li>
+                            </ul>
                         </div>
                         
                         <h5> Pregúntale </h5>
@@ -111,7 +88,7 @@
                         <img src="{{ STATIC_URL }}images/fiscaliza.png" alt="">
                         </a> 
                         <h5> Fiscaliza</h5>
-                        <p>Denuncia todo aquello que quieras mejorar en tu comuna, cuéntanos de lugares públicos en mal estado, propaganda electoral inapropiada, entre otros.</p>
+                        <p>Denuncia todo aquello que quieras mejorar en tu comuna; cuéntanos de lugares públicos en mal estado y propaganda electoral inapropiada, entre otros.</p>
                         </li>
                         
                         <li class="span6">

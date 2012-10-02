@@ -2,7 +2,7 @@
 {% block content %}
 
 <!DOCTYPE html>
-<html lang="en">
+<!--<html lang="en">
 
 
 
@@ -15,26 +15,22 @@
     <link href="{{ STATIC_URL }}kathe.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js" ></script>
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+   <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
+   <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/ui-lightness/jquery-ui-1.8.23.css" rel="stylesheet">
     
     <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
   <script src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.purr.js"></script>
     </head>
+  -->
 
 <div class="paginaCompleta container">
-			 <br/>
-             <br/>
-             <br/>
-             <br/>
-             <br/>
-             <br/>
-             <br/>
+			 
              
   <!--<h3> Nuestra Metodología </h3> -->
-             <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-success" style="float: right; margin-top: -40px;"> Descargar nuestra metodología completa </a>
+             
+<p style="float:none; height: 30px;"><a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-success" style="float: right;"> Descargar nuestra metodología completa </a></p>
              
  
  <div class="accordion" id="accordion2">
@@ -48,7 +44,7 @@
 <div class="accordion-inner">
 Los datos que se presentan en este sitio web tienen como objetivo ofrecer a la ciudadanía un panorama de la situación de su comuna en diferentes áreas, de tal forma que se pueda realizar una evaluación de la gestión del municipio y detectar los principales problemas que, comparativamente, afectan a la comuna. <br/> <br/>
 
-A pesar de la importancia y de la influencia que los alcaldes logran tener en la vida de las personas, en nuestro país existen pocas instancias de fácil acceso para que la ciudadanía conozca y evalúe la gestión de sus municipios; menos todavía para que puedan comparar en base a datos objetivos la situación en la que su alcalde deja el municipio al final de su período, o que obligue a los nuevos candidatos a asumir determinadas posturas y presentar programas específicos que recojan los temas más relevantes para cada localidad. <br/> <br/>
+A pesar de la importancia y de la influencia que los alcaldes logran tener en la vida de las personas, en nuestro país existen pocas instancias de fácil acceso para que la ciudadanía conozca y evalúe la gestión de sus municipios; menos todavía para que pueda comparar en base a datos objetivos la situación en la que su alcalde deja el municipio al final de su período, o que obligue a los nuevos candidatos a asumir determinadas posturas y presentar programas específicos que recojan los temas más relevantes para cada localidad. <br/> <br/>
 
 La diferencia de esta propuesta en relación a otros estudios de este tipo, es mostrar la información de una forma más comprensible. Muchas veces un número o un porcentaje no es suficiente para comprender un determinado resultado, por lo que utilizamos constantemente los Rankings para la ubicación de la comuna en relación al total nacional. En otros casos se muestran porcentajes, los cuales también se contraponen a un promedio nacional para hacerlo comparable. De esta forma, el ciudadano puede realizar comparaciones para dimensionar los principales desafíos de su comuna.
 
@@ -118,7 +114,7 @@ Otros lugares en donde puedes obtener información municipal de este tipo es en 
 
 
 </div>
-</div>
+</div> 
 </div>
 
 
@@ -134,13 +130,12 @@ Otros lugares en donde puedes obtener información municipal de este tipo es en 
 
  
              <div class="paginaCompleta container"> <a name="Top">           
-             <div class="flechaMetodologia"> <a href="#Top"><img src="{{ STATIC_URL }}./images/flechaArriba.png" /> </a></div> </a> 
+             <div class="flechaMetodologia" title="Volver a la lista"> <a href="#Top"><img src="{{ STATIC_URL }}./images/flechaArriba.png" /> </a></div> </a> 
              <h5> Descripción de los datos publicados:</h5>
              <p> A continuación revisaremos en detalle cada uno de los datos publicados, qué significa cada dato, qué fuentes de información utilizamos para calcularlos y cómo los calculamos.</p>
              <h5> Listado de índicadores </h5>
-             <ul class="listaMetodologia">
-      
-              
+             
+             <ul class="listaMetodologia well">
               <li class="itemListaMetodologia"><a href="#Pobreza"> Pobreza</a></li>
               <li class="itemListaMetodologia"><a href="#Desigualdad"> Desigualdad </a></li>
               <li class="itemListaMetodologia"><a href="#Funcionarios"> Funcionarios </a></li>
@@ -179,11 +174,12 @@ Otros lugares en donde puedes obtener información municipal de este tipo es en 
              
              
              
-             
-             <div class="container">
+            
+             <div class="container cat">
+              <a name="Pobreza"> </a>
              <div class="categoriaPobreza">
-             <h4 class="sangriaIzquierda"> <a name="Pobreza"> Pobreza </a></h4>
-             <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda">Pobreza </h4>
+             <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
              </div>   
              <h5> ¿Qué entendemos por pobreza? </h5>
 <p>La pobreza puede ser entendida en función de los hogares cuyo ingreso por persona se encuentra por debajo del nivel de ingreso mínimo necesario para adquirir un determinado estándar o calidad de vida. La línea de la pobreza se calcula en función del ingreso y su capacidad de satisfacer las necesidades básicas, definidas a través de una canasta de alimentos por persona. En zonas urbanas, el cálculo de la línea de pobreza se realiza según el valor de 2 canastas básicas de alimentos, y en zonas rurales,  1,75 veces. A partir de ello, todos quienes posean un ingreso per cápita menor a 2 o 1,75 veces el precio de la canasta básica, se encuentran bajo la línea de la pobreza.
@@ -199,11 +195,12 @@ Para la creación del ranking, se ordenaron las comunas con datos disponibles, s
 
      </div>
                 
-             <br/> 
-             <div class="container">
+             
+             <div class="container cat">
+              <a name="Desigualdad"></a>
              <div class="categoriaDesigualdad">
-             <h4 class="sangriaIzquierda"> <a name="Desigualdad"> Desigualdad</a></h4>
-              <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda">  Desigualdad</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
            <h5>¿Qué entendemos por desigualdad?</h5>
 <p>La desigualdad la entendemos según el Coeficiente de Gini, el cual toma valores entre 0 y 1, donde 0 corresponde a la perfecta igualdad (todos tienen los mismos ingresos) y 1 corresponde a la perfecta desigualdad (una persona tiene todos los ingresos y los demás ninguno). </p>
@@ -217,11 +214,12 @@ Luego, para ilustrar el nivel de desigualdad de cada comuna, hicimos un paralelo
 
             </div>
      		
-            <br/> 
-             <div class="container">
+            
+             <div class="container cat">
+              <a name="Funcionarios"> </a>
              <div class="categoriaFuncionarios">
-             <h4 class="sangriaIzquierda"> <a name="Funcionarios"> Funcionarios Municipales</a></h4>
-               <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Funcionarios Municipales</h4>
+               <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <h5>¿Qué entendemos por funcionarios municipales? </h5>
 <p>En las municipalidades existen tres tipos de funcionarios según el tipo de contrato: planta, contrata y honorarios. Los funcionarios de planta conforman la organización estable de la municipalidad; los funcionarios a contrata corresponden a cargos transitorios hasta el 31 de diciembre de cada año; y los funcionarios a honorarios representan el personal fuera de la dotación, contratado para la realización de funciones transitorias.</p>
@@ -235,11 +233,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
             
-            <br/> 
-             <div class="container">
+            
+             <div class="container cat">
+              <a name="Simce"></a>
              <div class="categoriaEducacion">
-             <h4 class="sangriaIzquierda"> <a name="Simce"> Puntaje SIMCE</a></h4>
-              <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda">  Puntaje SIMCE</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              
 <h5>¿Qué entendemos por variación en el puntaje SIMCE? </h5>
@@ -257,11 +256,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
             
             </div>
      		
-             <br/> 
-             <div class="container">
+             
+             <div class="container cat">
+              <a name="ServiciosSalud"> </a>
              <div class="categoriaServiciosSalud">
-             <h4 class="sangriaIzquierda"> <a name="ServiciosSalud"> Servicios de Salud por habitante</a></h4>
-              <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Servicios de Salud por habitante</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <h5>¿Qué entendemos por Servicio de Salud por habitante? </h5>
 <p>Entre los servicios de salud traspasados a las municipalidades, o servicios de atención primaria de salud municipal, se encuentran: Centros Comunitarios de Salud Familiar (CESCOF), Centros de Salud Familiar (CESFAM), Centro General Rural (CGR), Consultorio de Salud Mental (COSAM), Centro de Referencia de Salud (CRS), Centro de Salud Rural (CSR), Centro de Salud Urbano (CSU), Posta de Salud Rural (PSR) y Servicios de Atención Primaria de Urgencia (SAPU). </p>
@@ -276,11 +276,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
             
-            <br/> 
-             <div class="container">
+            
+             <div class="container cat">
+              <a name="ObesidadMedia"></a>
              <div class="categoriaObesidad">
-             <h4 class="sangriaIzquierda"> <a name="ObesidadMedia"> Obesidad en Enseñanza Media y Básica</a></h4>
-              <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda">  Obesidad en Enseñanza Media y Básica</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
             <h5>¿Qué es la obesidad en niños de enseñanza básica y enseñanza media? </h5>
 <p>La Junta Nacional de Auxilio Escolar y Becas (JUNAEB) anualmente aplica una encuesta a los niños(a) y jóvenes de 1º Medio y 1° Básico de los establecimientos Municipalizados y Particulares Subvencionados, en donde se levantan datos para el análisis de la situación nutricional de la población escolar del país. Los datos recolectados constituyen aproximadamente el 93% del total del sistema educacional. </p>
@@ -293,11 +294,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
             
-             <br/> 
-             <div class="container">
+             
+             <div class="container cat">
+              <a name="Delitos"></a>
              <div class="categoriaSeguridad">
-             <h4 class="sangriaIzquierda"> <a name="Delitos">Delitos de Mayor Connotación Social</a></h4>
-             <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Delitos de Mayor Connotación Social</h4>
+             <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
               
             <h5> ¿Qué entendemos por delitos de mayor connotación social?</h5>
@@ -311,11 +313,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
             
-            <br/> 
-             <div class="container">
+            
+             <div class="container cat">
+              <a name="AreasVerdes"> </a>
              <div class="categoriaAreasPublicas">
-             <h4 class="sangriaIzquierda"> <a name="AreasVerdes">Áreas Verdes</a></h4>
-               <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Áreas Verdes</h4>
+               <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <h5>¿Qué entendemos por Mantención de Áreas Verdes? </h5>
 <p>Según la Comisión Nacional de Medio Ambiente (CONAMA), las áreas verdes son  espacios urbanos, o de periferia a éstos, predominantemente ocupados con árboles, arbustos o plantas, que pueden tener diferentes usos, ya sea para cumplir funciones de esparcimiento, recreación, ecológicas, ornamentación, protección, recuperación y rehabilitación del entorno, o similares. </p>
@@ -340,11 +343,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
     
-    <br/> 
-             <div class="container">
+    
+             <div class="container cat">
+              <a name="TransparenciaActiva"> </a>
              <div class="categoriaRankingConsejo">
-             <h4 class="sangriaIzquierda"> <a name="TransparenciaActiva">Trasparencia Activa	</a></h4>
-              <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Trasparencia Activa</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <h5>¿Qué entendemos por Transparencia Activa? </h5>
 <p>Es deber de los órganos de la administración del Estado poner a disposición del público  información relevante de su gestión, sin que ésta sea previamente solicitada, a través de los sitios web, según lo establecido en la Ley 20.285 de Acceso a la Información Pública. Entre los temas que es obligatorio publicar por parte de los municipios están: 1) actos y documentos publicados en el diario oficial, 2) marco normativo, 3) organigrama de la institución, junto a facultades funciones y atribuciones, 4) nombre, grado y remuneraciones de funcionarios de planta, contrata y honorarios, 5) información de compras mediante Mercado Público, y de contratación de bienes inmuebles, 6) información actualizada sobre transferencias, 7) actos y resoluciones con efectos sobre terceros, 8) información actualizada sobre trámites y requisitos, 9) información sobre programas de  subsidios y beneficios, 10) mecanismos de participación ciudadana; 11) presupuesto municipal; 12) auditorías; y finalmente 13) información sobre terceros con participación en la municipalidad. </p>
@@ -354,11 +358,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
             
             </div>
     			
-    <br/> 
-             <div class="container">
+    
+             <div class="container cat">
+              <a name="Organizaciones"> </a>
              <div class="categoriaOrganizaciones">
-             <h4 class="sangriaIzquierda"> <a name="Organizaciones">Organizaciones Sociales</a></h4>
-              <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Organizaciones Sociales</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <h5>¿Qué medimos en Organizaciones Sociales?</h5>
 <p>Según la Ley 20.500 sobre Asociaciones y Participación Ciudadana en la Gestión Pública, todas las personas tienen derecho a asociarse libremente para la consecución de fines lícitos, y este derecho comprende la facultad de crear asociaciones que expresen la diversidad de intereses sociales e identidades culturales. Entre las Organizaciones Comunitarias comunales es posible encontrar Clubes Deportivos, Centros de Madres, Centro u Organizaciones del Adulto Mayor, Centro de Padres y Apoderados, Juntas de Vecinos u otras organizaciones funcionales. </p>
@@ -375,11 +380,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
     		
-               <br/> 
-             <div class="container">
+               
+             <div class="container cat">
+              <a name="Semaforos"> </a>
              <div class="categoriaSemaforoAmarillo">
-             <h4 class="sangriaIzquierda"> <a name="Semaforos"> Informes Contraloría</a></h4>
-               <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Informes Contraloría</h4>
+               <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
 
              
@@ -394,12 +400,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
                 
-    		 <br/> 
-             <div class="container">
+    		 
+             <div class="container cat">
+             <a name="Ingreso"> </a> 
              <div class="categoriaIngreso">
-
              <h4 class="sangriaIzquierda">  Ingreso por Persona en la Comuna</h4>
-              <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
             <a name="Ingreso"> <h5>¿Qué medimos en ‘Ingreso por persona’?</h5></a>
 <p>La Encuesta de Caracterización Socioeconómica (CASEN 2009) mide el ingreso monetario, que se define como todos los ingresos autónomos del hogar (sueldos y salarios, ganancias provenientes del trabajo independiente, autoprovisión de bienes producidos por el hogar, bonificaciones, gratificaciones, rentas, intereses, así como jubilaciones, pensiones, montepíos y transferencias entre privados) más los aportes en efectivo que distribuye el Estado a las personas y los hogares a través de sus programas sociales (bonos y subsidios). </p>
@@ -413,11 +419,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>           
                 
- 			<br/> 
-             <div class="container">
+ 			
+             <div class="container cat">
+              <a name="Profesionalizacion"> </a>
              <div class="categoriaProfesionalizacion">
-             <h4 class="sangriaIzquierda"> <a name="Profesionalizacion">Profesionalización</a></h4>
-             <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Profesionalización</h4>
+             <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
 
              <h5>¿Qué queremos medir en ‘Profesionalización’? </h5>
@@ -432,11 +439,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
             
-            <br/> 
-             <div class="container">
+            
+             <div class="container cat">
+              <a name="Vulnerabilidad"> </a>
              <div class="categoriaSalud">
-             <h4 class="sangriaIzquierda"> <a name="Vulnerabilidad">Vulnerabilidad</a></h4>
-              <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Vulnerabilidad</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
   
 <h5>¿Qué entendemos por vulnerabilidad?</h5>
@@ -458,11 +466,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
             
-            <br/> 
-             <div class="container">
+            
+             <div class="container cat">
+              <a name="AVPP"> </a>
              <div class="categoriaSalud">
-             <h4 class="sangriaIzquierda"> <a name="AVPP">Años de Vida Potencialmente Perdidos </a></h4>
-              <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Años de Vida Potencialmente Perdidos </h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
 
             <h5> ¿Qué son los años de vida potencialmente perdidos? </h5>
@@ -477,11 +486,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
                 
-       		 <br/> 
-             <div class="container">
+       		 
+             <div class="container cat">
+             <a name="Matricula"> </a>
              <div class="categoriaEducacion">
-             <h4 class="sangriaIzquierda"> <a name="Matricula">Matrícula</a></h4>
-               <a href="./pdf/Afiche_Chile.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Matrícula</h4>
+               <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
 <p>Evolución de la Matrícula Municipal entre el 2008 y el 2011, a partir de los datos del Ministerio de Educación. Para calcularlo se utilizó el total de matrículas escolares de la comuna, y se separó a las que correspondían al sector municipal, para poder calcular el porcentaje de éstas sobre el total. El objetivo es analizar, para cada comuna, si la matrícula municipal ha aumentado o disminuido.
         	</p>
@@ -489,11 +499,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
             <em>*** Datos elaborados por Educación 2020 </em> </p>
             </div>
             
-             <br/> 
-             <div class="container">
+             
+             <div class="container cat">
+              <a name="EvaluacionDocente"> </a>
              <div class="categoriaEducacion">
-             <h4 class="sangriaIzquierda"> <a name="EvaluacionDocente">Evaluación Docente</a></h4>
-              <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Evaluación Docente</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <p>El Sistema de Evaluación del Desempeño Profesional Docente, llevado a cabo por el Ministerio de Educación, es una evaluación para profesores de establecimientos municipales a lo largo del país, cuyo objetivo es fortalecer la profesión y contribuir a mejorar la calidad de la educación. </p>
              
@@ -504,11 +515,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
             </div>
            
            
-            <br/> 
-             <div class="container">
+            
+             <div class="container cat">
+              <a name="ProgramasSeguridad"> </a>
              <div class="categoriaSeguridad">
-             <h4 class="sangriaIzquierda"> <a name="ProgramasSeguridad">Programas de Seguridad</a></h4>
-             <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Programas de Seguridad</h4>
+             <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
             <h5>¿Qué queremos medir en ‘Programas de Seguridad’? </h5>
 <p>Existen tres programas de seguridad que tienen que ver con el ámbito de gestión municipal: El Plan Cuadrante, el Programa Barrio en Paz Residencial y el Programa Barrio en Paz Comercial. Buscamos medir la presencia de estos programas en cada comuna.</p>
@@ -520,11 +532,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
             
-            <br/> 
-             <div class="container">
+            
+             <div class="container cat">
+              <a name="NotaSeguridad"> </a>
              <div class="categoriaSeguridad">
-             <h4 class="sangriaIzquierda"> <a name="NotaSeguridad">Nota a la Seguridad</a></h4>
-              <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Nota a la Seguridad</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <h5>¿Qué es la nota a la seguridad? </h5>
 <p>La Encuesta Nacional de Seguridad Ciudadana (ENUSC) del 2011, elaborada por la Subsecretaría de Prevención del Delito del Ministerio del Interior y Seguridad Pública, en la pregunta n° 8 señala: “En una escala de 1 a 7, donde 1= muy inseguro y 7= muy seguro, ¿Qué nota le pondría a la seguridad en su comuna?”</p>
@@ -540,11 +553,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 </p>
             </div>
             
-              <br/> 
-             <div class="container">
+              
+             <div class="container cat">
+              <a name="PercepcionSeguridad"> </a>
              <div class="categoriaSeguridad">
-             <h4 class="sangriaIzquierda"> <a name="PercepcionSeguridad">Percepción de Seguridad</a></h4>
-              <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Percepción de Seguridad</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <h5>¿Qué entendemos por percepción de delincuencia?</h5>
 <p>La Encuesta Nacional de Seguridad Ciudadana (ENUSC) del 2011, elaborada por la Subsecretaría de Prevención del Delito del Ministerio del Interior y Seguridad Pública, en la pregunta n° 4, señala: “Usted diría que durante los últimos doce meses la delincuencia de su país, su comuna y su barrio respectivamente: 1) Aumentó, 2) Se Mantuvo, 3) Disminuyo, 4) No Sabe, o 5) No Responde". A partir del dato relativo a comunas, se estableció la percepción de delincuencia en la comuna.</p>
@@ -559,11 +573,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
             
-              <br/> 
-             <div class="container">
+              
+             <div class="container cat">
+              <a name="pladeco"> </a>
              <div class="categoriaUrbanismo">
-             <h4 class="sangriaIzquierda"> <a name="PLADECO">Plan de Desarrollo Comunal</a></h4>
-               <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Plan de Desarrollo Comunal</h4>
+               <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <h5>Qué es el Plan de Desarrollo Comunal?</h5>
 <p>El Plan de Desarrollo Comunal (PLADECO) es el instrumento que contempla las acciones que el municipio debe emprender para satisfacer las necesidades de la comunidad local y promover el avance social, económico y cultural. </p>
@@ -575,11 +590,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
             
-              <br/> 
-             <div class="container">
+              
+             <div class="container cat">
+               <a name="PRC"> </a>
              <div class="categoriaUrbanismo">
-             <h4 class="sangriaIzquierda"> <a name="PRC">Plan Regulador Comunal </a></h4>
-              <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda">Plan Regulador Comunal </h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <h5>¿Qué entendemos por Plan Regulador Comunal?</h5>
 <p>El Plan Regulador Comunal (PRC), es un instrumento esencialmente técnico, orientador y regulador del desarrollo urbano en el territorio respectivo, y representa un instrumento planificador destinado a establecer las proyecciones sobre el desarrollo urbanístico y de construcción para la comuna. Todas las comunas que estén sujetas a Planificación Urbana-Regional o Urbana-Intercomunal, las que tengan una población de 7.000 habitantes o más, los centros poblados afectados por una destrucción total o parcial, y las comuna que la Secretaría Regional Ministerial de Vivienda y Urbanismo disponga mediante resolución, deberán poseer dicho plan.</p>
@@ -589,11 +605,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
             
-             <br/> 
-             <div class="container">
+             
+             <div class="container cat">
+              <a name="Aseo"> </a>
              <div class="categoriaUrbanismo">
-             <h4 class="sangriaIzquierda"> <a name="Aseo">Gastos en Aseo</a></h4>
-              <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Gastos en Aseo</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <h5>¿Qué entendemos por gasto en aseo?</h5>
 <p>La Ley Orgánica de Municipalidades, atribuye como una función exclusiva de cada municipio del país el aseo y ornato en el ámbito de su territorio. Para este estudio, consideramos el gasto promedio que, entre los años 2008 y 2011, la municipalidad hizo por el aseo, la recolección de basura y la mantención de vertederos.</p>
@@ -605,11 +622,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 <p>Se calculó un ranking donde el número 1 indica mayor cantidad de recursos destinados al aseo comunal. Del mismo modo, se calculó el promedio nacional. </p>
             </div>
             
-          <br/> 
-             <div class="container">
+          
+             <div class="container cat">
+              <a name="Solicitudes"> </a>
              <div class="categoriaTransparencia">
-             <h4 class="sangriaIzquierda"> <a name="Solicitudes">Solicitudes de Acceso a la Información pública</a></h4>
-              <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Solicitudes de Acceso a la Información pública</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <h5>¿Qué medimos a través de las ‘Solicitudes de Acceso a Información Pública?</h5>
 <p>La transparencia pasiva es el deber de los órganos de la administración del Estado de responder a la solicitud de información efectuada por cualquier persona, proveyendo la información requerida en forma exacta, oportuna y completa, según lo establece la Ley 20.285 de Acceso a Información Pública. Utilizando este derecho, la Fundación Ciudadano Inteligente envió solicitudes de información a los municipios de todo Chile, y logró analizar los mecanismos para el envío de solicitudes que posee cada municipalidad, el nivel de cumplimiento en el envío de respuestas y trabajar en otras áreas de investigación con la información recopilada. </p>
@@ -622,11 +640,12 @@ Los datos sobre el número de habitantes de cada comuna fueron extraídos de las
 
             </div>
             
-            <br/> 
-             <div class="container">
+            
+             <div class="container cat">
+              <a name="Amparos"> </a>
              <div class="categoriaTransparencia">
-             <h4 class="sangriaIzquierda"> <a name="Amparos">Amparos y Reclamos</a></h4>
-             <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Amparos y Reclamos</h4>
+             <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
             <h5> ¿Qué son los amparos y reclamos ante el Consejo para la Transparencia?</h5>
 <p>Puesto que el acceso a la información pública es un derecho que tienen todos los ciudadanos, existen mecanismos para que se respete ese derecho, como son los amparos y reclamos que se pueden presentar al Consejo para la Transparencia. Los amparos se realizan en el caso de que un requerimiento de información pública no reciba respuesta, sea denegada, contenga información incompleta o tarde más de lo que la ley permite en ser respondido; mientras que los reclamos surgen cuando se observa que el organismo no ha publicado información relativa a la transparencia activa, ésta no ha sido actualizada, es incompleta, no se puede acceder a ella o se observan errores. 
@@ -641,11 +660,12 @@ Una vez presentado el amparo o reclamo ante el Consejo, éste resuelve si es aco
             </div>
             
             
-               <br/> 
-             <div class="container">
+               
+             <div class="container cat">
+              <a name="RecursosOrganizaciones"> </a>
              <div class="categoriaParticipacion">
-             <h4 class="sangriaIzquierda"> <a name="RecursosOrganizaciones">Recursos para Organizaciones Sociales</a></h4>
-              <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Recursos para Organizaciones Sociales</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
             <h5>¿Qué entendemos por Recursos para Organizaciones Sociales?</h5>
 <p>Corresponde al gasto por concepto de transferencias corrientes al sector privado, cuya finalidad es financiar programas de funcionamiento de las Organizaciones Comunitarias de la comuna. </p>
@@ -660,11 +680,12 @@ Una vez presentado el amparo o reclamo ante el Consejo, éste resuelve si es aco
 
             </div>
             
-                     <br/> 
-             <div class="container">
+                     
+             <div class="container cat">
+              <a name="CCOSC"> </a>
              <div class="categoriaParticipacion">
-             <h4 class="sangriaIzquierda"> <a name="CCOSC">Consejo Comunal de Organizaciones de la Sociedad Civil </a></h4>
-             <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Consejo Comunal de Organizaciones de la Sociedad Civil</h4>
+             <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <h5>¿Qué entendemos por CCOSC?</h5>
 <p>El Consejo Comunal de Organizaciones de la Sociedad Civil (CCOSC) es un órgano asesor que tiene como objetivo asegurar la participación de la comunidad local en el progreso económico, social y cultural de la comuna. Con la promulgación de la Ley 20.500 sobre asociaciones y participación ciudadana en la gestión pública, las comunas debieron sustituir los antiguos CESCO (Consejo Económico y Social Comunal) por los CCOSC, siendo éstos elegidos y conformados por las organizaciones comunitarias de carácter territorial (juntas de vecinos), funcional (organizaciones culturales, deportivas, centros de madres, centros del adulto mayor, etc.), y por otras organizaciones de interés público de la comuna. </p>
@@ -677,11 +698,12 @@ Una vez presentado el amparo o reclamo ante el Consejo, éste resuelve si es aco
             
             
             
-            <br/> 
-             <div class="container">
+            
+             <div class="container cat">
+              <a name="BalancePresupuesto"> </a>
              <div class="categoriaPresupuesto">
-             <h4 class="sangriaIzquierda"> <a name="BalancePresupuesto">Balance Presupuestario Municipal</a></h4>
-               <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Balance Presupuestario Municipal</h4>
+               <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
             <h5>¿Qué entendemos por Balance Presupuestario Municipal?</h5>
 <p>El balance presupuestario es la diferencia entre los ingresos y los gastos presupuestados para un determinado período. Cuando el resultado es positivo, el ejercicio financiero tiene como resultado un superávit presupuestario, es decir, que hubo mayores ingresos de lo presupuestado. Cuando el resultado es negativo, en cambio, el ejercicio financiero tiene como resultado un déficit presupuestario, es decir, que se gastó más de lo presupuestado.</p>
@@ -696,11 +718,12 @@ Una vez presentado el amparo o reclamo ante el Consejo, éste resuelve si es aco
             
             
             
-                        <br/> 
-             <div class="container">
+                        
+             <div class="container cat">
+              <a name="FondoComun"> </a>
              <div class="categoriaPresupuesto">
-             <h4 class="sangriaIzquierda"> <a name="FondoComun">Ingresos Fondo Común Municipal</a></h4>
-              <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Ingresos Fondo Común Municipal</h4>
+              <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
              <h5>¿Qué entendemos por Ingresos provenientes del Fondo Común Municipal?</h5>
 <p>El Fondo Común Municipal (FCM) es un mecanismo de redistribución de recursos financieros entre las municipalidades del país, ideado para beneficiar a las municipalidades de menores recursos, en especial, aquellas que tienen escasas posibilidades de acceder a otros ingresos, para las cuales constituye la fuente esencial de ingresos. Es decir, el FCM es un mecanismo de redistribución de los recursos, en donde todas las Municipalidades del país aportan un porcentaje de sus ingresos permanentes, y luego son repartidos entre todos según criterios redistributivos que benefician a los municipios más pobres, mitigando los problemas de inequidad. Se reparte 25% en partes iguales entre las comunas; 10% en relación a la pobreza relativa de las comunas; 30% en proporción directa al número de predios exentos de impuesto territorial de cada comuna con respecto al número de predios exentos del país; y 35% en proporción directa a los menores ingresos propios permanentes del año anterior. </p>
@@ -714,11 +737,12 @@ Una vez presentado el amparo o reclamo ante el Consejo, éste resuelve si es aco
             </div>
             
             
-               <br/> 
-             <div class="container">
+               
+             <div class="container cat">
+              <a name="GastosEnPersonal"> </a>
              <div class="categoriaPresupuesto">
-             <h4 class="sangriaIzquierda"> <a name="GastoEnPersonal">Gasto en Personal Municipal</a></h4>
-               <a href="" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
+             <h4 class="sangriaIzquierda"> Gasto en Personal Municipal</h4>
+               <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
             <h5> ¿Qué entendemos por gasto en personal municipal?</h5>
 <p>Corresponden a aquellos recursos destinados a pagar las remuneraciones del personal municipal y los gastos derivados de la misma actividad, que incluye todas las asignaciones relativas a remuneraciones, viáticos, bonificaciones por desempeño, etc. </p>
@@ -731,10 +755,12 @@ Una vez presentado el amparo o reclamo ante el Consejo, éste resuelve si es aco
 
             </div>
             
-               <br/> 
-             <div class="container">
+                
+             <div class="container cat">
+              <a name="Inversion"> </a>
              <div class="categoriaPresupuesto">
-             <h4 class="sangriaIzquierda"> <a name="Inversion">Gastos de Inversión</a></h4>
+             <h4 class="sangriaIzquierda"> Gastos de Inversión</h4>
+             <a href="{{ STATIC_URL }}documentos/documentoMetodologico.pdf" class="btn btn-mini btn-primary" style="float: right; margin-top: -25px;"> Descargar nuestra metodología completa </a>
               </div> 
             <h5> ¿Qué entendemos por desigualdad?</h5>
 <p>Según la Subsecretaría de Desarrollo Regional, son los gastos destinados a invertir en proyectos que promuevan el adelanto y el desarrollo local. Estos permiten analizar el grado en que las actividades y la administración municipal aportan al desarrollo de la comunidad. </p>

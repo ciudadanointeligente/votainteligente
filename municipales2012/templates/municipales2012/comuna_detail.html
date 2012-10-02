@@ -4,7 +4,7 @@
 <meta property="og:description" content="Viste estos datos de {{comuna}}"/>
 
 
-            <div class="contenidoMunicipalidades">
+            <div class="paginaCompleta">
                 <div class="container-fluid">
                     <div class="row-fluid">
                         <div class="span8">
@@ -98,7 +98,7 @@
                                                             <p>{{indice.dato.nombre}}</p>
                                                             <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ full_path }}" data-text="{{indice.numero_1}} {{indice.texto_1}}" data-lang="es" data-hashtags="{{comuna|cut:" "}},municipales2012">Tweetea esto</a>
                                                             <div class="signoInterrogacion" id="dyna1De">
-                                                                <a href="{{indice.area.link_detalle}}"><img alt="" src="{{ STATIC_URL }}images/signoInterrogacion.png" title="&iquest;C&oacute;mo se calcul&oacute;?" /> </a>
+                                                                <a href="{{indice.dato.link_metodologia}}"><img alt="" src="{{ STATIC_URL }}images/signoInterrogacion.png" title="&iquest;C&oacute;mo se calcul&oacute;?" /> </a>
                                                             </div>
                                                         </header>
                                                         <section>
@@ -109,7 +109,7 @@
                                                                 <br /> <br />{{indice.texto_1}}  <span class="{{indice.area.segunda_clase}}">{{indice.numero_2}}</span> {{indice.texto_2}}
                                                             </div>
                                                         </section>
-                                                        <section class="infoNacional">{{indice.texto_pie_pagina_1}}<span class="{{indice.area.segunda_clase}}"> {{indice.numero_pie_pagina_1}}</span> {{indice.texto_pie_pagina_2}}</section>
+                                                        <section class="infoNacional">{{indice.texto_pie_pagina_1}}<span class="{{indice.area.segunda_clase}}"> {{indice.numero_pie_pagina_1}}</span> {{indice.texto_pie_pagina_2}}</section> <span class="{{indice.area.segunda_clase}}">{{indice.numero_pie_pagina_2}}</span> {{indice.texto_pie_pagina_3}}
                                                     </div>
                                                 </article>
                                             </div>
