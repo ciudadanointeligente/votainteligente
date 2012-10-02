@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from models import Pregunta, Candidato
 # from django.forms import ModelForm, ModelMultipleChoiceField, CheckboxSelectMultiple
 from django import forms
@@ -21,6 +23,10 @@ class PreguntaForm(forms.ModelForm):
 
         self.fields['candidato'].widget = forms.CheckboxSelectMultiple()
         self.fields['candidato'].queryset = candidatos
+        self.fields['candidato'].help_text = 'Marca sólo a los candidatos que corresponde tu pregunta'
+        self.fields['remitente'].help_text = 'Identifícate como quieras'
+        self.fields['remitente'].initial = 'Comunero, Profesora, Dirigente Vecinal, etc.'
+        self.fields['texto_pregunta'].initial = 'Escribe una pregunta clara y respetuosa. Así aumentas la posibilidad de que respondan seriamente.'
 
 '''	
     # Overriding save allows us to process the value of 'toppings' field    
