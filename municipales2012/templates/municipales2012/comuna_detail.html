@@ -75,13 +75,7 @@
                                 </div>
                                 <!--<div class="navi"> 
                                     </div>    -->
-                                <script>
-                                    $(document).ready(function() {
-                                    // initialize scrollable
-                                    $(".scrollable").scrollable({circular: true }).autoscroll({ autoplay: true, interval: 7000 }).navigator(".navi");
-                                    });
-                                    
-                                </script>
+                                
                                 <div class="Carrusel">
                                     <!-- "previous page" action -->
                                     <a class="prev browse left"><img alt="" id="flechitaIzquierda" src="{{ STATIC_URL }}images/flechaIzquierda.png" /></a>
@@ -102,6 +96,7 @@
                                                     <div class="articulokathe wellKathe">
                                                         <header class="tituloCarrusel {{indice.area.clase_en_carrusel}}">
                                                             <p>{{indice.dato.nombre}}</p>
+                                                            <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ full_path }}" data-text="{{indice.numero_1}} {{indice.texto_1}}" data-lang="es" data-hashtags="{{comuna|cut:" "}},municipales2012">Tweetea esto</a>
                                                             <div class="signoInterrogacion" id="dyna1De">
                                                                 <a href="{{indice.area.link_detalle}}"><img alt="" src="{{ STATIC_URL }}images/signoInterrogacion.png" title="&iquest;C&oacute;mo se calcul&oacute;?" /> </a>
                                                             </div>
@@ -114,7 +109,7 @@
                                                                 <br /> <br />{{indice.texto_1}}  <span class="{{indice.area.segunda_clase}}">{{indice.numero_2}}</span> {{indice.texto_2}}
                                                             </div>
                                                         </section>
-                                                        <section class="infoNacional">{{indice.texto_pie_pagina_1}}<span class="{{indice.area.segunda_clase}}">{{indice.numero_pie_pagina_1}}</span> {{indice.texto_pie_pagina_2}}</section>
+                                                        <section class="infoNacional">{{indice.texto_pie_pagina_1}}<span class="{{indice.area.segunda_clase}}"> {{indice.numero_pie_pagina_1}}</span> {{indice.texto_pie_pagina_2}}</section>
                                                     </div>
                                                 </article>
                                             </div>
@@ -135,5 +130,12 @@
                 </div>
             </div>
 </div>
+<script>
+    $(document).ready(function() {
+    // initialize scrollable
+    $(".scrollable").scrollable({circular: true }).autoscroll({ autoplay: true, interval: 7000 }).navigator(".navi");
+    });
+    
+</script>
 {% endblock content %}
 

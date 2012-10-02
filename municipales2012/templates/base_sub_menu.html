@@ -119,7 +119,6 @@
                        </tr>
                        
 
-}(document, 'script', 'facebook-jssdk'));</script>
 
                       
                     <tr class="dentroFooter">
@@ -152,11 +151,11 @@ $(function() {
   {% endfor %}
 
   ];
-  $( "#comunas-search" ).autocomplete({
+  $( ".comunas-search" ).autocomplete({
     source: availableTags,
     autoFocus: true
   });
-  $( "#comunas-search" ).autocomplete({
+  $( ".comunas-search" ).autocomplete({
      select: function(event, ui) { 
       $( "#comunas-search" ).val( ui.item.label );
       window.location = '/'+ui.item.value; 
@@ -164,7 +163,7 @@ $(function() {
      }
   });
 });
-</script>  
+</script> 
 {% block extra_js %}
 {% endblock extra_js %}
 
