@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-#
 # Create your views here.
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView, CreateView, DetailView
@@ -6,6 +6,7 @@ from django.views.generic.edit import FormView
 from models import Comuna, Indice, Pregunta, Candidato, Respuesta
 from django.shortcuts import get_object_or_404
 from forms import PreguntaForm
+from django.core.urlresolvers import reverse
 
 class HomeTemplateView(TemplateView):
 	def get_context_data(self, **kwargs):

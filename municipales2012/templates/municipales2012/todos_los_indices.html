@@ -8,12 +8,7 @@
  <div class="container paginaCompleta">
   
              
- <br/>
- <br/>
- <br/>
- <br/>
-  <br/>
- <br/>
+
  <h3> Más información de {{comuna}}</h3>
              <a href="{{ STATIC_URL }}documentos/BaseDatosMunicipalidades.xlsx" class="btn btn-mini btn-success" style="float: right; margin-top: -40px;"> Descargar Excel completo </a>
              
@@ -33,7 +28,8 @@
                        <div class="">
                         <header class="tituloCarrusel {{indice.area.clase_en_carrusel}}" > 
                           <p>{{indice.dato.nombre}}</p>
-                          <a href="https://twitter.com/share" class="twitter-share-button" data-lang="es" data-text="#{{comuna}} {{indice.numero_1}} {{indice.texto_1}}">Tweetea esto</a>
+
+                          <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ full_path }}" data-text="{{indice.numero_1}} {{indice.texto_1}}" data-lang="es" data-hashtags="{{comuna|cut:" "}},municipales2012">Tweetea esto</a>
                           </header>
                           <section>
                               <div class="categoria {{indice.dato.imagen}}">  

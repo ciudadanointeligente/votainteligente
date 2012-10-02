@@ -2,11 +2,10 @@
 {% block content %}
 
 
-     
    
            
          
-         <div class="container">  	
+         <div class="container">    
                 
                     
                 
@@ -47,42 +46,49 @@
       );
     </script>
 <!-- growl -->
-
-
        
          
-       										  <script>
-												$(document).ready(function() {
-													// Handler for .ready() called.
-													 $("#dyna img[title]").tooltip({
-											   		offset: [10, 2],
-											  		 effect: 'slide'
-														});
-												});
-											</script>
+                            <script>
+                        $(document).ready(function() {
+                          // Handler for .ready() called.
+                           $("#dyna img[title]").tooltip({
+                            offset: [10, 2],
+                             effect: 'slide'
+                            });
+                        });
+                      </script>
           
-    	
-    	<div class="container">
+      
+      <div class="container">
 
             <div class="row-fluid">
                 
                 
                     <ul class="thumbnails">
+                        
+                        
                         <li class="span3">
+
                         <div class="thumbnail">
-                        <img src="{{ STATIC_URL }}images/preguntale.png" alt="">
+
+                            <ul class="tt-wrapper">
+                                <li><a class="tt-preguntales" href="#"><img src="{{ STATIC_URL }}images/preguntale.png" alt=""><span>Ingresa en el buscador el nombre de tu comuna y ahí podrás hacer tus preguntas.</span></a></li>
+                            </ul>
                         </div>
                         
                         <h5> Pregúntale </h5>
                         <p>Desde tu comuna, escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
                         </li>
                         
+                        
+                        
+                        
                         <li class="span3">
                         <a href="{% url reporta %}" class="thumbnail">
                         <img src="{{ STATIC_URL }}images/fiscaliza.png" alt="">
                         </a> 
                         <h5> Fiscaliza</h5>
-                        <p>Denuncia todo aquello que quieras mejorar en tu comuna, cuéntanos de lugares públicos en mal estado, propaganda electoral inapropiada, entre otros.</p>
+                        <p>Denuncia todo aquello que quieras mejorar en tu comuna; cuéntanos de lugares públicos en mal estado y propaganda electoral inapropiada, entre otros.</p>
                         </li>
                         
                         <li class="span6">
@@ -102,33 +108,33 @@
                         <p>Desde tu comuna, escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
                         </li> -->
                        
-                   	</ul>
+                    </ul>
                     
                 
                 <!--<div class="copiaBtn"> Pregúntale <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </div>
                 <br/>
-				<p>Desde tu comuna, escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
+        <p>Desde tu comuna, escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
                 </div>
               
                 
                 <div class="span3"> 
                 <a  href="{% url reporta %}" class="btn btn-block btn-inverse"> Fiscaliza<img src="{{ STATIC_URL}}images/iconoReporta.png" style="float: right;"/> </a>
                 <br/>
-				<p>Denuncia todo aquello que quieras mejorar en tu comuna, cuéntanos de lugares públicos en mal estado, propaganda electoral inapropiada, entre otros.</p>
+        <p>Denuncia todo aquello que quieras mejorar en tu comuna, cuéntanos de lugares públicos en mal estado, propaganda electoral inapropiada, entre otros.</p>
                 </div>
                 
                    <div class="span3">
                 
                 <div class="copiaBtn"> Infografia 1 <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </div>
                 <br/>
-				<p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
+        <p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
                 </div>
                 
                 <div class="span3">
                 
                 <div class="copiaBtn"> Infografia 2 <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </div>
                 <br/>
-				<p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
+        <p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
                 </div> -->
                 
         </div>
@@ -141,12 +147,12 @@
          <div class="row">
                 <div class="span6">
                 <h5>Video 1</h5>
-				<img src="{{ STATIC_URL }}images/ejemplo-video.png" />
-				</div>
+        <img src="{{ STATIC_URL }}images/ejemplo-video.png" />
+        </div>
                 <div class="span6">
                 <h5>Video 2</h5>
-				<img src="{{ STATIC_URL }}images/ejemplo-video.png" /> 
-				</div>
+        <img src="{{ STATIC_URL }}images/ejemplo-video.png" /> 
+        </div>
         </div> 
         -->
         
@@ -157,7 +163,7 @@
         
         
         {% endblock content %}
-	
-	{% block extra_js %}
-	
+
+  {% block extra_js %}
+
   {% endblock extra_js %}
