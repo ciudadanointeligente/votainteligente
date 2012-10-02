@@ -338,8 +338,8 @@ class CsvReaderTestOneLine(TestCase):
         self.assertEquals(indice.texto_2, u"t2")
         self.assertEquals(indice.texto_pie_pagina_1, u"texto nacional 2")
         self.assertEquals(indice.numero_pie_pagina_1, u"426")
-        self.assertEquals(indice.texto_pie_pagina_2,u"y eso es muy malo")
-        self.assertEquals(indice.texto_pie_pagina_3,u"del ranking nacional")
+        self.assertEquals(indice.texto_pie_pagina_2, u"y eso es muy malo")
+        self.assertEquals(indice.texto_pie_pagina_3, u"del ranking nacional")
         self.assertEquals(indice.numero_pie_pagina_2 ,u"247")
         
     
