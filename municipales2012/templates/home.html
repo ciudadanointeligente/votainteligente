@@ -15,6 +15,8 @@
                 
                 <div class="buscadorPpal">
                 
+                <img class="candidatos" src="{{ STATIC_URL }}images/candidatos.png" alt="">
+                
                 <h3> <center>Conoce a tus candidatos y elige a tu media naranja en cada comuna</center></h3>
                 <center>
                     <form class="form-search"> <p> Escribe el nombre de la comuna que te interesa</p>
@@ -81,7 +83,9 @@
                         </li>
                         
                         <li class="span3">
-                        <a href="#" class="thumbnail">
+
+                        <a href="{% url reporta %}" class="thumbnail">
+
                         <img src="{{ STATIC_URL }}images/fiscaliza.png" alt="">
                         </a> 
                         <h5> Fiscaliza</h5>
@@ -89,7 +93,7 @@
                         </li>
                         
                         <li class="span6">
-                        <a href="#" class="thumbnail">
+                        <a href="http://www.elvaso.cl/2012/10/propaganda-electoral-respetan-la-ley/" target="_blank" class="thumbnail">
                         <img src="{{ STATIC_URL }}images/infografia1.jpg" alt="">
                         </a>
                         <h5> ¿Quieres saber dónde es ilegal poner propaganda electoral?</h5>
