@@ -300,19 +300,19 @@ class CsvReaderTestOneLine(TestCase):
         self.csvreader = CsvReader()
         self.line =["Algarrobo","Caracterización",u"Pobreza",u"encabezado","3,97",
             u"Es el porcentaje de habitantes de la comuna que viven bajo la línea de la pobreza",u"n2",u"t2",
-            u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",u" y eso es malo","","", "SI"]
+            u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",u" y eso es malo","247" ,"del ranking nacional", "SI"]
 
         self.line1 =["Algarrobo","Caracterización",u"Desigualdad",u"encabezado","3,97",
             		u"Es el porcentaje de habitantes de la comuna que viven bajo la línea de la pobreza",
             		u"n2",u"t2",u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",
-                    u" y eso es malo","","", "SI"]
+                    u" y eso es malo", "247", "del ranking nacional", "SI"]
 
         self.line2 =["Algarrobo","Caracterización",u"Pobreza",u"encabezado2","4",
             u"texto2",u"n2",u"t2",
-            u"texto nacional 2",u"426",u" y eso es muy malo","","", "NO"]
+            u"texto nacional 2",u"426",u" y eso es muy malo", "247" , "del ranking nacional", "NO"]
         self.line3 =["Algarrobo  ", "Caracterización ", "Pobreza ","encabezado2","4",
             "texto2","n2","t2",
-            "texto nacional 2","426"," y eso es muy malo","","", "SI"]
+            "texto nacional 2","426"," y eso es muy malo","247","del ranking nacional", "SI"]
 
 
     def test_crea_indice_en_carrusel_y_fuera_de_el(self):
@@ -339,6 +339,9 @@ class CsvReaderTestOneLine(TestCase):
         self.assertEquals(indice.texto_pie_pagina_1, u"texto nacional 2")
         self.assertEquals(indice.numero_pie_pagina_1, u"426")
         self.assertEquals(indice.texto_pie_pagina_2,u"y eso es muy malo")
+        self.assertEquals(indice.texto_pie_pagina_3,u"del ranking nacional")
+        self.assertEquals(indice.numero_pie_pagina_2 ,u"247")
+        
     
     def test_detect_indice(self):
     	indice = self.csvreader.detectIndice(self.line)
