@@ -31,14 +31,12 @@ class AreaTestCase(TestCase):
 	def test_create_area(self):
 		area, created = Area.objects.get_or_create(
 			nombre=u"Caracterización", 
-			clase_en_carrusel=u"fondoCeleste", 
-			link_detalle=u"./metodologia.html#Pobreza")
+			clase_en_carrusel=u"fondoCeleste")
 
 		
 		self.assertTrue(created)
 		self.assertEquals(area.nombre, u'Caracterización')
 		self.assertEquals(area.clase_en_carrusel,u"fondoCeleste")
-		self.assertEquals(area.link_detalle, u"./metodologia.html#Pobreza")
 
 	def test_unicode(self):
 		area = Area.objects.create(nombre=u"Caracterización", clase_en_carrusel=u"fondoCeleste")
@@ -47,11 +45,12 @@ class AreaTestCase(TestCase):
 
 class DatoTestCase(TestCase):
 	def test_create_dato(self):
-		dato, created = Dato.objects.get_or_create(nombre=u"Pobreza", imagen="chanchito.png")
+		dato, created = Dato.objects.get_or_create(nombre=u"Pobreza", imagen="chanchito.png", link_metodologia=u"http://metodologia.cl")
 
 		self.assertTrue(created)
 		self.assertEquals(dato.nombre, u"Pobreza")
 		self.assertEquals(dato.imagen, u"chanchito.png")
+		self.assertEquals(dato.link_metodologia, u"http://metodologia.cl")
 
 
 	def test_unicode(self):
@@ -231,6 +230,9 @@ class ComunaViewTestCase(TestCase):
 		self.assertEquals(response.context['comuna'], self.comuna1)
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'], self.comuna1.nombre)
+		self.assertTrue('full_path' in response.context)
+		self.assertTrue(response.context['full_path'].endswith(url) )
+
 
 
 	def test_get_indices_comunales(self):
@@ -274,6 +276,12 @@ class ComunaViewTestCase(TestCase):
 		self.assertTemplateUsed(response, "base_sub_menu.html")
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'], self.comuna1.nombre + u" índices detallados")
+		self.assertTrue('full_path' in response.context)
+
+		url_comuna = reverse('comuna-overview', kwargs={
+			'slug':self.comuna1.slug
+			})
+		self.assertTrue(response.context['full_path'].endswith(url_comuna) )
 
 
 	def atest_get_todos_los_indices_de_una_comuna_como_json(self):
@@ -292,19 +300,28 @@ class CsvReaderTestOneLine(TestCase):
         self.csvreader = CsvReader()
         self.line =["Algarrobo","Caracterización",u"Pobreza",u"encabezado","3,97",
             u"Es el porcentaje de habitantes de la comuna que viven bajo la línea de la pobreza",u"n2",u"t2",
-            u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",u" y eso es malo"]
+            u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",u" y eso es malo","","", "SI"]
 
         self.line1 =["Algarrobo","Caracterización",u"Desigualdad",u"encabezado","3,97",
             		u"Es el porcentaje de habitantes de la comuna que viven bajo la línea de la pobreza",
             		u"n2",u"t2",u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",
-                    u" y eso es malo"]
+                    u" y eso es malo","","", "SI"]
 
         self.line2 =["Algarrobo","Caracterización",u"Pobreza",u"encabezado2","4",
             u"texto2",u"n2",u"t2",
-            u"texto nacional 2",u"426",u" y eso es muy malo"]
+            u"texto nacional 2",u"426",u" y eso es muy malo","","", "NO"]
         self.line3 =["Algarrobo  ", "Caracterización ", "Pobreza ","encabezado2","4",
             "texto2","n2","t2",
-            "texto nacional 2","426"," y eso es muy malo"]
+            "texto nacional 2","426"," y eso es muy malo","","", "SI"]
+
+
+    def test_crea_indice_en_carrusel_y_fuera_de_el(self):
+    	indice = self.csvreader.detectIndice(self.line1)
+    	self.assertTrue(indice.en_carrusel)
+
+        indice = self.csvreader.detectIndice(self.line2)
+        self.assertFalse(indice.en_carrusel)
+
 
     def test_actualiza_indice(self):
         indice = self.csvreader.detectIndice(self.line)

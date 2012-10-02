@@ -29,6 +29,11 @@ class CsvReader(object):
 		comuna = self.detectComuna(line)
 		area = self.detectArea(line)
 		dato = self.detectDato(line)
+		en_carrusel_text = line[13].decode('utf-8').strip()
+		en_carrusel = False
+		if en_carrusel_text == u"SI":
+			en_carrusel = True
+
 
 		try:
 			indice = Indice.objects.get(
@@ -43,6 +48,7 @@ class CsvReader(object):
 			indice.texto_pie_pagina_1 = line[8].strip()
 			indice.numero_pie_pagina_1 = line[9].strip()
 			indice.texto_pie_pagina_2 = line[10].strip()
+			indice.en_carrusel = en_carrusel
 			indice.save()
 		except:
 			indice = Indice.objects.create(
@@ -57,7 +63,7 @@ class CsvReader(object):
 				texto_pie_pagina_1 = line[8].strip(),
 				numero_pie_pagina_1 = line[9].strip(),
 				texto_pie_pagina_2 = line[10].strip(),
-				en_carrusel = True
+				en_carrusel = en_carrusel
 				)
 
 
