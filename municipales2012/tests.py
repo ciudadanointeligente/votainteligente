@@ -292,19 +292,28 @@ class CsvReaderTestOneLine(TestCase):
         self.csvreader = CsvReader()
         self.line =["Algarrobo","Caracterización",u"Pobreza",u"encabezado","3,97",
             u"Es el porcentaje de habitantes de la comuna que viven bajo la línea de la pobreza",u"n2",u"t2",
-            u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",u" y eso es malo"]
+            u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",u" y eso es malo","","", "SI"]
 
         self.line1 =["Algarrobo","Caracterización",u"Desigualdad",u"encabezado","3,97",
             		u"Es el porcentaje de habitantes de la comuna que viven bajo la línea de la pobreza",
             		u"n2",u"t2",u"En el ranking nacional de pobreza, la comuna se ubica en el lugar",u"326",
-                    u" y eso es malo"]
+                    u" y eso es malo","","", "SI"]
 
         self.line2 =["Algarrobo","Caracterización",u"Pobreza",u"encabezado2","4",
             u"texto2",u"n2",u"t2",
-            u"texto nacional 2",u"426",u" y eso es muy malo"]
+            u"texto nacional 2",u"426",u" y eso es muy malo","","", "NO"]
         self.line3 =["Algarrobo  ", "Caracterización ", "Pobreza ","encabezado2","4",
             "texto2","n2","t2",
-            "texto nacional 2","426"," y eso es muy malo"]
+            "texto nacional 2","426"," y eso es muy malo","","", "SI"]
+
+
+    def test_crea_indice_en_carrusel_y_fuera_de_el(self):
+    	indice = self.csvreader.detectIndice(self.line1)
+    	self.assertTrue(indice.en_carrusel)
+
+        indice = self.csvreader.detectIndice(self.line2)
+        self.assertFalse(indice.en_carrusel)
+
 
     def test_actualiza_indice(self):
         indice = self.csvreader.detectIndice(self.line)
