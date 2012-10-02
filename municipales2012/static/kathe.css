@@ -18,6 +18,8 @@
 /* CSS Document */
 
 /*-----HOME  -----------*/
+.bodySubmenu{margin-top: 130px;}
+.bodyRegular{margin-top: 90px;}
 iframe {
 	border:none;
 	}
@@ -34,8 +36,9 @@ iframe {
     border-radius: 6px;
     margin-bottom: 30px;
     padding: 60px;
-	margin-top:128px;
+	margin-top:40px;
 	color:white;
+	position:relative;
 	}
 
 .menuPpal {
@@ -71,56 +74,6 @@ iframe {
 	color: white;
 	}
 
-/* POPUP VOTA */
-
-#purr-container {
-	position: absolute;
-	top: 120px;
-	left: 20px;
-	width: 280px;
-}
-
-.notice {
-	background-color: #BDE9F4;
-	border: 1px solid #B7DFE9;
-	padding: 10px;
-	box-shadow: 2px 2px 6px #4E91B6;
-	color: #388EA3;
-}
-
-.notice:before {
-	content: url(images/flecha_purr_vota.png);
-	position: absolute;
-	top: -29px;
-	left: 120px;
-}
-
-.notice-body {
-	font-size: 15px;
-	text-shadow: 1px 1px 0px white;
-	font-weight: bold;
-	margin: 5px 10px;
-}
-
-.notice-bottom {
-	text-align: center;
-	margin-top: 15px;
-}
-
-.notice .close {
-	position: absolute;
-	top: 4px;
-	right: 10px;
-	opacity: 0.7;
-	color: #388EA3;
-}	
-
-.notice .close:hover {
-	opacity: 1;
-	color: #388EA3;
-}	
-
-
 /*	
 .subTitulosHomeInfo {
 	background-image: url(./images/iconoInfoHome.png);
@@ -152,10 +105,7 @@ iframe {
 	margin-top:46px;
 	}
 
-.contenidoMunicipalidades {
-	margin-top:120px;
-	height:700px;
-	}
+
 .sidebarDerecha {
 	margin-top:23px;
 	}
@@ -838,6 +788,12 @@ div.navi a.active {
     width: 235px;
 	}
 
+
+
+/*  ------------METODOLOGÍA-------------   */
+
+.cat [class*="categoria"]{margin-top: 120px;}
+
 .categoria {
 	font-family: 'bebas_neueregular';
     font-size: 21px;
@@ -849,8 +805,10 @@ div.navi a.active {
 	}
 
 .listaMetodologia {
-	list-style:none;
-	margin:0px;
+	height: 225px;
+    list-style: none outside none;
+    margin-left: -1px;
+    width: 900px;
 	}	
 
 .itemListaMetodologia {
@@ -861,7 +819,7 @@ div.navi a.active {
     list-style: disc inside none;
     margin-right: 17px;
     text-decoration: none;
-    width: 296px;
+    width: 283px;
 	}
 
 
@@ -884,125 +842,125 @@ div.navi a.active {
     top: 522px;
 	}
 
-.categoriaPobreza {
+.categoriaPobreza h4 {
 	background-image: url(./images/pobreza.png);
 	background-repeat:no-repeat;
 	}	
 
-.categoriaIngreso {
+.categoriaIngreso h4{
 	background-image: url(./images/ingresos.png);
 	background-repeat:no-repeat;
 	}	
 
 
-.categoriaDesigualdad {
+.categoriaDesigualdad h4{
 	background-image: url(./images/desigualdad.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaFuncionarios {
+.categoriaFuncionarios h4{
 	background-image: url(./images/funcionarios.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaEducacion {
+.categoriaEducacion h4{
 	background-image: url(./images/educacion.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaParticipacion {
+.categoriaParticipacion h4{
 	background-image: url(./images/casa.png);
 	background-repeat:no-repeat;
 	}
 
 
-.categoriaServiciosSalud {
+.categoriaServiciosSalud h4{
 	background-image: url(./images/servicioSalud.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSalud {
+.categoriaSalud h4{
 	background-image: url(./images/salud.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaObesidad {
+.categoriaObesidad h4{
 	background-image: url(./images/obesidad.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSeguridad {
+.categoriaSeguridad h4{
 	background-image: url(images/seguridad.png);
 	background-repeat:no-repeat;
 	}
 
 
-.categoriaAreasPublicas {
+.categoriaAreasPublicas h4{
 	background-image: url(./images/areasPublicas.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaUrbanismo {
+.categoriaUrbanismo h4{
 	background-image: url(./images/areasPublicas.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaRanking {
+.categoriaRanking h4{
 	background-image: url(./images/ranking.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaTransparencia{
+.categoriaTransparencia h4{
 	background-image: url(./images/transparencia.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaOrganizaciones {
+.categoriaOrganizaciones h4{
 	background-image: url(./images/organizaciones.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaPresupuesto{
+.categoriaPresupuesto h4{
 	background-image: url(./images/presupuesto.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSemaforoRojo {
+.categoriaSemaforoRojo h4{
 	background-image: url(./images/semaforoRojo.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSemaforoAmarillo {
+.categoriaSemaforoAmarillo h4{
 	background-image: url(./images/semaforoAmarillo.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSemaforoVerde {
+.categoriaSemaforoVerde h4{
 	background-image: url(./images/semaforoVerde.png);
 	background-repeat:no-repeat;
 	}
 	
-.categoriaSemaforoColores {
+.categoriaSemaforoColores h4{
 	background-image: url(./images/semaforoColores.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaRankingConsejo {
+.categoriaRankingConsejo h4{
 	background-image: url(./images/rankingConsejo.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaProfesionalizacion{
+.categoriaProfesionalizacion h4{
 	background-image: url(./images/profesionalizacion.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaParticipacion{
+.categoriaParticipacion h4{
 	background-image: url(./images/participacion.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaCaracterizacion{
+.categoriaCaracterizacion h4{
 	background-image: url(./images/caracterizacion.png);
 	background-repeat:no-repeat;
 	}
@@ -1049,7 +1007,6 @@ div.navi a.active {
 
 .paginaCompleta {
 	clear:both;
-	margin-left:24%;
 	margin-top:20px;
 	}
 
@@ -1072,9 +1029,9 @@ div.navi a.active {
 
 .candidatos {
 	left: 47.5%;
+    opacity: 0.7;
     position: absolute;
-    top: 175px;
-	opacity: 0.7;
+    top: 25px;
 	}
 
 /*-------- METODOLOGIA---------*/
@@ -1100,7 +1057,7 @@ div.navi a.active {
 
 .fci-ampolleta-light {
 	position: absolute;
-	top: 65px;
+	top: 0px;
 	z-index: 10;
 	right: -135px;
 }
@@ -1147,7 +1104,7 @@ span.asterisco {
 	box-shadow: 2px 2px 6px #4E91B6;
 	color: #388EA3;
 	position: absolute;
-	top: 0px;
+	top: 120px;
 	left: 20px;
 	width: 280px;
 }
@@ -1184,37 +1141,73 @@ span.asterisco {
 	color: #388EA3;
 }	
 
-#preguntalesPopup {
-	cursor: pointer;
+/* TOOLTIP PREGUNTALES */
+
+.tt-wrapper li {
+	list-style: none;
 }
 
-.notice_preguntales {
-	background-color: #D0FF3C;
-	border: 1px solid #BDE246;
-	padding: 27px 10px;
-	box-shadow: 2px 2px 6px #E1E6D1;
-	color: #8EA030;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-	position: absolute;
-	top: 359px;
-	left: 137px;
-	width: 197px;
+ul .tt-wrapper {
+	margin: 0px;
 }
 
-.notice_preguntales:before {
-	content: url(images/flecha_purr_preguntales.png);
-	position: absolute;
-	top: 149px;
-	left: 89px;
+.tt-wrapper li a{
+    display: block;
+    outline: none;
+    position: relative;
 }
 
-.notice_preguntales .close {
+.tt-wrapper li .tt-preguntales{
+    background-position: 0px 0px;
+}
+
+.tt-wrapper li a span {
+	width: 200px;
+	height: auto;
+	line-height: 20px;
+	padding: 46px 10px;
+	left: 50%;
+	margin-left: -110px;
+	font-weight: 400;
+	font-size: 14px;
+	color: #60910C;
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 1);
+	text-align: center;
+	background: #CBFE00;
+	text-indent: 0px;
+	border-radius: 5px;
 	position: absolute;
-	top: 4px;
-	right: 10px;
-	opacity: 0.7;
-	color: #A5A5A5;
-}	
+	pointer-events: none;
+	bottom: 100px;
+	opacity: 0;
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+	border: 1px solid #BBEB00;
+	font-weight: bold;
+}
+
+.tt-wrapper li a span:before,
+.tt-wrapper li a span:after{
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    margin-left: -9px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
+.tt-wrapper li a span:before{
+    top: -10px;
+    margin-left: -10px;
+    border-bottom: 10px solid #CBFD00;
+}
+
+.tt-wrapper li a:hover span{
+    opacity: 1;
+    bottom: -4px;
+}
 
 .notice_preguntales .close:hover {
 	opacity: 1;
