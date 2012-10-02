@@ -71,56 +71,6 @@ iframe {
 	color: white;
 	}
 
-/* POPUP VOTA */
-
-#purr-container {
-	position: absolute;
-	top: 120px;
-	left: 20px;
-	width: 280px;
-}
-
-.notice {
-	background-color: #BDE9F4;
-	border: 1px solid #B7DFE9;
-	padding: 10px;
-	box-shadow: 2px 2px 6px #4E91B6;
-	color: #388EA3;
-}
-
-.notice:before {
-	content: url(images/flecha_purr_vota.png);
-	position: absolute;
-	top: -29px;
-	left: 120px;
-}
-
-.notice-body {
-	font-size: 15px;
-	text-shadow: 1px 1px 0px white;
-	font-weight: bold;
-	margin: 5px 10px;
-}
-
-.notice-bottom {
-	text-align: center;
-	margin-top: 15px;
-}
-
-.notice .close {
-	position: absolute;
-	top: 4px;
-	right: 10px;
-	opacity: 0.7;
-	color: #388EA3;
-}	
-
-.notice .close:hover {
-	opacity: 1;
-	color: #388EA3;
-}	
-
-
 /*	
 .subTitulosHomeInfo {
 	background-image: url(./images/iconoInfoHome.png);
@@ -1136,7 +1086,7 @@ span.asterisco {
 	box-shadow: 2px 2px 6px #4E91B6;
 	color: #388EA3;
 	position: absolute;
-	top: 0px;
+	top: 120px;
 	left: 20px;
 	width: 280px;
 }
@@ -1173,41 +1123,70 @@ span.asterisco {
 	color: #388EA3;
 }	
 
-#preguntalesPopup {
-	cursor: pointer;
+/* TOOLTIP PREGUNTALES */
+
+.tt-wrapper li {
+	list-style: none;
 }
 
-.notice_preguntales {
-	background-color: #D0FF3C;
-	border: 1px solid #BDE246;
-	padding: 27px 10px;
-	box-shadow: 2px 2px 6px #E1E6D1;
-	color: #8EA030;
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+ul .tt-wrapper {
+	margin: 0px;
+}
+
+.tt-wrapper li a{
+    display: block;
+    outline: none;
+    position: relative;
+}
+
+.tt-wrapper li .tt-preguntales{
+    background-position: 0px 0px;
+}
+
+.tt-wrapper li a span {
+	width: 200px;
+	height: auto;
+	line-height: 20px;
+	padding: 46px 10px;
+	left: 50%;
+	margin-left: -110px;
+	font-weight: 400;
+	font-size: 14px;
+	color: #60910C;
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, 1);
+	text-align: center;
+	background: #CBFE00;
+	text-indent: 0px;
+	border-radius: 5px;
 	position: absolute;
-	top: 359px;
-	left: 137px;
-	width: 197px;
+	pointer-events: none;
+	bottom: 100px;
+	opacity: 0;
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+	border: 1px solid #BBEB00;
+	font-weight: bold;
 }
 
-.notice_preguntales:before {
-	content: url(images/flecha_purr_preguntales.png);
-	position: absolute;
-	top: 149px;
-	left: 89px;
+.tt-wrapper li a span:before,
+.tt-wrapper li a span:after{
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    margin-left: -9px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
 }
 
-.notice_preguntales .close {
-	position: absolute;
-	top: 4px;
-	right: 10px;
-	opacity: 0.7;
-	color: #A5A5A5;
-}	
-
-.notice_preguntales .close:hover {
-	opacity: 1;
-	color: #C09853;
+.tt-wrapper li a span:before{
+    top: -10px;
+    margin-left: -10px;
+    border-bottom: 10px solid #CBFD00;
 }
 
-/* CIERRA POPUPs */
+.tt-wrapper li a:hover span{
+    opacity: 1;
+    bottom: -4px;
+}
