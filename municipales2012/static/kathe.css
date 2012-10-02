@@ -18,6 +18,8 @@
 /* CSS Document */
 
 /*-----HOME  -----------*/
+.bodySubmenu{margin-top: 130px;}
+.bodyRegular{margin-top: 90px;}
 iframe {
 	border:none;
 	}
@@ -34,7 +36,7 @@ iframe {
     border-radius: 6px;
     margin-bottom: 30px;
     padding: 60px;
-	margin-top:128px;
+	margin-top:40px;
 	color:white;
 	position:relative;
 	}
@@ -153,10 +155,7 @@ iframe {
 	margin-top:46px;
 	}
 
-.contenidoMunicipalidades {
-	margin-top:120px;
-	height:700px;
-	}
+
 .sidebarDerecha {
 	margin-top:23px;
 	}
@@ -839,6 +838,12 @@ div.navi a.active {
     width: 235px;
 	}
 
+
+
+/*  ------------METODOLOGÍA-------------   */
+
+.cat [class*="categoria"]{margin-top: 120px;}
+
 .categoria {
 	font-family: 'bebas_neueregular';
     font-size: 21px;
@@ -850,8 +855,10 @@ div.navi a.active {
 	}
 
 .listaMetodologia {
-	list-style:none;
-	margin:0px;
+	height: 225px;
+    list-style: none outside none;
+    margin-left: -1px;
+    width: 900px;
 	}	
 
 .itemListaMetodologia {
@@ -862,7 +869,7 @@ div.navi a.active {
     list-style: disc inside none;
     margin-right: 17px;
     text-decoration: none;
-    width: 296px;
+    width: 283px;
 	}
 
 
@@ -885,125 +892,125 @@ div.navi a.active {
     top: 522px;
 	}
 
-.categoriaPobreza {
+.categoriaPobreza h4 {
 	background-image: url(./images/pobreza.png);
 	background-repeat:no-repeat;
 	}	
 
-.categoriaIngreso {
+.categoriaIngreso h4{
 	background-image: url(./images/ingresos.png);
 	background-repeat:no-repeat;
 	}	
 
 
-.categoriaDesigualdad {
+.categoriaDesigualdad h4{
 	background-image: url(./images/desigualdad.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaFuncionarios {
+.categoriaFuncionarios h4{
 	background-image: url(./images/funcionarios.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaEducacion {
+.categoriaEducacion h4{
 	background-image: url(./images/educacion.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaParticipacion {
+.categoriaParticipacion h4{
 	background-image: url(./images/casa.png);
 	background-repeat:no-repeat;
 	}
 
 
-.categoriaServiciosSalud {
+.categoriaServiciosSalud h4{
 	background-image: url(./images/servicioSalud.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSalud {
+.categoriaSalud h4{
 	background-image: url(./images/salud.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaObesidad {
+.categoriaObesidad h4{
 	background-image: url(./images/obesidad.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSeguridad {
+.categoriaSeguridad h4{
 	background-image: url(images/seguridad.png);
 	background-repeat:no-repeat;
 	}
 
 
-.categoriaAreasPublicas {
+.categoriaAreasPublicas h4{
 	background-image: url(./images/areasPublicas.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaUrbanismo {
+.categoriaUrbanismo h4{
 	background-image: url(./images/areasPublicas.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaRanking {
+.categoriaRanking h4{
 	background-image: url(./images/ranking.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaTransparencia{
+.categoriaTransparencia h4{
 	background-image: url(./images/transparencia.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaOrganizaciones {
+.categoriaOrganizaciones h4{
 	background-image: url(./images/organizaciones.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaPresupuesto{
+.categoriaPresupuesto h4{
 	background-image: url(./images/presupuesto.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSemaforoRojo {
+.categoriaSemaforoRojo h4{
 	background-image: url(./images/semaforoRojo.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSemaforoAmarillo {
+.categoriaSemaforoAmarillo h4{
 	background-image: url(./images/semaforoAmarillo.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSemaforoVerde {
+.categoriaSemaforoVerde h4{
 	background-image: url(./images/semaforoVerde.png);
 	background-repeat:no-repeat;
 	}
 	
-.categoriaSemaforoColores {
+.categoriaSemaforoColores h4{
 	background-image: url(./images/semaforoColores.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaRankingConsejo {
+.categoriaRankingConsejo h4{
 	background-image: url(./images/rankingConsejo.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaProfesionalizacion{
+.categoriaProfesionalizacion h4{
 	background-image: url(./images/profesionalizacion.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaParticipacion{
+.categoriaParticipacion h4{
 	background-image: url(./images/participacion.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaCaracterizacion{
+.categoriaCaracterizacion h4{
 	background-image: url(./images/caracterizacion.png);
 	background-repeat:no-repeat;
 	}
@@ -1050,7 +1057,6 @@ div.navi a.active {
 
 .paginaCompleta {
 	clear:both;
-	margin-left:24%;
 	margin-top:20px;
 	}
 
@@ -1101,7 +1107,7 @@ div.navi a.active {
 
 .fci-ampolleta-light {
 	position: absolute;
-	top: 65px;
+	top: 0px;
 	z-index: 10;
 	right: -135px;
 }
