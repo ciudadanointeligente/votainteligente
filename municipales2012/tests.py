@@ -31,14 +31,12 @@ class AreaTestCase(TestCase):
 	def test_create_area(self):
 		area, created = Area.objects.get_or_create(
 			nombre=u"Caracterización", 
-			clase_en_carrusel=u"fondoCeleste", 
-			link_detalle=u"./metodologia.html#Pobreza")
+			clase_en_carrusel=u"fondoCeleste")
 
 		
 		self.assertTrue(created)
 		self.assertEquals(area.nombre, u'Caracterización')
 		self.assertEquals(area.clase_en_carrusel,u"fondoCeleste")
-		self.assertEquals(area.link_detalle, u"./metodologia.html#Pobreza")
 
 	def test_unicode(self):
 		area = Area.objects.create(nombre=u"Caracterización", clase_en_carrusel=u"fondoCeleste")
@@ -47,11 +45,12 @@ class AreaTestCase(TestCase):
 
 class DatoTestCase(TestCase):
 	def test_create_dato(self):
-		dato, created = Dato.objects.get_or_create(nombre=u"Pobreza", imagen="chanchito.png")
+		dato, created = Dato.objects.get_or_create(nombre=u"Pobreza", imagen="chanchito.png", link_metodologia=u"http://metodologia.cl")
 
 		self.assertTrue(created)
 		self.assertEquals(dato.nombre, u"Pobreza")
 		self.assertEquals(dato.imagen, u"chanchito.png")
+		self.assertEquals(dato.link_metodologia, u"http://metodologia.cl")
 
 
 	def test_unicode(self):
@@ -231,6 +230,9 @@ class ComunaViewTestCase(TestCase):
 		self.assertEquals(response.context['comuna'], self.comuna1)
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'], self.comuna1.nombre)
+		self.assertTrue('full_path' in response.context)
+		self.assertTrue(response.context['full_path'].endswith(url) )
+
 
 
 	def test_get_indices_comunales(self):
@@ -274,6 +276,12 @@ class ComunaViewTestCase(TestCase):
 		self.assertTemplateUsed(response, "base_sub_menu.html")
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'], self.comuna1.nombre + u" índices detallados")
+		self.assertTrue('full_path' in response.context)
+
+		url_comuna = reverse('comuna-overview', kwargs={
+			'slug':self.comuna1.slug
+			})
+		self.assertTrue(response.context['full_path'].endswith(url_comuna) )
 
 
 	def atest_get_todos_los_indices_de_una_comuna_como_json(self):
