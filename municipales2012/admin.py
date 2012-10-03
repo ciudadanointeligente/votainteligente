@@ -18,10 +18,12 @@ class ComunaAdmin(admin.ModelAdmin):
 admin.site.register(Comuna, ComunaAdmin)
 
 class PreguntaAdmin(admin.ModelAdmin):
+	model = Pregunta
+'''
 	inlines = [
 		CandidatoInline
 	]
-	model = Pregunta
+'''
 admin.site.register(Pregunta, PreguntaAdmin)
 
 class AreaAdmin(admin.ModelAdmin):
