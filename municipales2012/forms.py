@@ -22,6 +22,7 @@ class PreguntaForm(forms.ModelForm):
         print candidatos
 
         self.fields['candidato'].widget = forms.CheckboxSelectMultiple()
+        self.fields['candidato'].label = "Label"
         self.fields['candidato'].queryset = candidatos
         self.fields['candidato'].help_text = 'Marca sólo a los candidatos que corresponde tu pregunta'
         self.fields['remitente'].help_text = 'Identifícate como quieras'
