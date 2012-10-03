@@ -54,10 +54,18 @@ class Indice(models.Model):
 
 class Candidato(models.Model):
 	nombre = models.CharField(max_length=255)
-	mail = models.CharField(max_length=255)
+	#mail = models.CharField(max_length=255)
 	comuna = models.ForeignKey(Comuna)
 	partido = models.CharField(max_length=255)
 	web = models.CharField(max_length=255, blank=True, null=True)
+
+	def __unicode__(self):
+		return self.nombre
+
+class Contacto(models.Model):
+	tipo = models.CharField(max_length=255)
+	valor = models.CharField(max_length=255)
+	candidato = models.ForeignKey(Candidato)
 
 	def __unicode__(self):
 		return self.nombre
@@ -81,6 +89,7 @@ class Pregunta(models.Model):
 	candidato = models.ManyToManyField('Candidato', through='Respuesta')
 	remitente = models.CharField(max_length=255)
 	texto_pregunta = models.TextField()
+	aprobada = models.BooleanField()
 	
 	#objects = ManagerPregunta()
 	

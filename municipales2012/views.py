@@ -57,8 +57,8 @@ class ComunaPreguntales(CreateView):
 		comuna_slug = self.kwargs['slug']
 		comuna = get_object_or_404(Comuna, slug = comuna_slug)
 		context = super(ComunaPreguntales, self).get_context_data(**kwargs)
-		candidatos_comuna = Candidato.objects.filter(comuna=comuna)
-		preguntas = Pregunta.objects.filter(candidato__in=candidatos_comuna)
+		candidatos_comuna = Candidato.objects.filter(comuna = comuna)
+		preguntas = Pregunta.objects.filter(candidato__in = candidatos_comuna).filter(aprobada = True)
 		conversaciones = {}
 		for pregunta in preguntas:
 			texto_pregunta = pregunta.texto_pregunta
