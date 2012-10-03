@@ -1,0 +1,37 @@
+{% extends "base_sub_menu.html" %}
+{% block content %}
+ 
+ 
+ 
+             
+             
+ <div class="container paginaCompleta">
+  
+             
+ <br/>
+ <br/>
+ <br/>
+ <br/>
+  <br/>
+ <br/>
+ <h3> {{titulo}} </h3>
+ <form action="" method="post">{% csrf_token %}
+    {{form.as_p}}
+<input type="submit" value="He dicho" />
+</form>
+{% for remitente, mensaje in conversaciones.items %}
+	<b>{{remitente}} </b> preguntó:
+	<br>
+	{% for pregunta, respuestas in mensaje.items %}
+		{{pregunta}}
+		<br>
+		Las respuestas fueron:
+		<br>
+		{% for candidato, respuesta in respuestas.items%}
+			<b>{{candidato}}:</b> {{respuesta}}
+			<br>
+		{% endfor %}
+	{% endfor %}
+{% endfor %}
+</div>
+{% endblock %}
