@@ -30,7 +30,12 @@
 {% for candidato in candidatos %}
 					<label class="checkbox">
 					<input type="checkbox"> {{candidato.nombre}} </input> </label>
-					<span class="help-block"> <small> <em> <strong>*Tu pregunta se enviará al mail del comando de tu candidato* </strong></em> </small></span>
+					<span class="help-block"> <small> <em> <strong>
+						* Tu pregunta será enviada al mail del candidato
+						<br/>
+						** Tu pregunta será enviada al mail del partido del candidato
+						<br/>
+						*** No tenemos el mail del candidato </strong></em> </small></span>
 {% endfor %}
 				</div>
 				<div class="span8">
