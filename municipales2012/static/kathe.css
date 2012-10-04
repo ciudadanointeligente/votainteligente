@@ -201,6 +201,24 @@ iframe {
     top: 30px;
 }
 
+.signoInterrogacionTodosLosIndices {
+    z-index: 1;
+	top: 78px;
+	}
+
+.signoInterrogacionTodosLosIndices:hover {
+	cursor:pointer;
+
+	}
+
+.signoInterrogacionTodosLosIndices {
+  display: block;
+    float: right;
+    position: relative;
+    right: 4px;
+    top: 58px;
+}
+
 .infoCompletaMunicipalidades{
 	top: 300px;
 	height: 500px;

@@ -19,7 +19,6 @@ class PreguntaForm(forms.ModelForm):
     	super(PreguntaForm, self).__init__(*args, **kwargs)
     	#Falta filtrar los candidatos por comuna
     	candidatos = Candidato.objects.filter(comuna = comuna)
-        print candidatos
 
         self.fields['candidato'].widget = forms.CheckboxSelectMultiple()
         self.fields['candidato'].label = "Label"
