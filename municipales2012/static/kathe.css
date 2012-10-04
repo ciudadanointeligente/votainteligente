@@ -1274,8 +1274,28 @@ a.preguntaleHome:hover {
 }
 
 .gitHome {
-	width: 20px;
+    border-radius: 4px 4px 4px 4px;
+    height: 40px;
+    padding-top: 6px;
+    width: 940px;
+     -moz-transition: all 0.2s ease-in-out 0s;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+    display: block;
+    line-height: 20px;
 }
+
+.gitHome:hover {
+	text-decoration: none !important;
+	color: black;
+	 border-color: #0088cc;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+     -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+          box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+
+
 /*---------------- PREGUNTALE----------------------- */
 
 .tituloPreguntale {
@@ -1340,8 +1360,7 @@ position: relative;
 }
 
 .preguntasRecientes {
-	border-top: 4px solid #2F96B4;
-    padding-top: 17px;
+    padding-top: 12px;
 }
 
 .sidebarPreguntale {
@@ -1351,4 +1370,22 @@ position: relative;
 
 .btn-heDicho {
 	float: right;
+}
+
+.candidatosPreguntale {
+	float: right !important;
+	padding-left: 35px;
+}
+
+.btnDerecha {
+	float: right;
+	position: relative;
+    right: -11px;
+    top: -46px;
+}
+
+.barraSeparadora {
+	background-color: #3043B2;
+	height: 10px;
+	border-radius: 6px;
 }
