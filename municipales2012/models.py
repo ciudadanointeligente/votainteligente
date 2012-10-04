@@ -51,3 +51,61 @@ class Indice(models.Model):
 
 	def __unicode__(self):
 		return self.dato.nombre+' - '+self.comuna.nombre
+
+class Candidato(models.Model):
+	nombre = models.CharField(max_length=255)
+	#mail = models.CharField(max_length=255)
+	comuna = models.ForeignKey(Comuna)
+	partido = models.CharField(max_length=255)
+	web = models.CharField(max_length=255, blank=True, null=True)
+
+	def __unicode__(self):
+		return self.nombre
+
+class Contacto(models.Model):
+	tipo = models.CharField(max_length=255)
+	valor = models.CharField(max_length=255)
+	candidato = models.ForeignKey(Candidato)
+
+	def __unicode__(self):
+		return self.nombre
+
+class ManagerPregunta(models.Manager):
+	def create(self, **kwargs):
+		#Crear pregunta
+		destinatarios_pk = kwargs['candidato']
+		del kwargs['candidato']
+		pregunta = super(ManagerPregunta, self).create(**kwargs)
+		pregunta.save()
+		#Asociar respuestas
+		for destinatario_pk in destinatarios_pk:
+			destinatario = Candidato.objects.get(id = destinatario_pk)
+			Respuesta.objects.create(candidato=destinatario, pregunta=pregunta)
+		return pregunta
+	
+
+class Pregunta(models.Model):
+	"""docstring for Pregunta"""
+	candidato = models.ManyToManyField('Candidato', through='Respuesta')
+	remitente = models.CharField(max_length=255)
+	texto_pregunta = models.TextField()
+	aprobada = models.BooleanField()
+	
+	#objects = ManagerPregunta()
+	
+	def __unicode__(self):
+		return self.texto_pregunta
+		
+
+class Respuesta(models.Model):
+	"""docstring for Respuesta"""
+	pregunta = models.ForeignKey(Pregunta)
+	candidato = models.ForeignKey(Candidato)
+	texto_respuesta = models.TextField(default = 'Sin Respuesta')
+
+	def __unicode__(self):
+		return self.texto_respuesta
+
+
+		
+		
