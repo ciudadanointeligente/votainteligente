@@ -1352,7 +1352,7 @@ position: relative;
 }
 
 .preguntaCandidatos span.help-block {
-	color:#FF7272;
+	color:#828282;
 }
 
 .remitentePreguntale {
@@ -1388,4 +1388,27 @@ position: relative;
 	background-color: #3043B2;
 	height: 10px;
 	border-radius: 6px;
+}
+
+.preguntadoPor {
+	float: right;
+}
+
+.nombreCandidato {
+	border-top: 1px dashed grey;
+    font-family: georgia;
+    font-style: italic;
+    margin-top: 30px;
+    padding-top: 10px;
+}
+
+.nombreCandidato:first-child {
+	border-top: none;
+}
+
+.preguntaPreguntale {
+	font-family: georgia;
+	font-style: italic;
+	font-size: 10pt;
+	line-height: 15pt;
 }
