@@ -17,7 +17,6 @@
 					<input type="submit" class="btn-info" value="He dicho" />
 				</form> 
 </div>-->
-
 <div class="container paginaCompleta">
 	<h3> {{titulo}} </h3>
 	<h4 class="tituloPreguntale"> ¡Pregúntales!       Ellos Responden...</h4>
@@ -30,13 +29,13 @@
 {% for candidato in candidatos %}
 					<label class="checkbox">
 					<input type="checkbox"> {{candidato.nombre}} </input> </label>
+{% endfor %}
 					<span class="help-block"> <small> <em> <strong>
 						* Tu pregunta será enviada al mail del candidato
 						<br/>
 						** Tu pregunta será enviada al mail del partido del candidato
 						<br/>
 						*** No tenemos el mail del candidato </strong></em> </small></span>
-{% endfor %}
 				</div>
 				<div class="span8">
 					<label> <strong>Yo soy</strong></label>
@@ -57,16 +56,15 @@
 		</div>
 	</form>
 	<div class="container">
-		<!--<div class="barraSeparadora"></div> -->
 		<h4 class="tituloPreguntale"> Preguntas Recientes</h4>
 {% for remitente, mensaje in conversaciones.items %}
 		<div class="accordion" id="accordion2">
 			<div class="accordion-group">
+	{% for pregunta, respuestas in mensaje.items %}
 				<div class="accordion-heading tituloAcordion">
 					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
 						<div class="preguntadoPor"> <small><strong>Preguntado por:</strong> <em>{{remitente}}</em></small></div>
 						<br/> <br/>
-	{% for pregunta, respuestas in mensaje.items %}
 						<p class="preguntaPreguntale">{{pregunta}}</p>
 					</a>
 				</div>
@@ -76,13 +74,14 @@
 						<h4 class="nombreCandidato">{{candidato}}</h4>
 						<p>{{respuesta}}</p>
 						<br>
-		{% endfor %}
-	{% endfor %}
-{% endfor %}
 					</div>
 				</div>
+		{% endfor %}
+	{% endfor %}
 			</div>
 		</div>
+{% endfor %}
 	</div>
+
 </div>
 {% endblock %}
