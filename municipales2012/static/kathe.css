@@ -201,6 +201,24 @@ iframe {
     top: 30px;
 }
 
+.signoInterrogacionTodosLosIndices {
+    z-index: 1;
+	top: 78px;
+	}
+
+.signoInterrogacionTodosLosIndices:hover {
+	cursor:pointer;
+
+	}
+
+.signoInterrogacionTodosLosIndices {
+  display: block;
+    float: right;
+    position: relative;
+    right: 4px;
+    top: 58px;
+}
+
 .infoCompletaMunicipalidades{
 	top: 300px;
 	height: 500px;
@@ -1266,4 +1284,149 @@ a.preguntaleHome:hover {
   -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
      -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
           box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+
+}
+
+.linkGit {
+	margin-top: 7px;
+}
+
+.gitHome {
+    border-radius: 4px 4px 4px 4px;
+    height: 40px;
+    padding-top: 6px;
+    width: 940px;
+     -moz-transition: all 0.2s ease-in-out 0s;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+    display: block;
+    line-height: 20px;
+}
+
+.gitHome:hover {
+	text-decoration: none !important;
+	color: black;
+	 border-color: #0088cc;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+     -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+          box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+
+
+/*---------------- PREGUNTALE----------------------- */
+
+.tituloPreguntale {
+	background-color: #5BBEB6;
+	color: white;
+    padding: 10px;
+    background-image: linear-gradient(left bottom, rgb(61,163,194) 22%, rgb(47,149,180) 33%);
+background-image: -o-linear-gradient(left bottom, rgb(61,163,194) 22%, rgb(47,149,180) 33%);
+background-image: -moz-linear-gradient(left bottom, rgb(61,163,194) 22%, rgb(47,149,180) 33%);
+background-image: -webkit-linear-gradient(left bottom, rgb(61,163,194) 22%, rgb(47,149,180) 33%);
+background-image: -ms-linear-gradient(left bottom, rgb(61,163,194) 22%, rgb(47,149,180) 33%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	right top,
+	color-stop(0.22, rgb(61,163,194)),
+	color-stop(0.33, rgb(47,149,180))
+);
+position: relative;
+}
+
+#id_candidato_0{
+	background-color: red;
+}
+
+.formularioPreguntale {
+	background-color: red;
+
+}
+
+
+
+.tituloPreguntale:after { 
+	top: 100%; 
+	border: solid transparent; 
+	content: " "; 
+	height: 0; 
+	width: 0; 
+	position: absolute; 
+	pointer-events: none; 
+} 
+
+.tituloPreguntale:after { 
+	border-color: rgba(61, 163, 194, 0); 
+	border-top-color: #3DA3C2; 
+	border-width: 7px; 
+	left: 2.5%; 
+	margin-left: -7px; 
+}
+
+.preguntaCandidatos {
+	
+}
+
+.preguntaCandidatos span.help-block {
+	color:#828282;
+}
+
+.remitentePreguntale {
+	height: 30px !important;
+}
+
+.preguntasRecientes {
+    padding-top: 12px;
+}
+
+.sidebarPreguntale {
+	padding-left: 32px !important;
+    width: 278px;
+}
+
+.btn-heDicho {
+	float: right;
+}
+
+.candidatosPreguntale {
+	float: right !important;
+	padding-left: 35px;
+}
+
+.btnDerecha {
+	float: right;
+	position: relative;
+    right: -11px;
+    top: -46px;
+}
+
+.barraSeparadora {
+	background-color: #3043B2;
+	height: 10px;
+	border-radius: 6px;
+}
+
+.preguntadoPor {
+	float: right;
+}
+
+.nombreCandidato {
+	border-top: 1px dashed grey;
+    font-family: georgia;
+    font-style: italic;
+    margin-top: 30px;
+    padding-top: 10px;
+}
+
+.nombreCandidato:first-child {
+	border-top: none;
+}
+
+.preguntaPreguntale {
+	font-family: georgia;
+	font-style: italic;
+	font-size: 10pt;
+	line-height: 15pt;
 }

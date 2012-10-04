@@ -1,7 +1,11 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-#
 # Create your views here.
-from django.views.generic import TemplateView, DetailView
-from models import Comuna, Indice
+from django.http import HttpResponseRedirect
+from django.views.generic import TemplateView, CreateView, DetailView
+from django.views.generic.edit import FormView
+from models import Comuna, Indice, Pregunta, Candidato, Respuesta
+from django.shortcuts import get_object_or_404
+from forms import PreguntaForm
 from django.core.urlresolvers import reverse
 
 class HomeTemplateView(TemplateView):
@@ -22,7 +26,6 @@ class ComunaOverview(DetailView):
 		context['indices'] = indices
 		context['title'] = self.object.nombre
 		context['comunas'] = comunas
-		context['full_path'] = self.request.build_absolute_uri()
 		return context
 
 
@@ -39,12 +42,58 @@ class ComunaIndices(DetailView):
 		context['indices'] = indices
 		context['title'] = self.object.nombre + u" índices detallados"
 		context['comunas'] = comunas
-		url_comuna = reverse('comuna-overview', kwargs={
-			'slug':self.object.slug
-			})
-		context['full_path'] = self.request.build_absolute_uri(url_comuna)
+		return context
+
+class ComunaPreguntales(CreateView):
+	#model = Pregunta
+	form_class = PreguntaForm
+	#template_name = 'municipales2012/preguntales.html'
+	success_url = 'preguntales'
+
+	def get_template_names(self):
+		return ['municipales2012/preguntales.html']
+
+	def get_context_data(self, **kwargs):
+		comuna_slug = self.kwargs['slug']
+		comuna = get_object_or_404(Comuna, slug = comuna_slug)
+		context = super(ComunaPreguntales, self).get_context_data(**kwargs)
+		candidatos_comuna = Candidato.objects.filter(comuna = comuna)
+		preguntas = Pregunta.objects.filter(candidato__in = candidatos_comuna).filter(aprobada = True)
+		conversaciones = {}
+		for pregunta in preguntas:
+			texto_pregunta = pregunta.texto_pregunta
+			mensaje = {}
+			respuestas = {}
+			respuestas_pregunta = Respuesta.objects.filter(pregunta=pregunta)
+			for respuesta_pregunta in respuestas_pregunta:
+				texto_respuesta = respuesta_pregunta.texto_respuesta
+				nombre_candidato = respuesta_pregunta.candidato.nombre
+				respuestas[nombre_candidato] = texto_respuesta
+			nombre_emisor = pregunta.remitente
+			mensaje[texto_pregunta] = respuestas
+			conversaciones[nombre_emisor] = mensaje
+
+		context['conversaciones'] = conversaciones
+		context['candidatos'] = candidatos_comuna
+		context['titulo'] = "Preguntas a los Candidatos de " + comuna.nombre
 		
 		return context
+
+	def form_valid(self, form):
+		self.object = form.save(commit = False)
+		self.object.save()
+
+		candidatos = form.cleaned_data['candidato']
+		for candidato in candidatos:
+			Respuesta.objects.create(candidato = candidato, pregunta = self.object)
+		return HttpResponseRedirect(self.get_success_url())
+
+	def get_form_kwargs(self):
+		kwargs = super(ComunaPreguntales, self).get_form_kwargs()
+		comuna_slug = self.kwargs['slug']
+		comuna = get_object_or_404(Comuna, slug = comuna_slug)
+		kwargs['comuna'] = comuna
+		return kwargs
 
 class MetodologiaView(TemplateView):
 	template_name="municipales2012/metodologia.html"

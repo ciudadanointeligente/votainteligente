@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
-
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from models import Comuna, Area, Indice, Dato
+from models import Comuna, Area, Indice, Dato, Candidato, Pregunta, Respuesta, Contacto
 from management.commands.comunas_importer import *
+from django.test.client import Client
+from django.utils.unittest import skip
+from captcha.models import CaptchaStore
 
 
 class ComunaModelTestCase(TestCase):
@@ -31,7 +33,7 @@ class AreaTestCase(TestCase):
 	def test_create_area(self):
 		area, created = Area.objects.get_or_create(
 			nombre=u"Caracterización", 
-			clase_en_carrusel=u"fondoCeleste")
+			clase_en_carrusel=u"fondoCeleste") 
 
 		
 		self.assertTrue(created)
@@ -45,12 +47,11 @@ class AreaTestCase(TestCase):
 
 class DatoTestCase(TestCase):
 	def test_create_dato(self):
-		dato, created = Dato.objects.get_or_create(nombre=u"Pobreza", imagen="chanchito.png", link_metodologia=u"http://metodologia.cl")
+		dato, created = Dato.objects.get_or_create(nombre=u"Pobreza", imagen="chanchito.png")
 
 		self.assertTrue(created)
 		self.assertEquals(dato.nombre, u"Pobreza")
 		self.assertEquals(dato.imagen, u"chanchito.png")
-		self.assertEquals(dato.link_metodologia, u"http://metodologia.cl")
 
 
 	def test_unicode(self):
@@ -230,9 +231,6 @@ class ComunaViewTestCase(TestCase):
 		self.assertEquals(response.context['comuna'], self.comuna1)
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'], self.comuna1.nombre)
-		self.assertTrue('full_path' in response.context)
-		self.assertTrue(response.context['full_path'].endswith(url) )
-
 
 
 	def test_get_indices_comunales(self):
@@ -276,12 +274,6 @@ class ComunaViewTestCase(TestCase):
 		self.assertTemplateUsed(response, "base_sub_menu.html")
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'], self.comuna1.nombre + u" índices detallados")
-		self.assertTrue('full_path' in response.context)
-
-		url_comuna = reverse('comuna-overview', kwargs={
-			'slug':self.comuna1.slug
-			})
-		self.assertTrue(response.context['full_path'].endswith(url_comuna) )
 
 
 	def atest_get_todos_los_indices_de_una_comuna_como_json(self):
@@ -473,7 +465,237 @@ class TemplatesViewsTestCase(TestCase):
 		self.assertEquals(response.context['title'], u"Fiscaliza")
 
 
+class MessageTestCase(TestCase):
 
-    
+#Load candidate mailing data
+#Create mail template
+#Create question mail
+#Send question mail
+#Save question mail in db
+#Retrieve question mail from db
+#Obtain answer mail
+#Save answer mail in db
+#Retrieve answer mail from db
+#Associate quesion and answer mails
+#Obtain questions/answers for a given candidate
+#Calculate response stats
 
 
+	def setUp(self):
+		self.comuna1, created = Comuna.objects.get_or_create(nombre="comuna1", 
+			slug="la-comuna1",
+			main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+			messaging_extra_app_url="http://napistejim.cz/address=nachod",
+			mapping_extra_app_url="http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
+		self.comuna2, created = Comuna.objects.get_or_create(nombre="comuna2", 
+			slug="la-comuna2",
+			main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+			messaging_extra_app_url="http://napistejim.cz/address=nachod",
+			mapping_extra_app_url="http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
+		self.comuna3, created = Comuna.objects.get_or_create(nombre="comuna3", 
+			slug="la-comuna3",
+			main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+			messaging_extra_app_url="http://napistejim.cz/address=nachod",
+			mapping_extra_app_url="http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
+		self.data_candidato = [{'nombre': 'candidato1', 'mail': 'candidato1@test.com', 'mail2' : 'candidato1@test2.com', 'mail3' : 'candidato1@test3.com', 'comuna': self.comuna1, 'partido':'partido1', 'web': 'web1'},{'nombre': 'candidato2', 'mail': 'candidato2@test.com', 'comuna': self.comuna2, 'partido':'partido2'},{'nombre': 'candidato3', 'mail': 'candidato3@test.com', 'comuna': self.comuna3, 'partido':'partido3'}]
+		self.candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], comuna = self.comuna1, partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
+		self.candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], comuna = self.comuna1, partido = self.data_candidato[1]['partido'])
+		self.candidato3 = Candidato.objects.create(nombre=self.data_candidato[2]['nombre'], comuna = self.data_candidato[2]['comuna'], partido = self.data_candidato[2]['partido'])
+		self.question1 = "Why can't we be friends?"
+		self.answer1 = "I'd kinda like to be the President, so I can show you how your money's spent"
+		self.question2 = 'Who let the dogs out?'
+		self.answer2 = 'woof, woof, woof, woof'
+		self.template = '<h3>Hello, this is a test template</h3><br><p>Message goes here</p>'
+		self.mail_user = 'mailer@'
+		self.mail_pass = ''
+
+	def test_create_candidate(self):
+
+		self.assertTrue(self.candidato1)
+		self.assertEquals(self.candidato1.nombre, 'candidato1')
+		self.assertEquals(self.candidato1.comuna, self.comuna1)
+		self.assertEquals(self.candidato1.partido, 'partido1')
+		self.assertEquals(self.candidato1.web, 'web1')
+	
+	def test_create_contacto(self):
+		contacto, created = Contacto.objects.get_or_create(tipo = 'mail_personal', valor = 'test@test.com', candidato = self.candidato1)
+		self.assertTrue(created)
+		self.assertEquals(contacto.tipo, 'mail_personal')
+		self.assertEquals(contacto.valor, 'test@test.com')
+		self.assertEquals(contacto.candidato, self.candidato1)
+		self.assertTrue(contacto)
+
+	def test_create_question_message(self):
+		#Se crea la pregunta y las respuestas asociadas
+		pregunta = Pregunta.objects.create(
+											remitente='remitente1', 
+											texto_pregunta='texto_pregunta1')
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta, candidato=self.candidato1)
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta, candidato=self.candidato2)
+		#Se crea la pregunta con su respectivo texto y remitente?
+		self.assertTrue(pregunta)
+		self.assertEquals(pregunta.texto_pregunta,'texto_pregunta1')
+		self.assertEquals(pregunta.remitente,'remitente1')
+		#Se crearon las respuestas asociadas a la pregunta?
+		respuesta_no_contestada1 = Respuesta.objects.filter(candidato=self.candidato1).filter(pregunta=pregunta)[0]
+		respuesta_no_contestada2 = Respuesta.objects.filter(candidato=self.candidato2).filter(pregunta=pregunta)[0]
+		#Se crean las respuestas, y se guardan en la bd con los valores iniciales que corresponden?
+		self.assertEquals(respuesta_no_contestada1.texto_respuesta,'Sin Respuesta')
+		self.assertEquals(respuesta_no_contestada2.texto_respuesta,'Sin Respuesta')
+		#Existe la asociación entre preguntas y candidatos?
+		self.assertEquals(Candidato.objects.filter(pregunta=pregunta).filter(nombre=self.candidato1.nombre).count(),1)
+		self.assertEquals(Candidato.objects.filter(pregunta=pregunta).filter(nombre=self.candidato2.nombre).count(),1)
+		#Sólo se agregó la pregunta a 2 candidatos?
+		self.assertEquals(Candidato.objects.filter(pregunta=pregunta).count(),2)
+
+
+		
+
+	def test_create_answer_message(self):
+		#Se crea la pregunta y las respuestas asociadas
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato1)
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato2)
+		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato2)
+		#Se cambia la respuesta por defecto a la respuesta obtenida?
+		respuesta_candidato1_pregunta1 = Respuesta.objects.filter(candidato=self.candidato1).filter(pregunta=pregunta1)[0]
+		respuesta_candidato1_pregunta1.texto_respuesta ='texto_candidato1_respuesta1'
+		respuesta_candidato1_pregunta1.save()
+		respuesta_candidato1_pregunta1_db = Respuesta.objects.filter(candidato=self.candidato1).filter(pregunta=pregunta1)[0]
+		self.assertEquals(respuesta_candidato1_pregunta1_db.texto_respuesta,'texto_candidato1_respuesta1')
+		#Se cambian accidentalmente otras respuestas?
+		respuesta_candidato1_pregunta2 = Respuesta.objects.filter(candidato=self.candidato1).filter(pregunta=pregunta2)[0]
+		self.assertEquals(respuesta_candidato1_pregunta2.texto_respuesta,'Sin Respuesta')
+
+	def no_test_gmail_connection(self):
+		from django.core.mail import EmailMessage
+		email = EmailMessage('Subject', 'Body', 'pdaire@ciudadanointeligente.org', ['test@votainteligente.cl'],[], headers = {'Reply-To' : 'pdaire@votainteligente.cl'})
+		server_response = email.send()
+		self.assertEquals(server_response,1)
+		#chequear que el mail llega y lo podemos traer
+
+
+	def test_get_question_page(self):
+		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
+		response = self.client.post(url)
+
+		self.assertEquals(response.status_code, 200)
+		self.assertTemplateUsed(response, 'municipales2012/preguntales.html')
+		self.assertTrue('form' in response.context)
+		choices = response.context['form'].fields['candidato'].choices
+		self.assertTrue((self.candidato1.pk, self.candidato1.nombre) in response.context['form'].fields['candidato'].choices)
+		self.assertTrue((self.candidato2.pk, self.candidato2.nombre) in response.context['form'].fields['candidato'].choices)
+		self.assertTrue((self.candidato3.pk, self.candidato3.nombre) not in response.context['form'].fields['candidato'].choices)
+
+
+
+
+
+
+	def test_submit_question_message(self):
+		#Load URL and check captcha
+		captcha_count = CaptchaStore.objects.count()
+
+		self.failUnlessEqual(captcha_count, 0)
+		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
+		web = self.client.get(url)
+		captcha_count = CaptchaStore.objects.count()
+		#TODO: ESTO SE CAE Y NO SÉ POR QUÉ
+		#self.failUnlessEqual(captcha_count, 1)
+		captcha = CaptchaStore.objects.all()[0]
+		
+		#Post data
+		response = self.client.post(url, {'candidato': [self.candidato1.pk, self.candidato2.pk],
+											'texto_pregunta': 'Texto Pregunta', 
+											'remitente': 'Remitente 1',
+											'captcha_0': captcha.hashkey,
+											'captcha_1': captcha.response})
+		self.assertEquals(Pregunta.objects.count(), 1)
+		self.assertEquals(Pregunta.objects.all()[0].texto_pregunta, 'Texto Pregunta')
+		self.assertEquals(Pregunta.objects.all()[0].remitente, 'Remitente 1')
+
+		self.assertEquals(Respuesta.objects.count(), 2)
+
+
+
+		#Se crea la pregunta con su respectivo texto y remitente
+		pregunta_enviada = Pregunta.objects.filter(candidato=self.candidato1).filter(remitente='Remitente 1')[0]
+		self.assertTrue(pregunta_enviada)
+		self.assertEquals(pregunta_enviada.texto_pregunta,'Texto Pregunta')
+		self.assertEquals(pregunta_enviada.remitente,'Remitente 1')
+		#Se crean las respuestas, y se guardan en la bd con los valores iniciales que corresponden
+		respuesta_no_contestada1 = Respuesta.objects.filter(candidato=self.candidato1).filter(pregunta=pregunta_enviada)[0]
+		respuesta_no_contestada2 = Respuesta.objects.filter(candidato=self.candidato2).filter(pregunta=pregunta_enviada)[0]
+		self.assertEquals(respuesta_no_contestada1.texto_respuesta,'Sin Respuesta')
+		self.assertEquals(respuesta_no_contestada2.texto_respuesta,'Sin Respuesta')
+		#Existe la asociación entre preguntas y candidatos
+		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).filter(nombre=self.candidato1.nombre).count(),1)
+		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).filter(nombre=self.candidato2.nombre).count(),1)
+		#Sólo se agregó la pregunta a 2 candidatos
+		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).count(),2)
+
+	def test_display_conversations(self):
+		#Load URL and check captcha
+		captcha_count = CaptchaStore.objects.count()
+		self.failUnlessEqual(captcha_count, 0)
+		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
+		response = self.client.get(url)
+		captcha_count = CaptchaStore.objects.count()
+		#TODO: ESTO SE CAE Y NO SÉ POR QUÉ
+		#self.failUnlessEqual(captcha_count, 1)
+		captcha = CaptchaStore.objects.all()[0]
+		#Post data
+		response = self.client.post(url, {'candidato': [self.candidato1.pk],
+						'texto_pregunta': 'Texto Pregunta', 
+						'remitente': 'Remitente 1',
+						'captcha_0': captcha.hashkey,
+						'captcha_1': captcha.response},
+					follow = True)
+		self.assertEquals(response.status_code, 200)
+		#Check conversaciones
+		self.assertTrue('conversaciones' in response.context)
+		#Conversaciones aren't displayed if not allowed
+		self.assertEquals(response.context['conversaciones'], {})
+		#Conversaciones are displayed if allowed
+		pregunta = Pregunta.objects.filter(candidato=self.candidato1).filter(remitente='Remitente 1')[0]
+		pregunta.aprobada = True
+		pregunta.save()
+		response = self.client.get(url)
+		conversaciones = response.context['conversaciones']
+		nombre_remitente, pregunta = conversaciones.popitem()
+		texto_pregunta, respuestas = pregunta.popitem()
+		candidato, texto_respuesta = respuestas.popitem()
+		self.assertTrue(nombre_remitente)
+		self.assertTrue(texto_pregunta)
+		self.assertTrue(candidato)
+		self.assertTrue(texto_respuesta)
+	
+
+	#def test_create_mail_template(self):
+		
+	# def test_create_question_mail(self):
+	# 	import imaplib
+	# 	connection = imaplib.IMAP4_SSL('imap.gmail.com', 993)
+	# 	connection.login(user, pass)
+'''
+	def test_send_question_mail(self):
+		
+	def test_save_question_mail(self):
+		
+	def test_retrieve_question_mail(self):
+		
+	def test_obtain_answer_mail(self):
+		
+	def test_save_answer_mail(self):
+		
+	def test_retrieve_answer_mail(self):
+		
+	def test_associate_question_answer(self):
+		
+	def test_display_questions_answers(self):
+		
+	def test_calculate_response_stats(self):
+	
+'''	

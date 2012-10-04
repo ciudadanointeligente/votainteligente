@@ -31,7 +31,7 @@
                                                         
                                                         <li class="span6">
                                                             <div class="well thumbnail">
-                                                          <a href="{% url reporta %}" target="_blank" class="btn btn-block btn-info btnMunicipales">¡Pregúntale!</a>
+                                                          <a href="{% url comuna-preguntales comuna.slug %}" target="_blank" class="btn btn-block btn-info btnMunicipales">¡Pregúntale!</a>
                                                            <p class="textoBTN">A tus candidatos los que quieras</p>
                                                             </div>
                                                         </li>
@@ -97,7 +97,7 @@
                                                         <header class="tituloCarrusel {{indice.area.clase_en_carrusel}}">
                                                             <p>{{indice.dato.nombre}}</p>
                                                             <a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ full_path }}" data-text="{{indice.numero_1}} {{indice.texto_1}}" data-lang="es" data-hashtags="{{comuna|cut:" "}},municipales2012">Tweetea esto</a>
-                                                            <div class="signoInterrogacion" id="dyna1De">
+                                                            <div class="signoInterrogacion">
                                                                 <a href="{{indice.dato.link_metodologia}}"><img alt="" src="{{ STATIC_URL }}images/signoInterrogacion.png" title="&iquest;C&oacute;mo se calcul&oacute;?" /> </a>
                                                             </div>
                                                         </header>
