@@ -90,7 +90,7 @@
 
 
                                             {% for indice in indices %}
-                                            <div>
+                                            <div class="carruselItem">
 
                                                 <article>
                                                     <div class="articulokathe wellKathe">
@@ -102,14 +102,26 @@
                                                             </div>
                                                         </header>
                                                         <section>
-                                                            <div class="epigrafe {{indice.area.segunda_clase}}">{{indice.encabezado}}</div>
+                                                            <div class="epigrafe {{indice.area.segunda_clase}}">
+                                                                {{indice.encabezado}}
+                                                            </div>
                                                             <br />
                                                             <div class="categoria {{indice.dato.imagen}}">  
                                                                 <span class="numeroGrandeCategoria {{indice.area.segunda_clase}}"> {{indice.numero_1}}</span> 
                                                                 <br /> <br />{{indice.texto_1}}  <span class="{{indice.area.segunda_clase}}">{{indice.numero_2}}</span> {{indice.texto_2}}
                                                             </div>
                                                         </section>
-                                                        <section class="infoNacional">{{indice.texto_pie_pagina_1}}<span class="{{indice.area.segunda_clase}}"> {{indice.numero_pie_pagina_1}}</span> {{indice.texto_pie_pagina_2}}</section> <span class="{{indice.area.segunda_clase}}">{{indice.numero_pie_pagina_2}}</span> {{indice.texto_pie_pagina_3}}
+                                                        <section class="infoNacional">
+                                                            {{indice.texto_pie_pagina_1}}
+                                                            <span class="{{indice.area.segunda_clase}}"> 
+                                                                {{indice.numero_pie_pagina_1}}</span> 
+                                                                {{indice.texto_pie_pagina_2}} 
+                                                                <span class="{{indice.area.segunda_clase}}">
+                                                                    {{indice.numero_pie_pagina_2}}
+                                                                </span> 
+                                                                {{indice.texto_pie_pagina_3}}
+                                                            </section> 
+
                                                     </div>
                                                 </article>
                                             </div>
@@ -133,7 +145,7 @@
 <script>
     $(document).ready(function() {
     // initialize scrollable
-    $(".scrollable").scrollable({circular: true }).autoscroll({ autoplay: true, interval: 7000 }).navigator(".navi");
+    $(".scrollable").scrollable({circular: true }).navigator(".navi");
     });
     
 </script>

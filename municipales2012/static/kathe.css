@@ -465,7 +465,7 @@ element stays still.
   /* required settings */
   position:relative;
   overflow:hidden;
-  width: 340px;
+  width: 290px;
   min-height:200px;
   height:450px;
 }
@@ -602,8 +602,6 @@ div.navi a.active {
 }
 .articulokathe {
     display: block;
-    width: 240px;
-	margin-right:60px;
 }
 
 #flechitaIzquierda {
@@ -792,6 +790,11 @@ div.navi a.active {
   filter: progid:dximagetransform.microsoft.gradient(enabled=false);
 	}
 
+.carruselItem {
+	width: 290px;
+	position: relative;
+	overflow: hidden;
+}
 
 .infoNacional {
 	border-top: 1px solid #A6A6A5;
@@ -803,7 +806,7 @@ div.navi a.active {
     margin-right: 0;
     margin-top: 220px;
     padding-top: 6px;
-    width: 235px;
+    
 	}
 
 
@@ -817,9 +820,9 @@ div.navi a.active {
     font-size: 21px;
     line-height: 26px;
 	margin-left: 10px;
-	width:240px;
 	 position: absolute;
     top: 97px;
+    width: 245px;
 	}
 
 .listaMetodologia {
@@ -1016,7 +1019,7 @@ div.navi a.active {
     margin-bottom: 20px;
     min-height: 20px;
     padding: 18px;
-    width: 252px;
+    
 }
 
 
