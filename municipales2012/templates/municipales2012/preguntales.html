@@ -17,7 +17,6 @@
 					<input type="submit" class="btn-info" value="He dicho" />
 				</form> 
 </div>-->
-
 <div class="container paginaCompleta">
 	<h3> {{titulo}} </h3>
 	<h4 class="tituloPreguntale"> ¡Pregúntales!       Ellos Responden...</h4>
@@ -27,24 +26,24 @@
 				<div class="candidatosPreguntale span4">
 					<h5> Candidatos </h5>
 					<label>Marca sólo los candidatos a los que quieras preguntar</label>
-{% for candidato in candidatos %}
+{% for candidato, counter in candidatos %}
 					<label class="checkbox">
-					<input type="checkbox"> {{candidato.nombre}} </input> </label>
+					<input type="checkbox" name="candidato" value={{counter}}> {{candidato.nombre}} </input> </label>
+{% endfor %}
 					<span class="help-block"> <small> <em> <strong>
 						* Tu pregunta será enviada al mail del candidato
 						<br/>
 						** Tu pregunta será enviada al mail del partido del candidato
 						<br/>
 						*** No tenemos el mail del candidato </strong></em> </small></span>
-{% endfor %}
 				</div>
 				<div class="span8">
 					<label> <strong>Yo soy</strong></label>
-					<input class="input-xxlarge btn-block remitentePreguntale" type="text" placeholder="Comunero, Profesora, Dirigente, etc">
+					<input class="input-xxlarge btn-block remitentePreguntale" type="text" name="remitente" placeholder="Comunero, Profesora, Dirigente, etc">
 					<span class="help-block"> <small> <em> <strong>*Identifícate como quieras* </em></strong></small></span>
 					<br/>
 					<label> <strong>Escribe tu pregunta</strong></label>
-					<textarea rows="5" class="input-xxlarge btn-block"> </textarea>
+					<textarea rows="5" class="input-xxlarge btn-block" name="texto_pregunta"> </textarea>
 					<span class="help-block"> <small> <em> <strong>*Escribe una pregunta clara y respetuosa. Así aumentas la posibilidad de que respondan seriamente* </strong></em></small></span>
 					<br/>
 					<p>
@@ -57,16 +56,15 @@
 		</div>
 	</form>
 	<div class="container">
-		<!--<div class="barraSeparadora"></div> -->
 		<h4 class="tituloPreguntale"> Preguntas Recientes</h4>
 {% for remitente, mensaje in conversaciones.items %}
 		<div class="accordion" id="accordion2">
 			<div class="accordion-group">
+	{% for pregunta, respuestas in mensaje.items %}
 				<div class="accordion-heading tituloAcordion">
 					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
 						<div class="preguntadoPor"> <small><strong>Preguntado por:</strong> <em>{{remitente}}</em></small></div>
 						<br/> <br/>
-	{% for pregunta, respuestas in mensaje.items %}
 						<p class="preguntaPreguntale">{{pregunta}}</p>
 					</a>
 				</div>
@@ -76,13 +74,14 @@
 						<h4 class="nombreCandidato">{{candidato}}</h4>
 						<p>{{respuesta}}</p>
 						<br>
-		{% endfor %}
-	{% endfor %}
-{% endfor %}
 					</div>
 				</div>
+		{% endfor %}
+	{% endfor %}
 			</div>
 		</div>
+{% endfor %}
 	</div>
+
 </div>
 {% endblock %}
