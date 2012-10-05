@@ -3,10 +3,10 @@
 from models import Pregunta, Candidato
 # from django.forms import ModelForm, ModelMultipleChoiceField, CheckboxSelectMultiple
 from django import forms
-from captcha.fields import CaptchaField
+from captcha.fields import ReCaptchaField
 
 class PreguntaForm(forms.ModelForm):
-    captcha = CaptchaField()
+    captcha = ReCaptchaField(attrs={'theme' : 'clean','lang':'es'})
     class Meta:
         model = Pregunta
 
@@ -17,7 +17,6 @@ class PreguntaForm(forms.ModelForm):
     	comuna = kwargs['comuna']
     	del kwargs['comuna']
     	super(PreguntaForm, self).__init__(*args, **kwargs)
-    	#Falta filtrar los candidatos por comuna
     	candidatos = Candidato.objects.filter(comuna = comuna)
 
         self.fields['candidato'].widget = forms.CheckboxSelectMultiple()
