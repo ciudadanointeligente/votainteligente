@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_sub_menu.html" %}
 {% block content %}
 
 <meta property="og:description" content="Viste estos datos de {{comuna}}"/>
@@ -28,20 +28,19 @@
                         <div class="span4">  
                                                 <div class="sidebar-nav sidebarDerecha">  
                                                    <ul class="thumbnails">
-                                                        
                                                         <li class="span6">
                                                             <div class="well thumbnail">
-                                                          <a href="{% url comuna-preguntales comuna.slug %}" target="_blank" class="btn btn-block btn-info btnMunicipales">¡Pregúntale!</a>
-                                                           <p class="textoBTN">A tus candidatos los que quieras</p>
-                                                            </div>
-                                                        </li>
-                                                       
-                                                        <li class="span6">
-                                                            <div class="well thumbnail">
-                                                           <a href="{% url reporta %}" target="_blank" class="btn btn-block btn-info btnMunicipales">¡Fiscaliza!</a>
+                                                           <a href="{% url reporta %}" target="_blank" class="btn btn-block btn-primary btnMunicipales">¡Fiscaliza!</a>
                                                            <p class="textoBTN">Problemas en tu comuna</p>
                                                            
                                                         </div>
+                                                        </li>
+
+                                                        <li class="span6">
+                                                            <div class="well thumbnail">
+                                                          <a href="{% url comuna-preguntales comuna.slug %}" target="_blank" class="btn btn-block btn-success btnMunicipales">¡Pregúntale!</a>
+                                                           <p class="textoBTN">A tus candidatos los que quieras</p>
+                                                            </div>
                                                         </li>
  
                                                     </ul>
@@ -90,7 +89,7 @@
 
 
                                             {% for indice in indices %}
-                                            <div>
+                                            <div class="carruselItem">
 
                                                 <article>
                                                     <div class="articulokathe wellKathe">
@@ -102,14 +101,26 @@
                                                             </div>
                                                         </header>
                                                         <section>
-                                                            <div class="epigrafe {{indice.area.segunda_clase}}">{{indice.encabezado}}</div>
+                                                            <div class="epigrafe {{indice.area.segunda_clase}}">
+                                                                {{indice.encabezado}}
+                                                            </div>
                                                             <br />
                                                             <div class="categoria {{indice.dato.imagen}}">  
                                                                 <span class="numeroGrandeCategoria {{indice.area.segunda_clase}}"> {{indice.numero_1}}</span> 
                                                                 <br /> <br />{{indice.texto_1}}  <span class="{{indice.area.segunda_clase}}">{{indice.numero_2}}</span> {{indice.texto_2}}
                                                             </div>
                                                         </section>
-                                                        <section class="infoNacional">{{indice.texto_pie_pagina_1}}<span class="{{indice.area.segunda_clase}}"> {{indice.numero_pie_pagina_1}}</span> {{indice.texto_pie_pagina_2}}</section> <span class="{{indice.area.segunda_clase}}">{{indice.numero_pie_pagina_2}}</span> {{indice.texto_pie_pagina_3}}
+                                                        <section class="infoNacional">
+                                                            {{indice.texto_pie_pagina_1}}
+                                                            <span class="{{indice.area.segunda_clase}}"> 
+                                                                {{indice.numero_pie_pagina_1}}</span> 
+                                                                {{indice.texto_pie_pagina_2}} 
+                                                                <span class="{{indice.area.segunda_clase}}">
+                                                                    {{indice.numero_pie_pagina_2}}
+                                                                </span> 
+                                                                {{indice.texto_pie_pagina_3}}
+                                                            </section> 
+
                                                     </div>
                                                 </article>
                                             </div>
@@ -133,7 +144,7 @@
 <script>
     $(document).ready(function() {
     // initialize scrollable
-    $(".scrollable").scrollable({circular: true }).autoscroll({ autoplay: true, interval: 7000 }).navigator(".navi");
+    $(".scrollable").scrollable({circular: true }).navigator(".navi");
     });
     
 </script>

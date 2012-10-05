@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-
-  <head>
+<head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 <meta property="og:description" content="Todo lo que necesitas saber para votar"/>    
      
@@ -32,23 +29,35 @@
 </div>  
     
 
-
-
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
+ <div class="navbarSub navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner navSubMenu">
               <div class="container">
                     <div class="nav-collapse collapse">
-                  
+                        <ul class="nav pull-right">
+                        <li class="itemSubMenu"> <a href="{% url somos %}"> <small>Quienes Somos? </small></a></li>
+                        <li class="separador"> </li>
+                        <li class="itemSubMenu"> <a href="{% url metodologia %}"> <small>Metodología</small></a></li>
+                        </ul>       
+                    </div>
+               </div>
+             </div>
+ </div>
+
+        <div class="navbarMenu navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner menuSuperior">
+              <div class="container">
+                    <div class="nav-collapse collapse">
                         <ul class="menuPpal nav">
-                        <li class="pull-left"><a href="{% url home %}"><img alt="" src="{{ STATIC_URL }}images/logoVotaMunicipales.png" style="margin-left: -16px; margin-right: 155px;"></a> </li>
-                        <li class="dentroMenu pull-right"><a href="{% url somos %}">¿Quiénes Somos?</a></li>
-                        <li class="dentroMenu pull-right"><a href="{% url metodologia %}">Metodología</a></li>
-                        
-                        <li class="dentroMenu pull-right"><form class="navbar-search pull-right">
-                            <input type="text" class="search-query comunas-search" placeholder="Buscar una comuna">
-                            </form></li>
+                        <li class="pull-left"><a href="{% url home %}"><img alt="" src="{{ STATIC_URL }}images/logoVotaMunicipales.png" style="margin-left: -16px; margin-right: 155px;  margin-top: 14px;"></a> </li>
+                        <li class="preguntaleMenu pull-right"> <span style="color: rgb(237, 237, 237); opacity: 0.8;">& </span>¡Pregúntale! <img class="flechaMenuInversa" alt="" src="{{ STATIC_URL }}images/flechaMenuInversa.png"> </li>
+                        <li class="informateMenu pull-right"><img class="flechaMenu"alt="" src="{{ STATIC_URL }}images/flechaMenu.png"> Infórmate </li>
+                        <li class="buscadorMenu pull-right">
+                            <form class="navbar-search pull-right">
+                            <input type="text" class="search-query comunas-search" placeholder="Escribe el nombre de tu comuna">
+                            </form>
+                        </li>
                         </ul>
-                            
+                        
                     </div>
                </div>
              </div>
@@ -57,21 +66,7 @@
      
           
           
-    <div class="navbar subMenu navbar-fixed-top">
-            <div class="navbar-inner">
-              <div class="container">
-                    <div class="nav-collapse collapse">
-                        <ul class="nav pull-right">
-                         
-                       <!-- <li class=""> <a href="{% url home %}">Info Municipal  <img alt="" src="{{ STATIC_URL }}images/iconoInfoMunicipal.png" /></a></li>-->
-                        <li class=""> <a href="#">Pregúntale <img alt="" src="{{ STATIC_URL }}images/iconoPregunta.png" /></a></li>
-                        <li class=""> <a href="{% url reporta %}">Fiscaliza <img alt="" src="{{ STATIC_URL }}images/iconoReporta.png" /></a></li>
-                        </ul>
-                            
-                    </div>
-               </div>
-             </div>
-        </div>
+   
       
         
         
