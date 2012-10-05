@@ -41,6 +41,7 @@ iframe {
 	position:relative;
 	}
 
+
 .menuPpal {
 	width:940px;
 	}
@@ -101,10 +102,82 @@ iframe {
   font-weight:500;
 }
 
-.dentroMenu {
-	margin-top:46px;
-	}
 
+.informateMenu {
+	margin-top: 10px;
+	float: right !important;
+	color: #FFFF08;
+	font-weight: 500;
+	font-family: georgia;
+	font-style: italic;
+	font-size: 13pt;
+	margin-right: 5px;
+}
+
+.preguntaleMenu {
+	margin-top: 10px;
+	float: right !important;
+	color: #00D300;
+	font-weight: 500;
+	font-family: georgia;
+	font-style: italic;
+	font-size: 13pt;
+}
+
+span .casa{
+	color:#26B4E9;
+}
+
+.flechaMenu {
+	margin-right: 18px;
+    margin-top: -23px;
+}
+
+.flechaMenuInversa {
+	margin-left: 18px;
+    margin-top: -23px;
+}
+
+.menuSuperior {
+	 height: 103px;
+    margin-top: 33px;
+    padding-top: 0;
+
+}
+
+.buscadorMenu {
+	position: absolute;
+    right: 23px;
+    top: 56px;
+}
+
+.fiscalizaMenu {
+	position: absolute;
+    right: 295px;
+    top: 58px;
+}
+
+.separador {
+	border-top: 1px dashed grey;
+	margin-top: 17px;
+	width: 33px;
+}
+
+.navbarSub {
+	z-index: 1035 !important;
+
+}
+
+.navSubMenu {
+	min-height: 25px;
+}
+
+
+.itemSubMenu {
+	margin-top: -5px;
+	z-index: 3;
+	margin-right: 11px;
+}
 
 .sidebarDerecha {
 	margin-top:23px;
@@ -465,7 +538,7 @@ element stays still.
   /* required settings */
   position:relative;
   overflow:hidden;
-  width: 340px;
+  width: 290px;
   min-height:200px;
   height:450px;
 }
@@ -602,8 +675,6 @@ div.navi a.active {
 }
 .articulokathe {
     display: block;
-    width: 240px;
-	margin-right:60px;
 }
 
 #flechitaIzquierda {
@@ -792,6 +863,11 @@ div.navi a.active {
   filter: progid:dximagetransform.microsoft.gradient(enabled=false);
 	}
 
+.carruselItem {
+	width: 290px;
+	position: relative;
+	overflow: hidden;
+}
 
 .infoNacional {
 	border-top: 1px solid #A6A6A5;
@@ -803,7 +879,7 @@ div.navi a.active {
     margin-right: 0;
     margin-top: 220px;
     padding-top: 6px;
-    width: 235px;
+    
 	}
 
 
@@ -817,9 +893,9 @@ div.navi a.active {
     font-size: 21px;
     line-height: 26px;
 	margin-left: 10px;
-	width:240px;
 	 position: absolute;
     top: 97px;
+    width: 245px;
 	}
 
 .listaMetodologia {
@@ -1016,7 +1092,7 @@ div.navi a.active {
     margin-bottom: 20px;
     min-height: 20px;
     padding: 18px;
-    width: 252px;
+    
 }
 
 
@@ -1029,7 +1105,9 @@ div.navi a.active {
 	}
 
 .subMenu {
-	margin-top:87px;
+	clear: both;
+    
+    margin-top: 87px;
 	}
 
 .primerTabSubMenu {
