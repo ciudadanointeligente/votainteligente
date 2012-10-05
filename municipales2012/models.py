@@ -77,7 +77,11 @@ class Contacto(models.Model):
 	candidato = models.ForeignKey(Candidato)
 
 	def __unicode__(self):
+<<<<<<< HEAD
 		return self.valor
+=======
+		return self.candidato
+>>>>>>> reemplaza simple captcha por recaptcha
 
 class ManagerPregunta(models.Manager):
 	def create(self, **kwargs):
@@ -98,7 +102,7 @@ class Pregunta(models.Model):
 	candidato = models.ManyToManyField('Candidato', through='Respuesta')
 	remitente = models.CharField(max_length=255)
 	texto_pregunta = models.TextField()
-	aprobada = models.BooleanField()
+	aprobada = models.BooleanField(default=False)
 	
 	#objects = ManagerPregunta()
 	
