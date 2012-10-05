@@ -74,7 +74,7 @@ class ComunaPreguntales(CreateView):
 			conversaciones[nombre_emisor] = mensaje
 
 		context['conversaciones'] = conversaciones
-		context['candidatos'] = candidatos_comuna
+		context['candidatos'] = zip(candidatos_comuna, range(1, len(candidatos_comuna)+1))
 		context['titulo'] = "Preguntas a los Candidatos de " + comuna.nombre
 		
 		return context
