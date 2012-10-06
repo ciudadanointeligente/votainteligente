@@ -19,7 +19,3 @@ urlpatterns = patterns('',
 	url(r'^(?P<slug>[-\w]+)/preguntales/?$', ComunaPreguntales.as_view(), name="comuna-preguntales"),
 	
 	)
-urlpatterns += patterns('',
-    url(r'^captcha/', include('captcha.urls')),
-)
-

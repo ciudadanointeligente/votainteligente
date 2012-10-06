@@ -26,9 +26,9 @@
 				<div class="candidatosPreguntale span4">
 					<h5> Candidatos </h5>
 					<label>Marca sólo los candidatos a los que quieras preguntar</label>
-{% for candidato, counter in candidatos %}
+{% for candidato in candidatos %}
 					<label class="checkbox">
-					<input type="checkbox" name="candidato" value={{counter}}> {{candidato.nombre}} </input> </label>
+					<input type="checkbox" name="candidato" value={{candidato.pk}}> {{candidato.nombre}} </input> </label>
 {% endfor %}
 					<span class="help-block"> <small> <em> <strong>
 						* Tu pregunta será enviada al mail del candidato

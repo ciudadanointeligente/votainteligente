@@ -63,12 +63,25 @@ class Candidato(models.Model):
 		return self.nombre
 
 class Contacto(models.Model):
-	tipo = models.CharField(max_length=255)
+	PERSONAL = 1
+	PARTIDO = 2
+	#Se puede agregar Twitter, FB, etc.
+	OTRO = 9
+	TIPOS_DE_CONTACTO = (
+		(PERSONAL, 'personal'),
+		(PARTIDO, 'partido'),
+		(OTRO, 'otro'),
+	)
+	tipo = models.IntegerField(choices=TIPOS_DE_CONTACTO, default=PERSONAL)
 	valor = models.CharField(max_length=255)
 	candidato = models.ForeignKey(Candidato)
 
 	def __unicode__(self):
-		return self.nombre
+<<<<<<< HEAD
+		return self.valor
+=======
+		return self.candidato
+>>>>>>> reemplaza simple captcha por recaptcha
 
 class ManagerPregunta(models.Manager):
 	def create(self, **kwargs):
@@ -89,7 +102,7 @@ class Pregunta(models.Model):
 	candidato = models.ManyToManyField('Candidato', through='Respuesta')
 	remitente = models.CharField(max_length=255)
 	texto_pregunta = models.TextField()
-	aprobada = models.BooleanField()
+	aprobada = models.BooleanField(default=False)
 	
 	#objects = ManagerPregunta()
 	
