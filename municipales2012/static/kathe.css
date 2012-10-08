@@ -879,28 +879,28 @@ div.navi a.active {
     top: 522px;
 	}
 
-.categoriaPobreza h4 {
+.categoriaPobreza h4, .carruselItem .categoriaPobreza {
 	background-image: url(./images/pobreza.png);
 	background-repeat:no-repeat;
 	}	
 
-.categoriaIngreso h4{
+.categoriaIngreso h4, .carruselItem .categoriaIngreso{
 	background-image: url(./images/ingresos.png);
 	background-repeat:no-repeat;
 	}	
 
 
-.categoriaDesigualdad h4{
+.categoriaDesigualdad h4, .carruselItem .categoriaDesigualdad{
 	background-image: url(./images/desigualdad.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaFuncionarios h4{
+.categoriaFuncionarios h4, .carruselItem .categoriaFuncionarios{
 	background-image: url(./images/funcionarios.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaEducacion h4{
+.categoriaEducacion h4, .carruselItem .categoriaFuncionarios{
 	background-image: url(./images/educacion.png);
 	background-repeat:no-repeat;
 	}
