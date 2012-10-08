@@ -879,23 +879,23 @@ div.navi a.active {
     top: 522px;
 	}
 
-.categoriaPobreza h4, .carruselItem .categoriaPobreza {
+.categoriaPobreza h4, .carruselItem .categoriaPobreza, .infoCompletaMunicipalidades .categoriaPobreza{
 	background-image: url(./images/pobreza.png);
 	background-repeat:no-repeat;
 	}	
 
-.categoriaIngreso h4, .carruselItem .categoriaIngreso{
+.categoriaIngreso h4, .carruselItem .categoriaIngreso, .infoCompletaMunicipalidades .categoriaIngreso{
 	background-image: url(./images/ingresos.png);
 	background-repeat:no-repeat;
 	}	
 
 
-.categoriaDesigualdad h4, .carruselItem .categoriaDesigualdad{
+.categoriaDesigualdad h4, .carruselItem .categoriaDesigualdad, .infoCompletaMunicipalidades .categoriaDesigualdad{
 	background-image: url(./images/desigualdad.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaFuncionarios h4, .carruselItem .categoriaFuncionarios{
+.categoriaFuncionarios h4, .carruselItem .categoriaFuncionarios, .infoCompletaMunicipalidades .categoriaFuncionarios{
 	background-image: url(./images/funcionarios.png);
 	background-repeat:no-repeat;
 	}
@@ -905,7 +905,7 @@ div.navi a.active {
 	background-repeat:no-repeat;
 	}
 
-.categoriaParticipacion h4{
+.categoriaParticipacion h4, .carruselItem .categoriaParticipacion,{
 	background-image: url(./images/casa.png);
 	background-repeat:no-repeat;
 	}
