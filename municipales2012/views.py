@@ -7,6 +7,7 @@ from models import Comuna, Indice, Pregunta, Candidato, Respuesta
 from django.shortcuts import get_object_or_404
 from forms import PreguntaForm
 from django.core.urlresolvers import reverse
+from django.contrib import messages
 
 class HomeTemplateView(TemplateView):
 	def get_context_data(self, **kwargs):
@@ -86,6 +87,8 @@ class ComunaPreguntales(CreateView):
 		candidatos = form.cleaned_data['candidato']
 		for candidato in candidatos:
 			Respuesta.objects.create(candidato = candidato, pregunta = self.object)
+
+     		messages.success(self.request, 'Tu pregunta ha sido enviada') 
 		return HttpResponseRedirect(self.get_success_url())
 
 	def get_form_kwargs(self):
