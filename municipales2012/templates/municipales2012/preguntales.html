@@ -26,9 +26,7 @@
 				<div class="candidatosPreguntale span4">
 					<h5> Candidatos </h5>
 					<label>Marca sólo los candidatos a los que quieras preguntar</label>
-{% if form.candidato.errors %}
-					<label>{{form.candidato.errors}}</label>
-{% endif %}
+
 {% for candidato in candidatos %}
 					<label class="checkbox">
 					<input type="checkbox" name="candidato" value={{candidato.pk}}> {{candidato.nombre}} </input> </label>
@@ -39,28 +37,36 @@
 						** Tu pregunta será enviada al mail del partido del candidato
 						<br/>
 						*** No tenemos el mail del candidato </strong></em> </small></span>
+
+						{% if form.candidato.errors %}
+					<label class="alert-heading">{{form.candidato.errors}}</label>
+{% endif %}
 				</div>
 				<div class="span8">
 					<label> <strong>Yo soy</strong></label>
-{% if form.remitente.errors %}
-					<label>{{form.remitente.errors}}</label>
-{% endif %}
+
 					<input class="input-xxlarge btn-block remitentePreguntale" type="text" name="remitente" placeholder="Comunero, Profesora, Dirigente, etc">
 					<span class="help-block"> <small> <em> <strong>*Identifícate como quieras* </em></strong></small></span>
-					<br/>
-					<label> <strong>Escribe tu pregunta</strong></label>
-{% if form.texto_pregunta.errors %}
-					<label>{{form.texto_pregunta.errors}}</label>
+					{% if form.remitente.errors %}
+					<label>{{form.remitente.errors}}</label>
 {% endif %}
+					<br/>
+
+					<label> <strong>Escribe tu pregunta</strong></label>
+
 					<textarea rows="5" class="input-xxlarge btn-block" name="texto_pregunta"></textarea>
 					<span class="help-block"> <small> <em> <strong>*Escribe una pregunta clara y respetuosa. Así aumentas la posibilidad de que respondan seriamente* </strong></em></small></span>
+					{% if form.texto_pregunta.errors %}
+					<label>{{form.texto_pregunta.errors}}</label>
+{% endif %}
 					<br/>
 					<p>
-{% if form.captcha.errors %}
-					<label>{{form.captcha.errors}}</label>
-{% endif %}
+
 						{{form.captcha}}	
 					</p>
+					{% if form.captcha.errors %}
+					<label>{{form.captcha.errors}}</label>
+{% endif %}
 					<p> Acepto que mis preguntas y respuestas sean publicadas en este mismo medio. <br/>Confirmo que lo que aquí dice no atenta contra el candidato.</p>
 					<button type="submit" class="btn btn-info btnDerecha">He dicho</button>
 				</div>
@@ -74,7 +80,7 @@
 			<div class="accordion-group">
 	{% for pregunta, respuestas in mensaje.items %}
 				<div class="accordion-heading tituloAcordion">
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+					<a class="accordion-toggle" href="#collapseOne" data-parent="#accordion2" data-toggle="collapse"  >
 						<div class="preguntadoPor"> <small><strong>Preguntado por:</strong> <em>{{remitente}}</em></small></div>
 						<br/> <br/>
 						<p class="preguntaPreguntale">{{pregunta}}</p>
