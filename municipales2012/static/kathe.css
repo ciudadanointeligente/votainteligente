@@ -271,7 +271,7 @@ span .casa{
     float: right;
     position: relative;
     right: 4px;
-    top: 30px;
+    top: 65pxc;
 }
 
 .signoInterrogacionTodosLosIndices {
@@ -569,7 +569,7 @@ this element is the one that *you* will style the most.
     left: -3px;
     position: relative;
     right: 3px;
-    top: 417px;
+    top: 455px;
     width: 400px;
     z-index: 1;
 }
@@ -682,12 +682,12 @@ div.navi a.active {
 	padding: 17px 5px;
 	position: absolute;
 	z-index:1;
-	top:165px;
+	top:187px;
 	}
 
 #flechitaDerecha {
 	 background-color: #706F6F;
-    bottom: 134px;
+    bottom: 112px;
     padding: 17px 5px;
     position: absolute;
     right: 0;
@@ -717,7 +717,7 @@ div.navi a.active {
      -moz-border-radius: 4px;
           border-radius: 4px;
 	margin: -19px;
-	min-height: 72px;
+	min-height: 90px;
 	}	
 
 .fondoCeleste {
@@ -894,7 +894,7 @@ div.navi a.active {
     line-height: 26px;
 	margin-left: 10px;
 	 position: absolute;
-    top: 97px;
+    top: 115px;
     width: 245px;
 	}
 
@@ -1088,7 +1088,7 @@ div.navi a.active {
     border: 1px solid #E3E3E3;
     border-radius: 4px 4px 4px 4px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
-    height: 350px;
+    height: 380px;
     margin-bottom: 20px;
     min-height: 20px;
     padding: 18px;
