@@ -69,7 +69,8 @@
                                 <div class="navi"> 
 
                                     {% for indice in indices %}
-                                    <a href="{{forloop.counter}}" title="{{indice.area.nombre}} - {{indice.nombre}}"></a>
+                                    <a class="{{indice.area.clase_en_carrusel}}" href="{{forloop.counter}}" title="{{indice.area.nombre}} - {{indice.nombre}}"></a>
+
                                     {% endfor %}
                                 </div>
                                 <!--<div class="navi"> 
