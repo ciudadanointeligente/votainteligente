@@ -6,7 +6,6 @@ from models import Comuna, Area, Indice, Dato, Candidato, Pregunta, Respuesta, C
 from management.commands.comunas_importer import *
 from django.test.client import Client
 from django.utils.unittest import skip
-# from captcha.models import CaptchaStore
 
 
 class ComunaModelTestCase(TestCase):
