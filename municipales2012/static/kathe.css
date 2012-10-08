@@ -905,7 +905,7 @@ div.navi a.active {
 	background-repeat:no-repeat;
 	}
 
-.categoriaParticipacion h4{
+.categoriaParticipacion h4, .carruselItem .categoriaParticipacion,{
 	background-image: url(./images/casa.png);
 	background-repeat:no-repeat;
 	}
