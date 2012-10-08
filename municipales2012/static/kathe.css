@@ -900,104 +900,104 @@ div.navi a.active {
 	background-repeat:no-repeat;
 	}
 
-.categoriaEducacion h4, .carruselItem .categoriaFuncionarios{
+.categoriaEducacion h4, .carruselItem .categoriaEducacion, .infoCompletaMunicipalidades .categoriaEducacion{
 	background-image: url(./images/educacion.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaParticipacion h4, .carruselItem .categoriaParticipacion,{
+.categoriaParticipacion h4, .carruselItem .categoriaParticipacion, .infoCompletaMunicipalidades .categoriaParticipacion {
 	background-image: url(./images/casa.png);
 	background-repeat:no-repeat;
 	}
 
 
-.categoriaServiciosSalud h4{
+.categoriaServiciosSalud h4, .carruselItem .categoriaServiciosSalud, .infoCompletaMunicipalidades .categoriaServiciosSalud{
 	background-image: url(./images/servicioSalud.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSalud h4{
+.categoriaSalud h4, .carruselItem .categoriaSalud, .infoCompletaMunicipalidades .categoriaSalud{
 	background-image: url(./images/salud.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaObesidad h4{
+.categoriaObesidad h4, .carruselItem .categoriaObesidad, .infoCompletaMunicipalidades .categoriaObesidad{
 	background-image: url(./images/obesidad.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSeguridad h4{
+.categoriaSeguridad h4, .carruselItem .categoriaSeguridad, .infoCompletaMunicipalidades .categoriaSeguridad{
 	background-image: url(images/seguridad.png);
 	background-repeat:no-repeat;
 	}
 
 
-.categoriaAreasPublicas h4{
+.categoriaAreasPublicas h4, .carruselItem .categoriaAreasPublicas, .infoCompletaMunicipalidades .categoriaAreasPublicas{
 	background-image: url(./images/areasPublicas.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaUrbanismo h4{
+.categoriaUrbanismo h4, .carruselItem .categoriaUrbanismo, .infoCompletaMunicipalidades .categoriaUrbanismo{
 	background-image: url(./images/areasPublicas.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaRanking h4{
+.categoriaRanking h4, .carruselItem .categoriaRanking, .infoCompletaMunicipalidades .categoriaRanking{
 	background-image: url(./images/ranking.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaTransparencia h4{
+.categoriaTransparencia h4, .carruselItem .categoriaTransparencia, .infoCompletaMunicipalidades .categoriaTransparencia{
 	background-image: url(./images/transparencia.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaOrganizaciones h4{
+.categoriaOrganizaciones h4, .carruselItem .categoriaOrganizaciones, .infoCompletaMunicipalidades .categoriaOrganizaciones{
 	background-image: url(./images/organizaciones.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaPresupuesto h4{
+.categoriaPresupuesto h4, .carruselItem .categoriaPresupuesto, .infoCompletaMunicipalidades .categoriaPresupuesto{
 	background-image: url(./images/presupuesto.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSemaforoRojo h4{
+.categoriaSemaforoRojo h4, .carruselItem .categoriaSemaforoRojo, .infoCompletaMunicipalidades .categoriaSemaforoRojo{
 	background-image: url(./images/semaforoRojo.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSemaforoAmarillo h4{
+.categoriaSemaforoAmarillo h4, .carruselItem .categoriaSemaforoAmarillo, .infoCompletaMunicipalidades .categoriaSemaforoAmarillo{
 	background-image: url(./images/semaforoAmarillo.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaSemaforoVerde h4{
+.categoriaSemaforoVerde h4, .carruselItem .categoriaSemaforoVerde, .infoCompletaMunicipalidades .categoriaSemaforoVerde{
 	background-image: url(./images/semaforoVerde.png);
 	background-repeat:no-repeat;
 	}
 	
-.categoriaSemaforoColores h4{
+.categoriaSemaforoColores h4, .carruselItem .categoriaSemaforoColores, .infoCompletaMunicipalidades .categoriaSemaforoColores{
 	background-image: url(./images/semaforoColores.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaRankingConsejo h4{
+.categoriaRankingConsejo h4, .carruselItem .categoriaRankingConsejo, .infoCompletaMunicipalidades .categoriaRankingConsejo{
 	background-image: url(./images/rankingConsejo.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaProfesionalizacion h4{
+.categoriaProfesionalizacion h4, .carruselItem .categoriaProfesionalizacion, .infoCompletaMunicipalidades .categoriaProfesionalizacion{
 	background-image: url(./images/profesionalizacion.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaParticipacion h4{
+.categoriaParticipacion h4, .carruselItem .categoriaParticipacion, .infoCompletaMunicipalidades .categoriaParticipacion{
 	background-image: url(./images/participacion.png);
 	background-repeat:no-repeat;
 	}
 
-.categoriaCaracterizacion h4{
+.categoriaCaracterizacion h4, .carruselItem .categoriaCaracterizacion, .infoCompletaMunicipalidades .categoriaCaracterizacion{
 	background-image: url(./images/caracterizacion.png);
 	background-repeat:no-repeat;
 	}
