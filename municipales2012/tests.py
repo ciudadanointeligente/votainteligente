@@ -4,6 +4,8 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from models import Comuna, Area, Indice, Dato, Candidato, Pregunta, Respuesta, Contacto
 from management.commands.comunas_importer import *
+from management.commands.contactos_importer import *
+from management.commands.candidatos_importer import *
 from django.test.client import Client
 from django.utils.unittest import skip
 
@@ -685,3 +687,105 @@ class MessageTestCase(TestCase):
 	def test_calculate_response_stats(self):
 	
 '''	
+class ContactosLoaderTestCase(TestCase):
+	def setUp(self):
+		self.line1 = ["FIERA FEROZ","Algarrobo","fieripipoo@ciudadanointeligente.cl"]
+		self.line2 = ["FIERA FEROZ INTELIGENTE","Algarrobo","este no es el mail de la Fiera"]
+		self.line3 = ["FIERA FEROZ INTELIGENTE","Algarrobo",""]
+		self.lines = [self.line1, self.line2]
+
+		self.algarrobo = Comuna.objects.create(nombre=u"Algarrobo", slug=u"algarrobo")
+		self.candidateloader = ContactosLoader()
+
+	def test_create_detect_candidate(self):
+		
+		candidate = self.candidateloader.detectCandidate(self.line1)
+
+		self.assertEquals(candidate.nombre, u"FIERA FEROZ")
+		self.assertEquals(candidate.comuna, self.algarrobo)
+
+	def test_detect_contacto(self):
+		candidate = self.candidateloader.detectCandidate(self.line1)
+		contacto = self.candidateloader.detectContacto(self.line1)
+
+		self.assertEquals(contacto.valor, u"fieripipoo@ciudadanointeligente.cl")
+		self.assertEquals(contacto.candidato, candidate)
+
+
+	def test_does_not_create_contacto_if_it_isnt_a_mail(self):
+		contacto = self.candidateloader.detectContacto(self.line2)
+
+		self.assertTrue(contacto is None)
+		self.assertEquals(len(self.candidateloader.failed),1)
+		self.assertEquals(self.candidateloader.failed[0],{u"Algarrobo",u"FIERA FEROZ INTELIGENTE",u"este no es el mail de la Fiera"})
+
+	def test_does_not_create_two_candidates(self):
+		previous_candidate = Candidato.objects.create(nombre=u"FIERA FEROZ", comuna=self.algarrobo, partido=u"Partido Feroz")
+		contacto = self.candidateloader.detectContacto(self.line1)
+
+		self.assertEquals(Candidato.objects.all().count(), 1)
+
+	def test_empty_emails_do_not_belong_to_fail(self):
+		contacto = self.candidateloader.detectContacto(self.line3)
+		self.assertTrue(contacto is None)
+
+		self.assertEquals(len(self.candidateloader.empty),1)
+		self.assertEquals(self.candidateloader.empty[0],{u"Algarrobo",u"FIERA FEROZ INTELIGENTE"})
+
+
+	def test_it_does_not_create_two_candidates(self):
+
+		contacto = self.candidateloader.detectContacto(self.line2)
+		contacto = self.candidateloader.detectContacto(self.line2)
+
+		self.assertEquals(Candidato.objects.all().count(), 1)
+
+
+
+
+
+
+
+
+	##TODO: Testear la clase command y el metodo handle sin crear conflicto con la otra clase
+	##Command del comunas_importer
+
+
+class CandidatoLoader(TestCase):
+	def setUp(self):
+		self.line1 = ["Algarrobo","FIERA FEROZ","Partido Feroz"]
+		self.line2 = ["Algarrobo","FIERA FEROZ INTELIGENTE","Lavate los dientes"]
+		self.lines = [self.line1, self.line2]
+		self.algarrobo = Comuna.objects.create(nombre=u"Algarrobo", slug=u"algarrobo")
+		self.candidateloader = CandidatosLoader()
+
+	
+	def test_crea_candidato(self):
+		candidate = self.candidateloader.detectCandidate(self.line1)
+
+		self.assertEquals(candidate.nombre, u"FIERA FEROZ")
+		self.assertEquals(candidate.partido, u"Partido Feroz")
+		self.assertEquals(candidate.comuna, self.algarrobo)
+
+
+	def test_detecta_la_comuna(self):
+		comuna = self.candidateloader.detectComuna(self.line1)
+
+
+		self.assertEquals(comuna.nombre, u"Algarrobo")
+		self.assertEquals(comuna.slug, u"algarrobo")
+
+	def test_it_does_not_create_two_candidates(self):
+
+		contacto = self.candidateloader.detectCandidate(self.line2)
+		contacto = self.candidateloader.detectCandidate(self.line2)
+
+		self.assertEquals(Candidato.objects.all().count(), 1)
+
+
+
+
+
+
+
+
