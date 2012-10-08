@@ -19,17 +19,16 @@ class PreguntaForm(forms.ModelForm):
     	super(PreguntaForm, self).__init__(*args, **kwargs)
     	candidatos = Candidato.objects.filter(comuna = comuna)
 
-        self.fields['candidato'].widget = forms.CheckboxSelectMultiple()
-        self.fields['candidato'].label = "Label"
-        self.fields['candidato'].queryset = candidatos
-        self.fields['candidato'].help_text = 'Marca sólo los candidatos a los que quieras preguntar'
-        self.fields['candidato'].label = 'Candidatos'
-        self.fields['remitente'].widget.attrs['class'] = 'itemCandidato'
-        self.fields['remitente'].help_text = 'Identifícate como quieras'
-        self.fields['remitente'].initial = 'Comunero, Profesora, Dirigente, etc.'
-        self.fields['remitente'].label = 'Yo soy'
-        self.fields['texto_pregunta'].initial = 'Escribe una pregunta clara y respetuosa. Así aumentas la posibilidad de que respondan seriamente.'
-        self.fields['texto_pregunta'].label = 'Escribe tu pregunta'
+        #self.fields['candidato'].widget = forms.CheckboxSelectMultiple()
+        #self.fields['candidato'].queryset = candidatos
+        #self.fields['candidato'].help_text = 'Marca sólo los candidatos a los que quieras preguntar'
+        #self.fields['candidato'].label = 'Candidatos'
+        #self.fields['remitente'].widget.attrs['class'] = 'itemCandidato'
+        #self.fields['remitente'].help_text = 'Identifícate como quieras'
+        #self.fields['remitente'].initial = 'Comunero, Profesora, Dirigente, etc.'
+        #self.fields['remitente'].label = 'Yo soy'
+        #self.fields['texto_pregunta'].initial = 'Escribe una pregunta clara y respetuosa. Así aumentas la posibilidad de que respondan seriamente.'
+        #self.fields['texto_pregunta'].label = 'Escribe tu pregunta'
 
 '''	
     # Overriding save allows us to process the value of 'toppings' field    
