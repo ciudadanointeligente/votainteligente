@@ -77,11 +77,7 @@ class Contacto(models.Model):
 	candidato = models.ForeignKey(Candidato)
 
 	def __unicode__(self):
-<<<<<<< HEAD
 		return self.valor
-=======
-		return self.candidato
->>>>>>> reemplaza simple captcha por recaptcha
 
 class ManagerPregunta(models.Manager):
 	def create(self, **kwargs):
