@@ -6,7 +6,7 @@ from models import Comuna, Area, Indice, Dato, Candidato, Pregunta, Respuesta, C
 from management.commands.comunas_importer import *
 from django.test.client import Client
 from django.utils.unittest import skip
-from captcha.models import CaptchaStore
+# from captcha.models import CaptchaStore
 
 
 class ComunaModelTestCase(TestCase):
@@ -534,6 +534,7 @@ class MessageTestCase(TestCase):
 		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta, candidato=self.candidato2)
 		#Se crea la pregunta con su respectivo texto y remitente?
 		self.assertTrue(pregunta)
+		self.assertEquals(pregunta.aprobada,False)
 		self.assertEquals(pregunta.texto_pregunta,'texto_pregunta1')
 		self.assertEquals(pregunta.remitente,'remitente1')
 		#Se crearon las respuestas asociadas a la pregunta?
@@ -568,8 +569,8 @@ class MessageTestCase(TestCase):
 		#Se cambian accidentalmente otras respuestas?
 		respuesta_candidato1_pregunta2 = Respuesta.objects.filter(candidato=self.candidato1).filter(pregunta=pregunta2)[0]
 		self.assertEquals(respuesta_candidato1_pregunta2.texto_respuesta,'Sin Respuesta')
-
-	def no_test_gmail_connection(self):
+	@skip
+	def test_gmail_connection(self):
 		from django.core.mail import EmailMessage
 		email = EmailMessage('Subject', 'Body', 'pdaire@ciudadanointeligente.org', ['test@votainteligente.cl'],[], headers = {'Reply-To' : 'pdaire@votainteligente.cl'})
 		server_response = email.send()
@@ -593,25 +594,17 @@ class MessageTestCase(TestCase):
 
 
 
-
 	def test_submit_question_message(self):
-		#Load URL and check captcha
-		captcha_count = CaptchaStore.objects.count()
 
-		self.failUnlessEqual(captcha_count, 0)
-		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
-		web = self.client.get(url)
-		captcha_count = CaptchaStore.objects.count()
-		#TODO: ESTO SE CAE Y NO SÉ POR QUÉ
-		#self.failUnlessEqual(captcha_count, 1)
-		captcha = CaptchaStore.objects.all()[0]
+		
 		
 		#Post data
+		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
 		response = self.client.post(url, {'candidato': [self.candidato1.pk, self.candidato2.pk],
 											'texto_pregunta': 'Texto Pregunta', 
 											'remitente': 'Remitente 1',
-											'captcha_0': captcha.hashkey,
-											'captcha_1': captcha.response})
+											'recaptcha_response_field': 'PASSED'})
+		print response
 		self.assertEquals(Pregunta.objects.count(), 1)
 		self.assertEquals(Pregunta.objects.all()[0].texto_pregunta, 'Texto Pregunta')
 		self.assertEquals(Pregunta.objects.all()[0].remitente, 'Remitente 1')
@@ -635,23 +628,17 @@ class MessageTestCase(TestCase):
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).filter(nombre=self.candidato2.nombre).count(),1)
 		#Sólo se agregó la pregunta a 2 candidatos
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).count(),2)
+	
 
 	def test_display_conversations(self):
-		#Load URL and check captcha
-		captcha_count = CaptchaStore.objects.count()
-		self.failUnlessEqual(captcha_count, 0)
+		
 		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
 		response = self.client.get(url)
-		captcha_count = CaptchaStore.objects.count()
-		#TODO: ESTO SE CAE Y NO SÉ POR QUÉ
-		#self.failUnlessEqual(captcha_count, 1)
-		captcha = CaptchaStore.objects.all()[0]
-		#Post data
+		
 		response = self.client.post(url, {'candidato': [self.candidato1.pk],
 						'texto_pregunta': 'Texto Pregunta', 
 						'remitente': 'Remitente 1',
-						'captcha_0': captcha.hashkey,
-						'captcha_1': captcha.response},
+						'recaptcha_response_field': 'PASSED'},
 					follow = True)
 		self.assertEquals(response.status_code, 200)
 		#Check conversaciones

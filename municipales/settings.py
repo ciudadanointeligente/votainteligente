@@ -160,10 +160,9 @@ LOGGING = {
         },
     }
 }
-# Captcha settings (opcional):
-CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge' #operaciones matemáticas
-CAPTCHA_LETTER_ROTATION = (-10,10) #rotacion de los numeros
-CAPTCHA_NOISE_FUNCTIONS = () #sin ruido en la imagen
+#reCaptcha settings:
+RECAPTCHA_PUBLIC_KEY = '<your public key>'
+RECAPTCHA_PRIVATE_KEY = '<your private key>'
 # Email setting
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'sendgrid_username'
