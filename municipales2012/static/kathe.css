@@ -609,63 +609,6 @@ div.navi a.active {
 
 
 
-/* Celeste */
-.navi a:nth-child(n+1)  {
-	background-color:#61C0DC;
-	}
-.navi a:nth-child(n+2)  {
-	background-color:#61C0DC;
-	}
-
-/* Gris */	
-.navi a:nth-child(n+3) {
-	background-color:#6F7375;
-	}
-
-/*Burdeo */
-.navi a:nth-child(n+4) {
-	background-color:#CD627D;
-	}
-
-/* Rojo */
-.navi a:nth-child(n+5){
-	background-color:#E9605E;
-	}
-.navi a:nth-child(n+6){
-	background-color:#E9605E;
-	}
-.navi a:nth-child(n+7){
-	background-color:#E9605E;
-	}
-
-/* Azul */
-.navi a:nth-child(n+8) {
-	background-color:#2089C8;
-	}
-/* VErde */
-
-.navi a:nth-child(n+9) {
-	background-color:#6CB667;
-	}
-
-/* Naranjo */
-.navi a:nth-child(n+10) {
-	background-color:#F8B35C;
-	}
-
-/* Morado */ 
-.navi a:nth-child(n+11){
-	background-color:#A38FC1;
-	}
-
-.navi a:nth-child(n+12){
-	background-color:#A38FC1;
-	}
-
-/* Amarillo 
-.navi a:nth-child(n+12) {
-	background-color:#FFE578;
-	}*/
 
 
 
