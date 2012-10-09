@@ -19,7 +19,7 @@ class PreguntaForm(forms.ModelForm):
     	super(PreguntaForm, self).__init__(*args, **kwargs)
     	candidatos = Candidato.objects.filter (comuna = comuna)
 
-        #self.fields['candidato'].widget = forms.CheckboxSelectMultiple()
+        self.fields['candidato'].widget = forms.CheckboxSelectMultiple()
         self.fields['candidato'].queryset = candidatos
 	self.fields['candidato'].error_messages['required'] = 'Debes elegir al menos un candidato'
     	self.fields['remitente'].error_messages['required'] = 'Debes identificarte de alguna forma'
@@ -38,6 +38,12 @@ class PreguntaForm(forms.ModelForm):
         #self.fields['remitente'].label = 'Yo soy'
         #self.fields['texto_pregunta'].initial = 'Escribe una pregunta clara y respetuosa. Así aumentas la posibilidad de que respondan seriamente.'
         #self.fields['texto_pregunta'].label = 'Escribe tu pregunta'
+
+        self.fields['remitente'].widget.attrs['class'] = 'input-xxlarge btn-block remitentePreguntale'
+        self.fields['remitente'].widget.attrs['placeholder'] = 'Comunero, Profesora, Dirigente, etc'
+        self.fields['texto_pregunta'].widget.attrs['class'] = 'input-xxlarge btn-block'
+        self.fields['texto_pregunta'].widget.attrs['rows'] = '5'
+        self.fields['texto_pregunta'].widget.attrs['maxlength'] = '4095'
 
 '''	
     # Overriding save allows us to process the value of 'toppings' field    
