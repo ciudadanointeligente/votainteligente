@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from django.core.validators import MaxLengthValidator
 from django.db import models
 from mailer import send_mail
 # from django.core.mail import send_mail
@@ -112,7 +112,7 @@ class Pregunta(models.Model):
 	"""docstring for Pregunta"""
 	candidato = models.ManyToManyField('Candidato', through='Respuesta')
 	remitente = models.CharField(max_length=255)
-	texto_pregunta = models.TextField(max_length=4095)
+	texto_pregunta = models.TextField(validators=[MaxLengthValidator(4095)])
 	aprobada = models.BooleanField(default=False)
 	procesada = models.BooleanField(default=False)
 	
