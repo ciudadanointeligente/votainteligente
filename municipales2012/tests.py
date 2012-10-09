@@ -594,9 +594,9 @@ class MessageTestCase(TestCase):
 		self.assertTemplateUsed(response, 'municipales2012/preguntales.html')
 		self.assertTrue('form' in response.context)
 		choices = response.context['form'].fields['candidato'].choices
-		self.assertTrue((self.candidato1.pk, self.candidato1.nombre + " "+ str(self.candidato1.estrellitas)) in choices)
-		self.assertTrue((self.candidato2.pk, self.candidato2.nombre + " "+ str(self.candidato2.estrellitas)) in choices)
-		self.assertTrue((self.candidato3.pk, self.candidato3.nombre + " "+ str(self.candidato3.estrellitas)) not in choices)
+		self.assertTrue((self.candidato1.pk, self.candidato1.nombre) in choices)
+		self.assertTrue((self.candidato2.pk, self.candidato2.nombre) in choices)
+		self.assertTrue((self.candidato3.pk, self.candidato3.nombre) not in choices)
 
 
 
