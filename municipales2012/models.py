@@ -2,7 +2,7 @@
 
 from django.db import models
 from mailer import send_mail
-
+# from django.core.mail import send_mail
 # Create your models here.
 
 
@@ -115,11 +115,11 @@ class Pregunta(models.Model):
 		for candidato in candidatos:
 			texto_introduccion = 'Estimado(a) ' + candidato.nombre + ',\r Este mensaje ha sido enviado desde votainteligente.cl por un ciudadano con el deseo de informarse sobre su candidatura:'
 			mensaje = texto_introduccion + '\r\rYo, ' + self.remitente + ' quiero saber: \r\r' + self.texto_pregunta
-			destinacion = Contacto.objects.get(candidato=candidato).valor
-			print destinacion, mensaje
-			send_mail(subject, mensaje, 'municiaples2012@votainteligente.cl',
-		    [destinacion])
+			destinaciones = Contacto.objects.filter(candidato=candidato)
+			for destinacion in destinaciones:
+				send_mail(subject, mensaje, 'municiaples2012@votainteligente.cl',[destinacion.valor])
 
+			
 
 		
 
