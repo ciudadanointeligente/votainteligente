@@ -9,10 +9,15 @@ class IndiceInline(admin.TabularInline):
 
 class CandidatoInline(admin.TabularInline):
     model = Candidato
+    extra = 0
 
 class PreguntaInline(admin.TabularInline):
 	model = Pregunta
-      
+
+class RespuestaInline(admin.TabularInline):
+	model = Respuesta
+	readonly_fields = ['candidato']
+	extra = 0
 class ComunaAdmin(admin.ModelAdmin):
 	inlines = [
 		CandidatoInline,
@@ -35,6 +40,7 @@ class PreguntaAdmin(admin.ModelAdmin):
 	ordering = ['aprobada','procesada']
 	# readonly_fields = ['procesada']
 	actions = [aprobar_preguntas]
+	inlines = [RespuestaInline]
 
 	#funcion especial para la aprobación de mail en el admin
 	def save_model(self, request, obj, form, change):
