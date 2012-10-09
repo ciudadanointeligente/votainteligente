@@ -20,15 +20,15 @@ class PreguntaForm(forms.ModelForm):
     	candidatos = Candidato.objects.filter (comuna = comuna)
 
         #self.fields['candidato'].widget = forms.CheckboxSelectMultiple()
-	print self.fields['remitente'].error_messages
         self.fields['candidato'].queryset = candidatos
-	self.fields['candidato'].error_messages = {'required': 'Debes elegir al menos un candidato'}
-    	self.fields['remitente'].error_messages = {'required': 'Debes identificarte de alguna forma'}
-    	self.fields['remitente'].error_messages = {'invalid': 'El nombre del remitente es demasiado largo'}
-    	self.fields['texto_pregunta'].error_messages = {'required': 'Debes hacer una pregunta'}
-    	self.fields['texto_pregunta'].error_messages = {'invalid': 'La pregunta es demasiado larga'}
+	self.fields['candidato'].error_messages['required'] = 'Debes elegir al menos un candidato'
+    	self.fields['remitente'].error_messages['required'] = 'Debes identificarte de alguna forma'
+	self.fields['remitente'].error_messages['max_length'] = 'El nombre del remitente es demasiado largo'
+    	self.fields['texto_pregunta'].error_messages['required'] = 'Debes hacer una pregunta'
+	#No está funcionando con 'max_length', hay que buscar el valor apropiado. De todos modos sale en inglés
+    	self.fields['texto_pregunta'].error_messages['max_length'] = 'La pregunta es demasiado larga'
     	self.fields['captcha'].error_messages['required'] = 'Debemos asegurarnos que no seas un robot'
-    	self.fields['captcha'].error_messages['captcha_invalid'] = 'El captcha que ingresaste no es válido'
+    	self.fields['captcha'].error_messages['captcha_invalid'] = 'No ingresaste el valor correcto del captcha'
     	self.fields['captcha'].error_messages['invalid'] = 'El captcha que ingresaste no es válido'
         #self.fields['candidato'].help_text = 'Marca sólo los candidatos a los que quieras preguntar'
         #self.fields['candidato'].label = 'Candidatos'
