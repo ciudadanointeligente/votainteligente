@@ -21,6 +21,19 @@
     <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js" ></script>
     <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
     <script src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script> 
+    <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-10694322-1']);
+  _gaq.push(['_setDomainName', 'votainteligente.cl']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
    
     </head>
     <body class="bodySubmenu">
@@ -34,7 +47,7 @@
               <div class="container">
                     <div class="nav-collapse collapse">
                         <ul class="nav pull-right">
-                        <li class="itemSubMenu"> <a href="{% url somos %}"> <small>Quienes Somos? </small></a></li>
+                        <li class="itemSubMenu"> <a href="{% url somos %}"> <small>¿Quiénes Somos?</small></a></li>
                         <li class="separador"> </li>
                         <li class="itemSubMenu"> <a href="{% url metodologia %}"> <small>Metodología</small></a></li>
                         </ul>       
@@ -125,7 +138,7 @@
   <td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/educacionLogo.png"/></a> </td>
 <td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/techoLogo.png"/> </a> </td> 
 <td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/igualesLogo.png"  style="margin-top: -13px;"/></a> </td> 
-<td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/casaPazLogo.png" style="margin-right: 20px;"/></a> </td>
+<td class="itemFooter pull-left"> <a href="#"> <img src="{{ STATIC_URL }}images/casaPazLogo.png" style="margin-right: 2px;"/></a> </td>
 
   <td class="itemFooter pull-left"> <a href="https://twitter.com/share" class="twitter-share-button" data-text="¿Conoces a quién votas?... Vota inteligente" data-via="ciudadanoi" data-lang="es" data-hashtags="municipales2012">Twitter</a>
   

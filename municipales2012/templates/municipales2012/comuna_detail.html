@@ -8,7 +8,7 @@
                 <div class="container-fluid">
                     <div class="row-fluid">
                         <div class="span8">
-                            <h2>Municipales en <span><a href="{{comuna}}"> {{comuna}} </a></span>
+                            <h2>Municipales en <span>{{comuna}} </span>
                                 
                                 </h2>
                                 <div class="share_this_comuna">
@@ -39,7 +39,7 @@
                                                         <li class="span6">
                                                             <div class="well thumbnail">
                                                           <a href="{% url comuna-preguntales comuna.slug %}" target="_blank" class="btn btn-block btn-success btnMunicipales">¡Pregúntale!</a>
-                                                           <p class="textoBTN">A tus candidatos los que quieras</p>
+                                                           <p class="textoBTN">A tus candidatos lo que quieras</p>
                                                             </div>
                                                         </li>
  
@@ -47,7 +47,7 @@
                                                 </div>
                                                 
                         <div class="span4">
-                            <div style="margin-top: -10px;">
+                            <div style="margin-top: -40px;">
                                 <h4 style="width: 300px;">Los datos de <span>{{comuna}}</span> en: </h4> 
                                 <script>
                                     $(document).ready(function() {
@@ -131,7 +131,7 @@
                                     <!-- "next page" action -->
                                     <a class="next browse right"><img alt="" id="flechitaDerecha" src="{{ STATIC_URL }}images/flechaDerecha.png" /></a>
                                     
-                                    <a href="{% url comuna-index-detail slug=comuna.slug %}"  target="_blank" class="btn btn-mini" style="float: right; position: relative; top: -12px;  z-index: 2;"> Ver todos los datos </a>
+                                    <a href="{% url comuna-index-detail slug=comuna.slug %}"  target="_blank" class="btn btn-mini" style="float: right; position: relative; z-index: 2;"> Ver todos los datos </a>
                                     
                                     
                                    

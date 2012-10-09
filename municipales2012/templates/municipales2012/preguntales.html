@@ -34,15 +34,23 @@ $(function () {
 				</form> 
 </div>-->
 <div class="container paginaCompleta">
-	<h3> {{titulo}} </h3>
 
-{% if messages %} 
+	 <h3>Preguntas a los candidatos de <span><a href="{{comuna}}"> {{comuna}} </a></span> </h3>
+
+
+
+
+
+	<h4 class="tituloPreguntale"> ¡Pregúntales!       Ellos Responden...</h4>
+
+	{% if messages %} 
+<div class="alert alert-success">
 	{% for message in messages %}    
 		{{ message }}
 	{% endfor %}    
+</div>
 {% endif %}
 
-	<h4 class="tituloPreguntale"> ¡Pregúntales!       Ellos Responden...</h4>
 	<form class="preguntaCandidatos" action="" method="post">{% csrf_token %}
 		<div class="container-fluid">
 			<div class="row-fluid">
@@ -61,12 +69,12 @@ $(function () {
 						*** No tenemos el mail del candidato </strong></em> </small></span>
 
 {% if form.candidato.errors %}
-					<label class="alert-heading">{{form.candidato.errors}}</label>
+					<label class="alert alert-error">{{form.candidato.errors}}</label>
 {% endif %}
 				</div>
 				<div class="span8">
 					<label> <strong>Yo soy</strong></label>
-					<input class="input-xxlarge btn-block remitentePreguntale" type="text" name="remitente" placeholder="Comunero, Profesora, Dirigente, etc">
+					<input class="input-xxlarge btn-block remitentePreguntale" type="text" name="remitente" placeholder="Tomás González, Comunero, Profesora, Dirigente, etc">
 					<span class="help-block"> <small> <em> <strong>*Identifícate como quieras* </em></strong></small></span>
 {% if form.remitente.errors %}
 					<label>{{form.remitente.errors}}</label>
