@@ -78,7 +78,7 @@ class ComunaPreguntales(CreateView):
 
 		context['conversaciones'] = conversaciones
 		context['candidatos'] = candidatos
-		context['titulo'] = "Preguntas a los Candidatos de " + comuna.nombre
+		context['comuna'] = comuna.nombre
 		
 		return context
 
