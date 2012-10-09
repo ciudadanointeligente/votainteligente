@@ -1,4 +1,5 @@
 {% extends "base_sub_menu.html" %}
+{% load estrellitas %}
 {% block content %}
  
 <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js" ></script>
@@ -23,38 +24,35 @@ $(function () {
              
              
 
-<!--<div class="container paginaCompleta">
-
- 	 <h3> {{titulo}} </h3>
- 			 <h4 class="tituloPreguntale"> ¡Pregúntales!       Ellos Responden...</h4>
-
-				<form class="formularioPreguntale" action="" method="post">{% csrf_token %}
-    			{{form.as_p}}
-					<input type="submit" class="btn-info" value="He dicho" />
-				</form> 
-</div>-->
 <div class="container paginaCompleta">
 
 	 <h3>Preguntas a los candidatos de <span><a href="/{{comuna.slug}}"> {{comuna.nombre}} </a></span> </h3>
 
 
-{% if messages %} 
-	{% for message in messages %}    
-		{{ message }}
-	{% endfor %}    
-{% endif %}
+
 
 
 	<h4 class="tituloPreguntale"> ¡Pregúntales!       Ellos Responden...</h4>
+
+	{% if messages %} 
+<div class="alert alert-success">
+	{% for message in messages %}    
+		{{ message }}
+	{% endfor %}    
+</div>
+{% endif %}
+
 	<form class="preguntaCandidatos" action="" method="post">{% csrf_token %}
 		<div class="container-fluid">
 			<div class="row-fluid">
 				<div class="candidatosPreguntale span4">
 					<h5> Candidatos </h5>
 					<label>Marca sólo los candidatos a los que quieras preguntar</label>
-
-					{{form.candidato}}
-
+{% for pk, candidato in form.candidato.field.choices %}
+					<label class="checkbox">
+					<input type="checkbox" name="candidato" {{ pk|estrellitas_disabled }} value={{pk}}>{{candidato}} {{ pk|estrellitas }}
+					 </input> </label>
+{% endfor %}
 					<span class="help-block"> <small> <em> <strong>
 						* Tu pregunta será enviada al mail del candidato
 						<br/>

@@ -62,8 +62,20 @@ class Candidato(models.Model):
 	partido = models.CharField(max_length=255)
 	web = models.CharField(max_length=255, blank=True, null=True)
 
+
 	def __unicode__(self):
 		return self.nombre
+
+	def _estrellitas(self):
+		if self.contacto_set.count() == 0:
+			return 3
+		if self.contacto_set.filter(tipo=2).count() > 0:
+			return 2
+		if self.contacto_set.filter(tipo=1).count() > 0:
+			return 1
+		return None
+
+	estrellitas = property(_estrellitas)
 
 class Contacto(models.Model):
 	PERSONAL = 1
