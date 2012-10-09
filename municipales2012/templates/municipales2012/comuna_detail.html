@@ -8,7 +8,7 @@
                 <div class="container-fluid">
                     <div class="row-fluid">
                         <div class="span8">
-                            <h2>Municipales en <span>{{comuna}}</span>
+                            <h2>Municipales en <span><a href="{{comuna}}"> {{comuna}} </a></span>
                                 
                                 </h2>
                                 <div class="share_this_comuna">
@@ -69,7 +69,8 @@
                                 <div class="navi"> 
 
                                     {% for indice in indices %}
-                                    <a href="{{forloop.counter}}" title="{{indice.area.nombre}} - {{indice.nombre}}"></a>
+                                    <a class="{{indice.area.clase_en_carrusel}}" href="{{forloop.counter}}" title="{{indice.area.nombre}} - {{indice.nombre}}"></a>
+
                                     {% endfor %}
                                 </div>
                                 <!--<div class="navi"> 
@@ -130,7 +131,7 @@
                                     <!-- "next page" action -->
                                     <a class="next browse right"><img alt="" id="flechitaDerecha" src="{{ STATIC_URL }}images/flechaDerecha.png" /></a>
                                     
-                                    <a href="{% url comuna-index-detail slug=comuna.slug %}"  target="_blank" class="btn btn-mini" style="float: right; position: relative; top: -23px;  z-index: 2;"> Ver todos los datos </a>
+                                    <a href="{% url comuna-index-detail slug=comuna.slug %}"  target="_blank" class="btn btn-mini" style="float: right; position: relative; top: -12px;  z-index: 2;"> Ver todos los datos </a>
                                     
                                     
                                    
@@ -144,7 +145,7 @@
 <script>
     $(document).ready(function() {
     // initialize scrollable
-    $(".scrollable").scrollable({circular: true }).navigator(".navi");
+    $(".scrollable").scrollable({circular: true }).autoscroll({ autoplay: true, interval: 7000 }).navigator(".navi");
     });
     
 </script>
