@@ -1,4 +1,7 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
+from mailer import send_mail
 
 # Create your models here.
 
@@ -99,11 +102,25 @@ class Pregunta(models.Model):
 	remitente = models.CharField(max_length=255)
 	texto_pregunta = models.TextField()
 	aprobada = models.BooleanField(default=False)
+	procesada = models.BooleanField(default=False)
 	
 	#objects = ManagerPregunta()
 	
 	def __unicode__(self):
 		return self.texto_pregunta
+
+	def enviar(self):
+		subject= 'Un ciudadano está interesado en más información sobre tu candidatura'
+		candidatos = Candidato.objects.filter(pregunta=self)
+		for candidato in candidatos:
+			texto_introduccion = 'Estimado(a) ' + candidato.nombre + ',\r Este mensaje ha sido enviado desde votainteligente.cl por un ciudadano con el deseo de informarse sobre su candidatura:'
+			mensaje = texto_introduccion + '\r\rYo, ' + self.remitente + ' quiero saber: \r\r' + self.texto_pregunta
+			destinacion = Contacto.objects.get(candidato=candidato).valor
+			print destinacion, mensaje
+			send_mail(subject, mensaje, 'municiaples2012@votainteligente.cl',
+		    [destinacion])
+
+
 		
 
 class Respuesta(models.Model):
