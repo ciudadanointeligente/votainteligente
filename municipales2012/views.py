@@ -3,10 +3,11 @@
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView, CreateView, DetailView
 from django.views.generic.edit import FormView
-from models import Comuna, Indice, Pregunta, Candidato, Respuesta
+from models import Comuna, Indice, Pregunta, Candidato, Respuesta, Contacto
 from django.shortcuts import get_object_or_404
 from forms import PreguntaForm
 from django.core.urlresolvers import reverse
+from django.contrib import messages
 
 class HomeTemplateView(TemplateView):
 	def get_context_data(self, **kwargs):
@@ -58,6 +59,8 @@ class ComunaPreguntales(CreateView):
 		comuna = get_object_or_404(Comuna, slug = comuna_slug)
 		context = super(ComunaPreguntales, self).get_context_data(**kwargs)
 		candidatos_comuna = Candidato.objects.filter(comuna = comuna)
+		contactos_candidato = Contacto.objects.filter(candidato__in = candidatos_comuna)
+		candidatos = candidatos_comuna.filter(contacto__in = contactos_candidato)
 		preguntas = Pregunta.objects.filter(candidato__in = candidatos_comuna).filter(aprobada = True)
 		conversaciones = {}
 		for pregunta in preguntas:
@@ -74,7 +77,7 @@ class ComunaPreguntales(CreateView):
 			conversaciones[nombre_emisor] = mensaje
 
 		context['conversaciones'] = conversaciones
-		context['candidatos'] = candidatos_comuna
+		context['candidatos'] = candidatos
 		context['titulo'] = "Preguntas a los Candidatos de " + comuna.nombre
 		
 		return context
@@ -86,6 +89,8 @@ class ComunaPreguntales(CreateView):
 		candidatos = form.cleaned_data['candidato']
 		for candidato in candidatos:
 			Respuesta.objects.create(candidato = candidato, pregunta = self.object)
+
+     		messages.success(self.request, 'Tu pregunta ha sido enviada') 
 		return HttpResponseRedirect(self.get_success_url())
 
 	def get_form_kwargs(self):

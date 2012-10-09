@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
+
 from django.contrib import admin
 from models import *
+
 
 class IndiceInline(admin.TabularInline):
     model = Indice
@@ -19,11 +22,14 @@ admin.site.register(Comuna, ComunaAdmin)
 
 class PreguntaAdmin(admin.ModelAdmin):
 	model = Pregunta
-'''
-	inlines = [
-		CandidatoInline
-	]
-'''
+	#funcion especial para la aprobación de mail en el admin
+	def save_model(self, request, obj, form, change):
+	        if obj.aprobada and not obj.procesada:
+	        	obj.procesada=True
+	         	obj.enviar()
+
+	        obj.save()
+
 admin.site.register(Pregunta, PreguntaAdmin)
 
 class AreaAdmin(admin.ModelAdmin):
@@ -36,6 +42,11 @@ class DatoAdmin(admin.ModelAdmin):
 	pass
 
 admin.site.register(Dato, DatoAdmin)
+class ContactoAdmin(admin.ModelAdmin):
+	pass
+
+admin.site.register(Contacto, ContactoAdmin)
+
 
 
 
