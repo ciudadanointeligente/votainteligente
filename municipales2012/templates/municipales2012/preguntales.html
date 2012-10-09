@@ -38,14 +38,19 @@ $(function () {
 	 <h3>Preguntas a los candidatos de <span><a href="{{comuna}}"> {{comuna}} </a></span> </h3>
 
 
-{% if messages %} 
-	{% for message in messages %}    
-		{{ message }}
-	{% endfor %}    
-{% endif %}
+
 
 
 	<h4 class="tituloPreguntale"> ¡Pregúntales!       Ellos Responden...</h4>
+
+	{% if messages %} 
+<div class="alert alert-success">
+	{% for message in messages %}    
+		{{ message }}
+	{% endfor %}    
+</div>
+{% endif %}
+
 	<form class="preguntaCandidatos" action="" method="post">{% csrf_token %}
 		<div class="container-fluid">
 			<div class="row-fluid">
