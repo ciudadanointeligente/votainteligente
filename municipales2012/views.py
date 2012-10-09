@@ -85,13 +85,16 @@ class ComunaPreguntales(CreateView):
 	def form_valid(self, form):
 		self.object = form.save(commit = False)
 		self.object.save()
+		url = reverse('comuna-preguntales', kwargs={'slug':self.kwargs['slug']})
 
 		candidatos = form.cleaned_data['candidato']
 		for candidato in candidatos:
 			Respuesta.objects.create(candidato = candidato, pregunta = self.object)
 
      		messages.success(self.request, 'Tu pregunta ha sido enviada') 
-		return HttpResponseRedirect(self.get_success_url())
+     		
+     		
+		return HttpResponseRedirect(url)
 
 	def get_form_kwargs(self):
 		kwargs = super(ComunaPreguntales, self).get_form_kwargs()
