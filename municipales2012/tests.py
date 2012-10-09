@@ -784,6 +784,29 @@ class CandidatoLoader(TestCase):
 		self.assertEquals(Candidato.objects.all().count(), 1)
 
 
+class CandidatosEstrellitas(TestCase):
+	def setUp(self):
+		self.comuna = Comuna.objects.create(nombre=u"La comuna", slug="la-comuna")
+		self.candidato = Candidato.objects.create(nombre=u"Un candidato mala onda", partido=u"RN")
+
+
+	def test_candidato_tres_estrellitas(self):
+		#No hay contactos
+		self.assertEquals(self.candidato.estrellitas, 3)
+
+	def test_candidato_dos_estrellitas(self):
+		contacto_personal = Contacto.objects.create(candidato=self.candidato, valor=u"secretaria@rn.cl",tipo=2)
+
+		self.assertEquals(self.candidato.estrellitas, 2)
+
+
+	def test_candidato_una_estrella(self):
+		contacto_personal = Contacto.objects.create(candidato=self.candidato, valor=u"secretaria@rn.cl",tipo=2)
+
+		self.assertEquals(self.candidato.estrellitas, 1)
+
+
+
 
 
 
