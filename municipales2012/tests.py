@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.test import TestCase
+from django.core import mail
 from django.core.urlresolvers import reverse
 from models import Comuna, Area, Indice, Dato, Candidato, Pregunta, Respuesta, Contacto
 from management.commands.comunas_importer import *
@@ -501,7 +502,7 @@ class MessageTestCase(TestCase):
 		self.data_candidato = [{'nombre': 'candidato1', 'mail': 'candidato1@test.com', 'mail2' : 'candidato1@test2.com', 'mail3' : 'candidato1@test3.com', 'comuna': self.comuna1, 'partido':'partido1', 'web': 'web1'},{'nombre': 'candidato2', 'mail': 'candidato2@test.com', 'comuna': self.comuna2, 'partido':'partido2'},{'nombre': 'candidato3', 'mail': 'candidato3@test.com', 'comuna': self.comuna3, 'partido':'partido3'}]
 		self.candidato1 = Candidato.objects.create(nombre=self.data_candidato[0]['nombre'], comuna = self.comuna1, partido = self.data_candidato[0]['partido'], web = self.data_candidato[0]['web'])
 		self.candidato2 = Candidato.objects.create(nombre=self.data_candidato[1]['nombre'], comuna = self.comuna1, partido = self.data_candidato[1]['partido'])
-		self.candidato3 = Candidato.objects.create(nombre=self.data_candidato[2]['nombre'], comuna = self.data_candidato[2]['comuna'], partido = self.data_candidato[2]['partido'])
+		self.candidato3 = Candidato.objects.create(nombre=self.data_candidato[2]['nombre'], comuna = self.comuna2, partido = self.data_candidato[2]['partido'])
 		self.question1 = "Why can't we be friends?"
 		self.answer1 = "I'd kinda like to be the President, so I can show you how your money's spent"
 		self.question2 = 'Who let the dogs out?'
@@ -519,9 +520,9 @@ class MessageTestCase(TestCase):
 		self.assertEquals(self.candidato1.web, 'web1')
 	
 	def test_create_contacto(self):
-		contacto, created = Contacto.objects.get_or_create(tipo = 'mail_personal', valor = 'test@test.com', candidato = self.candidato1)
+		contacto, created = Contacto.objects.get_or_create(tipo = 1, valor = 'test@test.com', candidato = self.candidato1)
 		self.assertTrue(created)
-		self.assertEquals(contacto.tipo, 'mail_personal')
+		self.assertEquals(contacto.tipo, 1)
 		self.assertEquals(contacto.valor, 'test@test.com')
 		self.assertEquals(contacto.candidato, self.candidato1)
 		self.assertTrue(contacto)
@@ -570,12 +571,18 @@ class MessageTestCase(TestCase):
 		#Se cambian accidentalmente otras respuestas?
 		respuesta_candidato1_pregunta2 = Respuesta.objects.filter(candidato=self.candidato1).filter(pregunta=pregunta2)[0]
 		self.assertEquals(respuesta_candidato1_pregunta2.texto_respuesta,'Sin Respuesta')
-	@skip
-	def test_gmail_connection(self):
-		from django.core.mail import EmailMessage
-		email = EmailMessage('Subject', 'Body', 'pdaire@ciudadanointeligente.org', ['test@votainteligente.cl'],[], headers = {'Reply-To' : 'pdaire@votainteligente.cl'})
-		server_response = email.send()
-		self.assertEquals(server_response,1)
+	
+	def test_mail_sending(self):
+
+		# Send message.
+		mail.send_mail('Subject here', 'Here is the message.','from@example.com', ['to@example.com'],
+		    fail_silently=False)
+
+		# Test that one message has been sent.
+		self.assertEqual(len(mail.outbox), 1)
+
+		# Verify that the subject of the first message is correct.
+		self.assertEqual(mail.outbox[0].subject, 'Subject here')
 		#chequear que el mail llega y lo podemos traer
 
 
@@ -598,14 +605,13 @@ class MessageTestCase(TestCase):
 	def test_submit_question_message(self):
 
 		
-		
+		#hackeamos .virtualenvs/mun12/lib/python2.7/site-packages/captcha/fields.py porque no consideraba settings.debug como true.
 		#Post data
 		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
 		response = self.client.post(url, {'candidato': [self.candidato1.pk, self.candidato2.pk],
 											'texto_pregunta': 'Texto Pregunta', 
 											'remitente': 'Remitente 1',
 											'recaptcha_response_field': 'PASSED'})
-		print response
 		self.assertEquals(Pregunta.objects.count(), 1)
 		self.assertEquals(Pregunta.objects.all()[0].texto_pregunta, 'Texto Pregunta')
 		self.assertEquals(Pregunta.objects.all()[0].remitente, 'Remitente 1')
@@ -630,24 +636,47 @@ class MessageTestCase(TestCase):
 		#Sólo se agregó la pregunta a 2 candidatos
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).count(),2)
 	
+	def test_send_question_message(self):
+
+		
+		#hackeamos .virtualenvs/mun12/lib/python2.7/site-packages/captcha/fields.py porque no consideraba settings.debug como true.
+		#Post data
+		contacto1, created = Contacto.objects.get_or_create(tipo = 1, valor = 'candidato1@candidato1.com', candidato = self.candidato1)
+		contacto2, created = Contacto.objects.get_or_create(tipo = 1, valor = 'candidato2@candidato2.com', candidato = self.candidato2)
+		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
+		response = self.client.post(url, {'candidato': [self.candidato1.pk, self.candidato2.pk],
+											'texto_pregunta': 'Texto Pregunta', 
+											'remitente': 'Remitente 1',
+											'recaptcha_response_field': 'PASSED'})
+		pregunta_nueva = Pregunta.objects.get(remitente='Remitente 1')
+		pregunta_nueva.enviar()
+		# Test that one message has been sent.
+		self.assertEqual(len(mail.outbox), 2)
+
+		# Verify that the subject of the first message is correct.
+		self.assertEqual(mail.outbox[0].subject, 'Un ciudadano está interesado en más información sobre tu candidatura')
+		self.assertEqual(mail.outbox[1].subject, 'Un ciudadano está interesado en más información sobre tu candidatura')
+		# self.assertEqual(mail.outbox[0].from, 'municiaples2012@votainteligente.cl')
+		# self.assertEqual(mail.outbox[1].from, 'municiaples2012@votainteligente.cl')
+		#chequear que el mail llega y lo podemos traer
+
 
 	def test_display_conversations(self):
 		
 		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
 		response = self.client.get(url)
 		
-		response = self.client.post(url, {'candidato': [self.candidato1.pk],
-						'texto_pregunta': 'Texto Pregunta', 
-						'remitente': 'Remitente 1',
-						'recaptcha_response_field': 'PASSED'},
-					follow = True)
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato1)
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato2)
+
 		self.assertEquals(response.status_code, 200)
 		#Check conversaciones
 		self.assertTrue('conversaciones' in response.context)
 		#Conversaciones aren't displayed if not allowed
 		self.assertEquals(response.context['conversaciones'], {})
 		#Conversaciones are displayed if allowed
-		pregunta = Pregunta.objects.filter(candidato=self.candidato1).filter(remitente='Remitente 1')[0]
+		pregunta = Pregunta.objects.filter(candidato=self.candidato1).filter(remitente='remitente1')[0]
 		pregunta.aprobada = True
 		pregunta.save()
 		response = self.client.get(url)
@@ -781,6 +810,29 @@ class CandidatoLoader(TestCase):
 		contacto = self.candidateloader.detectCandidate(self.line2)
 
 		self.assertEquals(Candidato.objects.all().count(), 1)
+
+
+class CandidatosEstrellitas(TestCase):
+	def setUp(self):
+		self.comuna = Comuna.objects.create(nombre=u"La comuna", slug="la-comuna")
+		self.candidato = Candidato.objects.create(nombre=u"Un candidato mala onda", partido=u"RN")
+
+
+	def test_candidato_tres_estrellitas(self):
+		#No hay contactos
+		self.assertEquals(self.candidato.estrellitas, 3)
+
+	def test_candidato_dos_estrellitas(self):
+		contacto_personal = Contacto.objects.create(candidato=self.candidato, valor=u"secretaria@rn.cl",tipo=2)
+
+		self.assertEquals(self.candidato.estrellitas, 2)
+
+
+	def test_candidato_una_estrella(self):
+		contacto_personal = Contacto.objects.create(candidato=self.candidato, valor=u"secretaria@rn.cl",tipo=2)
+
+		self.assertEquals(self.candidato.estrellitas, 1)
+
 
 
 

@@ -1,9 +1,25 @@
 {% extends "base_sub_menu.html" %}
 {% block content %}
  
-  <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js" ></script>
-  <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
-  <script src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script> 
+<script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js" ></script>
+<script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script> 
+<script>
+$(function () {
+    $('body').off('click.collapse.data-api', '[data-toggle=collapse]');
+    $('body').on('click.collapse.data-api', '[data-toggle=collapse]', function ( e ) {
+      var $this = $(this), href
+        , target = $this.attr('data-target')
+          || e.preventDefault()
+          || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') //strip for ie7
+        , option = $(target).data('collapse') ? 'toggle' : $this.data()
+      $(target).collapse(option)
+      if($this.parentsUntil('.dropdown-menu').length!==0){
+          return false;
+      }
+    });
+});
+</script>
              
              
 
@@ -19,6 +35,13 @@
 </div>-->
 <div class="container paginaCompleta">
 	<h3> {{titulo}} </h3>
+
+{% if messages %} 
+	{% for message in messages %}    
+		{{ message }}
+	{% endfor %}    
+{% endif %}
+
 	<h4 class="tituloPreguntale"> ¡Pregúntales!       Ellos Responden...</h4>
 	<form class="preguntaCandidatos" action="" method="post">{% csrf_token %}
 		<div class="container-fluid">
@@ -26,7 +49,6 @@
 				<div class="candidatosPreguntale span4">
 					<h5> Candidatos </h5>
 					<label>Marca sólo los candidatos a los que quieras preguntar</label>
-
 {% for candidato in candidatos %}
 					<label class="checkbox">
 					<input type="checkbox" name="candidato" value={{candidato.pk}}> {{candidato.nombre}} </input> </label>
@@ -38,33 +60,30 @@
 						<br/>
 						*** No tenemos el mail del candidato </strong></em> </small></span>
 
-						{% if form.candidato.errors %}
+{% if form.candidato.errors %}
 					<label class="alert-heading">{{form.candidato.errors}}</label>
 {% endif %}
 				</div>
 				<div class="span8">
 					<label> <strong>Yo soy</strong></label>
-
 					<input class="input-xxlarge btn-block remitentePreguntale" type="text" name="remitente" placeholder="Comunero, Profesora, Dirigente, etc">
 					<span class="help-block"> <small> <em> <strong>*Identifícate como quieras* </em></strong></small></span>
-					{% if form.remitente.errors %}
+{% if form.remitente.errors %}
 					<label>{{form.remitente.errors}}</label>
 {% endif %}
 					<br/>
 
 					<label> <strong>Escribe tu pregunta</strong></label>
-
 					<textarea rows="5" class="input-xxlarge btn-block" name="texto_pregunta"></textarea>
 					<span class="help-block"> <small> <em> <strong>*Escribe una pregunta clara y respetuosa. Así aumentas la posibilidad de que respondan seriamente* </strong></em></small></span>
-					{% if form.texto_pregunta.errors %}
+{% if form.texto_pregunta.errors %}
 					<label>{{form.texto_pregunta.errors}}</label>
 {% endif %}
 					<br/>
 					<p>
-
 						{{form.captcha}}	
 					</p>
-					{% if form.captcha.errors %}
+{% if form.captcha.errors %}
 					<label>{{form.captcha.errors}}</label>
 {% endif %}
 					<p> Acepto que mis preguntas y respuestas sean publicadas en este mismo medio. <br/>Confirmo que lo que aquí dice no atenta contra el candidato.</p>
@@ -75,31 +94,32 @@
 	</form>
 	<div class="container">
 		<h4 class="tituloPreguntale"> Preguntas Recientes</h4>
-{% for remitente, mensaje in conversaciones.items %}
 		<div class="accordion" id="accordion2">
+{% for remitente, mensaje in conversaciones.items %}
 			<div class="accordion-group">
 	{% for pregunta, respuestas in mensaje.items %}
 				<div class="accordion-heading tituloAcordion">
-					<a class="accordion-toggle" href="#collapseOne" data-parent="#accordion2" data-toggle="collapse"  >
-						<div class="preguntadoPor"> <small><strong>Preguntado por:</strong> <em>{{remitente}}</em></small></div>
-						<br/> <br/>
+					<div class="preguntadoPor"> <small><strong>Preguntado por:</strong> <em>{{remitente}}</em></small></div>
+					<br/> <br/>
+					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{% cycle 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 as counter %}">
 						<p class="preguntaPreguntale">{{pregunta}}</p>
 					</a>
 				</div>
+				<div id="collapse{{ counter }}" class="accordion-body collapse in">
 		{% for candidato, respuesta in respuestas.items%}
-				<div id="collapseOne" class="accordion-body collapse">
 					<div class="accordion-inner">
 						<h4 class="nombreCandidato">{{candidato}}</h4>
 						<p>{{respuesta}}</p>
 						<br>
 					</div>
-				</div>
 		{% endfor %}
+				</div>
 	{% endfor %}
 			</div>
-		</div>
 {% endfor %}
+		</div>
 	</div>
+
 
 </div>
 {% endblock %}

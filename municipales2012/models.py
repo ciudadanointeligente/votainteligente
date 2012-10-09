@@ -1,5 +1,8 @@
-from django.db import models
+# -*- coding: utf-8 -*-
 
+from django.db import models
+from mailer import send_mail
+# from django.core.mail import send_mail
 # Create your models here.
 
 
@@ -97,13 +100,27 @@ class Pregunta(models.Model):
 	"""docstring for Pregunta"""
 	candidato = models.ManyToManyField('Candidato', through='Respuesta')
 	remitente = models.CharField(max_length=255)
-	texto_pregunta = models.TextField()
+	texto_pregunta = models.TextField(max_length=4095)
 	aprobada = models.BooleanField(default=False)
+	procesada = models.BooleanField(default=False)
 	
 	#objects = ManagerPregunta()
 	
 	def __unicode__(self):
 		return self.texto_pregunta
+
+	def enviar(self):
+		subject= 'Un ciudadano está interesado en más información sobre tu candidatura'
+		candidatos = Candidato.objects.filter(pregunta=self)
+		for candidato in candidatos:
+			texto_introduccion = 'Estimado(a) ' + candidato.nombre + ',\r Este mensaje ha sido enviado desde votainteligente.cl por un ciudadano con el deseo de informarse sobre su candidatura:'
+			mensaje = texto_introduccion + '\r\rYo, ' + self.remitente + ' quiero saber: \r\r' + self.texto_pregunta
+			destinaciones = Contacto.objects.filter(candidato=candidato)
+			for destinacion in destinaciones:
+				send_mail(subject, mensaje, 'municiaples2012@votainteligente.cl',[destinacion.valor])
+
+			
+
 		
 
 class Respuesta(models.Model):

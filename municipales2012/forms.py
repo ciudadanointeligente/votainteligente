@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from models import Pregunta, Candidato
-# from django.forms import ModelForm, ModelMultipleChoiceField, CheckboxSelectMultiple
 from django import forms
 from captcha.fields import ReCaptchaField
 
 class PreguntaForm(forms.ModelForm):
+
     captcha = ReCaptchaField(attrs={'theme' : 'clean','lang':'es'})
     class Meta:
         model = Pregunta
@@ -17,10 +17,16 @@ class PreguntaForm(forms.ModelForm):
     	comuna = kwargs['comuna']
     	del kwargs['comuna']
     	super(PreguntaForm, self).__init__(*args, **kwargs)
-    	candidatos = Candidato.objects.filter(comuna = comuna)
+    	candidatos = Candidato.objects.filter (comuna = comuna)
 
         #self.fields['candidato'].widget = forms.CheckboxSelectMultiple()
-        #self.fields['candidato'].queryset = candidatos
+        self.fields['candidato'].queryset = candidatos
+	self.fields['candidato'].error_messages = {'required': 'Debes elegir al menos un candidato'}
+    	self.fields['remitente'].error_messages = {'required': 'Debes identificarte de alguna forma'}
+    	self.fields['texto_pregunta'].error_messages = {'required': 'Debes hacer una pregunta'}
+    	self.fields['captcha'].error_messages['required'] = 'Debemos asegurarnos que no seas un robot'
+    	self.fields['captcha'].error_messages['captcha_invalid'] = 'El captcha que ingresaste no es válido'
+    	self.fields['captcha'].error_messages['invalid'] = 'El captcha que ingresaste no es válido'
         #self.fields['candidato'].help_text = 'Marca sólo los candidatos a los que quieras preguntar'
         #self.fields['candidato'].label = 'Candidatos'
         #self.fields['remitente'].widget.attrs['class'] = 'itemCandidato'

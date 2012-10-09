@@ -129,7 +129,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'django_extensions',
     'municipales2012',
-    'captcha'
+    'captcha',
+    'mailer'
 )
 
 # A sample logging configuration. The only tangible logging
