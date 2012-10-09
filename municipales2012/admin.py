@@ -19,16 +19,34 @@ class ComunaAdmin(admin.ModelAdmin):
         IndiceInline
     ]
 admin.site.register(Comuna, ComunaAdmin)
+# action de aprobacion masiva de preguntas
+def aprobar_preguntas(modeladmin, request, queryset):
+	for obj in queryset:
+		obj.enviar()
+		obj.procesada=True
+		obj.aprobada=True
+		obj.save()
+
+aprobar_preguntas.short_description = "Aprobar Preguntas para enviar"
 
 class PreguntaAdmin(admin.ModelAdmin):
 	model = Pregunta
+	list_display = ['texto_pregunta', 'aprobada', 'procesada']
+	ordering = ['aprobada','procesada']
+	# readonly_fields = ['procesada']
+	actions = [aprobar_preguntas]
+
 	#funcion especial para la aprobación de mail en el admin
 	def save_model(self, request, obj, form, change):
-	        if obj.aprobada and not obj.procesada:
-	        	obj.procesada=True
-	         	obj.enviar()
+	    if obj.aprobada and not obj.procesada:
+	    	obj.enviar()
+	    	obj.procesada=True
 
-	        obj.save()
+	    obj.save()
+
+
+
+		    
 
 admin.site.register(Pregunta, PreguntaAdmin)
 
