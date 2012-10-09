@@ -611,7 +611,9 @@ class MessageTestCase(TestCase):
 		response = self.client.post(url, {'candidato': [self.candidato1.pk, self.candidato2.pk],
 											'texto_pregunta': 'Texto Pregunta', 
 											'remitente': 'Remitente 1',
-											'recaptcha_response_field': 'PASSED'})
+											'recaptcha_response_field': 'PASSED'}, follow=True)
+
+		self.assertTemplateUsed(response, 'municipales2012/preguntales.html')
 		self.assertEquals(Pregunta.objects.count(), 1)
 		self.assertEquals(Pregunta.objects.all()[0].texto_pregunta, 'Texto Pregunta')
 		self.assertEquals(Pregunta.objects.all()[0].remitente, 'Remitente 1')
