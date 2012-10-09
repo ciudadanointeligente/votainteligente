@@ -97,7 +97,7 @@ class Pregunta(models.Model):
 	"""docstring for Pregunta"""
 	candidato = models.ManyToManyField('Candidato', through='Respuesta')
 	remitente = models.CharField(max_length=255)
-	texto_pregunta = models.TextField()
+	texto_pregunta = models.TextField(max_length=4095)
 	aprobada = models.BooleanField(default=False)
 	
 	#objects = ManagerPregunta()
