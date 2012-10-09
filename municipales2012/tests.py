@@ -594,9 +594,9 @@ class MessageTestCase(TestCase):
 		self.assertTemplateUsed(response, 'municipales2012/preguntales.html')
 		self.assertTrue('form' in response.context)
 		choices = response.context['form'].fields['candidato'].choices
-		self.assertTrue((self.candidato1.pk, self.candidato1.nombre) in response.context['form'].fields['candidato'].choices)
-		self.assertTrue((self.candidato2.pk, self.candidato2.nombre) in response.context['form'].fields['candidato'].choices)
-		self.assertTrue((self.candidato3.pk, self.candidato3.nombre) not in response.context['form'].fields['candidato'].choices)
+		self.assertTrue((self.candidato1.pk, self.candidato1.nombre) in choices)
+		self.assertTrue((self.candidato2.pk, self.candidato2.nombre) in choices)
+		self.assertTrue((self.candidato3.pk, self.candidato3.nombre) not in choices)
 
 
 
@@ -611,7 +611,9 @@ class MessageTestCase(TestCase):
 		response = self.client.post(url, {'candidato': [self.candidato1.pk, self.candidato2.pk],
 											'texto_pregunta': 'Texto Pregunta', 
 											'remitente': 'Remitente 1',
-											'recaptcha_response_field': 'PASSED'})
+											'recaptcha_response_field': 'PASSED'}, follow=True)
+
+		self.assertTemplateUsed(response, 'municipales2012/preguntales.html')
 		self.assertEquals(Pregunta.objects.count(), 1)
 		self.assertEquals(Pregunta.objects.all()[0].texto_pregunta, 'Texto Pregunta')
 		self.assertEquals(Pregunta.objects.all()[0].remitente, 'Remitente 1')
@@ -815,7 +817,7 @@ class CandidatoLoader(TestCase):
 class CandidatosEstrellitas(TestCase):
 	def setUp(self):
 		self.comuna = Comuna.objects.create(nombre=u"La comuna", slug="la-comuna")
-		self.candidato = Candidato.objects.create(nombre=u"Un candidato mala onda", partido=u"RN")
+		self.candidato = Candidato.objects.create(nombre=u"Un candidato mala onda", partido=u"RN", comuna=self.comuna)
 
 
 	def test_candidato_tres_estrellitas(self):
@@ -829,7 +831,7 @@ class CandidatosEstrellitas(TestCase):
 
 
 	def test_candidato_una_estrella(self):
-		contacto_personal = Contacto.objects.create(candidato=self.candidato, valor=u"secretaria@rn.cl",tipo=2)
+		contacto_personal = Contacto.objects.create(candidato=self.candidato, valor=u"yo-soy-un-weon-malo@rn.cl",tipo=1)
 
 		self.assertEquals(self.candidato.estrellitas, 1)
 
