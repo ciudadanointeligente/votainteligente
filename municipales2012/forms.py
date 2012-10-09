@@ -19,13 +19,16 @@ class PreguntaForm(forms.ModelForm):
     	super(PreguntaForm, self).__init__(*args, **kwargs)
     	candidatos = Candidato.objects.filter (comuna = comuna)
 
-        #self.fields['candidato'].widget = forms.CheckboxSelectMultiple()
+        self.fields['candidato'].widget = forms.CheckboxSelectMultiple()
         self.fields['candidato'].queryset = candidatos
-	self.fields['candidato'].error_messages = {'required': 'Debes elegir al menos un candidato'}
-    	self.fields['remitente'].error_messages = {'required': 'Debes identificarte de alguna forma'}
-    	self.fields['texto_pregunta'].error_messages = {'required': 'Debes hacer una pregunta'}
+	self.fields['candidato'].error_messages['required'] = 'Debes elegir al menos un candidato'
+    	self.fields['remitente'].error_messages['required'] = 'Debes identificarte de alguna forma'
+	self.fields['remitente'].error_messages['max_length'] = 'El nombre del remitente es demasiado largo'
+    	self.fields['texto_pregunta'].error_messages['required'] = 'Debes hacer una pregunta'
+	#No está funcionando con 'max_length', hay que buscar el valor apropiado. De todos modos sale en inglés
+    	self.fields['texto_pregunta'].error_messages['max_length'] = 'La pregunta es demasiado larga'
     	self.fields['captcha'].error_messages['required'] = 'Debemos asegurarnos que no seas un robot'
-    	self.fields['captcha'].error_messages['captcha_invalid'] = 'El captcha que ingresaste no es válido'
+    	self.fields['captcha'].error_messages['captcha_invalid'] = 'No ingresaste el valor correcto del captcha'
     	self.fields['captcha'].error_messages['invalid'] = 'El captcha que ingresaste no es válido'
         #self.fields['candidato'].help_text = 'Marca sólo los candidatos a los que quieras preguntar'
         #self.fields['candidato'].label = 'Candidatos'
@@ -35,6 +38,12 @@ class PreguntaForm(forms.ModelForm):
         #self.fields['remitente'].label = 'Yo soy'
         #self.fields['texto_pregunta'].initial = 'Escribe una pregunta clara y respetuosa. Así aumentas la posibilidad de que respondan seriamente.'
         #self.fields['texto_pregunta'].label = 'Escribe tu pregunta'
+
+        self.fields['remitente'].widget.attrs['class'] = 'input-xxlarge btn-block remitentePreguntale'
+        self.fields['remitente'].widget.attrs['placeholder'] = 'Comunero, Profesora, Dirigente, etc'
+        self.fields['texto_pregunta'].widget.attrs['class'] = 'input-xxlarge btn-block'
+        self.fields['texto_pregunta'].widget.attrs['rows'] = '5'
+        self.fields['texto_pregunta'].widget.attrs['maxlength'] = '4095'
 
 '''	
     # Overriding save allows us to process the value of 'toppings' field    

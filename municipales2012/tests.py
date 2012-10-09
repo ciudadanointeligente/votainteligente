@@ -619,6 +619,7 @@ class MessageTestCase(TestCase):
 		self.assertEquals(Pregunta.objects.all()[0].remitente, 'Remitente 1')
 
 		self.assertEquals(Respuesta.objects.count(), 2)
+		self.assertTrue('comunas' in response.context)
 
 
 
