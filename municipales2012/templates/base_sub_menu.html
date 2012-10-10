@@ -37,8 +37,13 @@
 </script>
    
     </head>
+
+
     <body class="bodySubmenu">
+       <!--[If lte IE 9]>  <div class="ielte9"><![endif]-->
+       
 <div class="bulb_container">
+
 <div class="fci-ampolleta-light"><iframe src="http://ciudadanointeligente.org/assets/bulb_light.html?wmode=transparent" width="120px" height="220" frameborder="0"></iframe></div>
 </div>  
     
@@ -62,14 +67,16 @@
               <div class="container">
                     <div class="nav-collapse collapse">
                         <ul class="menuPpal nav">
-                        <li class="pull-left"><a href="{% url home %}"><img alt="" src="{{ STATIC_URL }}images/logoVotaMunicipales.png" style="margin-left: -16px; margin-right: 155px;  margin-top: 26px;"></a> </li>
-                        <li class="preguntaleMenu pull-right"> <span style="color: rgb(237, 237, 237); opacity: 0.8;">& </span>¡Pregúntale! <img class="flechaMenuInversa" alt="" src="{{ STATIC_URL }}images/flechaMenuInversa.png"> </li>
-                        <li class="informateMenu pull-right"><img class="flechaMenu" alt="" src="{{ STATIC_URL }}images/flechaMenu.png"/> Infórmate </li>
-                        <li class="buscadorMenu pull-right">
-                            <form class="navbar-search pull-right">
-                            <input type="text" class="search-query comunas-search" placeholder="Escribe el nombre de tu comuna">
-                            </form>
-                        </li>
+                            <li class="pull-left"><a href="{% url home %}"><img alt="" src="{{ STATIC_URL }}images/logoVotaMunicipales.png" style="margin-left: -16px; margin-right: 155px;  margin-top: 26px;"></a> </li>
+                            <li class="pull-right rightMenu">
+                                <span class="preguntaleMenu"> <span style="color: rgb(237, 237, 237); opacity: 0.8;">& </span>¡Pregúntale! <img class="flechaMenuInversa" alt="" src="{{ STATIC_URL }}images/flechaMenuInversa.png"> </span>
+                                <span class="informateMenu"><img class="flechaMenu" alt="" src="{{ STATIC_URL }}images/flechaMenu.png"/> Infórmate </span>
+                                <div class="buscadorMenu">
+                                    <form class="navbar-search pull-right">
+                                    <input type="text" class="search-query comunas-search" placeholder="Escribe el nombre de tu comuna">
+                                    </form>
+                                </div>
+                            </li>
                         </ul>
                         
                     </div>
@@ -100,9 +107,9 @@
              
              
               <div class="container">
-              <!-- [If IE]> <div class="alert alert-error">
+              <!--[If IE]> <div class="alert alert-error">
               <p> Este sitio no esta optimizado para Internet Explorer, por favor usar otro navegador </p> </div>
-              <! [endif] -->
+              <![endif]-->
 
                 {% block content %}
                 {% endblock content %}
@@ -110,8 +117,8 @@
 
                 </div>
         <footer class="footer">
-                    <!-- [If lt IE 9]> <div class="footer">
-                    <! [endif] -->
+                    <!--[If lte IE 9]> <div class="footer">
+                    <![endif]-->
                     <div class="container">
                       
                       <div class="pull-left">
@@ -146,8 +153,8 @@
                       </table>
                       
                     </div>
-                    <!-- [If lt IE 9]> </div>
-                    <! [endif] -->
+                    <!--[If lte IE 9]> </div>
+                    <![endif]-->
         </footer>
   
 <script>
@@ -177,6 +184,6 @@ $(function() {
 <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>
   
     
-    
+    <!--[If IE]>  </div><![endif]--> 
 </body>
 </html>
