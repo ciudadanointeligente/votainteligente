@@ -143,6 +143,7 @@
   
   
 <script>
+
 $(function() {
   var availableTags = [{% for comuna in comunas %}
   {label:"{{comuna.nombre}}",value:"{{comuna.slug}}"}{% if not forloop.last %},{% endif %}
@@ -157,15 +158,15 @@ $(function() {
 
   $( ".comunas-search" ).autocomplete({
      select: function(event, ui) { 
-      console.log('selected');
-      console.log(ui.item);
+      
       $( "#comunas-search" ).val( ui.item.label );
         window.location = '/'+ui.item.value; 
         return false;
      }
+
   });
   $('.form-search').submit(function(){
-
+    
     return false;
   })
 });

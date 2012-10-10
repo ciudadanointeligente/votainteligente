@@ -87,8 +87,9 @@
                                     <span class="preguntaleMenu"> <span style="color: rgb(237, 237, 237); opacity: 0.8;">& </span>¡Pregúntale! </span>
                                 </div>
                                 <div class="buscadorMenu">
-                                    <form class="navbar-search pull-right">
+                                    <form class="navbar-search pull-right form-search-comuna">
                                     <input type="text" class="search-query comunas-search" placeholder="Escribe el nombre de tu comuna">
+                                    <p class="comuna-search-error">Debes seleccionar una comuna</p>
                                     </form>
                                 </div>
                             </li>
@@ -194,8 +195,10 @@ $(function() {
         return false;
      }
   });
-  $('.form-search').submit(function(){
+  $('.form-search-comuna').submit(function(){
+    var input = $(this).children('.comunas-search');
 
+    $(this).children('.comuna-search-error').effect("highlight", {color:"green", mode:"hide"}, 3000); 
     return false;
   })
 });
