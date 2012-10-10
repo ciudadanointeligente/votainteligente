@@ -1204,7 +1204,7 @@ ul .tt-wrapper {
     background-position: 0px 0px;
 }
 
-.tt-wrapper li a span {
+.tt-wrapper li .tt-preguntales span {
 	width: 200px;
 	height: auto;
 	line-height: 20px;
@@ -1222,14 +1222,19 @@ ul .tt-wrapper {
 	position: absolute;
 	pointer-events: none;
 	bottom: 100px;
-	opacity: 0;
+	display: none;
 	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 	border: 1px solid #BBEB00;
 	font-weight: bold;
 }
 
-.tt-wrapper li a span:before,
-.tt-wrapper li a span:after{
+.tt-wrapper li .tt-preguntales:hover span{
+    display: block;
+    bottom: -4px;
+}
+
+.tt-wrapper li .tt-preguntales span:before,
+.tt-wrapper li .tt-preguntales span:after{
     content: '';
     position: absolute;
     top: -10px;
@@ -1250,11 +1255,6 @@ ul .tt-wrapper {
 .tt-wrapper li a:hover span{
     opacity: 1;
     bottom: -4px;
-}
-
-.notice_preguntales .close:hover {
-	opacity: 1;
-	color: #388EA3;
 }
 
 /* CIERRA POPUPs */
