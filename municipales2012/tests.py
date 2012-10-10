@@ -9,7 +9,7 @@ from management.commands.contactos_importer import *
 from management.commands.candidatos_importer import *
 from django.test.client import Client
 from django.utils.unittest import skip
-
+from django.template import Template, Context
 
 class ComunaModelTestCase(TestCase):
 	def test_create_comuna(self):
@@ -835,6 +835,50 @@ class CandidatosEstrellitas(TestCase):
 		contacto_personal = Contacto.objects.create(candidato=self.candidato, valor=u"yo-soy-un-weon-malo@rn.cl",tipo=1)
 
 		self.assertEquals(self.candidato.estrellitas, 1)
+
+	def test_candidato_una_estrella_con_dos_contactos(self):
+		contacto_personal = Contacto.objects.create(candidato=self.candidato, valor=u"secretaria@rn.cl",tipo=2)
+		contacto_personal = Contacto.objects.create(candidato=self.candidato, valor=u"yo-soy-un-weon-malo@rn.cl",tipo=1)
+
+		self.assertEquals(self.candidato.estrellitas, 1)
+
+
+class TemplateTagsTesting(TestCase):
+	def setUp(self):
+		area = Area.objects.create(nombre=u"Caracterización", clase_en_carrusel=u"fondoCeleste")
+		pobreza = Dato.objects.create(nombre=u"Pobreza", imagen="chanchito.png")
+		comuna = Comuna.objects.create(nombre=u"La comuna", 
+										slug=u"la-comuna",
+										main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+										)
+		self.indice = Indice.objects.create(
+			comuna =comuna,
+			area = area,
+			dato = pobreza,
+			encabezado = u"encabezado",
+			numero_1 = u"7%",
+			texto_1 = u"de los habitantes de la comuna son pobres",
+			numero_2 = u"n2",
+			texto_2 = u"t2",
+			texto_pie_pagina_1 = u"En el Ranking nacional de pobreza, la comuna está en el lugar",
+			numero_pie_pagina_1 = u"1",
+			texto_pie_pagina_2 = u"tpp2",
+			numero_pie_pagina_2 = u"2",
+			texto_pie_pagina_3 = u"tpp3",
+			numero_pie_pagina_3 = u"3",
+			en_carrusel = True
+			)
+
+
+	# def test_create_link_for_updating_election_data(self):
+ #        template = Template('{% load twitter_tags %}{% twitt_indice indice %}')
+        
+        
+ #        context = Context({"indice": self.indice })
+ #        election_update_url = reverse('election_update',kwargs={'slug':self.election.slug})
+ #        expected_twitt = u''
+        
+ #        self.assertEqual(template.render(context), expected_html) 
 
 
 

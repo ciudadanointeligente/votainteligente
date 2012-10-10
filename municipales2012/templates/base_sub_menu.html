@@ -180,16 +180,24 @@ $(function() {
 
   ];
   $( ".comunas-search" ).autocomplete({
+    delay:0,
     source: availableTags,
     autoFocus: true
   });
+
   $( ".comunas-search" ).autocomplete({
      select: function(event, ui) { 
+      console.log('selected');
+      console.log(ui.item);
       $( "#comunas-search" ).val( ui.item.label );
-      window.location = '/'+ui.item.value; 
-      return false;
+        window.location = '/'+ui.item.value; 
+        return false;
      }
   });
+  $('.form-search').submit(function(){
+
+    return false;
+  })
 });
 </script> 
 {% block extra_js %}
