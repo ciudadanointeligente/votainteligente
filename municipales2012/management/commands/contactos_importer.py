@@ -53,9 +53,7 @@ class Command(BaseCommand):
             	+u" | Contacto: "+contacto.valor
 
         print u"Los siguientes contactos no pudieron ser ingresados"
-        for contacto in contactos_loader.failed:
-        	print contacto[0], contactos[1], contacto[2]
+        print contactos_loader.failed
 
         print u"Los siguientes contactos están vacíos"
-        for contacto in contactos_loader.empty:
-        	print contacto[0], contacto[1]
+        print contactos_loader.empty

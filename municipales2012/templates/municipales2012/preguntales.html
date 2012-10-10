@@ -26,7 +26,7 @@ $(function () {
 
 <div class="container paginaCompleta">
 
-	 <h3>Preguntas a los candidatos de <span><a href="{{comuna}}"> {{comuna}} </a></span> </h3>
+	 <h3>Preguntas a los candidatos de <span><a href="/{{comuna.slug}}"> {{comuna.nombre}} </a></span> </h3>
 
 
 
@@ -60,32 +60,24 @@ $(function () {
 						<br/>
 						*** No tenemos el mail del candidato </strong></em> </small></span>
 
-{% if form.candidato.errors %}
-					<label class="alert alert-error">{{form.candidato.errors}}</label>
-{% endif %}
+					{{form.candidato.errors}}
 				</div>
 				<div class="span8">
 					<label> <strong>Yo soy</strong></label>
-					<input class="input-xxlarge btn-block remitentePreguntale" type="text" name="remitente" placeholder="Tomás González, Comunero, Profesora, Dirigente, etc">
+					{{form.remitente}}
 					<span class="help-block"> <small> <em> <strong>*Identifícate como quieras* </em></strong></small></span>
-{% if form.remitente.errors %}
-					<label>{{form.remitente.errors}}</label>
-{% endif %}
+					{{form.remitente.errors}}
 					<br/>
 
 					<label> <strong>Escribe tu pregunta</strong></label>
-					<textarea rows="5" class="input-xxlarge btn-block" name="texto_pregunta"></textarea>
+					{{form.texto_pregunta}}
 					<span class="help-block"> <small> <em> <strong>*Escribe una pregunta clara y respetuosa. Así aumentas la posibilidad de que respondan seriamente* </strong></em></small></span>
-{% if form.texto_pregunta.errors %}
-					<label>{{form.texto_pregunta.errors}}</label>
-{% endif %}
+					{{form.texto_pregunta.errors}}
 					<br/>
 					<p>
 						{{form.captcha}}	
 					</p>
-{% if form.captcha.errors %}
-					<label>{{form.captcha.errors}}</label>
-{% endif %}
+					{{form.captcha.errors}}
 					<p> Acepto que mis preguntas y respuestas sean publicadas en este mismo medio. <br/>Confirmo que lo que aquí dice no atenta contra el candidato.</p>
 					<button type="submit" class="btn btn-info btnDerecha">He dicho</button>
 				</div>
