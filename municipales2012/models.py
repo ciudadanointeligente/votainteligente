@@ -75,10 +75,11 @@ class Candidato(models.Model):
 	def _estrellitas(self):
 		if self.contacto_set.count() == 0:
 			return 3
-		if self.contacto_set.filter(tipo=2).count() > 0:
-			return 2
 		if self.contacto_set.filter(tipo=1).count() > 0:
 			return 1
+		if self.contacto_set.filter(tipo=2).count() > 0:
+			return 2
+		
 		return None
 
 	estrellitas = property(_estrellitas)

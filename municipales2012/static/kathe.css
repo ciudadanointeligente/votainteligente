@@ -1477,3 +1477,32 @@ padding: 8px 35px 8px 14px;
 
 }
 
+.btn-vota {
+  color: #ffffff !important; 
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+  background-color: #28AAD1 !important;
+  *background-color: #008DBC !important;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#28AAD1), to(#008DBC)) !important;
+  background-image: -webkit-linear-gradient(top, #26B4E9, #008DBC) !important;
+  background-image: -o-linear-gradient(top, #26B4E9, #008DBC)!important;
+  background-image: linear-gradient(to bottom, #26B4E9, #008DBC) !important;
+  background-image: -moz-linear-gradient(top, #26B4E9, #008DBC) !important;
+  background-repeat: repeat-x !important;
+  border-color: #28AAD1 #28AAD1 #249FBC !important;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) !important;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0) !important;
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false) !important;
+}
+
+.btn-vota:hover {
+	 color: #ffffff !important;
+  background-color: #008DBC!important;
+  *background-color: #008DBC !important;
+}
+
+
+.comuna-search-error{
+	display: none;
+	color:black;
+	width: 230px;
+}
