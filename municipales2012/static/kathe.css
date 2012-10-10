@@ -31,10 +31,6 @@ iframe {
   margin:-50px 0 0; /* negative fixed header height */
 }
 
-.navbar .nav > li.rightMenu {
-	float: right;
-}
-
 .buscadorPpal {
 	background-color: #26B4E9;
     border-radius: 6px;
@@ -106,40 +102,50 @@ iframe {
   font-weight:500;
 }
 
+.navbar .nav > li.rightMenu {
+	float: right;
+	margin-top: 15px;
+	margin-right: 40px;
+	margin-left: 40px;
+}
 
 .informateMenu {
 	margin-top: -4px;
-	float: right !important;
 	color: #FFFF08;
 	font-weight: 500;
 	font-family: georgia;
 	font-style: italic;
 	font-size: 13pt;
 	margin-right: 5px;
+	position: relative;
+}
+
+.informateMenu:before {
+	content: url(images/flechaMenu.png);
+	left: -40px;
+    top: -37px;
+    position: absolute;
 }
 
 .preguntaleMenu {
 	margin-top: -4px;
-	float: right !important;
 	color: #00D300;
 	font-weight: 500;
 	font-family: georgia;
 	font-style: italic;
 	font-size: 13pt;
+	position: relative;
+}
+
+.preguntaleMenu:after {
+	content: url(images/flechaMenuInversa.png);
+	right: -40px;
+    top: -37px;
+    position: absolute;
 }
 
 span .casa{
 	color:#26B4E9;
-}
-
-.flechaMenu {
-	margin-right: 18px;
-    margin-top: -23px;
-}
-
-.flechaMenuInversa {
-	margin-left: 18px;
-    margin-top: -23px;
 }
 
 .menuSuperior {
