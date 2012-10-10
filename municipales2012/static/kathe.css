@@ -31,10 +31,6 @@ iframe {
   margin:-50px 0 0; /* negative fixed header height */
 }
 
-.navbar .nav > li.rightMenu {
-	float: right;
-}
-
 .buscadorPpal {
 	background-color: #26B4E9;
     border-radius: 6px;
@@ -106,40 +102,50 @@ iframe {
   font-weight:500;
 }
 
+.navbar .nav > li.rightMenu {
+	float: right;
+	margin-top: 15px;
+	margin-right: 40px;
+	margin-left: 40px;
+}
 
 .informateMenu {
 	margin-top: -4px;
-	float: right !important;
 	color: #FFFF08;
 	font-weight: 500;
 	font-family: georgia;
 	font-style: italic;
 	font-size: 13pt;
 	margin-right: 5px;
+	position: relative;
+}
+
+.informateMenu:before {
+	content: url(images/flechaMenu.png);
+	left: -40px;
+    top: -37px;
+    position: absolute;
 }
 
 .preguntaleMenu {
 	margin-top: -4px;
-	float: right !important;
 	color: #00D300;
 	font-weight: 500;
 	font-family: georgia;
 	font-style: italic;
 	font-size: 13pt;
+	position: relative;
+}
+
+.preguntaleMenu:after {
+	content: url(images/flechaMenuInversa.png);
+	right: -40px;
+    top: -37px;
+    position: absolute;
 }
 
 span .casa{
 	color:#26B4E9;
-}
-
-.flechaMenu {
-	margin-right: 18px;
-    margin-top: -23px;
-}
-
-.flechaMenuInversa {
-	margin-left: 18px;
-    margin-top: -23px;
 }
 
 .menuSuperior {
@@ -1204,7 +1210,7 @@ ul .tt-wrapper {
     background-position: 0px 0px;
 }
 
-.tt-wrapper li a span {
+.tt-wrapper li .tt-preguntales span {
 	width: 200px;
 	height: auto;
 	line-height: 20px;
@@ -1222,14 +1228,19 @@ ul .tt-wrapper {
 	position: absolute;
 	pointer-events: none;
 	bottom: 100px;
-	opacity: 0;
+	display: none;
 	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 	border: 1px solid #BBEB00;
 	font-weight: bold;
 }
 
-.tt-wrapper li a span:before,
-.tt-wrapper li a span:after{
+.tt-wrapper li .tt-preguntales:hover span{
+    display: block;
+    bottom: -4px;
+}
+
+.tt-wrapper li .tt-preguntales span:before,
+.tt-wrapper li .tt-preguntales span:after{
     content: '';
     position: absolute;
     top: -10px;
@@ -1250,11 +1261,6 @@ ul .tt-wrapper {
 .tt-wrapper li a:hover span{
     opacity: 1;
     bottom: -4px;
-}
-
-.notice_preguntales .close:hover {
-	opacity: 1;
-	color: #388EA3;
 }
 
 /* CIERRA POPUPs */

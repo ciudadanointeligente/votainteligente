@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!--[if lt IE 9]>
+    <script src="http://d25m5ercbv4o2x.cloudfront.net/js/html5shiv.js"></script>
+    <![endif]-->
+
+<script type="text/javascript"> 
+var $buoop = {} 
+$buoop.ol = window.onload; 
+window.onload=function(){ 
+ try {if ($buoop.ol) $buoop.ol();}catch (e) {} 
+ var e = document.createElement("script"); 
+ e.setAttribute("type", "text/javascript"); 
+ e.setAttribute("src", "http://browser-update.org/update.js"); 
+ document.body.appendChild(e); 
+} 
+</script> 
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 <meta property="og:description" content="Todo lo que necesitas saber para votar"/>    
      
@@ -69,8 +84,10 @@
                         <ul class="menuPpal nav">
                             <li class="pull-left"><a href="{% url home %}"><img alt="" src="{{ STATIC_URL }}images/logoVotaMunicipales.png" style="margin-left: -16px; margin-right: 155px;  margin-top: 26px;"></a> </li>
                             <li class="pull-right rightMenu">
-                                <span class="preguntaleMenu"> <span style="color: rgb(237, 237, 237); opacity: 0.8;">& </span>¡Pregúntale! <img class="flechaMenuInversa" alt="" src="{{ STATIC_URL }}images/flechaMenuInversa.png"> </span>
-                                <span class="informateMenu"><img class="flechaMenu" alt="" src="{{ STATIC_URL }}images/flechaMenu.png"/> Infórmate </span>
+                                <div>
+                                    <span class="informateMenu">Infórmate </span>
+                                    <span class="preguntaleMenu"> <span style="color: rgb(237, 237, 237); opacity: 0.8;">& </span>¡Pregúntale! </span>
+                                </div>
                                 <div class="buscadorMenu">
                                     <form class="navbar-search pull-right">
                                     <input type="text" class="search-query comunas-search" placeholder="Escribe el nombre de tu comuna">
@@ -182,7 +199,17 @@ $(function() {
 
 
 <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.js"></script>
-  
+<script type="text/javascript"> 
+var $buoop = {} 
+$buoop.ol = window.onload; 
+window.onload=function(){ 
+ try {if ($buoop.ol) $buoop.ol();}catch (e) {} 
+ var e = document.createElement("script"); 
+ e.setAttribute("type", "text/javascript"); 
+ e.setAttribute("src", "http://browser-update.org/update.js"); 
+ document.body.appendChild(e); 
+} 
+</script> 
     
     <!--[If IE]>  </div><![endif]--> 
 </body>
