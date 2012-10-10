@@ -122,7 +122,7 @@ iframe {
 
 .informateMenu:before {
 	content: url(images/flechaMenu.png);
-	left: -40px;
+	left: -37px;
     top: -37px;
     position: absolute;
 }
@@ -139,7 +139,7 @@ iframe {
 
 .preguntaleMenu:after {
 	content: url(images/flechaMenuInversa.png);
-	right: -40px;
+	right: -37px;
     top: -37px;
     position: absolute;
 }
@@ -1267,7 +1267,7 @@ ul .tt-wrapper {
 
 
 .thumbnails {
-  margin-left: -20px;
+  margin-left: -3px;
   list-style: none;
   *zoom: 1;
 }
