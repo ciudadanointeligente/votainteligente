@@ -1499,3 +1499,10 @@ padding: 8px 35px 8px 14px;
   background-color: #008DBC!important;
   *background-color: #008DBC !important;
 }
+
+
+.comuna-search-error{
+	display: none;
+	color:black;
+	width: 230px;
+}

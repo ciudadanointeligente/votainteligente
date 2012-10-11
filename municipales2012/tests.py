@@ -692,33 +692,22 @@ class MessageTestCase(TestCase):
 		self.assertTrue(candidato)
 		self.assertTrue(texto_respuesta)
 	
+	def test_preguntas_count(self):
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
+		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
+		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3')
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato1)
+		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
+		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta 2', pregunta=pregunta3, candidato=self.candidato3)
 
-	#def test_create_mail_template(self):
-		
-	# def test_create_question_mail(self):
-	# 	import imaplib
-	# 	connection = imaplib.IMAP4_SSL('imap.gmail.com', 993)
-	# 	connection.login(user, pass)
-'''
-	def test_send_question_mail(self):
-		
-	def test_save_question_mail(self):
-		
-	def test_retrieve_question_mail(self):
-		
-	def test_obtain_answer_mail(self):
-		
-	def test_save_answer_mail(self):
-		
-	def test_retrieve_answer_mail(self):
-		
-	def test_associate_question_answer(self):
-		
-	def test_display_questions_answers(self):
-		
-	def test_calculate_response_stats(self):
-	
-'''	
+		self.assertEqual(self.comuna1.numero_preguntas(), 2)
+		self.assertEqual(self.comuna2.numero_preguntas(), 1)
+		self.assertEqual(self.comuna3.numero_preguntas(), 0)
+
+
+
+
 class ContactosLoaderTestCase(TestCase):
 	def setUp(self):
 		self.line1 = ["FIERA FEROZ","Algarrobo","fieripipoo@ciudadanointeligente.cl"]
