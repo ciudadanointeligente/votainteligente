@@ -467,6 +467,18 @@ class TemplatesViewsTestCase(TestCase):
 		self.assertEquals(response.context['title'], u"Fiscaliza")
 
 
+	def test_get_que_puedo_hacer(self):
+		url = reverse('que_puedo_hacer')
+		response = self.client.get(url)
+
+		self.assertTemplateUsed(response, 'municipales2012/que_puedo_hacer.html')
+		self.assertEquals(response.status_code, 200)
+		self.assertTrue('comunas' in response.context)
+		self.assertEquals(response.context['comunas'].count(), 2)
+		self.assertTrue('title' in response.context)
+		self.assertEquals(response.context['title'],u"¿Qué puedo hacer?")
+
+
 class MessageTestCase(TestCase):
 
 #Load candidate mailing data
