@@ -186,7 +186,7 @@ span .casa{
 .itemSubMenu {
 	margin-top: -5px;
 	z-index: 3;
-	margin-right: 11px;
+	margin-right: -16px;
 }
 
 .sidebarDerecha {
@@ -1131,6 +1131,16 @@ div.navi a.active {
 	border-radius:4px 4px 4px 4px;
 	 border: 1px solid #DDDDDD;}
 
+.bannerQuePuedo {
+	width:965px;
+	 height: 137px;
+	border-radius:4px 4px 4px 4px;
+	 border: 1px solid #DDDDDD;
+	}
+
+
+
+
 .tituloAcordion {
 	background-color:#F2F2F2;
 	}
@@ -1515,3 +1525,26 @@ padding: 8px 35px 8px 14px;
     padding-left: 5px;
     width: 230px;
 }
+
+.calugaQuePuedo {
+	border-bottom: 1px dashed grey;
+    margin-bottom: 0px;
+    padding-bottom: 24px;
+}
+
+.calugaQuePuedo:last-child  {
+	border-bottom: none;
+}
+
+.quePuedoHacer {
+-moz-transition: all 0.2s ease-in-out 0s;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+    display: block;
+    line-height: 20px;
+
+   }
+    padding: 4px;
+
+
