@@ -116,6 +116,17 @@ class MetodologiaView(TemplateView):
 		return context
 
 
+class QuePuedoHacerHacerView(TemplateView):
+	template_name = "municipales2012/que_puedo_hacer.html"
+
+	def get_context_data(self, **kwargs):
+		context = super(QuePuedoHacerHacerView, self).get_context_data(**kwargs)
+		context['title'] = u"¿Qué puedo hacer?"
+		comunas = Comuna.objects.all()
+		context['comunas'] = comunas
+		return context
+
+
 class QuienesSomosView(TemplateView):
 	template_name="municipales2012/quienesSomos.html"
 

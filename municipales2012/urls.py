@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
-from views import HomeTemplateView, ComunaOverview, ComunaIndices, MetodologiaView, QuienesSomosView, ComunaPreguntales, ReportaView
+from views import HomeTemplateView, ComunaOverview, ComunaIndices, MetodologiaView, QuienesSomosView, ComunaPreguntales, ReportaView,\
+QuePuedoHacerHacerView
 from django.views.generic import TemplateView
 
 urlpatterns = patterns('',
@@ -10,6 +11,7 @@ urlpatterns = patterns('',
 	url(r'^metodologia/?$', MetodologiaView.as_view(), name="metodologia"),
 	url(r'^somos/?$', QuienesSomosView.as_view(), name="somos"),
 	url(r'^fiscaliza/?$', ReportaView.as_view(), name="reporta"),
+	url(r'^que_puedo_hacer/?$', QuePuedoHacerHacerView.as_view(), name="que_puedo_hacer"),
 	
 	
 
