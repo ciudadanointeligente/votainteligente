@@ -101,7 +101,7 @@ $(function () {
 		{% for candidato, respuesta in respuestas.items%}
 					<div class="accordion-inner">
 						<h4 class="nombreCandidato">{{candidato}}</h4>
-						<p>{{respuesta}}</p>
+						<p id="{{respuesta.pk}}">{{respuesta.texto_respuesta}}</p>
 						<br>
 					</div>
 		{% endfor %}
