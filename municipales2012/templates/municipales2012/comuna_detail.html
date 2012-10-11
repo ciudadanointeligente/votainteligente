@@ -32,7 +32,7 @@
                                                    <ul class="thumbnails">
                                                         <li class="span12" style="margin-bottom: 10px;">
                                                             <div>
-                                                           <a href="{% url comuna-index-detail slug=comuna.slug %}" target="_blank" class="btn btn-block btn-primary btnMunicipales">Revisa todas las cifras de {{comuna}}</a>
+                                                           <a href="{% url comuna-index-detail slug=comuna.slug %}" target="_blank" class="btn btn-block btn-vota">Revisa los datos duros de {{comuna}}</a>
                                                            
                                                             </div>
                                                         </li>
@@ -47,8 +47,8 @@
 
                                                         <li class="span6" style="margin-right: 0px;">
                                                             <div class="well thumbnail">
-                                                          <a href="{% url comuna-preguntales comuna.slug %}" target="_blank" class="btn btn-block btn-success btnMunicipales">¡Pregúntale!</a>
-                                                           <p class="textoBTN">A tus candidatos lo que quieras</p>
+                                                          <a href="{% url comuna-preguntales comuna.slug %}" target="_blank" class="btn btn-block btn-success btnMunicipales">¡Pregúntales!</a>
+                                                           <p class="textoBTN"> Hay <strong>{{comuna.numero_preguntas}}</strong> pregunta(s), haz la tuya.</p>
                                                             </div>
                                                         </li>
  

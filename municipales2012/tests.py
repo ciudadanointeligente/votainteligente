@@ -9,7 +9,7 @@ from management.commands.contactos_importer import *
 from management.commands.candidatos_importer import *
 from django.test.client import Client
 from django.utils.unittest import skip
-
+from django.template import Template, Context
 
 class ComunaModelTestCase(TestCase):
 	def test_create_comuna(self):
@@ -692,33 +692,22 @@ class MessageTestCase(TestCase):
 		self.assertTrue(candidato)
 		self.assertTrue(texto_respuesta)
 	
+	def test_preguntas_count(self):
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
+		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
+		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3')
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato1)
+		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
+		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta 2', pregunta=pregunta3, candidato=self.candidato3)
 
-	#def test_create_mail_template(self):
-		
-	# def test_create_question_mail(self):
-	# 	import imaplib
-	# 	connection = imaplib.IMAP4_SSL('imap.gmail.com', 993)
-	# 	connection.login(user, pass)
-'''
-	def test_send_question_mail(self):
-		
-	def test_save_question_mail(self):
-		
-	def test_retrieve_question_mail(self):
-		
-	def test_obtain_answer_mail(self):
-		
-	def test_save_answer_mail(self):
-		
-	def test_retrieve_answer_mail(self):
-		
-	def test_associate_question_answer(self):
-		
-	def test_display_questions_answers(self):
-		
-	def test_calculate_response_stats(self):
-	
-'''	
+		self.assertEqual(self.comuna1.numero_preguntas(), 2)
+		self.assertEqual(self.comuna2.numero_preguntas(), 1)
+		self.assertEqual(self.comuna3.numero_preguntas(), 0)
+
+
+
+
 class ContactosLoaderTestCase(TestCase):
 	def setUp(self):
 		self.line1 = ["FIERA FEROZ","Algarrobo","fieripipoo@ciudadanointeligente.cl"]
@@ -835,6 +824,50 @@ class CandidatosEstrellitas(TestCase):
 		contacto_personal = Contacto.objects.create(candidato=self.candidato, valor=u"yo-soy-un-weon-malo@rn.cl",tipo=1)
 
 		self.assertEquals(self.candidato.estrellitas, 1)
+
+	def test_candidato_una_estrella_con_dos_contactos(self):
+		contacto_personal = Contacto.objects.create(candidato=self.candidato, valor=u"secretaria@rn.cl",tipo=2)
+		contacto_personal = Contacto.objects.create(candidato=self.candidato, valor=u"yo-soy-un-weon-malo@rn.cl",tipo=1)
+
+		self.assertEquals(self.candidato.estrellitas, 1)
+
+
+class TemplateTagsTesting(TestCase):
+	def setUp(self):
+		area = Area.objects.create(nombre=u"Caracterización", clase_en_carrusel=u"fondoCeleste")
+		pobreza = Dato.objects.create(nombre=u"Pobreza", imagen="chanchito.png")
+		comuna = Comuna.objects.create(nombre=u"La comuna", 
+										slug=u"la-comuna",
+										main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+										)
+		self.indice = Indice.objects.create(
+			comuna =comuna,
+			area = area,
+			dato = pobreza,
+			encabezado = u"encabezado",
+			numero_1 = u"7%",
+			texto_1 = u"de los habitantes de la comuna son pobres",
+			numero_2 = u"n2",
+			texto_2 = u"t2",
+			texto_pie_pagina_1 = u"En el Ranking nacional de pobreza, la comuna está en el lugar",
+			numero_pie_pagina_1 = u"1",
+			texto_pie_pagina_2 = u"tpp2",
+			numero_pie_pagina_2 = u"2",
+			texto_pie_pagina_3 = u"tpp3",
+			numero_pie_pagina_3 = u"3",
+			en_carrusel = True
+			)
+
+
+	# def test_create_link_for_updating_election_data(self):
+ #        template = Template('{% load twitter_tags %}{% twitt_indice indice %}')
+        
+        
+ #        context = Context({"indice": self.indice })
+ #        election_update_url = reverse('election_update',kwargs={'slug':self.election.slug})
+ #        expected_twitt = u''
+        
+ #        self.assertEqual(template.render(context), expected_html) 
 
 
 

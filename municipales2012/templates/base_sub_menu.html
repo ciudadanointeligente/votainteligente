@@ -87,8 +87,9 @@
                                     <span class="preguntaleMenu"> <span style="color: rgb(237, 237, 237); opacity: 0.8;">& </span>¡Pregúntale! </span>
                                 </div>
                                 <div class="buscadorMenu">
-                                    <form class="navbar-search pull-right">
+                                    <form class="navbar-search pull-right form-search-comuna">
                                     <input type="text" class="search-query comunas-search" placeholder="Escribe el nombre de tu comuna">
+                                    <p class="comuna-search-error">Debes seleccionar una comuna</p>
                                     </form>
                                 </div>
                             </li>
@@ -123,7 +124,7 @@
              
               <div class="container">
               <!--[If IE]> <div class="alert alert-error">
-              <p> Este sitio no esta optimizado para Internet Explorer, por favor usar otro navegador </p> </div>
+              <p> Este sitio no esta optimizado para Internet Explorer, te recomendamos usar Firefox o Chrome en sus últimas versiones para una mejor experiencia. </p> </div>
               <![endif]-->
 
                 {% block content %}
@@ -180,16 +181,26 @@ $(function() {
 
   ];
   $( ".comunas-search" ).autocomplete({
+    delay:0,
     source: availableTags,
     autoFocus: true
   });
+
   $( ".comunas-search" ).autocomplete({
      select: function(event, ui) { 
+      console.log('selected');
+      console.log(ui.item);
       $( "#comunas-search" ).val( ui.item.label );
-      window.location = '/'+ui.item.value; 
-      return false;
+        window.location = '/'+ui.item.value; 
+        return false;
      }
   });
+  $('.form-search-comuna').submit(function(){
+    var input = $(this).children('.comunas-search');
+
+    $(this).children('.comuna-search-error').effect("highlight", {color:"green", mode:"hide"}, 3000); 
+    return false;
+  })
 });
 </script> 
 {% block extra_js %}

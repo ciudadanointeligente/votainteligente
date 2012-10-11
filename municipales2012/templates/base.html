@@ -143,6 +143,7 @@
   
   
 <script>
+
 $(function() {
   var availableTags = [{% for comuna in comunas %}
   {label:"{{comuna.nombre}}",value:"{{comuna.slug}}"}{% if not forloop.last %},{% endif %}
@@ -150,18 +151,26 @@ $(function() {
 
   ];
   $( ".comunas-search" ).autocomplete({
+    delay:0,
     source: availableTags,
     autoFocus: true
   });
+
   $( ".comunas-search" ).autocomplete({
      select: function(event, ui) { 
+      
       $( "#comunas-search" ).val( ui.item.label );
-      window.location = '/'+ui.item.value; 
-      return false;
+        window.location = '/'+ui.item.value; 
+        return false;
      }
+
   });
+  $('.form-search').submit(function(){
+    
+    return false;
+  })
 });
-</script>
+</script> 
 {% block extra_js %}
 {% endblock extra_js %}
 

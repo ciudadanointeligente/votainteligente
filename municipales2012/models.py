@@ -16,6 +16,12 @@ class Comuna(models.Model):
 	def __unicode__(self):
 		return self.nombre
 
+	def numero_preguntas(self):
+		candidatos_comuna = Candidato.objects.filter(comuna=self)
+		preguntas_candidatos_comuna = Pregunta.objects.filter(candidato__in=candidatos_comuna).distinct()
+		return preguntas_candidatos_comuna.count()
+
+
 
 class Area(models.Model):
 	nombre = models.CharField(max_length=255)
@@ -69,10 +75,11 @@ class Candidato(models.Model):
 	def _estrellitas(self):
 		if self.contacto_set.count() == 0:
 			return 3
-		if self.contacto_set.filter(tipo=2).count() > 0:
-			return 2
 		if self.contacto_set.filter(tipo=1).count() > 0:
 			return 1
+		if self.contacto_set.filter(tipo=2).count() > 0:
+			return 2
+		
 		return None
 
 	estrellitas = property(_estrellitas)

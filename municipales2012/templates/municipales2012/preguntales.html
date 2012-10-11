@@ -26,7 +26,7 @@ $(function () {
 
 <div class="container paginaCompleta">
 
-	 <h3>Preguntas a los candidatos de <span><a href="/{{comuna.slug}}"> {{comuna.nombre}} </a></span> </h3>
+	 <h3>Preguntas a los candidatos de <span><a href="{% url comuna-overview slug=comuna.slug %}"> {{comuna.nombre}} </a></span> </h3>
 
 
 
