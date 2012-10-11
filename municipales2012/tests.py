@@ -225,7 +225,7 @@ class MolestaAUnCandidato(TestCase):
 
 		self.assertEqual(template.render(context), expected_html)
 
-	def test_molesta_a_un_candidato_sin_twitter_por_su_respuesta_via_twitter(self):
+	def test_molesta_a_un_candidato_con_twitter_por_su_respuesta_via_twitter(self):
 		template = Template("{% load twitter_tags %}{{ respuesta|twittrespuesta }}")
 		context = Context({"respuesta": self.respuesta2 })
 		url_respuesta = self.respuesta2.get_absolute_url()
