@@ -129,7 +129,7 @@ class Pregunta(models.Model):
 		return self.texto_pregunta
 
 	def enviar(self):
-		subject= 'Un ciudadano está interesado en más información sobre tu candidatura [ID=#' + self.id + ']'
+		subject= 'Un ciudadano está interesado en más información sobre tu candidatura [ID=#' + str(self.id) + ']'
 		candidatos = Candidato.objects.filter(pregunta=self)
 		for candidato in candidatos:
 			texto_introduccion = 'Estimado(a) ' + candidato.nombre + ',\reste mensaje ha sido enviado desde votainteligente.cl por un ciudadano con el deseo de informarse sobre su candidatura:'
