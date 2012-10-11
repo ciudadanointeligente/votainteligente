@@ -205,7 +205,7 @@ span .casa{
 
 .footer {
     border-right: 1px solid white;
-    list-style: none outside none;
+    list-style: circle;
     margin: 40px 0 0px auto;
     padding-right: 17px;
 	padding-bottom: 10px;
@@ -216,6 +216,7 @@ span .casa{
     margin-bottom: 0;
     position: relative;
 	overflow: visible;
+	color: white;
 
 	}
 
@@ -1502,7 +1503,14 @@ padding: 8px 35px 8px 14px;
 
 
 .comuna-search-error{
-	display: none;
-	color:black;
-	width: 230px;
+	 background-color: white !important;
+    border-radius: 4px 4px 4px 4px;
+    color: black;
+    display: none;
+    font-family: georgia;
+    font-size: 10pt;
+    font-style: italic;
+    margin-top: 15px;
+    opacity: 0.8;
+    width: 550px;
 }
