@@ -69,9 +69,8 @@ class ComunaPreguntales(CreateView):
 			respuestas = {}
 			respuestas_pregunta = Respuesta.objects.filter(pregunta=pregunta)
 			for respuesta_pregunta in respuestas_pregunta:
-				texto_respuesta = respuesta_pregunta.texto_respuesta
 				nombre_candidato = respuesta_pregunta.candidato.nombre
-				respuestas[nombre_candidato] = texto_respuesta
+				respuestas[nombre_candidato] = respuesta_pregunta
 			nombre_emisor = pregunta.remitente
 			mensaje[texto_pregunta] = respuestas
 			conversaciones[nombre_emisor] = mensaje

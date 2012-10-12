@@ -2,6 +2,7 @@
 from django.core.validators import MaxLengthValidator
 from django.db import models
 from mailer import send_mail
+from django.core.urlresolvers import reverse
 # from django.core.mail import send_mail
 # Create your models here.
 
@@ -67,6 +68,7 @@ class Candidato(models.Model):
 	comuna = models.ForeignKey(Comuna)
 	partido = models.CharField(max_length=255)
 	web = models.CharField(max_length=255, blank=True, null=True)
+	twitter = models.CharField(max_length=255, null=True)
 
 
 	def __unicode__(self):
@@ -132,9 +134,9 @@ class Pregunta(models.Model):
 		subject= 'Un ciudadano está interesado en más información sobre tu candidatura [ID=#' + str(self.id) + ']'
 		candidatos = Candidato.objects.filter(pregunta=self)
 		for candidato in candidatos:
-			texto_introduccion = 'Estimado(a) ' + candidato.nombre + ',\reste mensaje ha sido enviado desde votainteligente.cl por un ciudadano con el deseo de informarse sobre su candidatura:'
-			texto_cierre = '\r\r--\r*para responder a esta pregunta responda este mismo correo sin cambiar el asunto/subject. Gracias.\rLa respuesta quedará publicada en http://votainteligente.cl'
-			mensaje = texto_introduccion + '\r\rYo, ' + self.remitente + ' quiero saber: \r\r' + self.texto_pregunta + texto_cierre
+			texto_introduccion = u'Estimado(a) ' + candidato.nombre + ',\reste mensaje ha sido enviado desde votainteligente.cl por un ciudadano con el deseo de informarse sobre su candidatura:'
+			texto_cierre = u'\r\r--\r*para responder a esta pregunta responda este mismo correo sin cambiar el asunto/subject. Gracias.\rLa respuesta quedará publicada en http://votainteligente.cl'
+			mensaje = texto_introduccion + u'\r\rYo, ' + self.remitente + ' quiero saber: \r\r' + self.texto_pregunta + texto_cierre
 			destinaciones = Contacto.objects.filter(candidato=candidato)
 			for destinacion in destinaciones:
 				send_mail(subject, mensaje, 'municipales2012@votainteligente.cl',[destinacion.valor])
@@ -151,6 +153,10 @@ class Respuesta(models.Model):
 
 	def __unicode__(self):
 		return self.texto_respuesta
+
+	def get_absolute_url(self):
+		url = reverse('comuna-preguntales', kwargs={'slug':self.candidato.comuna.slug})
+		return url+"#"+str(self.id)
 
 
 		
