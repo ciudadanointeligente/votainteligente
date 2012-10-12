@@ -3,6 +3,8 @@ from django.core.validators import MaxLengthValidator
 from django.db import models
 from mailer import send_mail
 from django.core.urlresolvers import reverse
+from django.db.models import Q
+from django.db.models import Count
 # from django.core.mail import send_mail
 # Create your models here.
 
@@ -62,6 +64,22 @@ class Indice(models.Model):
 	def __unicode__(self):
 		return self.dato.nombre+' - '+self.comuna.nombre
 
+class SinDatos(models.Manager):
+	def get_query_set(self):
+		#Annotate hace que a cada candidato tenga un campo extra
+		#llamado contacto_count que es la cantidad de contactos
+		#entonces puedes decirle a los objetos resultado de este queryset
+		#candidato.contacto_count
+		#y debería ser 0 el resultado por que filtramos por eso
+		#los Q objects permiten hacer consultas complejas de sql
+		#por ejemplo hacer varios ors
+		return super(SinDatos, self).get_query_set().annotate(contacto_count=Count('contacto'))\
+												.filter(\
+													Q(twitter__isnull=True) \
+													| Q(twitter__exact='') | \
+													Q(contacto_count=0))
+
+
 class Candidato(models.Model):
 	nombre = models.CharField(max_length=255)
 	#mail = models.CharField(max_length=255)
@@ -70,6 +88,9 @@ class Candidato(models.Model):
 	web = models.CharField(max_length=255, blank=True, null=True)
 	twitter = models.CharField(max_length=255, null=True, blank=True)
 
+	#managers
+	objects = models.Manager()
+	sin_datos = SinDatos()
 
 	def __unicode__(self):
 		return self.nombre
@@ -85,6 +106,21 @@ class Candidato(models.Model):
 		return None
 
 	estrellitas = property(_estrellitas)
+
+	def _has_twitter(self):
+		if self.twitter:
+			return True
+		return False
+
+	has_twitter = property(_has_twitter)
+
+	def _has_contacto(self):
+		if self.contacto_set.count() > 0:
+			return True
+		return False
+
+	has_contacto = property(_has_contacto)
+
 
 class Contacto(models.Model):
 	PERSONAL = 1
