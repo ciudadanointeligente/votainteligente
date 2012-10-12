@@ -2,6 +2,7 @@
 from django.core.validators import MaxLengthValidator
 from django.db import models
 from mailer import send_mail
+from django.core.urlresolvers import reverse
 # from django.core.mail import send_mail
 # Create your models here.
 
@@ -67,6 +68,7 @@ class Candidato(models.Model):
 	comuna = models.ForeignKey(Comuna)
 	partido = models.CharField(max_length=255)
 	web = models.CharField(max_length=255, blank=True, null=True)
+	twitter = models.CharField(max_length=255, null=True)
 
 
 	def __unicode__(self):
@@ -151,6 +153,15 @@ class Respuesta(models.Model):
 
 	def __unicode__(self):
 		return self.texto_respuesta
+
+	def get_absolute_url(self):
+		url = reverse('comuna-preguntales', kwargs={'slug':self.candidato.comuna.slug})
+		return url+"#"+str(self.id)
+
+	def is_answered(self):
+		if self.texto_respuesta.strip() == u"Sin Respuesta":
+			return False
+		return True
 
 
 		

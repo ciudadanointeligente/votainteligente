@@ -10,6 +10,7 @@ from management.commands.candidatos_importer import *
 from django.test.client import Client
 from django.utils.unittest import skip
 from django.template import Template, Context
+from urllib2 import quote
 
 class ComunaModelTestCase(TestCase):
 	def test_create_comuna(self):
@@ -137,7 +138,124 @@ class IndiceTestCase(TestCase):
 
 		self.assertEquals(indice.__unicode__(), u"Ingreso por persona - La comuna")
 
-	
+
+class CandidatoTestCase(TestCase):
+	def setUp(self):
+		self.comuna1 = Comuna.objects.create(nombre=u"La comuna1", slug=u"la-comuna1")
+
+	def test_create_candidato(self):
+		candidato, created = Candidato.objects.get_or_create(comuna=self.comuna1,\
+															 nombre=u"el candidato",\
+															 partido=u"API",\
+															 web=u"http://votainteligente.cl",\
+															 twitter=u"candidato")
+
+		self.assertTrue(created)
+		self.assertEquals(candidato.comuna, self.comuna1)
+		self.assertEquals(candidato.nombre, u"el candidato")
+		self.assertEquals(candidato.partido, u"API")
+		self.assertEquals(candidato.web, u"http://votainteligente.cl")
+		self.assertEquals(candidato.twitter, "candidato")
+
+
+	def test_create_candidato_without_twitter(self):
+		candidato, created = Candidato.objects.get_or_create(comuna=self.comuna1,\
+															 nombre=u"el candidato",\
+															 partido=u"API",\
+															 web=u"http://votainteligente.cl")
+
+		self.assertTrue(created)
+		self.assertTrue(candidato.twitter is None)
+
+
+class RespuestaTestCase(TestCase):
+	def setUp(self):
+		self.comuna1 = Comuna.objects.create(nombre=u"La comuna1", slug=u"la-comuna1")
+		self.candidato1 = Candidato.objects.create(comuna=self.comuna1,\
+												 nombre=u"el candidato",\
+												 partido=u"API",\
+												 web=u"http://votainteligente.cl",\
+												 twitter=u"candidato")
+
+		self.pregunta1 = Pregunta.objects.create(
+											remitente='remitente1', 
+											texto_pregunta='texto_pregunta1')
+
+
+	def test_create_respuesta(self):
+		respuesta, created = Respuesta.objects.get_or_create(candidato = self.candidato1, pregunta = self.pregunta1)
+
+		self.assertTrue(created)
+		self.assertEquals(respuesta.candidato, self.candidato1)
+		self.assertEquals(respuesta.pregunta, self.pregunta1)
+		self.assertEquals(respuesta.texto_respuesta, u"Sin Respuesta")
+
+	def test_get_absolute_url(self):
+		respuesta, created = Respuesta.objects.get_or_create(candidato = self.candidato1, pregunta = self.pregunta1)
+
+		url = respuesta.get_absolute_url()
+		url_preguntales = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
+		self.assertEquals(url, url_preguntales+"#"+str(respuesta.id))
+
+	def test_is_not_answered(self):
+		respuesta = Respuesta.objects.create(candidato = self.candidato1, pregunta = self.pregunta1)
+
+		self.assertFalse(respuesta.is_answered())
+
+	def test_is_answered(self):
+		respuesta = Respuesta.objects.create(candidato = self.candidato1, pregunta = self.pregunta1)
+		respuesta.texto_respuesta = u"Una respuesta maravillosa del candidato"
+		self.assertTrue(respuesta.is_answered())
+
+
+	def test_is_not_answered_with_spaces(self):
+		respuesta = Respuesta.objects.create(candidato = self.candidato1, pregunta = self.pregunta1)
+		respuesta.texto_respuesta = u"Sin Respuesta     "#Many spaces at the end
+
+		self.assertFalse(respuesta.is_answered())
+
+class MolestaAUnCandidato(TestCase):
+	def setUp(self):
+		self.comuna1 = Comuna.objects.create(nombre=u"La comuna1", slug=u"la-comuna1")
+		self.candidato_con_twitter = Candidato.objects.create(comuna=self.comuna1,\
+												 nombre=u"el candidato con twitter",\
+												 partido=u"API",\
+												 web=u"http://votainteligente.cl",\
+												 twitter=u"candidato")
+
+		self.candidato_sin_twitter = Candidato.objects.create(comuna=self.comuna1,\
+												 nombre=u"el candidato sin twitter",\
+												 partido=u"API",\
+												 web=u"http://votainteligente.cl")
+
+		self.pregunta1 = Pregunta.objects.create(
+											remitente='remitente1', 
+											texto_pregunta='texto_pregunta1')
+
+		self.respuesta1 = Respuesta.objects.create(candidato = self.candidato_con_twitter, pregunta = self.pregunta1)
+		self.respuesta2 = Respuesta.objects.create(candidato = self.candidato_sin_twitter, pregunta = self.pregunta1)
+
+	def test_molesta_a_un_candidato_sin_twitter_por_su_respuesta_via_twitter(self):
+		template = Template("{% load twitter_tags %}{{ respuesta|twittrespuesta }}")
+		context = Context({"respuesta": self.respuesta2 })
+		url_respuesta = self.respuesta2.get_absolute_url()
+		expected_html = u""
+
+		self.assertEqual(template.render(context), expected_html)
+
+	def test_molesta_a_un_candidato_con_twitter_por_su_respuesta_via_twitter(self):
+		template = Template("{% load twitter_tags %}{{ respuesta|twittrespuesta }}")
+		context = Context({"respuesta": self.respuesta1 })
+		url_respuesta = u"http://www.votainteligente.cl"+self.respuesta1.get_absolute_url()
+		expected_html = u'<a href="https://twitter.com/intent/tweet?screen_name='+self.respuesta1.candidato.twitter+u'" data-text="'+url_respuesta+u'" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Tweet to @'+self.respuesta1.candidato.twitter+u'</a>'
+		
+		self.assertEqual(template.render(context), expected_html)
+
+
+        
+
+        
+
 class HomeTestCase(TestCase):
 	def test_get_the_home_page(self):
 		url = reverse('home')
@@ -682,8 +800,8 @@ class MessageTestCase(TestCase):
 		response = self.client.get(url)
 		
 		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato1)
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato2)
+		respuesta1 = Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato1)
+		respuesta2 = Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato2)
 
 		self.assertEquals(response.status_code, 200)
 		#Check conversaciones
@@ -696,6 +814,9 @@ class MessageTestCase(TestCase):
 		pregunta.save()
 		response = self.client.get(url)
 		conversaciones = response.context['conversaciones']
+		#Creo que no es necesario hacer esto;Se puede acceder a todas las variables de una Pregunta en el template
+		expected_conversaciones = {u"remitente1":{u"texto_pregunta1":{u"candidato1":respuesta1,u"candidato2":respuesta2}}}
+		self.assertEquals(conversaciones, expected_conversaciones)
 		nombre_remitente, pregunta = conversaciones.popitem()
 		texto_pregunta, respuestas = pregunta.popitem()
 		candidato, texto_respuesta = respuestas.popitem()

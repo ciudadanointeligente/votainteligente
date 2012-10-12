@@ -1,6 +1,7 @@
 {% extends "base_sub_menu.html" %}
 {% load estrellitas %}
 {% block content %}
+{% load twitter_tags %}
  
 <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js" ></script>
 <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
@@ -100,8 +101,8 @@ $(function () {
 				<div id="collapse{{ counter }}" class="accordion-body collapse in">
 		{% for candidato, respuesta in respuestas.items%}
 					<div class="accordion-inner">
-						<h4 class="nombreCandidato">{{candidato}}</h4>
-						<p>{{respuesta}}</p>
+						<h4 class="nombreCandidato">{{candidato}}</h4><div class="twitteales">{{ respuesta|twittrespuesta }}</div>
+						<p id="{{respuesta.pk}}">{{respuesta.texto_respuesta}}</p>
 						<br>
 					</div>
 		{% endfor %}
