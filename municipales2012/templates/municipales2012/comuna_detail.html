@@ -39,7 +39,13 @@
                                                             </div>
                                                         </li>
 
-                                                        <li class="span6" style="margin-left: 0px;">
+                                                            <li class="span6" style="margin-left: 0px;">
+                                                            <div class="well thumbnail">
+                                                          <a href="{% url comuna-preguntales comuna.slug %}" target="_blank" class="btn btn-block btn-success btnMunicipales">¡Pregúntales!</a>
+                                                           <p class="textoBTN"> Hay <strong>{{comuna.numero_preguntas}}</strong> pregunta(s), haz la tuya.</p>
+                                                            </div>
+                                                        </li>
+                                                        <li class="span6" style="margin-right: 0px;">
                                                             <div class="well thumbnail">
                                                            <a href="{% url reporta %}" target="_blank" class="btn btn-block btn-danger btnMunicipales">¡Fiscaliza!</a>
                                                            <p class="textoBTN">Problemas en tu comuna</p>
@@ -47,12 +53,7 @@
                                                         </div>
                                                         </li>
 
-                                                        <li class="span6" style="margin-right: 0px;">
-                                                            <div class="well thumbnail">
-                                                          <a href="{% url comuna-preguntales comuna.slug %}" target="_blank" class="btn btn-block btn-success btnMunicipales">¡Pregúntales!</a>
-                                                           <p class="textoBTN"> Hay <strong>{{comuna.numero_preguntas}}</strong> pregunta(s), haz la tuya.</p>
-                                                            </div>
-                                                        </li>
+                                                        
  
                                                     </ul>
                                                 </div>
