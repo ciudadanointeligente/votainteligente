@@ -158,6 +158,11 @@ class Respuesta(models.Model):
 		url = reverse('comuna-preguntales', kwargs={'slug':self.candidato.comuna.slug})
 		return url+"#"+str(self.id)
 
+	def is_answered(self):
+		if self.texto_respuesta.strip() == u"Sin Respuesta":
+			return False
+		return True
+
 
 		
 		
