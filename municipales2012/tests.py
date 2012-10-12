@@ -10,6 +10,7 @@ from management.commands.candidatos_importer import *
 from django.test.client import Client
 from django.utils.unittest import skip
 from django.template import Template, Context
+from urllib2 import quote
 
 class ComunaModelTestCase(TestCase):
 	def test_create_comuna(self):
@@ -245,9 +246,9 @@ class MolestaAUnCandidato(TestCase):
 	def test_molesta_a_un_candidato_con_twitter_por_su_respuesta_via_twitter(self):
 		template = Template("{% load twitter_tags %}{{ respuesta|twittrespuesta }}")
 		context = Context({"respuesta": self.respuesta1 })
-		url_respuesta = self.respuesta1.get_absolute_url()
-		expected_html = u'<a href="https://twitter.com/intent/tweet?screen_name="candidato" class="twitter-mention-button" data-lang="es">http://www.votainteligente.cl'+url_respuesta+u'</a>'
-
+		url_respuesta = u"http://www.votainteligente.cl"+self.respuesta1.get_absolute_url()
+		expected_html = u'<a href="https://twitter.com/intent/tweet?screen_name='+self.respuesta1.candidato.twitter+u'" data-text="'+url_respuesta+u'" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Tweet to @'+self.respuesta1.candidato.twitter+u'</a>'
+		
 		self.assertEqual(template.render(context), expected_html)
 
 
