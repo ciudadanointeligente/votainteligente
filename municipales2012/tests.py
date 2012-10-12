@@ -165,7 +165,16 @@ class CandidatoTestCase(TestCase):
 															 web=u"http://votainteligente.cl")
 
 		self.assertTrue(created)
-		self.assertTrue(candidato.twitter is None)
+		self.assertFalse(candidato.twitter)
+
+	def test_create_candidato_with_empty_twitter(self):
+		candidato,created = Candidato.objects.get_or_create(comuna=self.comuna1,\
+															 nombre=u"el candidato",\
+															 partido=u"API",\
+															 web=u"http://votainteligente.cl",
+															 twitter=u"")
+		self.assertTrue(created)
+		self.assertFalse(candidato.twitter)
 
 
 class RespuestaTestCase(TestCase):
@@ -214,6 +223,8 @@ class RespuestaTestCase(TestCase):
 
 		self.assertFalse(respuesta.is_answered())
 
+
+
 class MolestaAUnCandidato(TestCase):
 	def setUp(self):
 		self.comuna1 = Comuna.objects.create(nombre=u"La comuna1", slug=u"la-comuna1")
@@ -226,7 +237,8 @@ class MolestaAUnCandidato(TestCase):
 		self.candidato_sin_twitter = Candidato.objects.create(comuna=self.comuna1,\
 												 nombre=u"el candidato sin twitter",\
 												 partido=u"API",\
-												 web=u"http://votainteligente.cl")
+												 web=u"http://votainteligente.cl",
+												 twitter=u"")
 
 		self.pregunta1 = Pregunta.objects.create(
 											remitente='remitente1', 

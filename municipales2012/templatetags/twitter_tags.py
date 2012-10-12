@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.filter(name='twittrespuesta')
 def twittrespuesta(respuesta):
-	if respuesta.candidato.twitter is None:
+	if not respuesta.candidato.twitter:
 		return u""
 
 	url_respuesta = respuesta.get_absolute_url()
