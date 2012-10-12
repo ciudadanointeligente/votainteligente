@@ -68,7 +68,7 @@ class Candidato(models.Model):
 	comuna = models.ForeignKey(Comuna)
 	partido = models.CharField(max_length=255)
 	web = models.CharField(max_length=255, blank=True, null=True)
-	twitter = models.CharField(max_length=255, null=True)
+	twitter = models.CharField(max_length=255, null=True, blank=True)
 
 
 	def __unicode__(self):
