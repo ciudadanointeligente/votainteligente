@@ -7,6 +7,7 @@ from models import Comuna, Area, Indice, Dato, Candidato, Pregunta, Respuesta, C
 from management.commands.comunas_importer import *
 from management.commands.contactos_importer import *
 from management.commands.candidatos_importer import *
+from mailer.models import Message
 from django.test.client import Client
 from django.utils.unittest import skip
 from django.template import Template, Context
@@ -329,7 +330,6 @@ class MolestaAUnCandidato(TestCase):
 		self.candidato_sin_twitter = Candidato.objects.create(comuna=self.comuna1,\
 												 nombre=u"el candidato sin twitter",\
 												 partido=u"API",\
-												 web=u"http://votainteligente.cl",
 												 web=u"http://votainteligente.cl",\
 												 colectivo=colectivo1)
 
@@ -893,12 +893,14 @@ class MessageTestCase(TestCase):
 											'recaptcha_response_field': 'PASSED'})
 		pregunta_nueva = Pregunta.objects.get(remitente='Remitente 1')
 		pregunta_nueva.enviar()
-		# Test that one message has been sent.
-		self.assertEqual(len(mail.outbox), 2)
+		# Test that two messages are waiting to be sent.
+		self.assertEquals(Message.objects.count(), 2)
 
 		# Verify that the subject of the first message is correct.
-		self.assertEqual(mail.outbox[0].subject, 'Un ciudadano está interesado en más información sobre tu candidatura')
-		self.assertEqual(mail.outbox[1].subject, 'Un ciudadano está interesado en más información sobre tu candidatura')
+		primera_pregunta = Message.objects.all()[0]
+		segunda_pregunta = Message.objects.all()[1]
+		self.assertTrue(primera_pregunta.subject.startswith(u'Un ciudadano está interesado en más información sobre tu candidatura'))
+		self.assertTrue(segunda_pregunta.subject.startswith(u'Un ciudadano está interesado en más información sobre tu candidatura'))
 		# self.assertEqual(mail.outbox[0].from, 'municiaples2012@votainteligente.cl')
 		# self.assertEqual(mail.outbox[1].from, 'municiaples2012@votainteligente.cl')
 		#chequear que el mail llega y lo podemos traer
@@ -989,6 +991,25 @@ class MessageTestCase(TestCase):
 		self.assertEqual(self.candidato2.numero_respuestas(), 1)
 		self.assertEqual(self.candidato3.numero_respuestas(), 1)
 
+	@skip("No construido aún")
+	def test_preguntas_por_partido(self):
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
+		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
+		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3')
+		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c1', pregunta=pregunta1, candidato=self.candidato1)
+		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
+		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
+		preguntas_partido_1 = self.colectivo1.preguntas
+		preguntas_partido_2 = self.colectivo2.preguntas
+		preguntas_partido_3 = self.colectivo3.preguntas
+
+
+		self.assertEqual(preguntas_partido_1.count(), 2)
+		self.assertEqual(preguntas_partido_2.count(), 1)
+		self.assertEqual(preguntas_partido_3.count(), 0)
+
+
+	@skip("No construido aún")
 	def test_party_questions(self):
 		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
 		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
@@ -997,6 +1018,8 @@ class MessageTestCase(TestCase):
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
 		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
 		# Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p3c3', pregunta=pregunta3, candidato=self.candidato3)
+
+
 
 		self.assertEqual(preguntas_por_partidos[0][0], 2)
 		self.assertEqual(preguntas_por_partidos[0][1], 'partido1')
@@ -1041,7 +1064,10 @@ class ContactosLoaderTestCase(TestCase):
 		self.assertEquals(self.candidateloader.failed[0],{u"Algarrobo",u"FIERA FEROZ INTELIGENTE",u"este no es el mail de la Fiera"})
 
 	def test_does_not_create_two_candidates(self):
-		previous_candidate = Candidato.objects.create(nombre=u"FIERA FEROZ", comuna=self.algarrobo, partido=u"Partido Feroz", colectivo=colectivo1)
+		previous_candidate = Candidato.objects.create(nombre=u"FIERA FEROZ", 
+			comuna=self.algarrobo, 
+			partido=u"Partido Feroz", 
+			colectivo=self.colectivo1)
 		contacto = self.candidateloader.detectContacto(self.line1)
 
 		self.assertEquals(Candidato.objects.all().count(), 1)
@@ -1073,7 +1099,6 @@ class ContactosLoaderTestCase(TestCase):
 
 
 class CandidatoLoader(TestCase):
-	@skip('con cambio de colectivo y partido se cae esta seccion')
 	def setUp(self):
 		self.line1 = ["Algarrobo","FIERA FEROZ","Partido Feroz"]
 		self.line2 = ["Algarrobo","FIERA FEROZ INTELIGENTE","Lavate los dientes"]
@@ -1081,7 +1106,6 @@ class CandidatoLoader(TestCase):
 		self.algarrobo = Comuna.objects.create(nombre=u"Algarrobo", slug=u"algarrobo")
 		self.candidateloader = CandidatosLoader()
 
-	@skip('con cambio de colectivo y partido se cae esta seccion')
 	def test_crea_candidato(self):
 		candidate = self.candidateloader.detectCandidate(self.line1)
 
@@ -1089,14 +1113,14 @@ class CandidatoLoader(TestCase):
 		self.assertEquals(candidate.partido, u"Partido Feroz")
 		self.assertEquals(candidate.comuna, self.algarrobo)
 
-	@skip('con cambio de colectivo y partido se cae esta seccion')
 	def test_detecta_la_comuna(self):
 		comuna = self.candidateloader.detectComuna(self.line1)
 
 
 		self.assertEquals(comuna.nombre, u"Algarrobo")
 		self.assertEquals(comuna.slug, u"algarrobo")
-	@skip('con cambio de colectivo y partido se cae esta seccion')
+
+
 	def test_it_does_not_create_two_candidates(self):
 
 		contacto = self.candidateloader.detectCandidate(self.line2)
@@ -1109,7 +1133,10 @@ class CandidatosEstrellitas(TestCase):
 	def setUp(self):
 		self.colectivo1 = Colectivo.objects.create(sigla='C1', nombre='Colectivo 1')
 		self.comuna = Comuna.objects.create(nombre=u"La comuna", slug="la-comuna")
-		self.candidato = Candidato.objects.create(nombre=u"Un candidato mala onda", partido=u"RN", comuna=self.comuna, colectivo=colectivo1)
+		self.candidato = Candidato.objects.create(nombre=u"Un candidato mala onda", 
+													partido=u"RN", 
+													comuna=self.comuna, 
+													colectivo=self.colectivo1)
 
 
 	def test_candidato_tres_estrellitas(self):
