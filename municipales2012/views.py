@@ -15,6 +15,8 @@ class HomeTemplateView(TemplateView):
 		comunas = Comuna.objects.all()
 
 		context['comunas'] = comunas
+		context['ultimas_preguntas']= Pregunta.objects.all().order_by('-id')[:5]
+		context['ultimas_respuestas']= Respuesta.objects.exclude(texto_respuesta='Sin Respuesta').order_by('-id')[:5]
 		return context
 
 class ComunaOverview(DetailView):
