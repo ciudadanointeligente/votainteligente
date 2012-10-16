@@ -8,7 +8,16 @@
          <div class="container">    
                 
                     
-                
+                <div class="barra_noticias">
+                    <ul style="position: absolute; margin: 0px; top: 0px; ">
+                        {%for ultima_pregunta in ultimas_preguntas%}
+                       <li><strong>{{ultima_pregunta.remitente|truncatechars:30}}</strong> preguntó: "{{ultima_pregunta.texto_pregunta|truncatechars:200}}"</li>
+                       {%endfor%}
+                       {%for ultima_respuesta in ultimas_respuestas%}
+                       <li><strong>{{ultima_respuesta.candidato.nombre|truncatechars:30}}</strong> Respondió: {{ultima_respuesta.texto_respuesta|truncatechars:200}} <a href="/{{ultima_respuesta.candidato.comuna.slug}}/">Ver</a></li>
+                       {%endfor%}
+                   </ul>
+                </div>
                 
                 <div class="buscadorPpal">
                 
@@ -27,6 +36,15 @@
                     
 
                  </center> </div> 
+                 <!-- ticker ultimas preguntas y respuestas -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.barra_noticias').easyTicker({
+            visible: 1,
+            interval: 1500
+        });
+    });
+</script>
         
 <!-- growl -->
     <script type="text/javascript">
@@ -185,5 +203,21 @@
         {% endblock content %}
 
   {% block extra_js %}
+  <script type='text/javascript'>iticker_id = 2513;</script>
+<script src="http://static.itickerapp.com/iticker_seed.js" type="text/javascript"></script>
+
+<style type="text/css">
+    .barra_noticias{
+        border: 3px solid #CE00CE;
+        margin-top: 10px;
+        font-size: 12px;
+        background:#663399 url('{{ STATIC_URL }}/images/signoInterrogacion.png') no-repeat 20px 0px ;
+        color: white;
+        border-radius: 10px;
+    }
+    .barra_noticias ul li{
+        padding: 5px 10px 5px 80px;
+    }
+</style>
 
   {% endblock extra_js %}
