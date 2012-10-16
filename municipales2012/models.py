@@ -18,11 +18,16 @@ class Comuna(models.Model):
 	
 	def __unicode__(self):
 		return self.nombre
-
-	def numero_preguntas(self):
+	def preguntas(self):
 		candidatos_comuna = Candidato.objects.filter(comuna=self)
 		preguntas_candidatos_comuna = Pregunta.objects.filter(candidato__in=candidatos_comuna).distinct()
-		return preguntas_candidatos_comuna.count()
+		return preguntas_candidatos_comuna
+	def numero_preguntas(self):
+		preg = self.preguntas()
+		return preg.count()
+	def numero_respuestas(self):
+		resp = Respuesta.objects.filter(pregunta__in=self.preguntas()).exclude(texto_respuesta='Sin Respuesta').distinct()
+		return resp.count()
 
 
 
@@ -79,11 +84,17 @@ class SinDatos(models.Manager):
 													| Q(twitter__exact='') | \
 													Q(contacto_count=0))
 
+class Colectivo(models.Model):
+	sigla = models.CharField(max_length=255)
+	nombre = models.CharField(max_length=255, blank=True, null=True)
+	def __unicode__(self):
+		return self.sigla
 
 class Candidato(models.Model):
 	nombre = models.CharField(max_length=255)
 	#mail = models.CharField(max_length=255)
 	comuna = models.ForeignKey(Comuna)
+	colectivo = models.ForeignKey(Colectivo)
 	partido = models.CharField(max_length=255)
 	web = models.CharField(max_length=255, blank=True, null=True)
 	twitter = models.CharField(max_length=255, null=True, blank=True)
@@ -106,6 +117,20 @@ class Candidato(models.Model):
 		return None
 
 	estrellitas = property(_estrellitas)
+	def preguntas(self):
+		preg = Pregunta.objects.filter(candidato=self).distinct()
+		return preg
+	def numero_preguntas(self):
+		preg = self.preguntas()
+		return preg.count()
+
+	def respuestas(self):
+		preg = Pregunta.objects.filter(candidato=self).distinct()
+		resp = Respuesta.objects.filter(pregunta__in=preg).filter(candidato=self).exclude(texto_respuesta='Sin Respuesta').distinct()
+		return resp
+	def numero_respuestas(self):
+		resp = self.respuestas()
+		return resp.count()
 
 	def _has_twitter(self):
 		if self.twitter:
@@ -122,6 +147,16 @@ class Candidato(models.Model):
 	has_contacto = property(_has_contacto)
 
 
+def preguntas_por_partido(self):
+	pass
+	# print Partido.objects.aggregate(nro_preguntas=Sum('candidatos__numero_preguntas'))
+
+
+
+
+
+
+		
 class Contacto(models.Model):
 	PERSONAL = 1
 	PARTIDO = 2
