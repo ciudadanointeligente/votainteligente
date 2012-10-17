@@ -1,5 +1,29 @@
+{% extends "base_sub_menu.html" %}
+{% block content %}
+
+<div class="malos">
+	<span>Estos candidatos no responden las preguntas de sus ciudadanos</span>
 <ul>
-	{% for malo in malos %}
-	<li>{{malo}}</li>
+	{% for malo in malos|slice:":15" %}
+
+	<li>
+		{{forloop.counter}} {{malo.candidato}} de {{malo.candidato.comuna}} no ha respondido {{malo.preguntas_no_respondidas}} preguntas
+
+	</li>
 	{% endfor %}
 </ul>
+</div>
+
+<div class="buenos">
+	<span>Estos candidatos deben ser premiados por que responden las preguntas de sus ciudadanos</span>
+<ul>
+	{% for bueno in buenos|slice:":15" %}
+
+	<li>
+		{{forloop.counter}} {{bueno.candidato}} de {{bueno.candidato.comuna}} ha respondido {{bueno.preguntas_respondidas}} preguntas
+
+	</li>
+	{% endfor %}
+</ul>
+</div>
+{% endblock content %}
