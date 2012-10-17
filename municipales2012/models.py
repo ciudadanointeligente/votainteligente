@@ -94,7 +94,7 @@ class Candidato(models.Model):
 	nombre = models.CharField(max_length=255)
 	#mail = models.CharField(max_length=255)
 	comuna = models.ForeignKey(Comuna)
-	colectivo = models.ForeignKey(Colectivo)
+	colectivo = models.ForeignKey(Colectivo, null=True)
 	partido = models.CharField(max_length=255)
 	web = models.CharField(max_length=255, blank=True, null=True)
 	twitter = models.CharField(max_length=255, null=True, blank=True)
@@ -117,17 +117,23 @@ class Candidato(models.Model):
 		return None
 
 	estrellitas = property(_estrellitas)
-	def preguntas(self):
-		preg = Pregunta.objects.filter(candidato=self).distinct()
-		return preg
+
 	def numero_preguntas(self):
-		preg = self.preguntas()
-		return preg.count()
+		return self.pregunta.count()
 
 	def respuestas(self):
 		preg = Pregunta.objects.filter(candidato=self).distinct()
 		resp = Respuesta.objects.filter(pregunta__in=preg).filter(candidato=self).exclude(texto_respuesta='Sin Respuesta').distinct()
 		return resp
+
+
+	def _preguntas_respondidas(self):
+		preguntas = self.pregunta.exclude(respuesta__texto_respuesta="Sin Respuesta")
+		return preguntas
+
+
+	preguntas_respondidas = property(_preguntas_respondidas)
+
 	def numero_respuestas(self):
 		resp = self.respuestas()
 		return resp.count()
@@ -190,7 +196,7 @@ class ManagerPregunta(models.Manager):
 
 class Pregunta(models.Model):
 	"""docstring for Pregunta"""
-	candidato = models.ManyToManyField('Candidato', through='Respuesta')
+	candidato = models.ManyToManyField('Candidato', through='Respuesta', related_name="pregunta")
 	remitente = models.CharField(max_length=255)
 	texto_pregunta = models.TextField(validators=[MaxLengthValidator(4095)])
 	aprobada = models.BooleanField(default=False)
