@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from forms import PreguntaForm
 from django.core.urlresolvers import reverse
 from django.contrib import messages
+from operator import itemgetter
 
 class HomeTemplateView(TemplateView):
 	def get_context_data(self, **kwargs):
@@ -164,18 +165,29 @@ class Ranking(TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super(Ranking, self).get_context_data(**kwargs)
 		context['malos'] = self.malos()
+		context['buenos'] = self.buenos()
 		return context
 
 	def malos(self):
-		malos = []
+		clasificados = self.clasificados()
+		return sorted(clasificados,  key=itemgetter('preguntas_no_respondidas'), reverse=True)
+
+	def buenos(self):
+		clasificados = self.clasificados()
+		return sorted(clasificados,  key=itemgetter('preguntas_respondidas'), reverse=True)
+
+
+	def clasificados(self):
+		clasificados = []
 		candidatos = Candidato.objects.all()
 		for candidato in candidatos:
-			element = {
-			'candidato':candidato,
-			'pregunta_count':candidato.numero_preguntas(),
-			'preguntas_respondidas':candidato.numero_respuestas(),
-			'preguntas_no_respondidas':candidato.numero_preguntas() - candidato.numero_respuestas()
-			}
-			malos.append(element)
+			if candidato.numero_preguntas() > 0:
+				element = {
+				'candidato':candidato,
+				'pregunta_count':candidato.numero_preguntas(),
+				'preguntas_respondidas':candidato.numero_respuestas(),
+				'preguntas_no_respondidas':candidato.numero_preguntas() - candidato.numero_respuestas()
+				}
+				clasificados.append(element)
 
-		return sorted(malos, key=lambda k: -k['preguntas_respondidas'], reverse=True) 
+		return clasificados
