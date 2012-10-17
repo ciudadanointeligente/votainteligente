@@ -155,3 +155,27 @@ class ReportaView(TemplateView):
 		comunas = Comuna.objects.all()
 		context['comunas'] = comunas
 		return context
+
+
+
+class Ranking(TemplateView):
+	template_name = "municipales2012/ranking.html"
+
+	def get_context_data(self, **kwargs):
+		context = super(Ranking, self).get_context_data(**kwargs)
+		context['malos'] = self.malos()
+		return context
+
+	def malos(self):
+		malos = []
+		candidatos = Candidato.objects.all()
+		for candidato in candidatos:
+			element = {
+			'candidato':candidato,
+			'pregunta_count':candidato.numero_preguntas(),
+			'preguntas_respondidas':candidato.numero_respuestas(),
+			'preguntas_no_respondidas':candidato.numero_preguntas() - candidato.numero_respuestas()
+			}
+			malos.append(element)
+
+		return sorted(malos, key=lambda k: -k['preguntas_respondidas'], reverse=True) 
