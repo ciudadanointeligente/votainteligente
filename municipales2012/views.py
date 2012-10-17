@@ -170,12 +170,14 @@ class Ranking(TemplateView):
 		malos = []
 		candidatos = Candidato.objects.all()
 		for candidato in candidatos:
-			element = {
-			'candidato':candidato,
-			'pregunta_count':candidato.numero_preguntas(),
-			'preguntas_respondidas':candidato.numero_respuestas(),
-			'preguntas_no_respondidas':candidato.numero_preguntas() - candidato.numero_respuestas()
-			}
-			malos.append(element)
+			if candidato.numero_preguntas() > 0:
+				element = {
+				'candidato':candidato,
+				'pregunta_count':candidato.numero_preguntas(),
+				'preguntas_respondidas':candidato.numero_respuestas(),
+				'preguntas_no_respondidas':candidato.numero_preguntas() - candidato.numero_respuestas()
+				}
+				malos.append(element)
+		malos = sorted(malos, key=lambda k: -k['preguntas_respondidas'], reverse=True)
 
-		return sorted(malos, key=lambda k: -k['preguntas_respondidas'], reverse=True) 
+		return  malos
