@@ -1,4 +1,5 @@
 {% extends "base_sub_menu.html" %}
+{% load twitter_tags %}
 {% block content %}
 
 <div class="malos">
@@ -8,7 +9,9 @@
 
 	<li>
 		{{forloop.counter}} {{malo.candidato}} de {{malo.candidato.comuna}} no ha respondido {{malo.preguntas_no_respondidas}} preguntas
-
+		{% if malo.candidato.twitter %}
+			{{ malo.candidato|no_responde }}
+		{% endif %}
 	</li>
 	{% endfor %}
 </ul>
