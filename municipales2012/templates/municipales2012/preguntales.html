@@ -89,21 +89,23 @@ $(function () {
 		<h4 class="tituloPreguntale"> Preguntas Recientes</h4>
 		<div class="accordion" id="accordion2">
 {% for remitente, mensaje in conversaciones.items %}
-			<div class="accordion-group">
+			<div class="accordion-groupPreguntale">
 	{% for pregunta, respuestas in mensaje.items %}
 				<div class="accordion-heading tituloAcordion">
-					<div class="preguntadoPor"> <small><strong>Preguntado por:</strong> <em>{{remitente}}</em></small></div>
-					<br/> <br/>
-					<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{% cycle 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 as counter %}">
-						<p class="preguntaPreguntale">{{pregunta}}</p>
-					</a>
+					
+						<div class="preguntaPreguntale">{{pregunta}} 
+							<div class="preguntadoPor"> <small><strong>Preguntado por:</strong> <em>{{remitente}}</em></small></div>
+							<br/> <br/>
+						</div>
 				</div>
-				<div id="collapse{{ counter }}" class="accordion-body collapse in">
+				
+				<div class="accordion-body collapse in">
 		{% for candidato, respuesta in respuestas.items%}
-					<div class="accordion-inner">
-						<h4 class="nombreCandidato">{{candidato}}</h4><div class="twitteales">{{ respuesta|twittrespuesta }}</div>
-						<p id="{{respuesta.pk}}">{{respuesta.texto_respuesta}}</p>
-						<br>
+					<div class="nombreRespuestaPreguntale"> 
+						<h5 class="nombreCandidato">{{candidato}}</h5>
+						<div class="twitteales">{{ respuesta|twittrespuesta }}</div>
+						<span><p class="respuestaPreguntale"id="{{respuesta.pk}}">{{respuesta.texto_respuesta}}</p></span>
+						<br/>
 					</div>
 		{% endfor %}
 				</div>
