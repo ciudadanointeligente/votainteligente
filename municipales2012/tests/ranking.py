@@ -110,7 +110,7 @@ class RankingTestCase(TestCase):
 		los_mas_malos = view.malos()
 
 
-		# for malo in los_mas_malos:
+		#for malo in los_mas_malos:
 		# 	print malo["candidato"], malo["preguntas_no_respondidas"]
 
 		self.assertEquals(len(los_mas_malos), 4)

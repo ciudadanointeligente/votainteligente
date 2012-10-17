@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from forms import PreguntaForm
 from django.core.urlresolvers import reverse
 from django.contrib import messages
+from operator import itemgetter
 
 class HomeTemplateView(TemplateView):
 	def get_context_data(self, **kwargs):
@@ -178,6 +179,6 @@ class Ranking(TemplateView):
 				'preguntas_no_respondidas':candidato.numero_preguntas() - candidato.numero_respuestas()
 				}
 				malos.append(element)
-		malos = sorted(malos, key=lambda k: -k['preguntas_respondidas'], reverse=True)
+		malos = sorted(malos,  key=itemgetter('preguntas_no_respondidas'), reverse=True)
 
 		return  malos
