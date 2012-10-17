@@ -50,3 +50,38 @@ class CandidatoTestCase(TestCase):
 															 twitter=u"")
 		self.assertTrue(created)
 		self.assertFalse(candidato.twitter)
+
+
+	def test_preguntas_del_candidato(self):
+		candidato = Candidato.objects.create(comuna=self.comuna1,\
+											 nombre=u"el candidato",\
+											 partido=u"API",\
+											 web=u"http://votainteligente.cl",
+											 twitter=u"")
+		pregunta = Pregunta.objects.create(
+											remitente='remitente1', 
+											texto_pregunta='texto_pregunta1')
+		respuesta = Respuesta.objects.create(pregunta=pregunta, candidato=candidato)
+
+		self.assertTrue(candidato.pregunta.count(), 1)
+		self.assertTrue(candidato.pregunta.all()[0], pregunta)
+
+
+	def test_preguntas_respondidas(self):
+		candidato = Candidato.objects.create(comuna=self.comuna1,\
+											 nombre=u"el candidato",\
+											 partido=u"API",\
+											 web=u"http://votainteligente.cl",
+											 twitter=u"")
+		pregunta = Pregunta.objects.create(
+											remitente='remitente1', 
+											texto_pregunta='texto_pregunta1')
+		pregunta_no_respondida = Pregunta.objects.create(
+											remitente='remitente1', 
+											texto_pregunta='es usted mala onda?')
+
+		respuesta = Respuesta.objects.create(pregunta=pregunta, candidato=candidato, texto_respuesta=u"yo opino que guau guau")
+		sin_respuesta = Respuesta.objects.create(pregunta=pregunta_no_respondida, candidato=candidato)
+
+		self.assertTrue(candidato.preguntas_respondidas.count(), 1)
+		self.assertTrue(candidato.preguntas_respondidas.all()[0], pregunta)
