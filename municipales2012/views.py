@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-#
 # Create your views here.
 from django.http import HttpResponseRedirect
-from django.views.generic import TemplateView, CreateView, DetailView
+from django.views.generic import TemplateView, CreateView, DetailView, ListView
 from django.views.generic.edit import FormView
 from models import Comuna, Indice, Pregunta, Candidato, Respuesta, Contacto
 from django.shortcuts import get_object_or_404
@@ -15,6 +15,8 @@ class HomeTemplateView(TemplateView):
 		comunas = Comuna.objects.all()
 
 		context['comunas'] = comunas
+		context['ultimas_preguntas']= Pregunta.objects.all().order_by('-id')[:5]
+		context['ultimas_respuestas']= Respuesta.objects.exclude(texto_respuesta='Sin Respuesta').order_by('-id')[:5]
 		return context
 
 class ComunaOverview(DetailView):
@@ -44,6 +46,13 @@ class ComunaIndices(DetailView):
 		context['title'] = self.object.nombre + u" índices detallados"
 		context['comunas'] = comunas
 		return context
+
+class NosFaltanDatosView(ListView):
+	queryset = Candidato.sin_datos.all()
+	context_object_name = "candidatos"
+
+	def get_template_names(self):
+		return ['municipales2012/nos_faltan_datos.html']
 
 class ComunaPreguntales(CreateView):
 	#model = Pregunta

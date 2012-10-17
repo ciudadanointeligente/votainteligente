@@ -3,6 +3,8 @@ from django.core.validators import MaxLengthValidator
 from django.db import models
 from mailer import send_mail
 from django.core.urlresolvers import reverse
+from django.db.models import Q
+from django.db.models import Count
 # from django.core.mail import send_mail
 # Create your models here.
 
@@ -16,11 +18,16 @@ class Comuna(models.Model):
 	
 	def __unicode__(self):
 		return self.nombre
-
-	def numero_preguntas(self):
+	def preguntas(self):
 		candidatos_comuna = Candidato.objects.filter(comuna=self)
 		preguntas_candidatos_comuna = Pregunta.objects.filter(candidato__in=candidatos_comuna).distinct()
-		return preguntas_candidatos_comuna.count()
+		return preguntas_candidatos_comuna
+	def numero_preguntas(self):
+		preg = self.preguntas()
+		return preg.count()
+	def numero_respuestas(self):
+		resp = Respuesta.objects.filter(pregunta__in=self.preguntas()).exclude(texto_respuesta='Sin Respuesta').distinct()
+		return resp.count()
 
 
 
@@ -62,14 +69,39 @@ class Indice(models.Model):
 	def __unicode__(self):
 		return self.dato.nombre+' - '+self.comuna.nombre
 
+class SinDatos(models.Manager):
+	def get_query_set(self):
+		#Annotate hace que a cada candidato tenga un campo extra
+		#llamado contacto_count que es la cantidad de contactos
+		#entonces puedes decirle a los objetos resultado de este queryset
+		#candidato.contacto_count
+		#y debería ser 0 el resultado por que filtramos por eso
+		#los Q objects permiten hacer consultas complejas de sql
+		#por ejemplo hacer varios ors
+		return super(SinDatos, self).get_query_set().annotate(contacto_count=Count('contacto'))\
+												.filter(\
+													Q(twitter__isnull=True) \
+													| Q(twitter__exact='') | \
+													Q(contacto_count=0))
+
+class Colectivo(models.Model):
+	sigla = models.CharField(max_length=255)
+	nombre = models.CharField(max_length=255, blank=True, null=True)
+	def __unicode__(self):
+		return self.sigla
+
 class Candidato(models.Model):
 	nombre = models.CharField(max_length=255)
 	#mail = models.CharField(max_length=255)
 	comuna = models.ForeignKey(Comuna)
+	colectivo = models.ForeignKey(Colectivo)
 	partido = models.CharField(max_length=255)
 	web = models.CharField(max_length=255, blank=True, null=True)
 	twitter = models.CharField(max_length=255, null=True, blank=True)
 
+	#managers
+	objects = models.Manager()
+	sin_datos = SinDatos()
 
 	def __unicode__(self):
 		return self.nombre
@@ -85,7 +117,46 @@ class Candidato(models.Model):
 		return None
 
 	estrellitas = property(_estrellitas)
+	def preguntas(self):
+		preg = Pregunta.objects.filter(candidato=self).distinct()
+		return preg
+	def numero_preguntas(self):
+		preg = self.preguntas()
+		return preg.count()
 
+	def respuestas(self):
+		preg = Pregunta.objects.filter(candidato=self).distinct()
+		resp = Respuesta.objects.filter(pregunta__in=preg).filter(candidato=self).exclude(texto_respuesta='Sin Respuesta').distinct()
+		return resp
+	def numero_respuestas(self):
+		resp = self.respuestas()
+		return resp.count()
+
+	def _has_twitter(self):
+		if self.twitter:
+			return True
+		return False
+
+	has_twitter = property(_has_twitter)
+
+	def _has_contacto(self):
+		if self.contacto_set.count() > 0:
+			return True
+		return False
+
+	has_contacto = property(_has_contacto)
+
+
+def preguntas_por_partido(self):
+	pass
+	# print Partido.objects.aggregate(nro_preguntas=Sum('candidatos__numero_preguntas'))
+
+
+
+
+
+
+		
 class Contacto(models.Model):
 	PERSONAL = 1
 	PARTIDO = 2
