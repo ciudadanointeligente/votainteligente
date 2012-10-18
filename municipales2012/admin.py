@@ -22,6 +22,7 @@ class RespuestaInline(admin.TabularInline):
 	readonly_fields = ['candidato']
 	extra = 0
 class ComunaAdmin(admin.ModelAdmin):
+	search_fields = ['nombre', 'candidato__nombre']
 	inlines = [
 		CandidatoInline,
         IndiceInline
@@ -70,7 +71,7 @@ class DatoAdmin(admin.ModelAdmin):
 
 admin.site.register(Dato, DatoAdmin)
 class ContactoAdmin(admin.ModelAdmin):
-	pass
+	search_fields = ['valor', 'candidato__nombre']
 
 admin.site.register(Contacto, ContactoAdmin)
 
