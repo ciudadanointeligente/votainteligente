@@ -24,7 +24,9 @@
 
 	<li>
 		{{forloop.counter}} {{bueno.candidato}} de {{bueno.candidato.comuna}} ha respondido {{bueno.preguntas_respondidas}} preguntas
-
+		{% if bueno.candidato.twitter %}
+			{{ bueno|si_responde }}
+		{% endif %}
 	</li>
 	{% endfor %}
 </ul>
