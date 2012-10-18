@@ -66,7 +66,7 @@ $(function () {
 				<div class="span8">
 					<label> <strong>Yo soy</strong></label>
 					{{form.remitente}}
-					<span class="help-block"> <small> <em> <strong>*Identifícate como quieras* </em></strong></small></span>
+					<span class="help-block"> <small> <em> <strong>*Identifícate como quieras* </strong> </em> </small></span>
 					{{form.remitente.errors}}
 					<br/>
 
@@ -104,7 +104,7 @@ $(function () {
 					<div class="nombreRespuestaPreguntale"> 
 						<h5 class="nombreCandidato">{{candidato}}</h5>
 						
-						<div><p class="respuestaPreguntale"id="{{respuesta.pk}}">{{respuesta.texto_respuesta}}</p></div>
+						<div class="respuestaPreguntale"id="{{respuesta.pk}}">{{respuesta.texto_respuesta}}</div>
 						<br/>
 						<div class="twitteales">{{ respuesta|twittrespuesta }}</div>
 					</div>
