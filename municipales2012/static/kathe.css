@@ -1598,26 +1598,31 @@ padding: 8px 35px 8px 14px;
     padding: 4px;
 
 
-.titulosCandidatosBuenos{
-	
-}
-.titulosCandidatosMalos{
-	
+.candidatosBuenos {
+	padding-left: 5px;
+	background-color: grey;
 }
 
-.listadoCandidatosMalos {
+
+.listadoCandidatos {
 	list-style: none;
 	margin-left: 0px;
+	margin-top: 15px;
 }
 
-.listadoCandidatosBuenos {
-	list-style: none;
-	margin-left: 0px;
+.itemListadoCandidatos {
+	border-bottom: 1px solid #DDDDDD;
+    font-size: 10pt;
+    list-style: decimal outside none;
+    margin-left: 23px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 434px;
+
 }
 
-.itemListadoCandidatosBuenos {
-	border-bottom: 1px solid grey;
-
+.tituloRanking {
+	padding-left: 20px;
 }
 
 .itemListadoCandidatosMalos {
