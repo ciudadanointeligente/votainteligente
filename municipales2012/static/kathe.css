@@ -135,6 +135,7 @@ iframe {
 	font-style: italic;
 	font-size: 13pt;
 	position: relative;
+	max-height: 120px;
 }
 
 .preguntaleMenu:after {
@@ -241,7 +242,7 @@ span .casa{
 	}
 
 .itemFooter{
-	 margin-left:15px;
+	 margin-left:13px;
 	 margin-top: 21px;
 	}
 
@@ -1488,8 +1489,12 @@ position: relative;
     padding-top: 10px;
     font-weight: 900;
     color: #474747;
-    font-family: georgia;
-    font-style: italic;
+}
+
+.twitteales {
+	float: right;
+	margin-bottom: 10px;
+	padding-right: 10px;
 }
 
 .nombreRespuestaPreguntale {
@@ -1593,9 +1598,28 @@ padding: 8px 35px 8px 14px;
     padding: 4px;
 
 
-.buenos{
-	margin-top: 10px;
+.titulosCandidatosBuenos{
+	
 }
-.malos{
-	margin-top: 10px;
+.titulosCandidatosMalos{
+	
+}
+
+.listadoCandidatosMalos {
+	list-style: none;
+	margin-left: 0px;
+}
+
+.listadoCandidatosBuenos {
+	list-style: none;
+	margin-left: 0px;
+}
+
+.itemListadoCandidatosBuenos {
+	border-bottom: 1px solid grey;
+
+}
+
+.itemListadoCandidatosMalos {
+
 }

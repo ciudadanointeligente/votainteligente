@@ -9,6 +9,7 @@ from forms import PreguntaForm
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from operator import itemgetter
+from django.db.models import Count
 
 class HomeTemplateView(TemplateView):
 	def get_context_data(self, **kwargs):
@@ -164,30 +165,28 @@ class Ranking(TemplateView):
 
 	def get_context_data(self, **kwargs):
 		context = super(Ranking, self).get_context_data(**kwargs)
-		context['malos'] = self.malos()
-		context['buenos'] = self.buenos()
+		clasificados = self.clasificados()
+		context['malos'] = self.malos(clasificados)
+		context['buenos'] = self.buenos(clasificados)
 		return context
 
-	def malos(self):
-		clasificados = self.clasificados()
-		return sorted(clasificados,  key=itemgetter('preguntas_no_respondidas'), reverse=True)
+	def malos(self, clasificados):
+		return sorted(clasificados,  key=itemgetter('preguntas_no_respondidas'), reverse=True)[:15]
 
-	def buenos(self):
-		clasificados = self.clasificados()
-		return sorted(clasificados,  key=itemgetter('preguntas_respondidas'), reverse=True)
+	def buenos(self, clasificados):
+		return sorted(clasificados,  key=itemgetter('preguntas_respondidas'), reverse=True)[:15]
 
 
 	def clasificados(self):
 		clasificados = []
-		candidatos = Candidato.objects.all()
+		candidatos = Candidato.objects.all().annotate(preguntas_count=Count('pregunta')).exclude(preguntas_count=0)
 		for candidato in candidatos:
-			if candidato.numero_preguntas() > 0:
-				element = {
-				'candidato':candidato,
-				'pregunta_count':candidato.numero_preguntas(),
-				'preguntas_respondidas':candidato.numero_respuestas(),
-				'preguntas_no_respondidas':candidato.numero_preguntas() - candidato.numero_respuestas()
-				}
-				clasificados.append(element)
+			element = {
+			'candidato':candidato,
+			'pregunta_count':candidato.numero_preguntas(),
+			'preguntas_respondidas':candidato.numero_respuestas(),
+			'preguntas_no_respondidas':candidato.numero_preguntas() - candidato.numero_respuestas()
+			}
+			clasificados.append(element)
 
 		return clasificados
