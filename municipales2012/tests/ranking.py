@@ -104,12 +104,19 @@ class RankingTestCase(TestCase):
 		#el candidato3 es un pajero y no responde niuna cuestion
 
 
+	def test_get_clasificados(self):
+		view = Ranking()
+		clasificados = view.clasificados()
+		self.assertEquals(len(clasificados), 4)
+
+
 	def test_obtiene_ranking_candidatos_que_han_respondido_menos(self):
 
 		view = Ranking()
-		los_mas_malos = view.malos()
+		clasificados = view.clasificados()
+		los_mas_malos = view.malos(clasificados)
 
-		self.assertEquals(len(los_mas_malos), 4)
+		
 		self.assertEquals(los_mas_malos[0]["candidato"], self.candidato3)
 		self.assertEquals(los_mas_malos[0]["pregunta_count"], 3)
 		self.assertEquals(los_mas_malos[0]["preguntas_respondidas"], 0)
@@ -156,7 +163,8 @@ class RankingTestCase(TestCase):
 
 	def test_get_ranking_de_los_buenos(self):
 		view = Ranking()
-		los_mas_buenos = view.buenos()
+		clasificados = view.clasificados()
+		los_mas_buenos = view.buenos(clasificados)
 
 		self.assertEquals(len(los_mas_buenos), 4)
 		self.assertEquals(los_mas_buenos[0]["candidato"], self.candidato1)

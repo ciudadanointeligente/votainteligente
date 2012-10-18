@@ -11,8 +11,10 @@
 	{% for bueno in buenos|slice:":15" %}
 <br/>
 	<li class="itemListadoCandidatosBuenos">
-		{{forloop.counter}} {{bueno.candidato}} de {{bueno.candidato.comuna}} ha respondido {{bueno.preguntas_respondidas}} preguntas
-
+		{{forloop.counter}} {{bueno.candidato}} de <a href="{% url comuna-overview bueno.candidato.comuna.slug %}">{{bueno.candidato.comuna}}</a> ha respondido {{bueno.preguntas_respondidas}} de {{bueno.pregunta_count}} <a href="{% url comuna-preguntales bueno.candidato.comuna.slug %}">preguntas</a>
+		{% if bueno.candidato.twitter %}
+			{{ bueno|si_responde }}
+		{% endif %}
 	</li>
 	{% endfor %}
 </ul>
@@ -24,7 +26,7 @@
 	{% for malo in malos|slice:":15" %}
 <br/>
 	<li class="itemListadoCandidatosMalos">
-		{{forloop.counter}} {{malo.candidato}} de {{malo.candidato.comuna}} no ha respondido {{malo.preguntas_no_respondidas}} preguntas
+		{{forloop.counter}} {{malo.candidato}} de <a href="{% url comuna-overview malo.candidato.comuna.slug %}">{{malo.candidato.comuna}}</a> no ha respondido {{malo.preguntas_no_respondidas}} de {{malo.pregunta_count}} <a href="{% url comuna-preguntales malo.candidato.comuna.slug %}">preguntas</a>
 		{% if malo.candidato.twitter %}
 			{{ malo|no_responde }}
 		{% endif %}
