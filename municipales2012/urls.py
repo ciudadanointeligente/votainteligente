@@ -14,7 +14,8 @@ urlpatterns = patterns('',
 	url(r'^fiscaliza/?$', ReportaView.as_view(), name="reporta"),
 	url(r'^que_puedo_hacer/?$', QuePuedoHacerHacerView.as_view(), name="que_puedo_hacer"),
 	url(r'^nos_faltan_datos/?$', NosFaltanDatosView.as_view(), name="nos_faltan_datos"),
-	url(r'^ranking/?$',cache_page(Ranking.as_view(), 60 * 15) , name="ranking"),
+	url(r'^rank/?$', cache_page(Ranking.as_view(), 60 * 15), name="ranking"),
+	url(r'^ranking/?$', TemplateView.as_view(template_name="municipales2012/rank.html"), name="rank"),
 	
 	
 
