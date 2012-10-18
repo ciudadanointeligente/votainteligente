@@ -1598,26 +1598,43 @@ padding: 8px 35px 8px 14px;
     padding: 4px;
 
 
-.titulosCandidatosBuenos{
-	
-}
-.titulosCandidatosMalos{
-	
+.candidatosBuenos {
+	padding-left: 5px;
+	background-color: grey;
 }
 
-.listadoCandidatosMalos {
+
+.listadoCandidatos {
 	list-style: none;
 	margin-left: 0px;
+	margin-top: 15px;
 }
 
-.listadoCandidatosBuenos {
-	list-style: none;
-	margin-left: 0px;
+.itemListadoCandidatos {
+	 border-bottom: 1px solid #DDDDDD;
+    font-size: 10pt;
+    height: 51px;
+    list-style: decimal outside none;
+    margin-left: 23px;
+    padding-bottom: 5px;
+    padding-top: 0;
+    width: 434px;
+
 }
 
-.itemListadoCandidatosBuenos {
-	border-bottom: 1px solid grey;
+.itemListadoCandidatos a {
+	color:grey;
+	font-family: georgia;
+	font-style: italic;
+}
 
+.contenedorTwitter {
+	float: right;
+	padding-top: 5px;
+}
+
+.tituloRanking {
+	padding-left: 20px;
 }
 
 .itemListadoCandidatosMalos {

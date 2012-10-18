@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from views import HomeTemplateView, ComunaOverview, ComunaIndices, MetodologiaView, QuienesSomosView, ComunaPreguntales, ReportaView,\
 QuePuedoHacerHacerView, NosFaltanDatosView, Ranking
 from django.views.generic import TemplateView
+from django.views.decorators.cache import cache_page
 
 urlpatterns = patterns('',
 	url(r'^$', HomeTemplateView.as_view(template_name="home.html"), name="home"),
@@ -13,7 +14,8 @@ urlpatterns = patterns('',
 	url(r'^fiscaliza/?$', ReportaView.as_view(), name="reporta"),
 	url(r'^que_puedo_hacer/?$', QuePuedoHacerHacerView.as_view(), name="que_puedo_hacer"),
 	url(r'^nos_faltan_datos/?$', NosFaltanDatosView.as_view(), name="nos_faltan_datos"),
-	url(r'^ranking/?$', Ranking.as_view(), name="ranking"),
+	url(r'^rank/?$', cache_page(Ranking.as_view(), 60 * 15), name="ranking"),
+	url(r'^ranking/?$', TemplateView.as_view(template_name="municipales2012/rank.html"), name="rank"),
 	
 	
 
