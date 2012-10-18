@@ -47,7 +47,11 @@
                                                         </li>
                                                         <li class="span6" style="margin-right: 0px;">
                                                             <div class="well thumbnail">
-                                                           <a href="{% url reporta %}" target="_blank" class="btn btn-block btn-danger btnMunicipales">¡Fiscaliza!</a>
+							        {% if flavour == 'mobile' %}
+								    <a href="./m/reporta.php" target="_blank" class="btn btn-block btn-danger btnMunicipales">¡Fiscaliza!</a>
+								{% else %}
+								    <a href="{% url reporta %}" target="_blank" class="btn btn-block btn-danger btnMunicipales">¡Fiscaliza!</a>
+								{% endif %}
                                                            <p class="textoBTN">Problemas en tu comuna</p>
                                                            
                                                         </div>

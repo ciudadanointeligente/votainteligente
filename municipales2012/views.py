@@ -165,10 +165,20 @@ class Ranking(TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super(Ranking, self).get_context_data(**kwargs)
 		context['malos'] = self.malos()
+		context['buenos'] = self.buenos()
 		return context
 
 	def malos(self):
-		malos = []
+		clasificados = self.clasificados()
+		return sorted(clasificados,  key=itemgetter('preguntas_no_respondidas'), reverse=True)
+
+	def buenos(self):
+		clasificados = self.clasificados()
+		return sorted(clasificados,  key=itemgetter('preguntas_respondidas'), reverse=True)
+
+
+	def clasificados(self):
+		clasificados = []
 		candidatos = Candidato.objects.all()
 		for candidato in candidatos:
 			if candidato.numero_preguntas() > 0:
@@ -178,7 +188,6 @@ class Ranking(TemplateView):
 				'preguntas_respondidas':candidato.numero_respuestas(),
 				'preguntas_no_respondidas':candidato.numero_preguntas() - candidato.numero_respuestas()
 				}
-				malos.append(element)
-		malos = sorted(malos,  key=itemgetter('preguntas_no_respondidas'), reverse=True)
+				clasificados.append(element)
 
-		return  malos
+		return clasificados

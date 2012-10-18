@@ -1,5 +1,40 @@
-<ul>
-	{% for malo in malos %}
-	<li>{{malo}}</li>
+{% extends "base_sub_menu.html" %}
+{% load twitter_tags %}
+{% block content %}
+
+<div class="paginaCompleta container">
+<div class="row-fluid">
+
+<div class="span6">
+	<div class="candidatosBuenos thumbnail">Estos candidatos responden las preguntas de sus ciudadanos</div>
+<ul class="listadoCandidatosBuenos">
+	{% for bueno in buenos|slice:":15" %}
+
+	<li>
+		{{forloop.counter}} {{bueno.candidato}} de {{bueno.candidato.comuna}} ha respondido {{bueno.preguntas_respondidas}} preguntas
+
+	</li>
 	{% endfor %}
 </ul>
+</div>
+
+<div class="span6">
+	<div class="candidatosMalos thumbnail">Estos candidatos no responden las preguntas de sus ciudadanos</div>
+<ul class="listadoCandidatosMalos">
+	{% for malo in malos|slice:":15" %}
+
+	<li>
+		{{forloop.counter}} {{malo.candidato}} de {{malo.candidato.comuna}} no ha respondido {{malo.preguntas_no_respondidas}} preguntas
+		{% if malo.candidato.twitter %}
+			{{ malo|no_responde }}
+		{% endif %}
+	</li>
+	{% endfor %}
+</ul>
+</div>
+
+
+
+</div>
+</div>
+{% endblock content %}

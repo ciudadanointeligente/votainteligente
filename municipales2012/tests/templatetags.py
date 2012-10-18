@@ -18,12 +18,12 @@ class TemplateTagsTesting(TestCase):
 	def setUp(self):
 		area = Area.objects.create(nombre=u"Caracterización", clase_en_carrusel=u"fondoCeleste")
 		pobreza = Dato.objects.create(nombre=u"Pobreza", imagen="chanchito.png")
-		comuna = Comuna.objects.create(nombre=u"La comuna", 
+		self.comuna = Comuna.objects.create(nombre=u"La comuna", 
 										slug=u"la-comuna",
 										main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
 										)
 		self.indice = Indice.objects.create(
-			comuna =comuna,
+			comuna =self.comuna,
 			area = area,
 			dato = pobreza,
 			encabezado = u"encabezado",
@@ -39,14 +39,26 @@ class TemplateTagsTesting(TestCase):
 			numero_pie_pagina_3 = u"3",
 			en_carrusel = True
 			)
+		self.candidato = Candidato.objects.create(comuna=self.comuna,\
+															 nombre=u"el candidato",\
+															 partido=u"API",\
+															 web=u"http://votainteligente.cl",\
+															 twitter=u"candidato")
+
+	def test_no_responden_diles_algo(self):
+		expected_html = '<a href="https://twitter.com/intent/tweet?screen_name=candidato" data-text="No ha respondido 1 preguntas de sus ciudadanos, las puede ver en http://www.votainteligente.cl/la-comuna/preguntales" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Tweet to @candidato</a>'
+		template = Template("{% load twitter_tags %}{{ malo|no_responde }}")
+		context = Context({"malo": {'candidato':self.candidato,'preguntas_no_respondidas':1} })
 
 
-	# def test_create_link_for_updating_election_data(self):
- #        template = Template('{% load twitter_tags %}{% twitt_indice indice %}')
-        
-        
- #        context = Context({"indice": self.indice })
- #        election_update_url = reverse('election_update',kwargs={'slug':self.election.slug})
- #        expected_twitt = u''
-        
- #        self.assertEqual(template.render(context), expected_html) 
+		self.assertEqual(template.render(context), expected_html)
+
+
+
+	def test_no_responden_diles_algo(self):
+		expected_html = '<a href="https://twitter.com/intent/tweet?screen_name=candidato" data-text="Gracias por responder, sus respuestas en http://www.votainteligente.cl/la-comuna/preguntales" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Tweet to @candidato</a>'
+		template = Template("{% load twitter_tags %}{{ bueno|si_responde }}")
+		context = Context({"bueno": {'candidato':self.candidato,'preguntas_respondidas':1} })
+
+
+		self.assertEqual(template.render(context), expected_html)
