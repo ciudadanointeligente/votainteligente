@@ -1,38 +1,39 @@
 {% extends "base_sub_menu.html" %}
 {% load twitter_tags %}
 {% block content %}
-
 <div class="paginaCompleta container">
 <div class="row-fluid">
 
 <div class="span6">
-	<div class="candidatosBuenos thumbnail">Estos candidatos responden las preguntas de sus ciudadanos</div>
-<ul class="listadoCandidatosBuenos">
+<div class="thumbnail tituloRanking" style="background-color: rgb(223, 240, 216); padding-left: 20px; color: rgb(70, 136, 71); border-color: rgb(70, 136, 71);">Estos son los candidatos que <strong>MÁS</strong> responden a los ciudadanos</div>
+<ul class="listadoCandidatos">
 	{% for bueno in buenos|slice:":15" %}
-<br/>
-	<li class="itemListadoCandidatosBuenos">
-		{{forloop.counter}} {{bueno.candidato}} de <a href="{% url comuna-overview bueno.candidato.comuna.slug %}">{{bueno.candidato.comuna}}</a> ha respondido {{bueno.preguntas_respondidas}} de {{bueno.pregunta_count}} <a href="{% url comuna-preguntales bueno.candidato.comuna.slug %}">preguntas</a>
-		{% if bueno.candidato.twitter %}
-			{{ bueno|si_responde }}
-		{% endif %}
+	<li class="itemListadoCandidatos">
+		<div class="contenedorTwitter">{% if bueno.candidato.twitter %}{{ bueno|si_responde }}{% endif %} </div>
+		<strong>{{bueno.candidato}}</strong> de <a href="{% url comuna-overview bueno.candidato.comuna.slug %}">{{bueno.candidato.comuna}}</a> <br/>ha respondido {{bueno.preguntas_respondidas}} de {{bueno.pregunta_count}}<a href="{% url comuna-preguntales bueno.candidato.comuna.slug %}">preguntas</a>
 	</li>
 	{% endfor %}
+	
+<br/>
+
 </ul>
 </div>
 
 <div class="span6">
-	<div class="candidatosMalos thumbnail">Estos candidatos no responden las preguntas de sus ciudadanos</div>
-<ul class="listadoCandidatosMalos">
+<div class="thumbnail tituloRanking" style="padding-left: 20px; background-color: rgb(242, 222, 222); color: rgb(185, 74, 72); border-color: rgb(185, 74, 72);">Estos son los candidatos que <strong>MENOS</strong> responden a los ciudadanos</div>
+<ul class="listadoCandidatos">
 	{% for malo in malos|slice:":15" %}
+	<li class="itemListadoCandidatos">
+		<div class="contenedorTwitter">{% if malo.candidato.twitter %}{{ malo|no_responde }}{% endif %}</div>
+		<strong>{{malo.candidato}}</strong> de  <a href="{% url comuna-overview malo.candidato.comuna.slug %}">{{malo.candidato.comuna}}</a><br/> no ha respondido {{malo.preguntas_no_respondidas}} de {{malo.pregunta_count}} <a href="{% url comuna-preguntales malo.candidato.comuna.slug %}">preguntas</a>
+</li>
+	
 <br/>
-	<li class="itemListadoCandidatosMalos">
-		{{forloop.counter}} {{malo.candidato}} de <a href="{% url comuna-overview malo.candidato.comuna.slug %}">{{malo.candidato.comuna}}</a> no ha respondido {{malo.preguntas_no_respondidas}} de {{malo.pregunta_count}} <a href="{% url comuna-preguntales malo.candidato.comuna.slug %}">preguntas</a>
-		{% if malo.candidato.twitter %}
-			{{ malo|no_responde }}
-		{% endif %}
-	</li>
 	{% endfor %}
+
+
 </ul>
+</div>
 </div>
 
 </div>
