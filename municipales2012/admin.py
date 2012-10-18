@@ -3,6 +3,9 @@
 from django.contrib import admin
 from models import *
 
+class ColectivoAdmin(admin.ModelAdmin):
+	model = Colectivo
+admin.site.register(Colectivo,ColectivoAdmin)
 
 class IndiceInline(admin.TabularInline):
     model = Indice
