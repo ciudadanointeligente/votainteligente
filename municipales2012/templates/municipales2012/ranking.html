@@ -2,9 +2,25 @@
 {% load twitter_tags %}
 {% block content %}
 
-<div class="malos">
-	<span>Estos candidatos no responden las preguntas de sus ciudadanos</span>
-<ul>
+<div class="paginaCompleta container">
+<div class="row-fluid">
+
+<div class="span6">
+	<div class="candidatosBuenos thumbnail">Estos candidatos responden las preguntas de sus ciudadanos</div>
+<ul class="listadoCandidatosBuenos">
+	{% for bueno in buenos|slice:":15" %}
+
+	<li>
+		{{forloop.counter}} {{bueno.candidato}} de {{bueno.candidato.comuna}} ha respondido {{bueno.preguntas_respondidas}} preguntas
+
+	</li>
+	{% endfor %}
+</ul>
+</div>
+
+<div class="span6">
+	<div class="candidatosMalos thumbnail">Estos candidatos no responden las preguntas de sus ciudadanos</div>
+<ul class="listadoCandidatosMalos">
 	{% for malo in malos|slice:":15" %}
 
 	<li>
@@ -17,16 +33,8 @@
 </ul>
 </div>
 
-<div class="buenos">
-	<span>Estos candidatos deben ser premiados por que responden las preguntas de sus ciudadanos</span>
-<ul>
-	{% for bueno in buenos|slice:":15" %}
 
-	<li>
-		{{forloop.counter}} {{bueno.candidato}} de {{bueno.candidato.comuna}} ha respondido {{bueno.preguntas_respondidas}} preguntas
 
-	</li>
-	{% endfor %}
-</ul>
+</div>
 </div>
 {% endblock content %}
