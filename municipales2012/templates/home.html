@@ -104,7 +104,11 @@
                         
                         
                         <li class="span3">
-                        <a href="{% url reporta %}" class="thumbnail">
+			{% if flavour == 'mobile' %}
+				<a href="./m/reporta.php" class="thumbnail">
+			{% else %}
+                        	<a href="{% url reporta %}" class="thumbnail">
+			{% endif %}
                         <img src="{{ STATIC_URL }}images/fiscaliza.png" alt="">
                         </a> 
                         <h5> Fiscaliza</h5>
