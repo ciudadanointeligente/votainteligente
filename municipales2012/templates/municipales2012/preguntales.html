@@ -99,14 +99,23 @@ $(function () {
 						</div>
 				</div>
 				
-				<div class="accordion-body collapse in">
+				<div class="accordion-body">
 		{% for candidato, respuesta in respuestas.items%}
 					<div class="nombreRespuestaPreguntale"> 
 						<h5 class="nombreCandidato">{{candidato}}</h5>
+
+						<div>
+						<div class="respuestaPreguntale"id="{{respuesta.pk}}">{{respuesta.texto_respuesta}}</div>
+						<br/>
+						<div class="twitteales">{{ respuesta|twittrespuesta }}</div>
+						</div>
+						<br/>
+
 						<br/>
 						<div class="twitteales">{{ respuesta|twittrespuesta }}</div>
 						<div class="respuestaPreguntale"id="{{respuesta.pk}}">{{respuesta.texto_respuesta}}</div>
 						
+
 					</div>
 		{% endfor %}
 				</div>
