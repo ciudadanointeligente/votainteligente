@@ -15,6 +15,7 @@
                        {%endfor%}
                        {%for ultima_respuesta in ultimas_respuestas%}
                        <li><strong>{{ultima_respuesta.candidato.nombre|truncatechars:30}}</strong> Respondió: {{ultima_respuesta.texto_respuesta|truncatechars:200}} <a href="/{{ultima_respuesta.candidato.comuna.slug}}/">Ver</a></li>
+                       <li><strong>En {{ultima_respuesta.candidato.comuna.nombre|upper}} {{ultima_respuesta.candidato.nombre|upper|truncatechars:30}} Respondió: </strong> {{ultima_respuesta.texto_respuesta|truncatechars:200}} <a href="/{{ultima_respuesta.candidato.comuna.slug}}/">Ver</a></li>
                        {%endfor%}
                    </ul>
                 </div>
