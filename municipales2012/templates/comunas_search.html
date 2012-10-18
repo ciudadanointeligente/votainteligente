@@ -1,0 +1,1 @@
+{% for comuna in comunas %}{label:"{{comuna.nombre}}",value:"{{comuna.slug}}"}{% if not forloop.last %},{% endif %}{% endfor %}
