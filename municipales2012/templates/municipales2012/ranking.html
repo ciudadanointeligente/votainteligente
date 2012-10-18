@@ -9,8 +9,8 @@
 	<div class="candidatosBuenos thumbnail">Estos candidatos responden las preguntas de sus ciudadanos</div>
 <ul class="listadoCandidatosBuenos">
 	{% for bueno in buenos|slice:":15" %}
-
-	<li>
+<br/>
+	<li class="itemListadoCandidatosBuenos">
 		{{forloop.counter}} {{bueno.candidato}} de {{bueno.candidato.comuna}} ha respondido {{bueno.preguntas_respondidas}} preguntas
 
 	</li>
@@ -22,8 +22,8 @@
 	<div class="candidatosMalos thumbnail">Estos candidatos no responden las preguntas de sus ciudadanos</div>
 <ul class="listadoCandidatosMalos">
 	{% for malo in malos|slice:":15" %}
-
-	<li>
+<br/>
+	<li class="itemListadoCandidatosMalos">
 		{{forloop.counter}} {{malo.candidato}} de {{malo.candidato.comuna}} no ha respondido {{malo.preguntas_no_respondidas}} preguntas
 		{% if malo.candidato.twitter %}
 			{{ malo|no_responde }}
@@ -32,8 +32,6 @@
 	{% endfor %}
 </ul>
 </div>
-
-
 
 </div>
 </div>

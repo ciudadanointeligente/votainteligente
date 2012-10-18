@@ -242,7 +242,7 @@ span .casa{
 	}
 
 .itemFooter{
-	 margin-left:15px;
+	 margin-left:13px;
 	 margin-top: 21px;
 	}
 
@@ -1607,8 +1607,19 @@ padding: 8px 35px 8px 14px;
 
 .listadoCandidatosMalos {
 	list-style: none;
+	margin-left: 0px;
 }
 
 .listadoCandidatosBuenos {
 	list-style: none;
+	margin-left: 0px;
+}
+
+.itemListadoCandidatosBuenos {
+	border-bottom: 1px solid grey;
+
+}
+
+.itemListadoCandidatosMalos {
+
 }
