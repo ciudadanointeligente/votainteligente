@@ -1466,6 +1466,8 @@ position: relative;
     padding-top: 6px;
     font-weight: 900;
     color: #383838;
+    max-width: 50%;
+    float: left;
 
 }
 
@@ -1484,11 +1486,19 @@ position: relative;
 
 .preguntaPreguntale:first-line {
     font-size: 11pt;
-    line-height:0px;
+    line-height:17px;
     padding-left: 12px;
     padding-top: 10px;
     font-weight: 900;
     color: #474747;
+}
+
+.headerRespuesta{
+	display: block;
+    float: none;
+    height: 100%;
+    padding: 10px 0;
+    width: 100%;
 }
 
 .twitteales {
@@ -1498,8 +1508,9 @@ position: relative;
 }
 
 .nombreRespuestaPreguntale {
-border-bottom: 1px solid #E5E5E5;
-
+	border-bottom: 1px solid #E5E5E5;
+    display: block;
+    overflow: hidden;
 }
 
 .nombreRespuestaPreguntale:last-child {
@@ -1509,10 +1520,11 @@ border-bottom: none;
 
 .respuestaPreguntale {
 	font-size: 9pt;
-    margin-bottom: -17px;
-    margin-top: -11px;
-    padding-bottom: 0;
-    padding-left: 27px;
+    padding: 10px 27px;
+}
+
+.separacionTwitter {
+	margin-top: 6px;
 }
 
 .accordion-groupPreguntale {
