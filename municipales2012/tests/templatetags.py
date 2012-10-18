@@ -62,3 +62,28 @@ class TemplateTagsTesting(TestCase):
 
 
 		self.assertEqual(template.render(context), expected_html)
+
+
+	def test_trae_todas_las_comunas(self):
+		comuna1 = Comuna.objects.create(nombre=u"La comuna1", 
+									slug=u"la-comuna1",
+									main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+									messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+									mapping_extra_app_url=u"")
+		comuna1 = Comuna.objects.create(nombre=u"La comuna2", 
+									slug=u"la-comuna2",
+									main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+									messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+									mapping_extra_app_url=u"")
+
+		expected_html = '{label:"La comuna",value:"la-comuna"},{label:"La comuna1",value:"la-comuna1"},{label:"La comuna2",value:"la-comuna2"}'
+		template = Template("{% load comunas %}{% comunas_search %}")
+
+		context = Context({})
+
+		self.assertEqual(template.render(context), expected_html)
+
+
+
+
+

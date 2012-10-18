@@ -1,3 +1,4 @@
+{% load comunas %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,11 +179,7 @@
   
 <script>
 $(function() {
-  var availableTags = [{% for comuna in comunas %}
-  {label:"{{comuna.nombre}}",value:"{{comuna.slug}}"}{% if not forloop.last %},{% endif %}
-  {% endfor %}
-
-  ];
+  var availableTags = [{% comunas_search %}];
   $( ".comunas-search" ).autocomplete({
     delay:0,
     source: availableTags,
