@@ -24,17 +24,17 @@ def no_responde(malo):
 	url_preguntales = reverse('comuna-preguntales', kwargs={
 			'slug':malo["candidato"].comuna.slug
 			})
-	anchor = u'<a href="https://twitter.com/intent/tweet?screen_name='+malo["candidato"].twitter+u'" data-text="No ha respondido '+str(malo["preguntas_no_respondidas"])+u' preguntas de sus ciudadanos, las puede ver en http://www.votainteligente.cl'+url_preguntales+u'" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Tweet to @'+malo["candidato"].twitter+u'</a>'
+	anchor = u'<a href="https://twitter.com/intent/tweet" data-text="'+str(malo["preguntas_no_respondidas"])+u' preguntas de ciudadanos no han sido respondidas por @'+malo["candidato"].twitter+u', revisalas en http://www.votainteligente.cl'+url_preguntales+u'" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Tweet to @'+malo["candidato"].twitter+u'</a>'
 	return mark_safe(anchor)
 
 
 @register.filter(name='si_responde')
-def si_responde(malo):	
-	if not malo["candidato"].twitter:
+def si_responde(bueno):	
+	if not bueno["candidato"].twitter:
 		return u""
 
 	url_preguntales = reverse('comuna-preguntales', kwargs={
-			'slug':malo["candidato"].comuna.slug
+			'slug':bueno["candidato"].comuna.slug
 			})
-	anchor = u'<a href="https://twitter.com/intent/tweet?screen_name='+malo["candidato"].twitter+u'" data-text="Gracias por responder, sus respuestas en http://www.votainteligente.cl'+url_preguntales+u'" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Tweet to @'+malo["candidato"].twitter+u'</a>'
+	anchor = u'<a href="https://twitter.com/intent/tweet" data-text="Gracias @'+bueno["candidato"].twitter+u' por responder a los ciudadanos en http://www.votainteligente.cl'+url_preguntales+u'" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Tweet to @'+bueno["candidato"].twitter+u'</a>'
 	return mark_safe(anchor)
