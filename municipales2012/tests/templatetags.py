@@ -46,7 +46,7 @@ class TemplateTagsTesting(TestCase):
 															 twitter=u"candidato")
 
 	def test_no_responden_diles_algo(self):
-		expected_html = '<a href="https://twitter.com/intent/tweet?screen_name=candidato" data-text="No ha respondido 1 preguntas de sus ciudadanos, las puede ver en http://www.votainteligente.cl/la-comuna/preguntales" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Tweet to @candidato</a>'
+		expected_html = '<a href="https://twitter.com/intent/tweet" data-text="1 preguntas de ciudadanos no han sido respondidas por @candidato, revisalas en http://www.votainteligente.cl/la-comuna/preguntales" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Tweet to @candidato</a>'
 		template = Template("{% load twitter_tags %}{{ malo|no_responde }}")
 		context = Context({"malo": {'candidato':self.candidato,'preguntas_no_respondidas':1} })
 
@@ -55,8 +55,8 @@ class TemplateTagsTesting(TestCase):
 
 
 
-	def test_no_responden_diles_algo(self):
-		expected_html = '<a href="https://twitter.com/intent/tweet?screen_name=candidato" data-text="Gracias por responder, sus respuestas en http://www.votainteligente.cl/la-comuna/preguntales" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Tweet to @candidato</a>'
+	def test_si_responden_dales_las_gracias(self):
+		expected_html = '<a href="https://twitter.com/intent/tweet" data-text="Gracias @candidato por responder a los ciudadanos en http://www.votainteligente.cl/la-comuna/preguntales" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Tweet to @candidato</a>'
 		template = Template("{% load twitter_tags %}{{ bueno|si_responde }}")
 		context = Context({"bueno": {'candidato':self.candidato,'preguntas_respondidas':1} })
 
