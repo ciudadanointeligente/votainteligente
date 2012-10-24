@@ -249,9 +249,9 @@ class MessageTestCase(TestCase):
 		self.assertTrue(texto_respuesta)
 	
 	def test_questions_by_comuna_count(self):
-		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
-		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
-		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3')
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1',aprobada=True)
+		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2',aprobada=True)
+		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3',aprobada=True)
 		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
 		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
@@ -262,9 +262,9 @@ class MessageTestCase(TestCase):
 		self.assertEqual(self.comuna3.numero_preguntas(), 0)
 	
 	def test_answers_by_comuna_count(self):
-		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
-		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
-		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3')
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1',aprobada=True)
+		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2',aprobada=True)
+		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3',aprobada=True)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c1', pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
 		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
@@ -275,9 +275,9 @@ class MessageTestCase(TestCase):
 		self.assertEqual(self.comuna3.numero_respuestas(), 0)
 
 	def test_candidate_questions(self):
-		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
-		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
-		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3')
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1',aprobada=True)
+		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2',aprobada=True)
+		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3',aprobada=True)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c1', pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
 		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
@@ -290,9 +290,9 @@ class MessageTestCase(TestCase):
 
 	
 	def test_candidate_answers(self):
-		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
-		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
-		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3')
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1',aprobada=True)
+		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2',aprobada=True)
+		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3',aprobada=True)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c1', pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
 		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
