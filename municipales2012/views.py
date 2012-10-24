@@ -103,7 +103,7 @@ class ComunaPreguntales(CreateView):
 		for candidato in candidatos:
 			Respuesta.objects.create(candidato = candidato, pregunta = self.object)
 
-     		messages.success(self.request, 'Tu pregunta ha sido enviada') 
+     		messages.success(self.request, '***\nTu pregunta ya está siendo procesada. En algunos minutos estará publicada.\n***') 
      		
      		
 		return HttpResponseRedirect(url)
