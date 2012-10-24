@@ -19,8 +19,9 @@ class Comuna(models.Model):
 	def __unicode__(self):
 		return self.nombre
 	def preguntas(self):
+		#solo preguntas aprobadas
 		candidatos_comuna = Candidato.objects.filter(comuna=self)
-		preguntas_candidatos_comuna = Pregunta.objects.filter(candidato__in=candidatos_comuna).distinct()
+		preguntas_candidatos_comuna = Pregunta.objects.filter(aprobada=True).filter(candidato__in=candidatos_comuna).distinct()
 		return preguntas_candidatos_comuna
 	def numero_preguntas(self):
 		preg = self.preguntas()
@@ -119,7 +120,7 @@ class Candidato(models.Model):
 	estrellitas = property(_estrellitas)
 
 	def numero_preguntas(self):
-		return self.pregunta.count()
+		return self.pregunta.filter(aprobada=True).count()
 
 	def respuestas(self):
 		preg = Pregunta.objects.filter(candidato=self).distinct()

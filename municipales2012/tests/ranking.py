@@ -60,7 +60,8 @@ class RankingTestCase(TestCase):
 
 		self.pregunta1 = Pregunta.objects.create(
 											remitente='remitente1', 
-											texto_pregunta='texto_pregunta1')
+											texto_pregunta='texto_pregunta1',
+											aprobada=True)
 		self.respuesta1 = Respuesta.objects.create(pregunta=self.pregunta1, candidato=self.candidato1)
 		self.respuesta2 = Respuesta.objects.create(pregunta=self.pregunta1, candidato=self.candidato2)
 		self.respuesta3 = Respuesta.objects.create(pregunta=self.pregunta1, candidato=self.candidato3)
@@ -68,7 +69,8 @@ class RankingTestCase(TestCase):
 
 		self.pregunta2 = Pregunta.objects.create(
 											remitente='remitente2', 
-											texto_pregunta='texto_pregunta2')
+											texto_pregunta='texto_pregunta2',
+											aprobada=True)
 		self.respuesta4 = Respuesta.objects.create(pregunta=self.pregunta2, candidato=self.candidato1)
 		self.respuesta5 = Respuesta.objects.create(pregunta=self.pregunta2, candidato=self.candidato2)
 		self.respuesta6 = Respuesta.objects.create(pregunta=self.pregunta2, candidato=self.candidato3)
@@ -76,15 +78,23 @@ class RankingTestCase(TestCase):
 
 		self.pregunta3 = Pregunta.objects.create(
 											remitente='remitente3', 
-											texto_pregunta='texto_pregunta3')
+											texto_pregunta='texto_pregunta3',
+											aprobada=True)
 
 		self.respuesta3_1 = Respuesta.objects.create(pregunta=self.pregunta3, candidato=self.candidato1)
 		self.respuesta3_2 = Respuesta.objects.create(pregunta=self.pregunta3, candidato=self.candidato2)
 		self.respuesta3_3 = Respuesta.objects.create(pregunta=self.pregunta3, candidato=self.candidato3)
 		self.respuesta3_4 = Respuesta.objects.create(pregunta=self.pregunta3, candidato=self.candidato4)
 
+		self.pregunta4 = Pregunta.objects.create(
+											remitente='remitente4', 
+											texto_pregunta='texto_pregunta4')
 
 
+		self.respuesta4_1 = Respuesta.objects.create(pregunta=self.pregunta4, candidato=self.candidato1)
+		self.respuesta4_2 = Respuesta.objects.create(pregunta=self.pregunta4, candidato=self.candidato2)
+		self.respuesta4_3 = Respuesta.objects.create(pregunta=self.pregunta4, candidato=self.candidato3)
+		self.respuesta4_4 = Respuesta.objects.create(pregunta=self.pregunta4, candidato=self.candidato4)
 		#el candidato1 respondiendo
 
 		self.respuesta1.texto_respuesta = u"Yo opino que guau guau"
