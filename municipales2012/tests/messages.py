@@ -197,7 +197,7 @@ class MessageTestCase(TestCase):
 		
 
 		#Viene un mensaje de alerta
-		# storage = messages.get_messages(self.request)
+		self.assertEquals(len(response.context['messages']),1)
 
 		# self.assertTrue(len(storage), 1)
 

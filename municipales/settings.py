@@ -123,6 +123,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'django_mobile.context_processors.flavour',
+    'django.contrib.messages.context_processors.messages',
 )
 
 INSTALLED_APPS = (
