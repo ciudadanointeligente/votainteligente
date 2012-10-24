@@ -72,7 +72,7 @@ class ComunaPreguntales(CreateView):
 		candidatos_comuna = Candidato.objects.filter(comuna = comuna)
 		contactos_candidato = Contacto.objects.filter(candidato__in = candidatos_comuna)
 		candidatos = candidatos_comuna.filter(contacto__in = contactos_candidato)
-		preguntas = Pregunta.objects.filter(candidato__in = candidatos_comuna).filter(aprobada = True)
+		preguntas = Pregunta.objects.filter(candidato__in = candidatos_comuna).filter(aprobada = True).distinct()
 		conversaciones = {}
 		for pregunta in preguntas:
 			texto_pregunta = pregunta.texto_pregunta
@@ -86,6 +86,9 @@ class ComunaPreguntales(CreateView):
 			mensaje[texto_pregunta] = respuestas
 			conversaciones[nombre_emisor] = mensaje
 
+
+
+		context['preguntas'] = preguntas
 		context['conversaciones'] = conversaciones
 		context['candidatos'] = candidatos
 		todas_las_comunas = Comuna.objects.all()

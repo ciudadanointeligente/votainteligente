@@ -36,12 +36,12 @@ $(function () {
 	<h4 class="tituloPreguntale"> ¡Pregúntales!       Ellos Responden...</h4>
 
 	{% if messages %} 
-<div class="alert alert-success">
-	{% for message in messages %}    
-		{{ message }}
-	{% endfor %}    
-</div>
-{% endif %}
+	<div class="alert alert-success">
+		{% for message in messages %}    
+			{{ message }}
+		{% endfor %}    
+	</div>
+	{% endif %}
 
 	<form class="preguntaCandidatos" action="" method="post">{% csrf_token %}
 		<div class="container-fluid">
@@ -88,22 +88,20 @@ $(function () {
 	<div class="container">
 		<h4 class="tituloPreguntale"> Preguntas Recientes</h4>
 		<div class="accordion" id="accordion2">
-{% for remitente, mensaje in conversaciones.items %}
-			<div class="accordion-groupPreguntale">
-	{% for pregunta, respuestas in mensaje.items %}
-				<div class="accordion-heading tituloAcordion">
+			{% for pregunta in preguntas %}
+<div class="accordion-groupPreguntale">
+	<div class="accordion-heading tituloAcordion">
 					
-						<div class="preguntaPreguntale">{{pregunta}} <br/>
-							<div class="preguntadoPor"> <small><strong>Preguntado por:</strong> <em>{{remitente}}</em></small></div>
-							<br/> <br/>
-						</div>
-				</div>
-				
-				<div class="accordion-body">
-		{% for candidato, respuesta in respuestas.items%}
+			<div id="{{pregunta.id}}"class="preguntaPreguntale">{{pregunta}} <br/>
+				<div class="preguntadoPor"> <small><strong>Preguntado por:</strong> <em>{{pregunta.remitente}}</em></small></div>
+				<br/> <br/>
+			</div>
+		</div>
+			<div class="accordion-body">
+			{% for respuesta in pregunta.respuesta_set.all %}
 					<div class="nombreRespuestaPreguntale"> 
 						<div class="headerRespuesta">
-							<h5 class="nombreCandidato">{{candidato}}</h5> 
+							<h5 class="nombreCandidato">{{respuesta.candidato}}</h5> 
 							<div class="twitteales">{{ respuesta|twittrespuesta }}</div> 
 						</div>
 						<br/>
@@ -113,15 +111,10 @@ $(function () {
 							
 						</div>
 						<br/>
-
-						
-						
-
 					</div>
-		{% endfor %}
-				</div>
-	{% endfor %}
+			{% endfor %}
 			</div>
+	</div>
 {% endfor %}
 		</div>
 	</div>
