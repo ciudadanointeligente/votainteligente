@@ -12,6 +12,7 @@ from django.test.client import Client
 from django.utils.unittest import skip
 from django.template import Template, Context
 from urllib2 import quote
+from django.contrib import messages
 
 class MessageTestCase(TestCase):
 
@@ -164,6 +165,8 @@ class MessageTestCase(TestCase):
 											'remitente': 'Remitente 1',
 											'recaptcha_response_field': 'PASSED'}, follow=True)
 
+
+
 		self.assertTemplateUsed(response, 'municipales2012/preguntales.html')
 		self.assertEquals(Pregunta.objects.count(), 1)
 		self.assertEquals(Pregunta.objects.all()[0].texto_pregunta, 'Texto Pregunta')
@@ -171,7 +174,6 @@ class MessageTestCase(TestCase):
 
 		self.assertEquals(Respuesta.objects.count(), 2)
 		self.assertTrue('comunas' in response.context)
-
 
 
 		#Se crea la pregunta con su respectivo texto y remitente
@@ -189,6 +191,23 @@ class MessageTestCase(TestCase):
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).filter(nombre=self.candidato2.nombre).count(),1)
 		#Sólo se agregó la pregunta a 2 candidatos
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).count(),2)
+
+		#
+
+		
+
+		#Viene un mensaje de alerta
+		# storage = messages.get_messages(self.request)
+
+		# self.assertTrue(len(storage), 1)
+
+		# for message in storage:
+		# 	print message
+		# self.assertTrue("alerta" in response.context)
+		# self.assertEquals(response.context["alerta"], "***\nTu pregunta ya está siendo procesada. En algunos minutos estará publicada.\n***")
+
+
+
 	
 	def test_send_question_message(self):
 
@@ -229,6 +248,11 @@ class MessageTestCase(TestCase):
 		self.assertEquals(response.status_code, 200)
 		#Check conversaciones
 		self.assertTrue('conversaciones' in response.context)
+
+		self.assertTrue('preguntas' in response.context)
+		self.assertEquals(response.context['preguntas'].count(),0)
+
+
 		#Conversaciones aren't displayed if not allowed
 		self.assertEquals(response.context['conversaciones'], {})
 		#Conversaciones are displayed if allowed
@@ -239,6 +263,8 @@ class MessageTestCase(TestCase):
 		conversaciones = response.context['conversaciones']
 		#Creo que no es necesario hacer esto;Se puede acceder a todas las variables de una Pregunta en el template
 		expected_conversaciones = {u"remitente1":{u"texto_pregunta1":{u"candidato1":respuesta1,u"candidato2":respuesta2}}}
+		self.assertEquals(response.context['preguntas'].count(),1)
+		self.assertEquals(response.context['preguntas'][0],pregunta1)
 		self.assertEquals(conversaciones, expected_conversaciones)
 		nombre_remitente, pregunta = conversaciones.popitem()
 		texto_pregunta, respuestas = pregunta.popitem()
@@ -249,9 +275,9 @@ class MessageTestCase(TestCase):
 		self.assertTrue(texto_respuesta)
 	
 	def test_questions_by_comuna_count(self):
-		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
-		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
-		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3')
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1',aprobada=True)
+		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2',aprobada=True)
+		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3',aprobada=True)
 		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
 		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
@@ -262,9 +288,9 @@ class MessageTestCase(TestCase):
 		self.assertEqual(self.comuna3.numero_preguntas(), 0)
 	
 	def test_answers_by_comuna_count(self):
-		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
-		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
-		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3')
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1',aprobada=True)
+		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2',aprobada=True)
+		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3',aprobada=True)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c1', pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
 		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
@@ -275,9 +301,9 @@ class MessageTestCase(TestCase):
 		self.assertEqual(self.comuna3.numero_respuestas(), 0)
 
 	def test_candidate_questions(self):
-		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
-		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
-		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3')
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1',aprobada=True)
+		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2',aprobada=True)
+		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3',aprobada=True)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c1', pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
 		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
@@ -290,9 +316,9 @@ class MessageTestCase(TestCase):
 
 	
 	def test_candidate_answers(self):
-		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
-		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
-		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3')
+		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1',aprobada=True)
+		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2',aprobada=True)
+		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3',aprobada=True)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c1', pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
 		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
