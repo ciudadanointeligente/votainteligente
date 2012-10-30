@@ -5,10 +5,11 @@
    
            
          
-         <div class="container">    
+         <div class="container paginaCompleta">    
                 
+            <div class="row-fluid">
                     
-                <div class="barra_noticias">
+               <!-- <div class="barra_noticias">
                     <ul style="position: absolute; margin: 0px; top: 0px; ">
                         {%for ultima_pregunta in ultimas_preguntas%}
                        <li><strong>{{ultima_pregunta.remitente|truncatechars:30}}</strong> preguntó: "{{ultima_pregunta.texto_pregunta|truncatechars:200}}"</li>
@@ -17,7 +18,29 @@
                        <li><strong>En {{ultima_respuesta.candidato.comuna.nombre|upper}} {{ultima_respuesta.candidato.nombre|upper|truncatechars:30}} Respondió: </strong> {{ultima_respuesta.texto_respuesta|truncatechars:200}} <a href="/{{ultima_respuesta.candidato.comuna.slug}}/">Ver</a></li>
                        {%endfor%}
                    </ul>
-                </div>
+                </div> -->
+
+                <div class="span12 thumbnail" style="margin-top: 13px; padding-top: 0px; padding-bottom: 0px;">
+                    <div>
+                       
+                    <h1  style="color: rgb(0, 175, 229); padding-left: 10px; font-size: 37px;">¡Muchas  gracias a toda la comunidad @ciudadanoi!  </h1>
+                    
+                    </div>
+                    <p class="parrafoResumen">
+                      Gracias a Uds. superamos las <span class="cifrasResumen"> 100.000 </span> visitas en votainteligente.cl y las <span class="cifrasResumen">75.000 </span>en lafranjadelosquesobran.cl
+                      </br>Recibimos más de <span class="cifrasResumen">2.800 </span> preguntas para los candidatos a alcalde, y más de <span class="cifrasResumen">900 </span>respuestas a éstas.
+                      </br> <span class="cifrasResumen">10.654 </span>ciudadanos ocuparon nuestro candideit.org y encontraron su media naranja.
+                    </br> #LosQueSobran tuvo <span class="cifrasResumen">3.882 </span>usuarios y más de <span class="cifrasResumen">8.200 </span> comentarios en twitter, siendo el segundo hashtag más usado en estas elecciones. 
+
+                      </br></br> Pero lo más importante fue que contamos con tu apoyo y participación en este gran proyecto que buscó acercarte un poco más a tus candidatos y entregarte información de tu comuna. 
+
+                      </br></br>
+                    <img src="{{ STATIC_URL }}images/comunidadI.png" alt="">
+                    
+                     </p>
+
+                  </div>
+            </div>
                 
                 <div class="buscadorPpal">
                 
