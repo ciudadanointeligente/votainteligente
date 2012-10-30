@@ -29,62 +29,8 @@ $(function () {
 
 	 <h3>Preguntas a los candidatos de <span><a href="{% url comuna-overview slug=comuna.slug %}"> {{comuna.nombre}} </a></span> </h3>
 
-
-
-
-
-	<h4 class="tituloPreguntale"> ¡Pregúntales!       Ellos Responden...</h4>
-
-	{% if messages %} 
-	<div class="alert alert-success">
-		{% for message in messages %}    
-			{{ message }}
-		{% endfor %}    
-	</div>
-	{% endif %}
-
-	<form class="preguntaCandidatos" action="" method="post">{% csrf_token %}
-		<div class="container-fluid">
-			<div class="row-fluid">
-				<div class="candidatosPreguntale span4">
-					<h5> Candidatos </h5>
-					<label>Marca sólo los candidatos a los que quieras preguntar</label>
-{% for pk, candidato in form.candidato.field.choices %}
-					<label class="checkbox">
-					<input type="checkbox" name="candidato" {{ pk|estrellitas_disabled }} value={{pk}}>{{candidato}} {{ pk|estrellitas }}
-					 </input> </label>
-{% endfor %}
-					<span class="help-block"> <small> <em> <strong>
-						* Tu pregunta será enviada al mail del candidato
-						<br/>
-						** Tu pregunta será enviada al mail del partido del candidato
-						<br/>
-						*** No tenemos el mail del candidato </strong></em> </small></span>
-
-					{{form.candidato.errors}}
-				</div>
-				<div class="span8">
-					<label> <strong>Yo soy</strong></label>
-					{{form.remitente}}
-					<span class="help-block"> <small> <em> <strong>*Identifícate como quieras* </strong> </em> </small></span>
-					{{form.remitente.errors}}
-					<br/>
-
-					<label> <strong>Escribe tu pregunta</strong></label>
-					{{form.texto_pregunta}}
-					
-					{{form.texto_pregunta.errors}}
-					<br/>
-					<p>
-						{{form.captcha}}	
-					</p>
-					{{form.captcha.errors}}
-					<p> Acepto que mis preguntas y respuestas sean publicadas en este mismo medio. <br/>Confirmo que lo que aquí dice no atenta contra el candidato.</p>
-					<button type="submit" class="btn btn-info btnDerecha">He dicho</button>
-				</div>
-			</div>
-		</div>
-	</form>
+	 <h2>El período de preguntas se ha terminado muchas gracias por preguntar y responder</h2>
+	 <h3>¡Vuelve a visitarnos, pronto tendremos más novedades!</h3>
 	<div class="container">
 		<h4 class="tituloPreguntale"> Preguntas Recientes</h4>
 		<div class="accordion" id="accordion2">
