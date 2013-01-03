@@ -184,7 +184,9 @@ EMAIL_HOST_PASSWORD = 'your_password'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+EXTRA_APPS = ()
 try:
     from local_settings import *
+    INSTALLED_APPS += EXTRA_APPS
 except ImportError:
     pass
