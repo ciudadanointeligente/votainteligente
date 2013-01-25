@@ -8,6 +8,7 @@ from municipales2012.management.commands.comunas_importer import *
 from municipales2012.management.commands.contactos_importer import *
 from municipales2012.management.commands.candidatos_importer import *
 from mailer.models import Message
+from django.conf import settings
 from django.test.client import Client
 from django.utils.unittest import skip
 from django.template import Template, Context
@@ -62,6 +63,7 @@ class MessageTestCase(TestCase):
 		self.template = '<h3>Hello, this is a test template</h3><br><p>Message goes here</p>'
 		self.mail_user = 'mailer@'
 		self.mail_pass = ''
+		settings.PREGUNTALE_STATUS = 'GOING_ON'
 
 	def test_create_candidate(self):
 
@@ -364,3 +366,24 @@ class MessageTestCase(TestCase):
 		self.assertEqual(preguntas_por_partidos[1][1], 'partido2')
 		self.assertEqual(preguntas_por_partidos[2][0], 0)
 		self.assertEqual(preguntas_por_partidos[2][1], 'partido3')
+
+	def test_preguntales_html_going_on(self):
+		# decir que esta en modo GOING ON (otros estados: COMING SOON, PASSED)
+		# acceder al Preguntales de la comuna 1
+		# asegurarme que lo rendereado es preguntales_html
+		settings.PREGUNTALE_STATUS = "GOING_ON"
+		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
+		response = self.client.get(url)
+		self.assertTemplateUsed(response, 'municipales2012/preguntales.html')
+
+	def test_preguntales_html_coming_soon(self):
+		settings.PREGUNTALE_STATUS = "COMING_SOON"
+		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
+		response = self.client.get(url)
+		self.assertTemplateUsed(response, 'municipales2012/preguntales_coming_soon.html')
+
+	def test_preguntales_html_passed(self):
+		settings.PREGUNTALE_STATUS = "PASSED"
+		url = reverse('comuna-preguntales', kwargs={'slug':self.comuna1.slug})
+		response = self.client.get(url)
+		self.assertTemplateUsed(response, 'municipales2012/preguntales_passed.html')

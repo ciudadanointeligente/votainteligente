@@ -6,6 +6,7 @@ from django.views.generic.edit import FormView
 from models import Comuna, Indice, Pregunta, Candidato, Respuesta, Contacto
 from django.shortcuts import get_object_or_404
 from forms import PreguntaForm
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from operator import itemgetter
@@ -63,7 +64,12 @@ class ComunaPreguntales(CreateView):
 	success_url = 'preguntales'
 
 	def get_template_names(self):
-		return ['municipales2012/preguntales.html']
+		if settings.PREGUNTALE_STATUS == 'GOING_ON':
+			return ['municipales2012/preguntales.html']
+		if settings.PREGUNTALE_STATUS == 'COMING_SOON':
+			return ['municipales2012/preguntales_coming_soon.html']
+		if settings.PREGUNTALE_STATUS == 'PASSED':
+			return ['municipales2012/preguntales_passed.html']
 
 	def get_context_data(self, **kwargs):
 		comuna_slug = self.kwargs['slug']

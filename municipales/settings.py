@@ -192,6 +192,8 @@ CANDIDATE_INFO_CONTACT_MAIL = '<your e-mail address where you want to receive ca
 CANDIDATE_CONTACT_SUBJECT = '<Subject you want for candidates inquiries>'
 
 EXTRA_APPS = ()
+PREGUNTALE_STATUS = 'GOING_ON'	# Cambia comportamiento del modulo Preguntales. Estados: GOING_ON (por defecto), COMING_SOON, PASSED
+
 try:
     from local_settings import *
     INSTALLED_APPS += EXTRA_APPS
