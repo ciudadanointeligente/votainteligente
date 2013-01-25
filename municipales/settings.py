@@ -185,6 +185,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 EXTRA_APPS = ()
+PREGUNTALE_STATUS = 'GOING_ON'	# Cambia comportamiento del modulo Preguntales. Estados: GOING_ON (por defecto), COMING_SOON, PASSED
+
 try:
     from local_settings import *
     INSTALLED_APPS += EXTRA_APPS
