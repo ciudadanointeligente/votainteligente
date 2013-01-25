@@ -1,5 +1,6 @@
 {% extends "base_sub_menu.html" %}
 {% block content %}
+{% load settingsvars_tags %}
 
 <meta property="og:description" content="Viste estos datos de {{comuna}}"/>
 
@@ -24,7 +25,7 @@
                           <div> 
                                 <iframe src="{{comuna.main_embedded}}" class="candideitorg_embeded" scrolling="no"> </iframe>
 
-                                <p> <em> *** Eres candidato y quieres enviarnos tu información. <a href="mailto:candidatos@votainteligente.cl?Subject=Respuestas%20Candideitorg">Click aquí</a> </em></p>
+                                <p> <em> *** Eres candidato y quieres enviarnos tu información. <a href="mailto:{% CANDIDATE_INFO_CONTACT_MAIL %}?Subject={% CANDIDATE_CONTACT_SUBJECT %}">Click aquí</a> </em></p>
 
                             </div>
                         </div>
@@ -166,7 +167,7 @@
                                 <div id="disqus_thread"></div>
                                     <script type="text/javascript">
                                         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-                                        var disqus_shortname = 'votainteligente'; // required: replace example with your forum shortname
+                                        var disqus_shortname = '{% DISQUS_SHORT_NAME %}'; // required: replace example with your forum shortname
 
                                         /* * * DON'T EDIT BELOW THIS LINE * * */
                                         (function() {
@@ -192,7 +193,7 @@
 
 <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'votainteligente'; // required: replace example with your forum shortname
+        var disqus_shortname = '{% DISQUS_SHORT_NAME %}'; // required: replace example with your forum shortname
 
         /* * * DON'T EDIT BELOW THIS LINE * * */
         (function () {

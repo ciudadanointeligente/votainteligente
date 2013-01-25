@@ -184,6 +184,13 @@ EMAIL_HOST_PASSWORD = 'your_password'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+#disqus/comment short name:
+DISQUS_SHORT_NAME = '<your disqus short name>'
+
+#candidate info contact mail
+CANDIDATE_INFO_CONTACT_MAIL = '<your e-mail address where you want to receive candidate inquiries'
+CANDIDATE_CONTACT_SUBJECT = '<Subject you want for candidates inquiries>'
+
 EXTRA_APPS = ()
 try:
     from local_settings import *

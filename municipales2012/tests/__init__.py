@@ -15,3 +15,4 @@ from sin_datos import *
 from templates import *
 from templatetags import *
 from ranking import *
+from settings_variables import *
