@@ -15,6 +15,8 @@ class Eleccion(models.Model):
 	main_embedded = models.CharField(max_length=512, blank=True, null=True)
 	messaging_extra_app_url = models.CharField(max_length=512, blank=True, null=True)
 	mapping_extra_app_url = models.CharField(max_length=512, blank=True, null=True)
+	featured = models.BooleanField(default=False)
+	searchable = models.BooleanField(default=True)
 	
 	def __unicode__(self):
 		return self.nombre

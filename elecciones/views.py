@@ -15,9 +15,11 @@ from django.db.models import Count
 class HomeTemplateView(TemplateView):
 	def get_context_data(self, **kwargs):
 		context = super(HomeTemplateView, self).get_context_data(**kwargs)
-		elecciones = Eleccion.objects.all()
+		elecciones_buscables = Eleccion.objects.filter(searchable=True)
+		elecciones_destacadas = Eleccion.objects.filter(featured=True)
 
-		context['elecciones'] = elecciones
+		context['elecciones_buscables'] = elecciones_buscables
+		context['elecciones_destacadas'] = elecciones_destacadas
 		context['ultimas_preguntas']= Pregunta.objects.all().order_by('-id')[:5]
 		context['ultimas_respuestas']= Respuesta.objects.exclude(texto_respuesta='Sin Respuesta').order_by('-id')[:5]
 		return context

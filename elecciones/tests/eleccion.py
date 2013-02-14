@@ -19,14 +19,15 @@ class EleccionModelTestCase(TestCase):
 														slug=u"la-eleccion",
 														main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
 														messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
-														mapping_extra_app_url=u"http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
+														mapping_extra_app_url=u"http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278",
+														featured=True)
 		self.assertTrue(created)
 		self.assertEquals(eleccion.nombre, u"La eleccion")
 		self.assertEquals(eleccion.slug, u"la-eleccion")
 		self.assertEquals(eleccion.main_embedded, u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded")
 		self.assertEquals(eleccion.messaging_extra_app_url, u"http://napistejim.cz/address=nachod")
 		self.assertEquals(eleccion.mapping_extra_app_url, u"http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278")
-
+		self.assertTrue(eleccion.featured)
 	def test_eleccion_unicode(self):
 		eleccion = Eleccion.objects.create(nombre=u"La eleccion", slug=u"la-eleccion")
 

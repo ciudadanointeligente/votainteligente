@@ -23,15 +23,29 @@ class HomeTestCase(TestCase):
 		self.assertTemplateUsed(response, 'home.html')
 
 	
-	def test_trae_los_nombres_de_las_elecciones_y_las_regiones(self):
+	def test_trae_los_nombres_de_las_elecciones_buscables(self):
 		eleccion1 = Eleccion.objects.create(nombre=u"La eleccion1", slug=u"la-eleccion1")
 		eleccion2 = Eleccion.objects.create(nombre=u"La eleccion2", slug=u"la-eleccion2")
+		eleccion3 = Eleccion.objects.create(nombre=u"La eleccion3", slug=u"la-eleccion3",searchable=False)
 		url = reverse('home')
 		response = self.client.get(url)
 
-		self.assertTrue('elecciones' in response.context)
-		self.assertTrue(eleccion1 in response.context["elecciones"])
-		self.assertTrue(eleccion2 in response.context["elecciones"])
+		self.assertTrue('elecciones_buscables' in response.context)
+		self.assertTrue(eleccion1 in response.context["elecciones_buscables"])
+		self.assertTrue(eleccion2 in response.context["elecciones_buscables"])
+		self.assertFalse(eleccion3 in response.context["elecciones_buscables"])
+	
+	def test_trae_los_nombres_de_las_elecciones_destacadas(self):
+		eleccion1 = Eleccion.objects.create(nombre=u"La eleccion1", slug=u"la-eleccion1")
+		eleccion2 = Eleccion.objects.create(nombre=u"La eleccion2", slug=u"la-eleccion2")
+		eleccion3 = Eleccion.objects.create(nombre=u"La eleccion3", slug=u"la-eleccion3",featured=True)
+		url = reverse('home')
+		response = self.client.get(url)
+
+		self.assertTrue('elecciones_destacadas' in response.context)
+		self.assertFalse(eleccion1 in response.context["elecciones_destacadas"])
+		self.assertFalse(eleccion2 in response.context["elecciones_destacadas"])
+		self.assertTrue(eleccion3 in response.context["elecciones_destacadas"])
 
 	def test_last_questions(self):
 
@@ -56,9 +70,6 @@ class HomeTestCase(TestCase):
 		url = reverse('home')
 		response = self.client.get(url)
 
-		self.assertTrue('elecciones' in response.context)
-		self.assertTrue(eleccion1 in response.context["elecciones"])
-		self.assertTrue(eleccion2 in response.context["elecciones"])
 		self.assertEquals(Pregunta.objects.all().count(), 7)
 		self.assertEquals(Respuesta.objects.all().count(), 7)
 		self.assertEquals(response.context['ultimas_preguntas'].count(),5)

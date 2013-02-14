@@ -64,25 +64,68 @@ class TemplateTagsTesting(TestCase):
 		self.assertEqual(template.render(context), expected_html)
 
 
-	def test_trae_todas_las_elecciones(self):
+	def test_trae_todas_las_elecciones_buscables(self):
 		eleccion1 = Eleccion.objects.create(nombre=u"La eleccion1", 
 									slug=u"la-eleccion1",
 									main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
 									messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
 									mapping_extra_app_url=u"")
-		eleccion1 = Eleccion.objects.create(nombre=u"La eleccion2", 
+		eleccion2 = Eleccion.objects.create(nombre=u"La eleccion2", 
 									slug=u"la-eleccion2",
 									main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
 									messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
 									mapping_extra_app_url=u"")
+		eleccion3 = Eleccion.objects.create(nombre=u"La eleccion3", 
+									slug=u"la-eleccion3",
+									main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+									messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+									mapping_extra_app_url=u"",
+									searchable=False)
+		eleccion4 = Eleccion.objects.create(nombre=u"La eleccion4", 
+									slug=u"la-eleccion4",
+									main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+									messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+									mapping_extra_app_url=u"",
+									featured=True)
 
-		expected_html = '{label:"La eleccion",value:"la-eleccion"},{label:"La eleccion1",value:"la-eleccion1"},{label:"La eleccion2",value:"la-eleccion2"}'
+		expected_html = '{label:"La eleccion",value:"la-eleccion"},{label:"La eleccion1",value:"la-eleccion1"},{label:"La eleccion2",value:"la-eleccion2"},{label:"La eleccion4",value:"la-eleccion4"}'
 		template = Template("{% load elecciones_templatetags %}{% elecciones_search %}")
 
 		context = Context({})
 
 		self.assertEqual(template.render(context), expected_html)
+	# @skip('calibrando el test')
+	def test_trae_todas_las_elecciones_destacadas(self):
+		eleccion1 = Eleccion.objects.create(nombre=u"La eleccion1", 
+									slug=u"la-eleccion1",
+									main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+									messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+									mapping_extra_app_url=u"")
+		eleccion2 = Eleccion.objects.create(nombre=u"La eleccion2", 
+									slug=u"la-eleccion2",
+									main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+									messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+									mapping_extra_app_url=u"",
+									featured=True)
+		eleccion3 = Eleccion.objects.create(nombre=u"La eleccion3", 
+									slug=u"la-eleccion3",
+									main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+									messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+									mapping_extra_app_url=u"",
+									searchable=False)
+		eleccion4 = Eleccion.objects.create(nombre=u"La eleccion4", 
+									slug=u"la-eleccion4",
+									main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
+									messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
+									mapping_extra_app_url=u"",
+									featured=True)
 
+		expected_html = '{label:"La eleccion2",value:"la-eleccion2"},{label:"La eleccion4",value:"la-eleccion4"}'
+		template = Template("{% load elecciones_templatetags %}{% elecciones_destacadas %}")
+
+		context = Context({})
+
+		self.assertEqual(template.render(context), expected_html)
 
 
 
