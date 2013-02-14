@@ -1,0 +1,1 @@
+{% for eleccion in elecciones %}{label:"{{eleccion.nombre}}",value:"{{eleccion.slug}}"}{% if not forloop.last %},{% endif %}{% endfor %}
