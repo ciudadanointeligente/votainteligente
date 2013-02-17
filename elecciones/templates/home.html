@@ -28,25 +28,75 @@
                      </p>
 
                   </div>
+            {% if elecciones_destacadas|length >= 1 and elecciones_buscables|length >= 1 %}
+              <!-- this case includes the block of featured elections and the searchbox for searchable elections -->
+              <!-- Featured Election block -->
+              <div class="contenedorDestacado">
+              <ul>
+                {% for eleccion_destacada in elecciones_destacadas %}
+                  <div class="destacado tipoEleccion{{ forloop.counter }}">
+                    <div class="contenidoDestacado">
+                      <a href="{{ eleccion_destacada.slug }}">
+                        <h2 class="tituloDestacado">{{eleccion_destacada.nombre}}</h2>
+                      </a>
+                    <p class="textoDestacado">Tipo de Elección</p> 
+                    </div>
+                  </div>
+                {% endfor %}
+              </ul>
+              </div>
+              <!-- Searchable elections Block -->
+              <div class="buscadorPpal">
+                <img class="candidatos" src="{{ STATIC_URL }}images/candidatos.png" alt="">
+                <h3> <center>Revisa y comparte información de tu comuna y candidatos </center></h3>
+                <center><form class="form-search form-search-eleccion"> 
+                  <p> Escribe el nombre de la comuna que te interesa</p>
+                  <input type="text" id="elecciones-search" class="input-xxlarge search-query elecciones-search">
+                  <p class="eleccion-search-error">Debes seleccionar una comuna</p>
+                  <br/> <br/>
+                  <p> <em> Hazle pregúntas a los candidatos | Elige a tu media naranja | Fiscaliza 
+                  </em></p> 
+                  </form>
+                 </center> 
+               </div> 
+
+            {% elif elecciones_destacadas|length >= 1 and elecciones_buscables|length < 1 %}
+              <!-- this case include JUST the block of featured elections -->
+              <!-- Featured Election block -->
+              <div class="contenedorDestacado">
+              <ul>
+                {% for eleccion_destacada in elecciones_destacadas %}
+                  <div class="destacado tipoEleccion{{ forloop.counter }}">
+                    <div class="contenidoDestacado">
+                      <a href="{{ eleccion_destacada.slug }}">
+                        <h2 class="tituloDestacado">{{eleccion_destacada.nombre}}</h2>
+                      </a>
+                    <p class="textoDestacado">texto destacado</p> 
+                    </div>
+                  </div>
+                {% endfor %}
+              </ul>
+              </div>
+            {% elif elecciones_destacadas|length < 1 and elecciones_buscables|length >= 1 %}
+              <!-- this case includes JUST the searchbox for searchable elections -->
+              <!-- Searchable elections Block -->
+              <div class="buscadorPpal">
+                <img class="candidatos" src="{{ STATIC_URL }}images/candidatos.png" alt="">
+                <h3> <center>Revisa y comparte información de tu comuna y candidatos </center></h3>
+                <center><form class="form-search form-search-eleccion"> 
+                  <p> Escribe el nombre de la comuna que te interesa</p>
+                  <input type="text" id="elecciones-search" class="input-xxlarge search-query elecciones-search">
+                  <p class="eleccion-search-error">Debes seleccionar una comuna</p>
+                  <br/> <br/>
+                  <p> <em> Hazle pregúntas a los candidatos | Elige a tu media naranja | Fiscaliza 
+                  </em></p> 
+                  </form>
+                 </center> 
+               </div> 
+            {% endif %}
             </div>
                 
-                <div class="buscadorPpal">
                 
-                <img class="candidatos" src="{{ STATIC_URL }}images/candidatos.png" alt="">
-                
-                <h3> <center>Revisa y comparte información de tu comuna y candidatos </center></h3>
-                <center>
-                    <form class="form-search form-search-eleccion"> <p> Escribe el nombre de la comuna que te interesa</p>
-                <input type="text" id="elecciones-search" class="input-xxlarge search-query elecciones-search"> 
-                <p class="eleccion-search-error">Debes seleccionar una comuna</p>
-                <br/> <br/>
-                <p> <em> Hazle pregúntas a los candidatos | Elige a tu media naranja | Fiscaliza 
-                </em></p> 
-                </form>
-
-                    
-
-                 </center> </div> 
                  <!-- ticker ultimas preguntas y respuestas -->
 <script type="text/javascript">
     $(document).ready(function(){
