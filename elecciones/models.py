@@ -17,6 +17,7 @@ class Eleccion(models.Model):
 	mapping_extra_app_url = models.CharField(max_length=512, blank=True, null=True)
 	featured = models.BooleanField(default=False)
 	searchable = models.BooleanField(default=True)
+	featured_caption = models.CharField(max_length = 100, blank = True, null = True)
 	
 	def __unicode__(self):
 		return self.nombre

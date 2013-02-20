@@ -39,7 +39,7 @@
                       <a href="{{ eleccion_destacada.slug }}">
                         <h2 class="tituloDestacado">{{eleccion_destacada.nombre}}</h2>
                       </a>
-                    <p class="textoDestacado">Tipo de Elección</p> 
+                    <p class="textoDestacado">{{eleccion_destacada.featured_caption}}</p> 
                     </div>
                   </div>
                 {% endfor %}
@@ -71,7 +71,7 @@
                       <a href="{{ eleccion_destacada.slug }}">
                         <h2 class="tituloDestacado">{{eleccion_destacada.nombre}}</h2>
                       </a>
-                    <p class="textoDestacado">texto destacado</p> 
+                    <p class="textoDestacado">{{eleccion_destacada.featured_caption}}</p> 
                     </div>
                   </div>
                 {% endfor %}

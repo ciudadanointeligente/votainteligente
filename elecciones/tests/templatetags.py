@@ -118,9 +118,10 @@ class TemplateTagsTesting(TestCase):
 									main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
 									messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
 									mapping_extra_app_url=u"",
-									featured=True)
+									featured=True,
+									featured_caption = "Eleccion 4 Destacada")
 
-		expected_html = '{label:"La eleccion2",value:"la-eleccion2"},{label:"La eleccion4",value:"la-eleccion4"}'
+		expected_html = '{label:"La eleccion2",value:"la-eleccion2"},{label:"La eleccion4",value:"la-eleccion4",text:"Eleccion 4 Destacada"}'
 		template = Template("{% load elecciones_templatetags %}{% elecciones_destacadas %}")
 
 		context = Context({})
