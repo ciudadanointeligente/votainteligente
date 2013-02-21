@@ -49,11 +49,11 @@
                                                         <li class="span6" style="margin-right: 0px;">
                                                             <div class="well thumbnail">
 							        {% if flavour == 'mobile' %}
-								    <a href="./m/reporta.php" target="_blank" class="btn btn-block btn-danger btnMunicipales">¡Fiscaliza!</a>
+								    <a href="{% url ranking %}" target="_blank" class="btn btn-block btn-danger btnMunicipales">Ranking General</a>
 								{% else %}
-								    <a href="{% url reporta %}" target="_blank" class="btn btn-block btn-danger btnMunicipales">¡Fiscaliza!</a>
+								    <a href="{% url ranking %}" target="_blank" class="btn btn-block btn-danger btnMunicipales">Ranking General</a>
 								{% endif %}
-                                                           <p class="textoBTN">Problemas en tu comuna</p>
+                                                           <p class="textoBTN">Quiénes responden y quiénes no.</p>
                                                            
                                                         </div>
                                                         </li>
