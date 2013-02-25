@@ -1,3 +1,4 @@
+from admin import *
 from area import *
 from candidato import *
 from eleccion import *
