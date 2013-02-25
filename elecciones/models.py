@@ -12,6 +12,7 @@ from django.db.models import Count
 class Eleccion(models.Model):
 	nombre =  models.CharField(max_length=255)
 	slug =  models.CharField(max_length=255)
+	candidator_api_key =  models.CharField(max_length=255, blank=True, null=True)
 	main_embedded = models.CharField(max_length=512, blank=True, null=True)
 	messaging_extra_app_url = models.CharField(max_length=512, blank=True, null=True)
 	mapping_extra_app_url = models.CharField(max_length=512, blank=True, null=True)
@@ -33,7 +34,6 @@ class Eleccion(models.Model):
 		return resp.count()
 
 
-
 class Area(models.Model):
 	nombre = models.CharField(max_length=255)
 	clase_en_carrusel = models.CharField(max_length=255, blank=True, null=True)
@@ -50,6 +50,7 @@ class Dato(models.Model):
 
 	def __unicode__(self):
 		return self.nombre
+
 
 class Indice(models.Model):
 	eleccion = models.ForeignKey(Eleccion)
@@ -68,9 +69,9 @@ class Indice(models.Model):
 	numero_pie_pagina_3 = models.CharField(max_length=255, blank=True, null=True)
 	en_carrusel = models.BooleanField(default=False)
 
-
 	def __unicode__(self):
 		return self.dato.nombre+' - '+self.eleccion.nombre
+
 
 class SinDatos(models.Manager):
 	def get_query_set(self):
@@ -87,11 +88,13 @@ class SinDatos(models.Manager):
 													| Q(twitter__exact='') | \
 													Q(contacto_count=0))
 
+
 class Colectivo(models.Model):
 	sigla = models.CharField(max_length=255)
 	nombre = models.CharField(max_length=255, blank=True, null=True)
 	def __unicode__(self):
 		return self.sigla
+
 
 class Candidato(models.Model):
 	nombre = models.CharField(max_length=255)
@@ -129,11 +132,9 @@ class Candidato(models.Model):
 		resp = Respuesta.objects.filter(pregunta__in=preg).filter(candidato=self).exclude(texto_respuesta='Sin Respuesta').distinct()
 		return resp
 
-
 	def _preguntas_respondidas(self):
 		preguntas = self.pregunta.exclude(respuesta__texto_respuesta="Sin Respuesta")
 		return preguntas
-
 
 	preguntas_respondidas = property(_preguntas_respondidas)
 
@@ -160,11 +161,6 @@ def preguntas_por_partido(self):
 	pass
 	# print Partido.objects.aggregate(nro_preguntas=Sum('candidatos__numero_preguntas'))
 
-
-
-
-
-
 		
 class Contacto(models.Model):
 	PERSONAL = 1
@@ -183,6 +179,7 @@ class Contacto(models.Model):
 	def __unicode__(self):
 		return self.valor
 
+
 class ManagerPregunta(models.Manager):
 	def create(self, **kwargs):
 		#Crear pregunta
@@ -195,7 +192,7 @@ class ManagerPregunta(models.Manager):
 			destinatario = Candidato.objects.get(id = destinatario_pk)
 			Respuesta.objects.create(candidato=destinatario, pregunta=pregunta)
 		return pregunta
-	
+
 
 class Pregunta(models.Model):
 	"""docstring for Pregunta"""
@@ -221,9 +218,6 @@ class Pregunta(models.Model):
 			for destinacion in destinaciones:
 				send_mail(subject, mensaje, 'municipales2012@votainteligente.cl',[destinacion.valor])
 
-			
-
-		
 
 class Respuesta(models.Model):
 	"""docstring for Respuesta"""
@@ -242,7 +236,3 @@ class Respuesta(models.Model):
 		if self.texto_respuesta.strip() == u"Sin Respuesta":
 			return False
 		return True
-
-
-		
-		
