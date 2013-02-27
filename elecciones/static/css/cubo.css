@@ -1,0 +1,70 @@
+ /*variables box*/
+
+		.box-contentwrap::before, .box-top::before {
+			content: '';
+			position: absolute;
+			height: 16px;
+			width: 16px;
+			display: block;
+
+		}
+		.box-contentwrap {
+			width: 86%;
+			background: url(../images/cubo/right-side.png) -1px 0px repeat-y white;
+			margin: 0;
+			padding: 9px 3% 9px 9%;
+			border-left: 0;
+			position: relative;
+			text-align: center;
+		}
+		.box-contentBlue{
+			background-color: #1A83C6;
+			padding: 15px;
+			text-align: center;
+		}
+		.box-contentBlue a, .box-contentBlue a:hover{ color: #fff; text-decoration: none;}
+		.box-contentBlue:hover{
+			background-color: #55B2D2;
+		}
+				
+		.box-contentwrap::before {
+			background: url(../images/cubo/bottom-after.png) -1px 0px no-repeat transparent;
+			bottom: 0;
+			left: 0px;
+
+
+		}	
+
+		.box-top{
+			height: 15px;
+			width: 86%;
+			margin: 0;
+			padding: 0 6%;
+			background: url(../images/cubo/top.png) no-repeat right 0;
+			position: relative;
+			margin-right: 0;
+		}
+
+		.box-top::before{
+			background: url(../images/cubo/top-left.png) 1px 1px no-repeat transparent;			
+			top: 0px;
+			left: 0px;
+		}
+	
+		/*center box*/
+		
+		.center-box .box-contentwrap{
+			background: white;
+			padding: 9px 4%;
+			width: 90%;
+
+		}
+
+	
+			.center-box .box-top::before {
+			background: url(../images/cubo/top.png) -1px 0px no-repeat white;
+			left: 0;
+		}
+
+
+		.center-box .box-contentwrap::before{background: none;}
