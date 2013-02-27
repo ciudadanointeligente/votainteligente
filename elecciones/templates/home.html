@@ -1,289 +1,129 @@
 {% extends "base_sub_menu.html" %}
+
+
+
 {% block content %}
+ <!-- páginaCompleta--> 
+ <div class="paginaCompleta">       
+    
+      {% block top-content %}
+      {% endblock top-content %}
 
-
-   
-           
-         
-         <div class="container paginaCompleta">    
-                
-            <div class="row-fluid">
-                <div class="span12 thumbnail" style="margin-top: 13px; padding-top: 0px; padding-bottom: 0px;">
-                    <div>
-                       
-                    <h1  style="color: rgb(0, 175, 229); padding-left: 10px; font-size: 37px;">¡Muchas  gracias a toda la comunidad @ciudadanoi!  </h1>
-                    
-                    </div>
-                    <p class="parrafoResumen">
-                      Gracias a Uds. superamos las <span class="cifrasResumen"> 100.000 </span> visitas en votainteligente.cl y las <span class="cifrasResumen">75.000 </span>en lafranjadelosquesobran.cl
-                      </br>Recibimos más de <span class="cifrasResumen">2.800 </span> preguntas para los candidatos a alcalde, y más de <span class="cifrasResumen">900 </span>respuestas a éstas.
-                      </br> <span class="cifrasResumen">10.654 </span>ciudadanos ocuparon nuestro candideit.org y encontraron su media naranja.
-                    </br> #LosQueSobran tuvo <span class="cifrasResumen">3.882 </span>usuarios y más de <span class="cifrasResumen">8.200 </span> comentarios en twitter, siendo el segundo hashtag más usado en estas elecciones. 
-
-                      </br></br> Pero lo más importante fue que contamos con tu apoyo y participación en este gran proyecto que buscó acercarte un poco más a tus candidatos y entregarte información de tu eleccion. 
-
-                      </br></br>
-                    <img src="{{ STATIC_URL }}images/comunidadI.png" alt="">
-                    
-                     </p>
-
-                  </div>
-            {% if elecciones_destacadas|length >= 1 and elecciones_buscables|length >= 1 %}
-              <!-- this case includes the block of featured elections and the searchbox for searchable elections -->
-              <!-- Featured Election block -->
-              <div class="contenedorDestacado">
-              <ul>
-                {% for eleccion_destacada in elecciones_destacadas %}
-                  <div class="destacado tipoEleccion{{ forloop.counter }}">
-                    <div class="contenidoDestacado">
-                      <a href="{{ eleccion_destacada.slug }}">
-                        <h2 class="tituloDestacado">{{eleccion_destacada.nombre}}</h2>
-                      </a>
-                    <p class="textoDestacado">{{eleccion_destacada.featured_caption}}</p> 
-                    </div>
-                  </div>
-                {% endfor %}
-              </ul>
+  <div class="row-fluid">   
+    {% if elecciones_destacadas|length >= 1 and elecciones_buscables|length >= 1 %}
+    <!-- this case includes the block of featured elections and the searchbox for searchable elections -->
+     
+     <!-- Featured Election block -->
+      <div class="contenedorDestacado">
+        <ul>
+          {% for eleccion_destacada in elecciones_destacadas %}
+            <div class="destacado tipoEleccion{{ forloop.counter }}">
+              <div class="contenidoDestacado">
+                <a href="{{ eleccion_destacada.slug }}">
+                  <h2 class="tituloDestacado">{{eleccion_destacada.nombre}}</h2>
+                </a>
+              <p class="textoDestacado">{{eleccion_destacada.featured_caption}}</p> 
               </div>
-              <!-- Searchable elections Block -->
-              <div class="buscadorPpal">
-                <img class="candidatos" src="{{ STATIC_URL }}images/candidatos.png" alt="">
-                <h3> <center>Revisa y comparte información de tu comuna y candidatos </center></h3>
-                <center><form class="form-search form-search-eleccion"> 
-                  <p> Escribe el nombre de la comuna que te interesa</p>
-                  <input type="text" id="elecciones-search" class="input-xxlarge search-query elecciones-search">
-                  <p class="eleccion-search-error">Debes seleccionar una comuna</p>
-                  <br/> <br/>
-                  <p> <em> Hazle pregúntas a los candidatos | Elige a tu media naranja | Fiscaliza 
-                  </em></p> 
-                  </form>
-                 </center> 
-               </div> 
-
-            {% elif elecciones_destacadas|length >= 1 and elecciones_buscables|length < 1 %}
-              <!-- this case include JUST the block of featured elections -->
-              <!-- Featured Election block -->
-              <div class="contenedorDestacado">
-              <ul>
-                {% for eleccion_destacada in elecciones_destacadas %}
-                  <div class="destacado tipoEleccion{{ forloop.counter }}">
-                    <div class="contenidoDestacado">
-                      <a href="{{ eleccion_destacada.slug }}">
-                        <h2 class="tituloDestacado">{{eleccion_destacada.nombre}}</h2>
-                      </a>
-                    <p class="textoDestacado">{{eleccion_destacada.featured_caption}}</p> 
-                    </div>
-                  </div>
-                {% endfor %}
-              </ul>
-              </div>
-            {% elif elecciones_destacadas|length < 1 and elecciones_buscables|length >= 1 %}
-              <!-- this case includes JUST the searchbox for searchable elections -->
-              <!-- Searchable elections Block -->
-              <div class="buscadorPpal">
-                <img class="candidatos" src="{{ STATIC_URL }}images/candidatos.png" alt="">
-                <h3> <center>Revisa y comparte información de tu comuna y candidatos </center></h3>
-                <center><form class="form-search form-search-eleccion"> 
-                  <p> Escribe el nombre de la comuna que te interesa</p>
-                  <input type="text" id="elecciones-search" class="input-xxlarge search-query elecciones-search">
-                  <p class="eleccion-search-error">Debes seleccionar una comuna</p>
-                  <br/> <br/>
-                  <p> <em> Hazle pregúntas a los candidatos | Elige a tu media naranja | Fiscaliza 
-                  </em></p> 
-                  </form>
-                 </center> 
-               </div> 
-            {% endif %}
             </div>
-                
-                
-                 <!-- ticker ultimas preguntas y respuestas -->
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('.barra_noticias').easyTicker({
-            visible: 1,
-            interval: 5000
-        });
-    });
-</script>
+          {% endfor %}
+        </ul>
+      </div> <!-- /contenedorDestacado -->
+
+      <!-- /FeaturedBlock -->
+
+      <!-- Searchable elections Block -->
+
+      <div class="buscadorPpal">
+        <img class="candidatos" src="{{ STATIC_URL }}images/candidatos.png" alt="">
+        <h3> <center>Revisa y comparte información de tu comuna y candidatos </center></h3>
+        <center>
+          <form class="form-search form-search-eleccion"> 
+          <p> Escribe el nombre de la comuna que te interesa</p>
+          <input type="text" id="elecciones-search" class="input-xxlarge search-query elecciones-search">
+          <p class="eleccion-search-error">Debes seleccionar una comuna</p>
+          <br/> <br/>
+          <p> <em> Hazle pregúntas a los candidatos | Elige a tu media naranja | Fiscaliza 
+          </em></p> 
+          </form>
+        </center> 
+      </div> <!-- /buscador ppal -->
+     
+      <!--/SearchableBlock--> 
+
+    {% elif elecciones_destacadas|length >= 1 and elecciones_buscables|length < 1 %}
+      <!-- this case include JUST the block of featured elections -->
+      <!-- Featured Election block -->
+      <div class="contenedorDestacado">
+        <ul>
+          {% for eleccion_destacada in elecciones_destacadas %}
+            <div class="destacado tipoEleccion{{ forloop.counter }}">
+              <div class="contenidoDestacado">
+                <a href="{{ eleccion_destacada.slug }}">
+                  <h2 class="tituloDestacado">{{eleccion_destacada.nombre}}</h2>
+                </a>
+              <p class="textoDestacado">{{eleccion_destacada.featured_caption}}</p> 
+              </div>
+            </div>
+          {% endfor %}
+        </ul>
+      </div><!-- /contenedorDestacado -->
+    {% elif elecciones_destacadas|length < 1 and elecciones_buscables|length >= 1 %}
+      <!-- this case includes JUST the searchbox for searchable elections -->
+      <!-- Searchable elections Block -->
+      <div class="buscadorPpal">
+        <img class="candidatos" src="{{ STATIC_URL }}images/candidatos.png" alt="">
+        <h3> <center>Revisa y comparte información de tu comuna y candidatos </center></h3>
+        <center>
+          <form class="form-search form-search-eleccion"> 
+          <p> Escribe el nombre de la comuna que te interesa</p>
+          <input type="text" id="elecciones-search" class="input-xxlarge search-query elecciones-search">
+          <p class="eleccion-search-error">Debes seleccionar una comuna</p>
+          <br/> <br/>
+          <p> <em> Hazle pregúntas a los candidatos | Elige a tu media naranja | Fiscaliza 
+          </em></p> 
+          </form>
+        </center> 
+      </div> <!-- /buscador ppal -->
+    {% endif %}
+  </div> <!-- /rowfluid -->
         
-<!-- growl -->
-    <script type="text/javascript">
-      var notice = '<div class="notice">'
-        +'<div class="notice-body">'
-          + '<p>¿Andas en busca de nuestro antiguo Vota Inteligente? (Información del Congreso)</p>'
-        + '</div>'
-        + '<div class="notice-bottom">'
-          + '<p><a class="btn btn-info" href="http://legislativo.votainteligente.cl" target="_blank">Encuéntralo aquí</a></p>'
-        + '</div>'
-    + '</div>';
-      $( notice ).purr(
-        {
-          isSticky: true,
-          fadeInSpeed: 4000,
-          fadeOutSpeed: 1000,
-          usingTransparentPNG: true
-        }
-      );
-    </script>
-<!-- growl -->
-       
-         
-                            <script>
-                        $(document).ready(function() {
-                          // Handler for .ready() called.
-                           $("#dyna img[title]").tooltip({
-                            offset: [10, 2],
-                             effect: 'slide'
-                            });
-                        });
-                      </script>
-          
-      
-      <div class="container">
-
-            <div class="row-fluid">
                 
-                
-                    <ul class="thumbnails">
-                        
-                        
-                        <li class="span3">
-
-                        <div class="thumbnail">
-
-                            <ul class="tt-wrapper">
-                                <li><a class="tt-preguntales" href="#"><img src="{{ STATIC_URL }}images/preguntale.png" alt=""><span>Ingresa en el buscador el nombre de tu comuna y ahí podrás hacer tus preguntas.</span></a></li>
-                            </ul>
-                        </div>
-                        
-                        <p>Desde tu comuna escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
-                        </li>
-                        
-                        
-                        
-                        
-                        <li class="span3">
-			{% if flavour == 'mobile' %}
-				<a href="http://taller.ciudadanointeligente.org/m/reporta.php" class="thumbnail">
-			{% else %}
-                        	<a href="{% url reporta %}" class="thumbnail">
-			{% endif %}
-                        <img src="{{ STATIC_URL }}images/fiscaliza.png" alt="">
-                        </a> 
-                        <h5> Fiscaliza</h5>
-                        <p>Denuncia todo aquello que quieras mejorar en tu comuna; cuéntanos de lugares públicos en mal estado y propaganda electoral inapropiada, entre otros.</p>
-                        </li>
-                        
-                        <li class="span3">
-                        <a href="http://www.elvaso.cl/2012/10/propaganda-electoral-respetan-la-ley/" target="_blank" class="thumbnail">
-                        <img src="{{ STATIC_URL }}images/infografia1.1.jpg" alt="">
-                        </a>
-                        <h5> Propaganda electoral ilegal </h5>
-                        <p>¿Qué está realmente prohibido? 
-                        <br/>Los datos duros de nuestra legislación sobre la forma en que los candidatos pueden hacer su campaña electoral.</p>
-                        </li>
-
-                         <li class="span3">
-                        <a href="http://www.elvaso.cl/2012/10/los-6-deberes-de-todo-alcalde/" target="_blank" class="thumbnail">
-                        <img src="{{ STATIC_URL }}images/deberesAlcalde.png" alt="">
-                        </a>
-                        <h5> ¿Qué debe hacer el Alcalde? </h5>
-                        <p> Cada 4 años los elegimos, pero sabemos realmente los principales deberes de todo alcalde. Aquí encontrarás todo el material para poder fiscalizar.</p>
-                        </li>
-
-                        <div class="row-fluid">
-                        <li class="span9">
-                        <a href="{% url ranking %}" class="thumbnail">
-                        <img src="{{ STATIC_URL }}images/bannerRanking.png" alt="">
-                        </a>
-                        </li>
-
-                        <li class="span3 thumbnail">
-                        <ul class ="listadoMenuHome">
-                          <li class="itemListaServel"><a href="http://www.servel.cl/controls/neochannels/neo_ch236/neochn236.aspx"class="btn btn-block">Guía para votantes del Servel</a></li>
-                          
-                          <li class="itemListaServel"><a href="http://consulta.servel.cl/" class="btn btn-block"> ¿Dónde voto?</a></li>
-                          <li class="itemListaServel"><a href="http://www.servel.cl/controls/neochannels/neo_ch244/neochn244.aspx"class="btn btn-block">Soy vocal ¿ahora qué?</a></li>
-                          <li class="itemListaServel"><a href="http://www.sinim.gov.cl/desarrollo_local/documentos/Manual_del_Concejal.pdf" class="btn btn-block"> Toda la info sobre los concejales</a></li>
-                          <li class="itemListaServel"><a href="http://www.elvaso.cl/2012/10/las-funciones-del-concejo-municipal/" class="btn btn-block"> Toda la info sobre los concejales</a></li>
-                        </ul>
-                        </li>
-
-                        </div>
-                        
-                        
-                        <!--<li class="span3">
-                        <a href="#" class="thumbnail">
-                        <img src="{{ STATIC_URL }}images/cuadradoRosado.png" alt="">
-                        </a>
-                         <h5> Infografia 1</h5>
-                        <p>Desde tu comuna, escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
-                        </li> -->
-                       
-                    </ul>
+          <!-- ticker ultimas preguntas y respuestas -->
+          <script type="text/javascript">
+              $(document).ready(function(){
+                  $('.barra_noticias').easyTicker({
+                      visible: 1,
+                      interval: 5000
+                  });
+              });
+          </script>
+          <!-- / ticker -->
+                  
+                 
+                   
+          <script>
+            $(document).ready(function() {
+              // Handler for .ready() called.
+               $("#dyna img[title]").tooltip({
+                offset: [10, 2],
+                 effect: 'slide'
+                });
+            });
+          </script>
                     
-                    <!--<div class="container">
-                     
-                      <div class="gitHome">
-                        
-                        <img src="{{ STATIC_URL }}images/logoGit.png" style="float: left; padding-left: 4px;" alt="">
-                        <p class="linkGit"><a href="https://github.com/ciudadanointeligente/municipales-2012" target="_blank">Quieres acceder a nuestro código en Github? </a></p>
-                        
-                        </div>
-                    </div> -->
-                
-                <!--<div class="copiaBtn"> Pregúntale <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </div>
-                <br/>
-        <p>Desde tu comuna, escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
-                </div>
-              
-                
-                <div class="span3"> 
-                <a  href="{% url reporta %}" class="btn btn-block btn-inverse"> Fiscaliza<img src="{{ STATIC_URL}}images/iconoReporta.png" style="float: right;"/> </a>
-                <br/>
-        <p>Denuncia todo aquello que quieras mejorar en tu comuna, cuéntanos de lugares públicos en mal estado, propaganda electoral inapropiada, entre otros.</p>
-                </div>
-                
-                   <div class="span3">
-                
-                <div class="copiaBtn"> Infografia 1 <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </div>
-                <br/>
-        <p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
-                </div>
-                
-                <div class="span3">
-                
-                <div class="copiaBtn"> Infografia 2 <img src="{{ STATIC_URL }}images/iconoPregunta2.png" style="float: right;"/> </div>
-                <br/>
-        <p>Escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.</p>
-                </div> -->
-                
-        </div>
-        </div>
+    
+    </div><!-- / páginaCompleta--> 
+
+      {% block bottom-content %}
+      {% endblock bottom-content %} 
+
+</div> <!-- /container (apparently started on base_sub_menu.html) --> 
         
         
-        <!--
-       <div class="container">
-         <div class="row">
-                <div class="span6">
-                <h5>Video 1</h5>
-        <img src="{{ STATIC_URL }}images/ejemplo-video.png" />
-        </div>
-                <div class="span6">
-                <h5>Video 2</h5>
-        <img src="{{ STATIC_URL }}images/ejemplo-video.png" /> 
-        </div>
-        </div> 
-        -->
-        
-       </div>
-        </div>
-        
-        
-        
+    
         
         {% endblock content %}
+
 
   {% block extra_js %}
   <script type='text/javascript'>iticker_id = 2513;</script>

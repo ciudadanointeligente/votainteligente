@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
 
 urlpatterns = patterns('',
-	url(r'^$', HomeTemplateView.as_view(template_name="home.html"), name="home"),
+	url(r'^$', HomeTemplateView.as_view(template_name="extra-content-home.html"), name="home"),
 	
 
 	#static pages

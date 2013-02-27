@@ -1,0 +1,85 @@
+{% extends "home.html" %}
+	{% block top-content %}
+
+		<div class="row-fluid">
+			<div class="span12 thumbnail" style="margin-top: 13px; padding-top: 0px; padding-bottom: 0px;">
+                 <!-- <div>
+                      <h1  style="color: rgb(0, 175, 229); padding-left: 10px; font-size: 37px;">Hola  </h1>
+                  </div>
+                  <p class="parrafoResumen">
+                    Gracias a Uds. superamos las <span class="cifrasResumen"> 100.000 </span> visitas en votainteligente.cl y las <span class="cifrasResumen">75.000 </span>en lafranjadelosquesobran.cl
+                    </br>Recibimos más de <span class="cifrasResumen">2.800 </span> preguntas para los candidatos a alcalde, y más de <span class="cifrasResumen">900 </span>respuestas a éstas.
+                    </br> <span class="cifrasResumen">10.654 </span>ciudadanos ocuparon nuestro candideit.org y encontraron su media naranja.
+                   </br> #LosQueSobran tuvo <span class="cifrasResumen">3.882 </span>usuarios y más de <span class="cifrasResumen">8.200 </span> comentarios en twitter, siendo el segundo hashtag más usado en estas elecciones. 
+
+                    </br></br> Pero lo más importante fue que contamos con tu apoyo y participación en este gran proyecto que buscó acercarte un poco más a tus candidatos y entregarte información de tu eleccion. 
+
+                    </br></br>
+                    <img src="{{ STATIC_URL }}images/comunidadI.png" alt=""/>
+                  
+                  </p>
+
+                </div>
+                -->
+             </div>
+	{% endblock top-content %}
+
+		{% block bottom-content %}
+
+      <div class="row-fluid">
+              <ul class="thumbnails span9">
+                  <li class="span3">
+                      <div class="thumbnail">
+                          <ul class="tt-wrapper">
+                              <li>
+                                  <a class="tt-preguntales" href="#"><img src="{{ STATIC_URL }}images/preguntale.png" alt=""><span>Ingresa en el buscador el nombre de tu comuna y ahí podrás hacer tus preguntas.</span></a>
+                              </li>
+                          </ul>
+                      </div>
+                      <p>Desde tu comuna escríbele a los candidatos tus inquietudes, revisa lo que otros les están preguntando y averigua quiénes son los que más responden.
+                      </p>
+                  </li>
+                  <li class="span3">
+                      {% if flavour == 'mobile' %}
+                        <a href="http://taller.ciudadanointeligente.org/m/reporta.php" class="thumbnail">
+                      {% else %}
+                                          <a href="{% url reporta %}" class="thumbnail">
+                      {% endif %}
+                      <img src="{{ STATIC_URL }}images/fiscaliza.png" alt=""> </a> 
+                      <h5> Fiscaliza</h5>
+                     <p>Denuncia todo aquello que quieras mejorar en tu comuna; cuéntanos de lugares públicos en mal estado y propaganda electoral inapropiada, entre otros.
+                     </p>
+                  </li>
+                  <li class="span3">
+                    <a href="http://www.elvaso.cl/2012/10/propaganda-electoral-respetan-la-ley/" target="_blank" class="thumbnail">
+                    <img src="{{ STATIC_URL }}images/infografia1.1.jpg" alt="">
+                    </a>
+                    <h5> Propaganda electoral ilegal </h5>
+                    <p>¿Qué está realmente prohibido? 
+                    <br/>Los datos duros de nuestra legislación sobre la forma en que los candidatos pueden hacer su campaña electoral.</p>
+                  </li>
+                  <li class="span3">
+                    <a href="http://www.elvaso.cl/2012/10/los-6-deberes-de-todo-alcalde/" target="_blank" class="thumbnail">
+                    <img src="{{ STATIC_URL }}images/deberesAlcalde.png" alt="">
+                    </a>
+                    <h5> ¿Qué debe hacer el Alcalde? </h5>
+                    <p> Cada 4 años los elegimos, pero sabemos realmente los principales deberes de todo alcalde. Aquí encontrarás todo el material para poder fiscalizar.</p>
+                  </li>
+                 
+              </ul>
+              <aside class="span3 thumbnail">
+                  <ul class ="listadoMenuHome">
+                      <li class="itemListaServel"><a href="http://www.servel.cl/controls/neochannels/neo_ch236/neochn236.aspx"class="btn btn-block">Guía para votantes del Servel</a></li>
+                    
+                      <li class="itemListaServel"><a href="http://consulta.servel.cl/" class="btn btn-block"> ¿Dónde voto?</a></li>
+                      <li class="itemListaServel"><a href="http://www.servel.cl/controls/neochannels/neo_ch244/neochn244.aspx"class="btn btn-block">Soy vocal ¿ahora qué?</a></li>
+                      <li class="itemListaServel"><a href="http://www.sinim.gov.cl/desarrollo_local/documentos/Manual_del_Concejal.pdf" class="btn btn-block"> Toda la info sobre los concejales</a></li>
+                      <li class="itemListaServel"><a href="http://www.elvaso.cl/2012/10/las-funciones-del-concejo-municipal/" class="btn btn-block"> Toda la info sobre los concejales</a></li>
+                  </ul>
+              </aside>
+                <!-- /menu aside-->
+ 
+            </div><!-- /row fluid -->
+ 
+
+	{% endblock bottom-content %}
