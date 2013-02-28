@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
+
 import re
+import slumber
 from django.core.validators import MaxLengthValidator
 from django.db import models
 from mailer import send_mail
@@ -8,7 +10,6 @@ from django.db.models import Q
 from django.db.models import Count
 # from django.core.mail import send_mail
 # Create your models here.
-
 
 class Eleccion(models.Model):
 	nombre =  models.CharField(max_length=255)
@@ -36,6 +37,18 @@ class Eleccion(models.Model):
 	def numero_respuestas(self):
 		resp = Respuesta.objects.filter(pregunta__in=self.preguntas()).exclude(texto_respuesta='Sin Respuesta').distinct()
 		return resp.count()
+
+	def candidatos_presentes(self):
+		api_url = 'http://candideit.org/api/v1/'
+		api = slumber.API(api_url)
+		
+		resp = api.election.get(username=self.candideitorg_username(), api_key=self.candideitorg_api_key, slug=self.candideitorg_election_slug())
+		candideitorg_election_id = resp['objects'][0]['id']
+		resp = api.election(candideitorg_election_id).get(username=self.candideitorg_username(), api_key=self.candideitorg_api_key)
+		return resp['candidates']
+
+	def numero_candidatos_presentes(self):
+		return len(self.candidatos_presentes())
 
 	def candideitorg_username(self):
 		pattern = re.compile('.*candideit\.org\/(.+?)\/([^/]+).*')
@@ -250,3 +263,4 @@ class Respuesta(models.Model):
 		if self.texto_respuesta.strip() == u"Sin Respuesta":
 			return False
 		return True
+
