@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import re
 from django.core.validators import MaxLengthValidator
 from django.db import models
 from mailer import send_mail
@@ -12,7 +13,7 @@ from django.db.models import Count
 class Eleccion(models.Model):
 	nombre =  models.CharField(max_length=255)
 	slug =  models.CharField(max_length=255)
-	candidator_api_key =  models.CharField(max_length=255, blank=True, null=True)
+	candideitorg_api_key =  models.CharField(max_length=512, blank=True, null=True)
 	main_embedded = models.CharField(max_length=512, blank=True, null=True)
 	messaging_extra_app_url = models.CharField(max_length=512, blank=True, null=True)
 	mapping_extra_app_url = models.CharField(max_length=512, blank=True, null=True)
@@ -21,17 +22,30 @@ class Eleccion(models.Model):
 	
 	def __unicode__(self):
 		return self.nombre
+
 	def preguntas(self):
 		#solo preguntas aprobadas
 		candidatos_eleccion = Candidato.objects.filter(eleccion=self)
 		preguntas_candidatos_eleccion = Pregunta.objects.filter(aprobada=True).filter(candidato__in=candidatos_eleccion).distinct()
 		return preguntas_candidatos_eleccion
+
 	def numero_preguntas(self):
 		preg = self.preguntas()
 		return preg.count()
+
 	def numero_respuestas(self):
 		resp = Respuesta.objects.filter(pregunta__in=self.preguntas()).exclude(texto_respuesta='Sin Respuesta').distinct()
 		return resp.count()
+
+	def candideitorg_username(self):
+		pattern = re.compile('.*candideit\.org\/(.+?)\/([^/]+).*')
+		results = pattern.findall(self.main_embedded)
+		return results[0][0]
+
+	def candideitorg_election_slug(self):
+		pattern = re.compile('.*candideit\.org\/(.+?)\/([^/]+).*')
+		results = pattern.findall(self.main_embedded)
+		return results[0][1]
 
 
 class Area(models.Model):
