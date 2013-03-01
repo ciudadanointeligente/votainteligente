@@ -1,6 +1,10 @@
  /*variables box*/
 
-		.box-contentwrap::before, .box-top::before {
+		.row-fluid [class*="span"].box{
+			margin-top: 26px;
+			margin-left: 1%;
+		}
+ 		.box-contentwrap::before, .box-top::before {
 			content: '';
 			position: absolute;
 			height: 16px;
@@ -51,6 +55,70 @@
 			left: 0px;
 		}
 	
+		.box-top::after{
+			content: '';
+			background: #fff;
+			top: -24px;
+			left: 41%;
+			height: 45px;
+			width: 75px;
+			display: block;
+			position: absolute;
+			background: url(../images/cubo/voto.png) no-repeat 0 0 transparent;
+		}
+		.box-color{
+			background-color: #049CDB;
+			color: #049CDB;
+		}
+		.box:nth-child(3n + 1){
+			clear: left;
+		}
+		/*blue*/
+		.box:nth-child(6n + 3) .box-color{
+			background-color: rgb(64, 175, 221);
+			color: rgb(64, 175, 221);
+		}
+
+		/*green*/
+		.box:nth-child(6n + 1) .box-color{
+			background-color: #AED82E;
+			color: #AED82E;
+		}
+
+		/*yellow*/
+		.box:nth-child(6n + 2) .box-color{
+			background-color: #FFC200;
+			color: #FFC200;
+		}
+
+		/*red*/
+		.box:nth-child(6n+4) .box-color{
+			background-color: #F05151;
+			color: #F05151;
+		}
+
+		/*purple*/
+		.box:nth-child(6n+5) .box-color{
+			background-color: #932780;
+			color: #932780;
+		}
+
+		.box-color a h2{
+			color: #fff;
+			min-height: 74px;
+			padding: 0 15px;
+		}
+
+		.votos{
+			background: url(../images/cubo/bg-votos.png) repeat-x 20px -6px transparent;
+			display: block;
+			padding: 24px 10px 5px;
+			margin-top: -10px;
+			min-height: 70px;
+		}
+		.votos p{background-color: rgba(255, 255, 255, 0.66);}
+
+	
 		/*center box*/
 		
 		.center-box .box-contentwrap{
@@ -68,3 +136,14 @@
 
 
 		.center-box .box-contentwrap::before{background: none;}
+
+		/* fix single box */
+.span12.box .box-contentwrap{
+	width: 90%;
+	padding: 9px 3% 9px 5%;
+}	
+.span8.box .box-contentwrap{
+	width: 89%;
+	padding: 9px 3% 9px 6%;
+}	
+

@@ -9,66 +9,16 @@
       {% block top-content %}
       {% endblock top-content %}
 
+
+
+
   <div class="row-fluid">   
-    {% if elecciones_destacadas|length >= 1 and elecciones_buscables|length >= 1 %}
-    <!-- this case includes the block of featured elections and the searchbox for searchable elections -->
-     
-     <!-- Featured Election block -->
-      <div class="contenedorDestacado">
-        <ul>
-          {% for eleccion_destacada in elecciones_destacadas %}
-            <div class="destacado tipoEleccion{{ forloop.counter }}">
-              <div class="contenidoDestacado">
-                <a href="{{ eleccion_destacada.slug }}">
-                  <h2 class="tituloDestacado">{{eleccion_destacada.nombre}}</h2>
-                </a>
-              <p class="textoDestacado">{{eleccion_destacada.featured_caption}}</p> 
-              </div>
-            </div>
-          {% endfor %}
-        </ul>
-      </div> <!-- /contenedorDestacado -->
 
-      <!-- /FeaturedBlock -->
 
-      <!-- Searchable elections Block -->
+<!-- Searchable Elections  -->
 
-      <div class="buscadorPpal">
-        <img class="candidatos" src="{{ STATIC_URL }}images/candidatos.png" alt="">
-        <h3> <center>Revisa y comparte información de tu comuna y candidatos </center></h3>
-        <center>
-          <form class="form-search form-search-eleccion"> 
-          <p> Escribe el nombre de la comuna que te interesa</p>
-          <input type="text" id="elecciones-search" class="input-xxlarge search-query elecciones-search">
-          <p class="eleccion-search-error">Debes seleccionar una comuna</p>
-          <br/> <br/>
-          <p> <em> Hazle pregúntas a los candidatos | Elige a tu media naranja | Fiscaliza 
-          </em></p> 
-          </form>
-        </center> 
-      </div> <!-- /buscador ppal -->
-     
-      <!--/SearchableBlock--> 
-
-    {% elif elecciones_destacadas|length >= 1 and elecciones_buscables|length < 1 %}
-      <!-- this case include JUST the block of featured elections -->
-      <!-- Featured Election block -->
-      <div class="contenedorDestacado">
-        <ul>
-          {% for eleccion_destacada in elecciones_destacadas %}
-            <div class="destacado tipoEleccion{{ forloop.counter }}">
-              <div class="contenidoDestacado">
-                <a href="{{ eleccion_destacada.slug }}">
-                  <h2 class="tituloDestacado">{{eleccion_destacada.nombre}}</h2>
-                </a>
-              <p class="textoDestacado">{{eleccion_destacada.featured_caption}}</p> 
-              </div>
-            </div>
-          {% endfor %}
-        </ul>
-      </div><!-- /contenedorDestacado -->
-    {% elif elecciones_destacadas|length < 1 and elecciones_buscables|length >= 1 %}
-      <!-- this case includes JUST the searchbox for searchable elections -->
+  {% if elecciones_buscables|length >= 1 %}
+  
       <!-- Searchable elections Block -->
       <div class="buscadorPpal">
         <img class="candidatos" src="{{ STATIC_URL }}images/candidatos.png" alt="">
@@ -85,10 +35,89 @@
         </center> 
       </div> <!-- /buscador ppal -->
     {% endif %}
-  </div> <!-- /rowfluid -->
+
+
+
         
+<!-- Featured Elections  -->
+
+    {% if elecciones_destacadas|length = 1 %}
+     
+     <!-- Featured Election block -->
+      <div class="contenedorDestacado well">
+        <ul>
+          {% for eleccion_destacada in elecciones_destacadas %}
+            <li class="span8 offset2 box right-box tipoEleccion{{ forloop.counter }}">
+              <div class="box-top"></div>
+              <div class="box-contentwrap">
+                <div class="box-color">
+                  <a href="{{ eleccion_destacada.slug }}">
+
+                    <h2>{{eleccion_destacada.nombre}}</h2>
+                  </a>
+                  <div class="votos">
+                    <p class="">{{eleccion_destacada.featured_caption}}</p> 
+                  </div>
+                </div>  
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div><!-- /contenedorDestacado -->
+      <!-- /FeaturedBlock -->
+
+    {% elif elecciones_destacadas|length = 2 %}
+      <!-- Featured Election block -->
+     <div class="contenedorDestacado well">
+        <ul>
+          {% for eleccion_destacada in elecciones_destacadas %}
+            <li class="span6 box right-box tipoEleccion{{ forloop.counter }}">
+              <div class="box-top"></div>
+              <div class="box-contentwrap">
+                <div class="box-color">
+                  <a href="{{ eleccion_destacada.slug }}">
+
+                    <h2>{{eleccion_destacada.nombre}}</h2>
+                  </a>
+                  <div class="votos">
+                    <p class="">{{eleccion_destacada.featured_caption}}</p> 
+                  </div>
+                </div>  
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div><!-- /contenedorDestacado -->
+
+    {% elif elecciones_destacadas|length >= 3 %}
+      <!-- Featured Election block -->
+     <div class="contenedorDestacado well">
+        <ul>
+          {% for eleccion_destacada in elecciones_destacadas %}
+            <li class="span4 box right-box tipoEleccion{{ forloop.counter }}">
+              <div class="box-top"></div>
+              <div class="box-contentwrap">
+                <div class="box-color">
+                  <a href="{{ eleccion_destacada.slug }}">
+
+                    <h2>{{eleccion_destacada.nombre}}</h2>
+                  </a>
+                  <div class="votos">
+                    <p class="">{{eleccion_destacada.featured_caption}}</p> 
+                  </div>
+                </div>  
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div><!-- /contenedorDestacado -->
+
+    {% endif %}
+
+</div> <!-- /rowfluid -->    
                 
-          <!-- ticker ultimas preguntas y respuestas -->
+<!-- ticker ultimas preguntas y respuestas -->
+
           <script type="text/javascript">
               $(document).ready(function(){
                   $('.barra_noticias').easyTicker({
@@ -119,7 +148,7 @@
 
 </div> <!-- /container (apparently started on base_sub_menu.html) --> 
         
-        
+
     
         
         {% endblock content %}

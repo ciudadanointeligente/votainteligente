@@ -41,7 +41,7 @@ iframe {
 	position:relative;
 	}
 
-
+.contenedorDestacado{overflow: hidden;}
 .menuPpal {
 	width:940px;
 	}
