@@ -103,6 +103,7 @@
 			color: #932780;
 		}
 
+		.box-color a:hover{text-decoration: none;}
 		.box-color a h2{
 			color: #fff;
 			min-height: 74px;
@@ -129,9 +130,9 @@
 		}
 
 	
-			.center-box .box-top::before {
-			background: url(../images/cubo/top.png) -1px 0px no-repeat white;
-			left: 0;
+		.center-box .box-top::before {
+		background: url(../images/cubo/top.png) -1px 0px no-repeat white;
+		left: 0;
 		}
 
 
