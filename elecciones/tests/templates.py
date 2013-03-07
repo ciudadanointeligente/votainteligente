@@ -64,3 +64,12 @@ class TemplatesViewsTestCase(TestCase):
 		self.assertEquals(response.context['elecciones'].count(), 2)
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'],u"¿Qué puedo hacer?")
+
+	def test_get_extra_info(self):
+		url = reverse('eleccion-extra-info',kwargs={'slug':self.eleccion1.slug})
+		response = self.client.get(url)
+
+		self.assertTemplateUsed(response, 'elecciones/extra_info.html')
+		self.assertEquals(response.status_code, 200)
+		self.assertTrue('title' in response.context)
+		self.assertEquals(response.context['title'],u"Más Información sobre La eleccion1")

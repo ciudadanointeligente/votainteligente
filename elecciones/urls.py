@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from views import HomeTemplateView, EleccionOverview, EleccionIndices, MetodologiaView, QuienesSomosView, EleccionPreguntales, ReportaView,\
-QuePuedoHacerHacerView, NosFaltanDatosView, Ranking
+QuePuedoHacerHacerView, NosFaltanDatosView, Ranking, EleccionExtraInfo
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
 
@@ -19,6 +19,7 @@ urlpatterns = patterns('',
 
 	#pages depending on the eleccion
 	url(r'^(?P<slug>[-\w]+)/indices/?$', EleccionIndices.as_view(), name='eleccion-index-detail'),
+	url(r'^(?P<slug>[-\w]+)/mas-info/?$', EleccionExtraInfo.as_view(), name='eleccion-extra-info'),
 	url(r'^(?P<slug>[-\w]+)/?$', EleccionOverview.as_view(), name="eleccion-overview"),
 	url(r'^(?P<slug>[-\w]+)/preguntales/?$', EleccionPreguntales.as_view(), name="eleccion-preguntales"),
 	

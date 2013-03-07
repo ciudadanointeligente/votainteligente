@@ -11,7 +11,7 @@
                 <div class="container-fluid">
                     <div class="row-fluid">
                         <div class="span8">asdfsad
-                            <h2>Municipales en <span>{{eleccion}} </span>
+                            <h2>Elecciones de <span>{{eleccion}} </span>
                                 
                                 </h2>
                                 <div class="share_this_eleccion">
@@ -35,7 +35,7 @@
                                                    <ul class="thumbnails">
                                                         <li class="span12" style="margin-bottom: 10px;">
                                                             <div>
-                                                           <a href="{% url eleccion-index-detail slug=eleccion.slug %}" target="_blank" class="btn btn-block btn-vota">Revisa los datos duros de {{eleccion}}</a>
+                                                           <a href="{% url eleccion-extra-info slug=eleccion.slug %}" target="_blank" class="btn btn-block btn-vota">Revisa todos los candidatos de {{eleccion}}</a>
                                                            
                                                             </div>
                                                         </li>

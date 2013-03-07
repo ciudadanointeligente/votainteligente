@@ -52,6 +52,17 @@ class EleccionIndices(DetailView):
 		context['elecciones'] = elecciones
 		return context
 
+class EleccionExtraInfo(DetailView):
+	model = Eleccion
+
+	def get_template_names(self):
+		return ['elecciones/extra_info.html']
+
+	def get_context_data(self, **kwargs):
+		context = super(EleccionExtraInfo, self).get_context_data(**kwargs)
+		context['title'] = u"Más Información sobre " + self.object.nombre
+		return context
+
 class NosFaltanDatosView(ListView):
 	queryset = Candidato.sin_datos.all()
 	context_object_name = "candidatos"
