@@ -1725,8 +1725,16 @@ span.gracias {
 
 input.search-query.elecciones-search.ui-autocomplete-input {
 	border-style: none;
-	background-color: #6db6dc;
+	background-color: white;
 	color: #fff;
 	border-bottom-width: 1px;
 	border-bottom-color: #1082be;
 }
+.row-fluid .home-py [class*="span"] {
+margin-left: 1.4%;
+}
+.row-fluid .home-py [class*="span"]:first-child {
+margin-left: 0;
+}
+
+
