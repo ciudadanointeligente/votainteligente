@@ -14,6 +14,7 @@ from django.utils.unittest import skip
 from django.template import Template, Context
 from urllib2 import quote
 from django.contrib import messages
+import os
 
 class MessageTestCase(TestCase):
 
@@ -64,6 +65,11 @@ class MessageTestCase(TestCase):
 		self.mail_user = 'mailer@'
 		self.mail_pass = ''
 		settings.PREGUNTALE_STATUS = 'GOING_ON'
+		os.environ['RECAPTCHA_TESTING'] = 'True'
+
+	def tearDown(self):
+		os.environ['RECAPTCHA_TESTING'] = 'False'
+
 
 	def test_create_candidate(self):
 
@@ -223,6 +229,8 @@ class MessageTestCase(TestCase):
 											'texto_pregunta': 'Texto Pregunta', 
 											'remitente': 'Remitente 1',
 											'recaptcha_response_field': 'PASSED'})
+
+
 		pregunta_nueva = Pregunta.objects.get(remitente='Remitente 1')
 		pregunta_nueva.enviar()
 		# Test that two messages are waiting to be sent.
