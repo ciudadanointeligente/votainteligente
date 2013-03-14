@@ -1726,7 +1726,7 @@ span.gracias {
 input.search-query.elecciones-search.ui-autocomplete-input {
 	border-style: none;
 	background-color: white;
-	color: #fff;
+	color: grey;
 	border-bottom-width: 1px;
 	border-bottom-color: #1082be;
 }

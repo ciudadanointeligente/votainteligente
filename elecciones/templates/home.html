@@ -17,7 +17,7 @@ onmouseout="document.over1.src='{{ STATIC_URL }}images/02-png.png'"></a>
 onmouseout="document.over2.src='{{ STATIC_URL }}images/03-png.png'"> </a>
             <h5>Vice-Presidente</h5>
           </li>
-          <li class="span3"><a href="senadores-1" class="thumbnail" ><img src="{{ STATIC_URL }}images/04-png.png" alt="Senadores" name="over3" onmouseover="document.over3.src='{{ STATIC_URL }}images/15-png.png'"
+          <li class="span3"><a href="{% url senadores %}" class="thumbnail" ><img src="{{ STATIC_URL }}images/04-png.png" alt="Senadores" name="over3" onmouseover="document.over3.src='{{ STATIC_URL }}images/15-png.png'"
 onmouseout="document.over3.src='{{ STATIC_URL }}images/04-png.png'"> </a>
             <h5>Senadores</h5>
           </li>
@@ -48,7 +48,7 @@ onmouseout="document.over5.src='{{ STATIC_URL }}images/06-png.png'"> </a>
             <p class="eleccion-search-error">Ej: Alto Paraná </p>
             <br/>
             <br/>
-            <p> <em> Hazle pregúntas a los candidatos | Compara | Elige a tu media naranja </em></p>
+            <p> <em> Preguntale a tu candidato | Compará | Elegí a tu media naranja </em></p>
           </form>
         </center>
       </div>
@@ -57,9 +57,9 @@ onmouseout="document.over5.src='{{ STATIC_URL }}images/06-png.png'"> </a>
             <li class="span4" style="width:210px;"><a href="#" class="thumbnail"> <img src="{{ STATIC_URL }}images/12-png.png" alt="Encontrá a tu candidato ideal"> </a> </li>
             <li class="span3 thumbnail" style="width:200px;">
               <ul class ="listadoMenuHome">
-                <li class="itemListaServel"><a href="/presidenciales/preguntales" class="btn btn-block">Preguntale a tu candidato</a></li>
-                <li class="itemListaServel"><a href="http://www.aquieneselegimos.org.py/inicio.php?sec=voluntarios" class="btn btn-block">Encuestadores voluntarios</a></li>
-                <li class="itemListaServel"><a href="http://www.aquieneselegimos.org.py/inicio.php?sec=quienes_somos" class="btn btn-block">¿Sos candidato? ¡Contactanos!</a></li>
+                <li class="itemListaServel"><a href="/presidentea/preguntales" class="btn btn-block">Preguntale a tu candidato</a></li>
+                <li class="itemListaServel"><a href="{% url voluntarios %}" class="btn btn-block">Encuestadores voluntarios</a></li>
+                <li class="itemListaServel"><a href="{% url somos %}" class="btn btn-block">¿Sos candidato? ¡Contactanos!</a></li>
                 <li class="itemListaServel"><a href="http://www.aquieneselegimos.org.py/index.php?sec=candidatos_contacto" class="btn btn-block">Cuestionario para Candidatos/as</a></li>
                 <li class="itemListaServel"><a href="http://tsje.gov.py/e2013/#!/consulta-al-rcp.html" target="_blank" class="btn btn-block">¿D&oacute;nde voto?</a></li>
               </ul>

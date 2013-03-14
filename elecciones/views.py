@@ -174,6 +174,13 @@ class VoluntariosView(TemplateView):
 		context['title'] = u"Gracias a TODOS"
 		return context
 
+class SenadoresView(TemplateView):
+	template_name="todos_los_senadores.html"
+
+	def get_context_data(self, **kwargs):
+		context = super(SenadoresView, self).get_context_data(**kwargs)
+		context['title'] = u"Todos los Senadores"
+		return context
 
 class QuienesSomosView(TemplateView):
 	template_name="quienesSomos.html"

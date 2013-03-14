@@ -83,3 +83,13 @@ class TemplatesViewsTestCase(TestCase):
 		self.assertEquals(response.status_code, 200)
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'],u"Gracias a TODOS")
+
+	def test_get_senadores(self):
+		url = reverse('senadores')
+		response = self.client.get(url)
+
+		self.assertTemplateUsed(response, 'todos_los_senadores.html')
+		self.assertEquals(response.status_code, 200)
+		self.assertTrue('title' in response.context)
+		self.assertEquals(response.context['title'],u"Todos los Senadores")
+

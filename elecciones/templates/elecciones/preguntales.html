@@ -34,7 +34,7 @@ $(function () {
 
 
 
-	<h4 class="tituloPreguntale"> ¡Pregúntales!       Ellos Responden...</h4>
+	<h4 class="tituloPreguntale"> ¡Preguntales!       Ellos Responden...</h4>
 
 	{% if messages %} 
 	<div class="alert alert-success">
@@ -49,7 +49,7 @@ $(function () {
 			<div class="row-fluid">
 				<div class="candidatosPreguntale span4">
 					<h5> Candidatos </h5>
-					<label>Marca sólo los candidatos a los que quieras preguntar</label>
+					<label>Marcá sólo los candidatos a los que querés preguntar</label>
 {% for pk, candidato in form.candidato.field.choices %}
 					<label class="checkbox">
 					<input type="checkbox" name="candidato" {{ pk|estrellitas_disabled }} value={{pk}}>{{candidato}} {{ pk|estrellitas }}
