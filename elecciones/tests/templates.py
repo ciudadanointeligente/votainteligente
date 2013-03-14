@@ -33,7 +33,7 @@ class TemplatesViewsTestCase(TestCase):
 		url = reverse('somos')
 		response = self.client.get(url)
 
-		self.assertTemplateUsed(response, 'elecciones/quienesSomos.html')
+		self.assertTemplateUsed(response, 'quienesSomos.html')
 
 		self.assertEquals(response.status_code, 200)
 		self.assertTrue('elecciones' in response.context)
@@ -73,3 +73,12 @@ class TemplatesViewsTestCase(TestCase):
 		self.assertEquals(response.status_code, 200)
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'],u"Más Información sobre La eleccion1")
+
+	def test_get_voluntarios(self):
+		url = reverse('voluntarios')
+		response = self.client.get(url)
+
+		self.assertTemplateUsed(response, 'voluntarios.html')
+		self.assertEquals(response.status_code, 200)
+		self.assertTrue('title' in response.context)
+		self.assertEquals(response.context['title'],u"Gracias a TODOS")

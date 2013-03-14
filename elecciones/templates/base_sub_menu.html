@@ -56,10 +56,10 @@
         <ul class="nav pull-right" style="width:922px;">
           <li class"itemLogo" style="width:400px; margin-left:-20px;"><a href="{% url home %}"><img src="{{ STATIC_URL }}images/00-logo-cird-top-png.png" alt="CIRD - Centro de Información y Recursos para el Desarrollo"></a></li>
           <li class="itemSubMenu"> <a href="http://www.aquieneselegimos.org.py/">Inicio</a></li>
-          <li class="itemSubMenu"> <a href="http://www.aquieneselegimos.org.py/inicio.php?sec=quienes_somos">¿Quiénes Somos?</a></li>
+          <li class="itemSubMenu"> <a href="{% url somos %}">¿Quiénes Somos?</a></li>
           <li class="itemSubMenu"> <a href="/">Candidatos 2013</a></li>
           <li class="itemSubMenu"><a href="http://www.aquieneselegimos.org.py/autoridades.php">Autoridades</a></li>
-          <li class="itemSubMenu"><a href="http://www.aquieneselegimos.org.py/inicio.php?sec=enlaces/">Enlaces</a></li>
+          <li class="itemSubMenu"><a href="{% url enlaces %}">Enlaces</a></li>
           <li class="itemSubMenu"><a href="http://www.aquieneselegimos.org.py/inicio.php?sec=contactenos">Cont&aacute;ctenos</a></li>
         </ul>
       </div>

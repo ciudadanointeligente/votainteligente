@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from views import HomeTemplateView, EleccionOverview, EleccionIndices, MetodologiaView, QuienesSomosView, EleccionPreguntales, ReportaView,\
-QuePuedoHacerHacerView, NosFaltanDatosView, Ranking, EleccionExtraInfo
+QuePuedoHacerHacerView, NosFaltanDatosView, Ranking, EleccionExtraInfo, EnlacesView, VoluntariosView
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
 
@@ -11,6 +11,8 @@ urlpatterns = patterns('',
 	#static pages
 	url(r'^metodologia/?$', MetodologiaView.as_view(), name="metodologia"),
 	url(r'^somos/?$', QuienesSomosView.as_view(), name="somos"),
+	url(r'^enlaces/?$', EnlacesView.as_view(), name="enlaces"),
+	url(r'^voluntarios/?$', VoluntariosView.as_view(), name="voluntarios"),
 	url(r'^fiscaliza/?$', ReportaView.as_view(), name="reporta"),
 	url(r'^que_puedo_hacer/?$', QuePuedoHacerHacerView.as_view(), name="que_puedo_hacer"),
 	url(r'^nos_faltan_datos/?$', NosFaltanDatosView.as_view(), name="nos_faltan_datos"),

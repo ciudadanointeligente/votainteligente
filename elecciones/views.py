@@ -158,9 +158,25 @@ class QuePuedoHacerHacerView(TemplateView):
 		context['elecciones'] = elecciones
 		return context
 
+class EnlacesView(TemplateView):
+	template_name="enlaces.html"
+
+	def get_context_data(self, **kwargs):
+		context = super(EnlacesView, self).get_context_data(**kwargs)
+		context['title'] = u"Enlaces"
+		return context
+
+class VoluntariosView(TemplateView):
+	template_name="voluntarios.html"
+
+	def get_context_data(self, **kwargs):
+		context = super(VoluntariosView, self).get_context_data(**kwargs)
+		context['title'] = u"Gracias a TODOS"
+		return context
+
 
 class QuienesSomosView(TemplateView):
-	template_name="elecciones/quienesSomos.html"
+	template_name="quienesSomos.html"
 
 	def get_context_data(self, **kwargs):
 		context = super(QuienesSomosView, self).get_context_data(**kwargs)
