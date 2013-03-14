@@ -72,6 +72,7 @@ class TemplatesViewsTestCase(TestCase):
 		self.assertTemplateUsed(response, 'elecciones/extra_info.html')
 		self.assertEquals(response.status_code, 200)
 		self.assertTrue('title' in response.context)
+		self.assertTrue('eleccion' in response.context)
 		self.assertEquals(response.context['title'],u"Más Información sobre La eleccion1")
 
 	def test_get_voluntarios(self):

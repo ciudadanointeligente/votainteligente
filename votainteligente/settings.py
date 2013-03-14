@@ -144,7 +144,8 @@ INSTALLED_APPS = (
     'django_mobile',
     'elecciones',
     'captcha',
-    'mailer'
+    'mailer',
+    'markdown_deux'
 )
 
 # A sample logging configuration. The only tangible logging

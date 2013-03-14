@@ -20,7 +20,9 @@ class EleccionModelTestCase(TestCase):
 														main_embedded=u"http://www.candideit.org/lfalvarez/rayo-x-politico/embeded",
 														messaging_extra_app_url=u"http://napistejim.cz/address=nachod",
 														mapping_extra_app_url=u"http://vecino.ciudadanointeligente.org/around?latitude=-33.429042;longitude=-70.611278",
-														featured_caption = u"Texto Destacado")
+														featured_caption = u"Texto Destacado",
+														extra_info_title = u"ver más",
+														extra_info_content=u"Más Información")
 		self.assertTrue(created)
 		self.assertEquals(eleccion.nombre, u"La eleccion")
 		self.assertEquals(eleccion.slug, u"la-eleccion")
@@ -30,6 +32,8 @@ class EleccionModelTestCase(TestCase):
 		self.assertTrue(eleccion.searchable)
 		self.assertFalse(eleccion.featured)
 		self.assertEquals(eleccion.featured_caption,u"Texto Destacado")
+		self.assertEquals(eleccion.extra_info_title,u"ver más")
+		self.assertEquals(eleccion.extra_info_content,u"Más Información")
 	def test_eleccion_unicode(self):
 		eleccion = Eleccion.objects.create(nombre=u"La eleccion", slug=u"la-eleccion")
 

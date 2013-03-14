@@ -16,7 +16,7 @@ from urllib2 import quote
 class EleccionViewTestCase(TestCase):
 	def setUp(self):
 		self.area = Area.objects.create(nombre=u"Caracterización", clase_en_carrusel=u"fondoCeleste")
-		self.eleccion1 = Eleccion.objects.create(nombre=u"La eleccion1", slug=u"la-eleccion1")
+		self.eleccion1 = Eleccion.objects.create(nombre=u"La eleccion1", slug=u"la-eleccion1", extra_info_title=u"ver más", extra_info_content=u"informacion adicional")
 		self.eleccion2 = Eleccion.objects.create(nombre=u"La eleccion2", slug=u"la-eleccion2")
 		ingreso_por_persona = Dato.objects.create(nombre=u"Ingreso por persona", imagen="chanchito.png")
 		pobreza = Dato.objects.create(nombre=u"Pobreza", imagen="chanchito.png")
@@ -87,10 +87,11 @@ class EleccionViewTestCase(TestCase):
 		self.assertEquals(response.context['elecciones'].count(), 2)
 		self.assertEquals(response.context['eleccion'], self.eleccion1)
 		self.assertTrue('title' in response.context)
+		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'], self.eleccion1.nombre)
 
 
-	def test_get_indices_eleccionles(self):
+	def test_get_indices_elecciones(self):
 		url = reverse('eleccion-overview', kwargs={
 			'slug':self.eleccion1.slug
 			})
@@ -132,8 +133,8 @@ class EleccionViewTestCase(TestCase):
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'], self.eleccion1.nombre + u" índices detallados")
 
-
-	def atest_get_todos_los_indices_de_una_eleccion_como_json(self):
+	@skip('not developed yet')
+	def test_get_todos_los_indices_de_una_eleccion_como_json(self):
 		url = reverse('eleccion-index-detail-json', kwargs={
 			'slug':self.eleccion1.slug
 			})

@@ -33,12 +33,14 @@
                         <div class="span4">  
                                                 <div class="sidebar-nav sidebarDerecha">  
                                                    <ul class="thumbnails">
+                                                    {% if eleccion.extra_info_title %}
                                                         <li class="span12" style="margin-bottom: 10px;">
                                                             <div>
-                                                           <a href="{% url eleccion-extra-info slug=eleccion.slug %}" target="_blank" class="btn btn-block btn-vota">Revisá todos los candidatos a {{eleccion}}</a>
+                                                           <a href="{% url eleccion-extra-info slug=eleccion.slug %}" target="_blank" class="btn btn-block btn-vota">{{eleccion.extra_info_title}}</a>
                                                            
                                                             </div>
                                                         </li>
+                                                        {% endif %}
 
                                                             <li class="span6" style="margin-left: 0px;">
                                                             <div class="well thumbnail">

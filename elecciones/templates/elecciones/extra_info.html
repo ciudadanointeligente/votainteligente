@@ -1,4 +1,5 @@
 {% extends "base_sub_menu.html" %}
+{% load markdown_deux_tags %}
 {% block content %}
  
  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -12,13 +13,7 @@
  <h3> Más información de <span><a href="{% url eleccion-overview slug=eleccion.slug %}"> {{eleccion.nombre}} </a></span> </h3>
              
              
-             <p> Encontrá aquí más información sobre esta elección. </p>
-             <h4>Candidatos Suplentes:</h4>
-             <ul>
-              <li>Un candidato Suplente</li>
-              <li>Otro candidato Suplente</li>
-
-             </ul>
+             {{ eleccion.extra_info_content|markdown }}
               
               
 

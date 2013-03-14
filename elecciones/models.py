@@ -5,6 +5,7 @@ from mailer import send_mail
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.db.models import Count
+from markdown_deux.templatetags.markdown_deux_tags import markdown_allowed
 # from django.core.mail import send_mail
 # Create your models here.
 
@@ -18,6 +19,9 @@ class Eleccion(models.Model):
 	featured = models.BooleanField(default=False)
 	searchable = models.BooleanField(default=True)
 	featured_caption = models.CharField(max_length = 100, blank = True, null = True)
+	extra_info_title = models.CharField(max_length = 50, blank = True, null = True)
+	extra_info_content = models.TextField(max_length = 3000, blank = True, null = True, help_text="Puedes usar Markdown. <br/> "
+            + markdown_allowed())
 	
 	def __unicode__(self):
 		return self.nombre
