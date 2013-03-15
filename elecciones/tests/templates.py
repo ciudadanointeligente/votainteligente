@@ -93,12 +93,3 @@ class TemplatesViewsTestCase(TestCase):
 		self.assertTrue('title' in response.context)
 		self.assertEquals(response.context['title'],u"Todos los Senadores")
 
-	def test_get_contact_form(self):
-		url = reverse('contacto')
-		response = self.client.get(url)
-
-		self.assertTemplateUsed(response, 'contacto.html')
-		self.assertEquals(response.status_code, 200)
-		self.assertTrue('title' in response.context)
-		self.assertEquals(response.context['title'],u"Contactanos")
-

@@ -3,6 +3,7 @@ from views import HomeTemplateView, EleccionOverview, EleccionIndices, Metodolog
 QuePuedoHacerHacerView, NosFaltanDatosView, Ranking, EleccionExtraInfo, EnlacesView, VoluntariosView, SenadoresView
 from django.views.generic import TemplateView
 from django.views.decorators.cache import cache_page
+from django.conf import settings 
 
 urlpatterns = patterns('',
 	url(r'^$', HomeTemplateView.as_view(template_name="home.html"), name="home"),
@@ -17,7 +18,7 @@ urlpatterns = patterns('',
 	url(r'^fiscaliza/?$', ReportaView.as_view(), name="reporta"),
 	url(r'^que_puedo_hacer/?$', QuePuedoHacerHacerView.as_view(), name="que_puedo_hacer"),
 	url(r'^nos_faltan_datos/?$', NosFaltanDatosView.as_view(), name="nos_faltan_datos"),
-	url(r'^ranking/?$', cache_page(Ranking.as_view(), 60 * 15), name="ranking"),	
+	url(r'^ranking/?$', cache_page(Ranking.as_view(), 60 * settings.CACHE_MINUTES), name="ranking"),	
  	url(r'^contact/', include('django_contactme.urls'))	,
 
 	#pages depending on the eleccion

@@ -201,6 +201,9 @@ CONTACTME_NOTIFY_TO = 'Alice <alice@example.com>, Joe <joe@example.com>'
 EXTRA_APPS = ()
 PREGUNTALE_STATUS = 'GOING_ON'	# Cambia comportamiento del modulo Preguntales. Estados: GOING_ON (por defecto), COMING_SOON, PASSED
 
+#CACHE_MINUTES for cache
+
+CACHE_MINUTES = 15
 try:
     from local_settings import *
     INSTALLED_APPS += EXTRA_APPS
