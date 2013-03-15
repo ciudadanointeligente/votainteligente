@@ -18,7 +18,7 @@ urlpatterns = patterns('',
 	url(r'^que_puedo_hacer/?$', QuePuedoHacerHacerView.as_view(), name="que_puedo_hacer"),
 	url(r'^nos_faltan_datos/?$', NosFaltanDatosView.as_view(), name="nos_faltan_datos"),
 	url(r'^ranking/?$', cache_page(Ranking.as_view(), 60 * 15), name="ranking"),	
-	
+ 	url(r'^contact/', include('django_contactme.urls'))	,
 
 	#pages depending on the eleccion
 	url(r'^(?P<slug>[-\w]+)/indices/?$', EleccionIndices.as_view(), name='eleccion-index-detail'),

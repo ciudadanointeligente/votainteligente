@@ -145,7 +145,8 @@ INSTALLED_APPS = (
     'elecciones',
     'captcha',
     'mailer',
-    'markdown_deux'
+    'markdown_deux',
+    'django_contactme'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -193,6 +194,9 @@ DISQUS_SHORT_NAME = '<your disqus short name>'
 #candidate info contact mail
 CANDIDATE_INFO_CONTACT_MAIL = '<your e-mail address where you want to receive candidate inquiries'
 CANDIDATE_CONTACT_SUBJECT = '<Subject you want for candidates inquiries>'
+
+#contactme settings: notification mail address(es)
+CONTACTME_NOTIFY_TO = 'Alice <alice@example.com>, Joe <joe@example.com>'
 
 EXTRA_APPS = ()
 PREGUNTALE_STATUS = 'GOING_ON'	# Cambia comportamiento del modulo Preguntales. Estados: GOING_ON (por defecto), COMING_SOON, PASSED
