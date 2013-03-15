@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.core.validators import MaxLengthValidator
 from django.db import models
-from mailer import send_mail
+from mailer import send_mail as store_mail
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.db.models import Count
 from markdown_deux.templatetags.markdown_deux_tags import markdown_allowed
-# from django.core.mail import send_mail
+from django.core.mail import send_mail
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 # Create your models here.
 
 
@@ -206,6 +208,7 @@ class Pregunta(models.Model):
 	"""docstring for Pregunta"""
 	candidato = models.ManyToManyField('Candidato', through='Respuesta', related_name="pregunta")
 	remitente = models.CharField(max_length=255)
+	email_sender = models.EmailField(max_length=100,blank=True,null=True)
 	texto_pregunta = models.TextField(validators=[MaxLengthValidator(4095)])
 	aprobada = models.BooleanField(default=False)
 	procesada = models.BooleanField(default=False)
@@ -224,7 +227,7 @@ class Pregunta(models.Model):
 			mensaje = texto_introduccion + u'\r\rYo, ' + self.remitente + ' quiero saber: \r\r' + self.texto_pregunta + texto_cierre
 			destinaciones = Contacto.objects.filter(candidato=candidato)
 			for destinacion in destinaciones:
-				send_mail(subject, mensaje, 'municipales2012@votainteligente.cl',[destinacion.valor])
+				store_mail(subject, mensaje, 'municipales2012@votainteligente.cl',[destinacion.valor])
 
 			
 
@@ -242,12 +245,20 @@ class Respuesta(models.Model):
 	def get_absolute_url(self):
 		url = reverse('eleccion-preguntales', kwargs={'slug':self.candidato.eleccion.slug})
 		return url+"#"+str(self.id)
+	
 
 	def is_answered(self):
 		if self.texto_respuesta.strip() == u"Sin Respuesta":
 			return False
 		return True
 
+@receiver(post_save, sender=Respuesta)
+def notify_sender(sender, instance, created, **kwargs):
+	respuesta = instance
+	to_address = respuesta.pregunta.email_sender
+	#only notify in text changing and user provides an email
+	if instance.is_answered() and respuesta.pregunta.email_sender:
+		send_mail('Tu pregunta ha recibido una respuesta', 'Here is the message.', 'from@example.com',[to_address], fail_silently=False)
 
 		
 		

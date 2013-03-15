@@ -87,7 +87,7 @@ class MessageTestCase(TestCase):
 		self.assertEquals(contacto.candidato, self.candidato1)
 		self.assertTrue(contacto)
 
-	def test_create_question_message(self):
+	def test_create_question_message_without_sender(self):
 		#Se crea la pregunta y las respuestas asociadas
 		pregunta = Pregunta.objects.create(
 											remitente='remitente1', 
@@ -111,6 +111,14 @@ class MessageTestCase(TestCase):
 		#Sólo se agregó la pregunta a 2 candidatos?
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta).count(),2)
 
+
+	def test_create_question_message_without_sender(self):
+		#Se crea la pregunta y las respuestas asociadas
+		pregunta = Pregunta.objects.create(remitente='remitente1', 
+											texto_pregunta='texto_pregunta1',
+											email_sender='mail@mail.er')
+		self.assertTrue(pregunta)
+		self.assertEquals(pregunta.email_sender,'mail@mail.er')
 
 		
 

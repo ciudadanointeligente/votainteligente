@@ -62,3 +62,45 @@ class RespuestaTestCase(TestCase):
 		respuesta.texto_respuesta = u"Sin Respuesta     "#Many spaces at the end
 
 		self.assertFalse(respuesta.is_answered())
+
+
+
+class AnswerNotificationTestCase(TestCase):
+	def setUp(self):
+		colectivo1 = Colectivo.objects.create(sigla='C1', nombre='Colectivo 1')
+		self.eleccion1 = Eleccion.objects.create(nombre=u"La eleccion1", slug=u"la-eleccion1")
+		self.candidato1 = Candidato.objects.create(eleccion=self.eleccion1,\
+																		nombre=u"el candidato",\
+																		partido=u"API",\
+																		web=u"http://votainteURLligente.cl",\
+																		twitter=u"candidato",\
+																		colectivo=colectivo1)
+
+		self.pregunta1 = Pregunta.objects.create(remitente='remitente1', 
+                                               texto_pregunta='texto_pregunta1',
+                                               email_sender="remitente1@votainteligente.cl")
+
+		self.respuesta1 = Respuesta.objects.create(candidato = self.candidato1, pregunta = self.pregunta1)
+
+		self.pregunta2 = Pregunta.objects.create(
+                                                                               remitente='remitente2', 
+                                                                               texto_pregunta='texto_pregunta2')
+		self.respuesta2 = Respuesta.objects.create(candidato = self.candidato1, pregunta = self.pregunta2)
+	def test_notify_when_answer_arrive(self):
+		self.respuesta1.texto_respuesta = u"Con Respuesta"
+		self.respuesta1.save()
+		self.assertEquals(len(mail.outbox), 1)
+		self.assertEquals(mail.outbox[0].subject, 'Tu pregunta ha recibido una respuesta')
+		self.assertTrue(mail.outbox[0].to.index(self.pregunta1.email_sender) > -1)
+
+	def test_dont_notify_in_creation(self):
+		self.respuesta1.texto_respuesta = u"Sin Respuesta"
+		self.respuesta1.save()
+		self.assertEquals(len(mail.outbox), 0)
+
+	def test_dont_notify_lacking_email_sender(self):
+		self.respuesta2.texto_respuesta = u"Con Respuesta"
+		self.respuesta2.save()
+		self.assertEquals(len(mail.outbox), 0)
+
+ 
