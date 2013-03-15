@@ -2,19 +2,19 @@
 {% autoescape off %}
 <p>{{ data.name }},</p>
 
-<p>{% blocktrans %}You, or someone in behalf of you, have sent a contact message to {{ site }}.{% endblocktrans %}</p>
+<p>{% blocktrans %}Tu has enviado un mensaje de contacto en el sitio {{ site }}.{% endblocktrans %}</p>
 
-<p>The Message:<br/>
+<p>El mensaje es:<br/>
 <i>{{ data.message }}</i>
 <hr/>
 
-<p>{% blocktrans %}Please click on the link below to confirm the message. If you did not post this message, either ignore it or report an incident to {{ support_email }}.{% endblocktrans %}</p>
+<p>{% blocktrans %}Por favor hacé click en el siguiente link para confirmar el mensaje. Si vos no has escrito este mail podés ignorarlo o reportar un incidente en {{ support_email }}.{% endblocktrans %}</p>
 
 <p><a href="http://{{ site.domain }}{{ confirmation_url }}">http://{{ site.domain }}{{ confirmation_url|slice:":40" }}...</a></p>
 
-<p>{% trans "If clicking does not work, you can also copy and paste the address into your browser's address window." %}</p>
+<p>{% trans "Si el click no funciona, copiá el link y pegalo en una ventana de tu navegador." %}</p>
 
 <p>--<br/>
-{% trans "Kind regards" %},<br/>
+{% trans "Saludos" %},<br/>
 {{ site }}</p>
 {% endautoescape %}
