@@ -1,6 +1,7 @@
 {% extends "base_sub_menu.html" %}
-{% block content %}
 {% load settingsvars_tags %}
+{% block content %}
+
 
 <meta property="og:description" content="Viste estos datos de {{eleccion}}"/>
 
@@ -64,34 +65,13 @@
  
                                                     </ul>
                                                 </div>
-                                                
+                        <!------------------------hay que borrar desde aquí---->    
                         <div class="span4">
+                            {% if indices %}
                             <div style="margin-top: -40px;">
                                 <h4 style="width: 300px;">Los datos de <span>{{eleccion}}</span> en: </h4> 
-                                <script>
-                                    $(document).ready(function() {
-                                    // Handler for .ready() called.
-                                    $("#dyna img[title]").tooltip({
-                                    offset: [10, 2],
-                                    effect: 'slide'
-                                    });
-                                    });
-                                </script>
-                                <script>
-                                    // custom easing called "custom"
-                                    $.easing.custom = function (x, t, b, c, d) {
-                                    var s = 1.70158;
-                                    if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
-                                    return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
-                                    }
-                                </script>
-                                <div class="navi"> 
-
-                                    {% for indice in indices %}
-                                    <a class="{{indice.area.clase_en_carrusel}}" href="{{forloop.counter}}" title="{{indice.area.nombre}} - {{indice.nombre}}"></a>
-
-                                    {% endfor %}
-                                </div>
+                                
+                                
                                 <!--<div class="navi"> 
                                     </div>    -->
                                 
@@ -107,7 +87,8 @@
 
 
 
-
+                                            
+                                            
                                             {% for indice in indices %}
                                             <div class="carruselItem">
 
@@ -156,7 +137,19 @@
                                    
                                 </div>
                             </div>
+                            <script>
+                                $(document).ready(function() {
+                                // initialize scrollable
+                                $(".scrollable").scrollable({circular: true }).autoscroll({ autoplay: true, interval: 7000 }).navigator(".navi");
+                                });
+                                
+                            </script>
+                            {% endif %}
                         </div>
+
+
+
+                        <!------------------------hay que borrar hasta aquí---->
                     </div>
                 </div>
             </div>
@@ -185,13 +178,7 @@
                     </div>
                 
 </div>
-<script>
-    $(document).ready(function() {
-    // initialize scrollable
-    $(".scrollable").scrollable({circular: true }).autoscroll({ autoplay: true, interval: 7000 }).navigator(".navi");
-    });
-    
-</script>
+
 
 <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
