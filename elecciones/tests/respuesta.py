@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from django.test import TestCase
+from django.conf import settings
+from django.contrib.sites.models import Site
 from django.core import mail
 from django.core.urlresolvers import reverse
 from elecciones.models import Eleccion, Area, Indice, Dato, Candidato, Pregunta, Respuesta, Contacto, Colectivo, preguntas_por_partido
@@ -89,8 +91,14 @@ class AnswerNotificationTestCase(TestCase):
 	def test_notify_when_answer_arrive(self):
 		self.respuesta1.texto_respuesta = u"Con Respuesta"
 		self.respuesta1.save()
+		candidato_responde = self.respuesta1.candidato
+		domain_url = Site.objects.get_current().domain
 		self.assertEquals(len(mail.outbox), 1)
-		self.assertEquals(mail.outbox[0].subject, 'Tu pregunta ha recibido una respuesta')
+		self.assertEquals(mail.outbox[0].subject,  candidato_responde.nombre + u' ha respondido a tu pregunta.')
+		message = self.respuesta1.pregunta.remitente + u',\rla respuesta la podés encontrar aquí:\rhttp://' + domain_url + self.respuesta1.get_absolute_url() + u'\r ¡Saludos!'
+		print message
+		self.assertEquals(mail.outbox[0].body, message)
+		self.assertEquals(mail.outbox[0].from_email, settings.INFO_CONTACT_MAIL)
 		self.assertTrue(mail.outbox[0].to.index(self.pregunta1.email_sender) > -1)
 
 	def test_dont_notify_in_creation(self):

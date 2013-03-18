@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.core.validators import MaxLengthValidator
+from django.conf import settings
+from django.contrib.sites.models import Site
 from django.db import models
 from mailer import send_mail as store_mail
 from django.core.urlresolvers import reverse
@@ -255,10 +257,12 @@ class Respuesta(models.Model):
 @receiver(post_save, sender=Respuesta)
 def notify_sender(sender, instance, created, **kwargs):
 	respuesta = instance
+	nombre_candidato = respuesta.candidato.nombre
 	to_address = respuesta.pregunta.email_sender
+	domain_url = Site.objects.get_current().domain
 	#only notify in text changing and user provides an email
 	if instance.is_answered() and respuesta.pregunta.email_sender:
-		send_mail('Tu pregunta ha recibido una respuesta', 'Here is the message.', 'from@example.com',[to_address], fail_silently=False)
+		send_mail( nombre_candidato + u' ha respondido a tu pregunta.', respuesta.pregunta.remitente + u',\rla respuesta la podés encontrar aquí:\rhttp://'+ domain_url + respuesta.get_absolute_url() + u'\r ¡Saludos!', settings.INFO_CONTACT_MAIL,[to_address], fail_silently=False)
 
 		
 		

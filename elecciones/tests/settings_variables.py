@@ -28,6 +28,6 @@ class SettingsVariablesInTemplate(TestCase):
 		self.assertEqual(template.render(Context({})), "Mail Subject")
 
 	def test_it_provides_mail_address_template_tag(self):
-		settings.CANDIDATE_INFO_CONTACT_MAIL = "candidatos@mail.com"
+		settings.INFO_CONTACT_MAIL = "candidatos@mail.com"
 		template = Template('{% load settingsvars_tags %}{% candidate_info_contact_mail %}')
 		self.assertEqual(template.render(Context({})), "candidatos@mail.com")

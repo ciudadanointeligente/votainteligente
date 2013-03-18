@@ -14,7 +14,7 @@ def disqus_short_name():
 
 @register.simple_tag
 def candidate_info_contact_mail():
-    return settings.CANDIDATE_INFO_CONTACT_MAIL
+    return settings.INFO_CONTACT_MAIL
 
 @register.simple_tag
 def candidate_info_contact_mail_subject():

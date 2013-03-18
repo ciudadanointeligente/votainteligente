@@ -69,7 +69,10 @@ $(function () {
 					{{form.remitente}}
 					<span class="help-block"> <small> <em> <strong>*Identifícate como quieras* </strong> </em> </small></span>
 					{{form.remitente.errors}}
-					<br/>
+					<label> <strong>Correo (Opcional)</strong></label>
+					{{form.email_sender}}
+					<span class="help-block"> <small> <em> <strong>Dejá tu correo si querés que te avisemos cuando respondan </strong> </em> </small></span>
+					{{form.email_sender.errors}}
 
 					<label> <strong>Escribe tu pregunta</strong></label>
 					{{form.texto_pregunta}}
