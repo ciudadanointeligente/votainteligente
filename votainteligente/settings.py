@@ -196,7 +196,7 @@ INFO_CONTACT_MAIL = '<your e-mail address where you want to receive candidate in
 CANDIDATE_CONTACT_SUBJECT = '<Subject you want for candidates inquiries>'
 
 #contactme settings: notification mail address(es)
-CONTACTME_NOTIFY_TO = 'Alice <alice@example.com>, Joe <joe@example.com>'
+CONTACTME_NOTIFY_TO = ''
 
 EXTRA_APPS = ()
 PREGUNTALE_STATUS = 'GOING_ON'	# Cambia comportamiento del modulo Preguntales. Estados: GOING_ON (por defecto), COMING_SOON, PASSED
