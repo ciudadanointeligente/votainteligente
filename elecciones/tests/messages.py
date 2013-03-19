@@ -230,6 +230,7 @@ class MessageTestCase(TestCase):
 		
 		#hackeamos .virtualenvs/mun12/lib/python2.7/site-packages/captcha/fields.py porque no consideraba settings.debug como true.
 		#Post data
+		settings.DEFAULT_FROM_EMAIL = 'otromail@votainteligente.org'
 		contacto1, created = Contacto.objects.get_or_create(tipo = 1, valor = 'candidato1@candidato1.com', candidato = self.candidato1)
 		contacto2, created = Contacto.objects.get_or_create(tipo = 1, valor = 'candidato2@candidato2.com', candidato = self.candidato2)
 		url = reverse('eleccion-preguntales', kwargs={'slug':self.eleccion1.slug})
@@ -240,6 +241,7 @@ class MessageTestCase(TestCase):
 
 
 		pregunta_nueva = Pregunta.objects.get(remitente='Remitente 1')
+
 		pregunta_nueva.enviar()
 		# Test that two messages are waiting to be sent.
 		self.assertEquals(Message.objects.count(), 2)
@@ -247,6 +249,9 @@ class MessageTestCase(TestCase):
 		# Verify that the subject of the first message is correct.
 		primera_pregunta = Message.objects.all()[0]
 		segunda_pregunta = Message.objects.all()[1]
+		
+		self.assertEquals(primera_pregunta.from_address, settings.DEFAULT_FROM_EMAIL)
+		self.assertEquals(segunda_pregunta.from_address, settings.DEFAULT_FROM_EMAIL)
 		self.assertTrue(primera_pregunta.subject.startswith(u'Un ciudadano está interesado en más información sobre tu candidatura'))
 		self.assertTrue(segunda_pregunta.subject.startswith(u'Un ciudadano está interesado en más información sobre tu candidatura'))
 		# self.assertEqual(mail.outbox[0].from, 'municiaples2012@votainteURLligente.cl')
