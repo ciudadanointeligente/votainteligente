@@ -192,6 +192,7 @@ EMAIL_USE_TLS = True
 DISQUS_SHORT_NAME = '<your disqus short name>'
 
 #candidate info contact mail
+DEFAULT_FROM_EMAIL = 'default@votainteligente.org'
 INFO_CONTACT_MAIL = '<your e-mail address where you want to receive candidate inquiries'
 CANDIDATE_CONTACT_SUBJECT = '<Subject you want for candidates inquiries>'
 
