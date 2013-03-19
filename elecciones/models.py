@@ -223,9 +223,11 @@ class Pregunta(models.Model):
 	def enviar(self):
 		subject= 'Un ciudadano está interesado en más información sobre tu candidatura [ID=#' + str(self.id) + ']'
 		candidatos = Candidato.objects.filter(pregunta=self)
+		current_site = Site.objects.get_current()
+
 		for candidato in candidatos:
-			texto_introduccion = u'Estimado(a) ' + candidato.nombre + ',\reste mensaje ha sido enviado desde votainteligente.cl por un ciudadano con el deseo de informarse sobre su candidatura:'
-			texto_cierre = u'\r\r--\r*para responder a esta pregunta responda este mismo correo sin cambiar el asunto/subject. Gracias.\rLa respuesta quedará publicada en http://votainteligente.cl'
+			texto_introduccion = u'Estimado(a) ' + candidato.nombre + ',\reste mensaje ha sido enviado desde '+current_site.name+' por un ciudadano con el deseo de informarse sobre su candidatura:'
+			texto_cierre = u'\r\r--\r*para responder a esta pregunta responda este mismo correo sin cambiar el asunto/subject. Gracias.\rLa respuesta quedará publicada en http://'+current_site.domain
 			mensaje = texto_introduccion + u'\r\rYo, ' + self.remitente + ' quiero saber: \r\r' + self.texto_pregunta + texto_cierre
 			destinaciones = Contacto.objects.filter(candidato=candidato)
 			for destinacion in destinaciones:
