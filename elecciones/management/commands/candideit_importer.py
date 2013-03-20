@@ -3,12 +3,16 @@
 from elecciones.models import Eleccion, Candidato
 import slumber
 from django.core.management.base import BaseCommand, CommandError
+import re
 
 class Syncronizer(object):
+    twitter_regexp = re.compile(r"^https?://[^/]*(?:t\.co|twitter\.com)/(?:#!\/){0,1}(.[^\/]*)")
+    #twitter_regexp = re.compile(r"twitter.com\/(?:#!\/){0,1}([^/])\/")
     def __init__(self, username, api_key, base_url="candideit.org"):
         self.api = slumber.API("http://"+base_url+"/api/v1/")
         self.username = username
         self.api_key = api_key
+
 
     def sync_elections(self):
         next = True
@@ -28,6 +32,22 @@ class Syncronizer(object):
     def sync_candidates(self, election, parsed_candidates):
         for candidate_dict in parsed_candidates:
             candidate, created = Candidato.objects.get_or_create(eleccion=election, nombre=candidate_dict["name"])
+
+    def _matcher(self, url):
+        r = self.twitter_regexp.match(url)
+        if r:
+            return r.groups()[0]
+        return r
+
+    def sync_twitter(self, candidate, id):
+        candidate_dict = self.api.candidate(id).get(username=self.username, api_key=self.api_key)
+        for link_dict in candidate_dict["links"]:
+            r = self._matcher(link_dict["url"])
+            if r:
+                candidate.twitter = r
+                candidate.save()
+
+
 
 
 class Command(BaseCommand):
