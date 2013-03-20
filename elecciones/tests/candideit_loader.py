@@ -9,6 +9,7 @@ from ludibrio import Stub
 import slumber
 from slumber import Resource
 import encodings.idna
+from ludibrio.matcher import *
 
 
 class CandideitLoaderTestCase(TestCase):
@@ -78,6 +79,8 @@ class CandideitLoaderTestCase(TestCase):
         self.assertEquals(self.syncronizer._matcher("http://twitter.com/#!/Fiera"), "Fiera")
         self.assertEquals(self.syncronizer._matcher("http://twitter.com/#!/Fiera/"), "Fiera")
 
+    
+
 
 
     def test_it_does_not_have_problems_with_other_links(self):
@@ -109,6 +112,13 @@ class CandideitLoaderTestCase(TestCase):
         self.assertEquals(Candidato.objects.filter(nombre=u"cand 1").count(), 1)
         self.assertEquals(Candidato.objects.filter(nombre=u"cand 2").count(), 1)
 
+    def test_it_gets_twitters_when_syncronizing_everything(self):
+        self.syncronizer.sync_elections()
+
+        fieri = Candidato.objects.get(nombre=u"cand 1")
+
+        self.assertEquals(fieri.twitter, "Fiera")
+
     def test_it_loads_several_pages(self):
         response_json_1 = open("elecciones/tests/sample_data/big_json_1.json")
         response_json_2 = open("elecciones/tests/sample_data/big_json_2.json")
@@ -120,6 +130,7 @@ class CandideitLoaderTestCase(TestCase):
         with Stub() as api:
             api.election.get(username=self.username, api_key=self.api_key,offset=0) >> parsed_elections_1
             api.election.get(username=self.username, api_key=self.api_key,offset=20) >> parsed_elections_2
+            api.candidate(kind_of(int)).get(username=self.username, api_key=self.api_key) >> self.parsed_fiera
 
         #Here is where I mock the api
         syncronizer.api = api

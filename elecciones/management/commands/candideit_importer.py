@@ -32,6 +32,7 @@ class Syncronizer(object):
     def sync_candidates(self, election, parsed_candidates):
         for candidate_dict in parsed_candidates:
             candidate, created = Candidato.objects.get_or_create(eleccion=election, nombre=candidate_dict["name"])
+            self.sync_twitter(candidate, candidate_dict["id"])
 
     def _matcher(self, url):
         r = self.twitter_regexp.match(url)
