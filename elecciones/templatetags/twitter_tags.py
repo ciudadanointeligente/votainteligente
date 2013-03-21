@@ -24,8 +24,10 @@ def twittrespuesta(respuesta):
 	if not respuesta.candidato.twitter:
 		return u""
 	template = Template("{{ request.get_host }}")
+	current_site = Site.objects.get_current()
 	url_respuesta = respuesta.get_absolute_url()
-	anchor = '<a href="https://twitter.com/intent/tweet?screen_name='+respuesta.candidato.twitter + '&text=Yo%20tambien%20quiero%20saber%20tu%20opinion%20sobre%20este%20tema&url=' + template.render(Context())+url_respuesta+ '" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Insiste con @'+respuesta.candidato.twitter+'</a>'
+	answer_url = "http://"+current_site.domain+url_respuesta
+	anchor = u'<a href="https://twitter.com/intent/tweet?screen_name='+respuesta.candidato.twitter + '&text=Yo%20tambien%20quiero%20saber%20tu%20opinion%20sobre%20este%20tema&url=' + answer_url + '" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Insiste con @'+respuesta.candidato.twitter+'</a>'
 	return mark_safe(anchor)
 
 

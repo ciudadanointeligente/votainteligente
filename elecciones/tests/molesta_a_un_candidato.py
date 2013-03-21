@@ -12,6 +12,7 @@ from django.test.client import Client
 from django.utils.unittest import skip
 from django.template import Template, Context, RequestContext
 from urllib2 import quote
+from django.contrib.sites.models import Site
 
 class MolestaAUnCandidato(TestCase):
 	def setUp(self):
@@ -45,14 +46,16 @@ class MolestaAUnCandidato(TestCase):
 		expected_html = u""
 
 		self.assertEqual(template.render(context), expected_html)
-	@skip('No tenemos host domain en local')
+
 	def test_molesta_a_un_candidato_con_twitter_por_su_respuesta_via_twitter(self):
 		template = Template("{% load twitter_tags %}{{ respuesta|twittrespuesta }}")
 		context = Context({"respuesta": self.respuesta1 })
 		template2 = Template("{{ request.get_host }}")
+		current_site = Site.objects.get_current()
+		answer_url = "http://"+current_site.domain+self.respuesta1.get_absolute_url()
+		url_respuesta = template2.render(Context())+answer_url
 		
-		url_respuesta = template2.render(Context())+self.respuesta1.get_absolute_url()
-		expected_html = u'<a href="https://twitter.com/intent/tweet?screen_name='+self.respuesta1.candidato.twitter+u'" data-text="'+url_respuesta+u'" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Tweet to @'+self.respuesta1.candidato.twitter+u'</a>'
+		expected_html = '<a href="https://twitter.com/intent/tweet?screen_name='+self.respuesta1.candidato.twitter + '&text=Yo%20tambien%20quiero%20saber%20tu%20opinion%20sobre%20este%20tema&url=' + answer_url + '" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Insiste con @'+self.respuesta1.candidato.twitter+'</a>'
 		
 		self.assertEqual(template.render(context), expected_html)
 
