@@ -54,12 +54,12 @@ onmouseout="document.over5.src='{{ STATIC_URL }}images/06-png.png'"> </a>
       </div>
       <div class="row-fluid">
             <li class="span6" style="width:480px;"><a href="{% url ranking %}" class="thumbnail"> <img src="{{ STATIC_URL }}images/07-png.png" alt="Ranking de candidatos"> </a> </li>
-            <li class="span4" style="width:210px;"><a href="#" class="thumbnail"> <img src="{{ STATIC_URL }}images/12-png.png" alt="Encontrá a tu candidato ideal"> </a> </li>
+            <li class="span4" style="width:200px;"><a href="presidentea" class="thumbnail"> <img src="{{ STATIC_URL }}images/12-png.png" alt="Encontrá a tu candidato ideal"> </a> </li>
             <li class="span3 thumbnail" style="width:200px;">
               <ul class ="listadoMenuHome">
                 <li class="itemListaServel"><a href="presidentea/preguntales" class="btn btn-block">Preguntale a tu candidato</a></li>
                 <li class="itemListaServel"><a href="{% url voluntarios %}" class="btn btn-block">Encuestadores voluntarios</a></li>
-                <li class="itemListaServel"><a href="contact/" class="btn btn-block">¿Sos candidato? ¡Contactanos!</a></li>
+                <li class="itemListaServel"><a href="{% url contactme-get-contact-form %}" class="btn btn-block">¿Sos candidato? ¡Contactanos!</a></li>
                 <li class="itemListaServel"><a href="https://docs.google.com/file/d/0BxKInCm998RfcGhYbEFUX2lOd3M/edit?usp=sharing" class="btn btn-block">Cuestionario para Candidatos/as</a></li>
                 <li class="itemListaServel"><a href="http://tsje.gov.py/e2013/#!/consulta-al-rcp.html" target="_blank" class="btn btn-block">¿D&oacute;nde voto?</a></li>
               </ul>
