@@ -18,7 +18,9 @@ urlpatterns = patterns('',
 	url(r'^fiscaliza/?$', ReportaView.as_view(), name="reporta"),
 	url(r'^que_puedo_hacer/?$', QuePuedoHacerHacerView.as_view(), name="que_puedo_hacer"),
 	url(r'^nos_faltan_datos/?$', NosFaltanDatosView.as_view(), name="nos_faltan_datos"),
-	url(r'^ranking/?$', cache_page(Ranking.as_view(), 60 * settings.CACHE_MINUTES), name="ranking"),	
+	url(r'^todos/?$', TemplateView.as_view(template_name="todos_los_candidatos.html"), name="todos"),
+	url(r'^ranking/?$', cache_page(Ranking.as_view(), 60 * settings.CACHE_MINUTES), name="ranking"),
+
  	url(r'^contact/', include('django_contactme.urls'))	,
 
 	#pages depending on the eleccion
