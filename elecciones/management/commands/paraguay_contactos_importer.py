@@ -21,7 +21,7 @@ class ContactosLoader:
             print "no pude encontrar a "+ nombre_candidato
         else:
             candidato = query[0]
-            email = line[3].decode('utf-8').strip()
+            email = line[2].decode('utf-8').strip()
             try:
                 validate_email(email)
                 Contacto.objects.get_or_create(candidato=candidato, valor=email)
