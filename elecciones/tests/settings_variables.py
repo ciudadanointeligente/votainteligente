@@ -50,3 +50,7 @@ class SettingsVariablesInTemplate(TestCase):
         settings.INFO_CONTACT_MAIL = "candidatos@mail.com"
         template = Template('{% load settingsvars_tags %}{% candidate_info_contact_mail %}')
         self.assertEqual(template.render(Context({})), "candidatos@mail.com")
+
+
+
+

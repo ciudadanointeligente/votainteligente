@@ -30,6 +30,10 @@ def ga_account_domain():
     return settings.GOOGLE_ANALYTICS_DOMAIN
 
 @register.simple_tag
+def url_domain():
+    return Site.objects.get_current().domain
+
+@register.simple_tag
 def ga_script():
     domain_url = Site.objects.get_current().domain
     expected_script = u"<script type=\"text/javascript\">\n"

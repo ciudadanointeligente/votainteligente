@@ -8,10 +8,6 @@
     <![endif]-->
 
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-<meta property="og:description" content="Todo lo que necesitas saber para votar en las elecciones municipales 2012"/>
-<meta name="description" content="Todo lo que necesitas saber para votar en las elecciones municipales 2012">
-<meta name="keywords" content="elecciones, municipales, municipales 2012, chile">
-<meta property="og:image" content="{{ STATIC_URL }}images/portadaFacebook.png"/>
 <title>A Quienes Elegimos - Elecciones 2013{% if title %} - {{title}}{% endif %}</title>
 <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico"/>
 
@@ -103,6 +99,11 @@
             </li>
             <li><a href="{% url contactme-get-contact-form %}">¿Sos candidato? contactanos</a></li>
             <li style="list-style:none;"><a href="https://twitter.com/share" class="twitter-share-button" data-text="Candidatos 2013" data-via="aqepy" data-lang="es" data-hashtags="votapy">Twitter</a></li>
+            <li style="list-style:none; ">
+                <a name="fb_share" type="button" share_url="http://{% url_domain %}">Compartir</a> 
+                <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript">
+                </script>
+            </li>
             <li style="list-style:none;">
               <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Faquieneselegimos.org.py&amp;send=false&amp;layout=button_count&amp;width=120&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=167673216633674" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:120px; height:21px;" allowTransparency="true"></iframe>
             </li>

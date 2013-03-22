@@ -4,6 +4,11 @@
 
 
 <meta property="og:description" content="Viste estos datos de {{eleccion}}"/>
+<meta name="description" content="Todo lo que necesitas saber para votar informado en las elecciones 2013">
+<meta name="keywords" content="elecciones, parlasur, senador, diputados, presidente, paraguay, 2013">
+<meta property="og:image" content="{{ STATIC_URL }}images/01-jpg.jpg"/>
+
+<title>Candidatos/as a <span>{{eleccion}} </title>
 
        
         
@@ -16,12 +21,17 @@
                                 
                                 </h2>
                                 <div class="share_this_eleccion">
-                                    <span class='st_facebook_large' displayText='Facebook'></span>
-                                    <span class='st_twitter_large' displayText='Tweet'></span>
-                                    <span class='st_linkedin_large' displayText='LinkedIn'></span>
-                                    <span class='st_pinterest_large' displayText='Pinterest'></span>
-                                    <span class='st_email_large' displayText='Email'></span>
-                                </div>
+                                    </li>
+            <li style="list-style:none; float:left;"><a href="https://twitter.com/share" class="twitter-share-button" data-text="Candidatos a {{eleccion}}" data-via="aqepy" data-lang="es" data-hashtags="votapy">Twitter</a></li>
+            <li style="list-style:none; float:left;">
+                <a name="fb_share" type="button" share_url="http://{% url_domain %}/{{ eleccion.slug }}">Compartir</a> 
+                <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript">
+                </script>
+            </li>
+            <li style="list-style:none; float:left;">
+              <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Faquieneselegimos.org.py&amp;send=false&amp;layout=button_count&amp;width=120&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=167673216633674" scrolling="no" frameborder="0" style="margin-left:5px; border:none; overflow:hidden; width:120px; height:21px;" allowTransparency="true"></iframe>
+            </li>
+        </div>
                             
                           <div> 
                                 <iframe src="{{eleccion.main_embedded}}" class="candideitorg_embeded" scrolling="no"> </iframe>
