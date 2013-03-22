@@ -107,7 +107,7 @@ class Candidato(models.Model):
 	#mail = models.CharField(max_length=255)
 	eleccion = models.ForeignKey(Eleccion)
 	colectivo = models.ForeignKey(Colectivo, null=True, blank=True)
-	partido = models.CharField(max_length=255, blank=True, null=True)
+	partido = models.CharField(max_length=255)
 	web = models.CharField(max_length=255, blank=True, null=True)
 	twitter = models.CharField(max_length=255, null=True, blank=True)
 
