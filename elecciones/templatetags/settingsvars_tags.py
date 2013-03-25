@@ -38,8 +38,14 @@ def ga_script():
     domain_url = Site.objects.get_current().domain
     expected_script = u"<script type=\"text/javascript\">\n"
     expected_script += u"  var _gaq = _gaq || [];\n"
+    counter = 0
     for tracker_id in settings.GOOGLE_ANALYTICS_TRACKER_ID:
-        expected_script += u"  _gaq.push(['_setAccount', '"+tracker_id+"']);\n"
+        index = ""
+        if counter > 0:
+            index = chr(counter + 96)+"."
+        expected_script += u"  _gaq.push(['"+index+"_setAccount', '"+tracker_id+"']);\n"
+        expected_script += u"  _gaq.push(['"+index+"_trackPageview']);\n"
+        counter+=1
     expected_script += u"  _gaq.push(['_setDomainName', '"+domain_url+"']);\n"
     expected_script += u"  _gaq.push(['_trackPageview']);\n\n  (function() {\n"
     expected_script += u"    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;\n"
