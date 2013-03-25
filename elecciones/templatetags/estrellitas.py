@@ -16,3 +16,11 @@ def estrellitas_disabled(candidato_id):
 	if candidato.estrellitas == 3:
 		return u'disabled="disabled"'
 	return ''
+
+
+@register.filter(name='estrellitas_tachado')
+def estrellitas_tachado(candidato_id):
+    candidato = Candidato.objects.get(pk=candidato_id)
+    if candidato.estrellitas == 3:
+        return u'tachado'
+    return ''

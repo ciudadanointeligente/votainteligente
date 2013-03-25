@@ -3,6 +3,7 @@
 {% load estrellitas %}
 {% block content %}
 {% load twitter_tags %}
+{% load settingsvars_tags %}
  
 <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js" ></script>
 <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js"></script>
@@ -51,16 +52,23 @@ $(function () {
 					<h5> Candidatos </h5>
 					<label>Marcá sólo los candidatos a los que querés preguntar</label>
 {% for pk, candidato in form.candidato.field.choices %}
-					<label class="checkbox">
-					<input type="checkbox" name="candidato" {{ pk|estrellitas_disabled }} value={{pk}}>{{candidato}} {{ pk|estrellitas }}
+					<label class="checkbox {{ pk|estrellitas_tachado }}">
+					<input type="checkbox" name="candidato" {{ pk|estrellitas_disabled }} class="" value={{pk}}>{{candidato}} {{ pk|estrellitas }}
 					 </input> </label>
 {% endfor %}
+				No tenemos los contactos de muchos de estos candidatos, si tenés alguno, mandános un mail a {% candidate_info_contact_mail %}
+						<br />
+						<br />
 					<span class="help-block"> <small> <em> <strong>
+						
 						* Tu pregunta será enviada al mail del candidato
 						<br/>
 						** Tu pregunta será enviada al mail del partido del candidato
 						<br/>
-						*** No tenemos el mail del candidato </strong></em> </small></span>
+						*** No tenemos el mail del candidato 
+						<br />
+						
+					</strong></em> </small></span>
 
 					{{form.candidato.errors}}
 				</div>

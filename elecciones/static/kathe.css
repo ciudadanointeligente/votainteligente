@@ -1737,4 +1737,7 @@ margin-left: 1.4%;
 margin-left: 0;
 }
 
+.tachado{
+    text-decoration: line-through;
+}
 
