@@ -209,7 +209,7 @@ CACHE_MINUTES = 15
 GOOGLE_ANALYTICS_TRACKER_ID = ['THETRACKERID']
 
 
-NO_ANSWER_DEFAULT_MESSAGE = "No pasa naipe todavia"
+NO_ANSWER_DEFAULT_MESSAGE = u"No pasa naipe aún loco"
 
 try:
     from local_settings import *
