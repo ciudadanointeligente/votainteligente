@@ -21,7 +21,7 @@ class HomeTemplateView(TemplateView):
 		context['elecciones_buscables'] = elecciones_buscables
 		context['elecciones_destacadas'] = elecciones_destacadas
 		context['ultimas_preguntas']= Pregunta.objects.all().order_by('-id')[:5]
-		context['ultimas_respuestas']= Respuesta.objects.exclude(texto_respuesta='Sin Respuesta').order_by('-id')[:5]
+		context['ultimas_respuestas']= Respuesta.objects.exclude(texto_respuesta=settings.NO_ANSWER_DEFAULT_MESSAGE).order_by('-id')[:5]
 		return context
 
 class EleccionOverview(DetailView):

@@ -38,7 +38,7 @@ class Eleccion(models.Model):
 		preg = self.preguntas()
 		return preg.count()
 	def numero_respuestas(self):
-		resp = Respuesta.objects.filter(pregunta__in=self.preguntas()).exclude(texto_respuesta='Sin Respuesta').distinct()
+		resp = Respuesta.objects.filter(pregunta__in=self.preguntas()).exclude(texto_respuesta=settings.NO_ANSWER_DEFAULT_MESSAGE).distinct()
 		return resp.count()
 
 
@@ -135,12 +135,12 @@ class Candidato(models.Model):
 
 	def respuestas(self):
 		preg = Pregunta.objects.filter(candidato=self).distinct()
-		resp = Respuesta.objects.filter(pregunta__in=preg).filter(candidato=self).exclude(texto_respuesta='Sin Respuesta').distinct()
+		resp = Respuesta.objects.filter(pregunta__in=preg).filter(candidato=self).exclude(texto_respuesta=settings.NO_ANSWER_DEFAULT_MESSAGE).distinct()
 		return resp
 
 
 	def _preguntas_respondidas(self):
-		preguntas = self.pregunta.exclude(respuesta__texto_respuesta="Sin Respuesta")
+		preguntas = self.pregunta.exclude(respuesta__texto_respuesta=settings.NO_ANSWER_DEFAULT_MESSAGE)
 		return preguntas
 
 
@@ -241,7 +241,7 @@ class Respuesta(models.Model):
 	"""docstring for Respuesta"""
 	pregunta = models.ForeignKey(Pregunta)
 	candidato = models.ForeignKey(Candidato)
-	texto_respuesta = models.TextField(default = 'Sin Respuesta')
+	texto_respuesta = models.TextField(default = settings.NO_ANSWER_DEFAULT_MESSAGE)
 
 	def __unicode__(self):
 		return self.texto_respuesta
@@ -252,7 +252,7 @@ class Respuesta(models.Model):
 	
 
 	def is_answered(self):
-		if self.texto_respuesta.strip() == u"Sin Respuesta":
+		if self.texto_respuesta.strip() == settings.NO_ANSWER_DEFAULT_MESSAGE:
 			return False
 		return True
 

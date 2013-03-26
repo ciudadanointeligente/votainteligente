@@ -208,6 +208,9 @@ CACHE_MINUTES = 15
 #TRACKERIDS it can be several 
 GOOGLE_ANALYTICS_TRACKER_ID = ['THETRACKERID']
 
+
+NO_ANSWER_DEFAULT_MESSAGE = "No pasa naipe todavia"
+
 try:
     from local_settings import *
     INSTALLED_APPS += EXTRA_APPS

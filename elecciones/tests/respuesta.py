@@ -39,7 +39,7 @@ class RespuestaTestCase(TestCase):
 		self.assertTrue(created)
 		self.assertEquals(respuesta.candidato, self.candidato1)
 		self.assertEquals(respuesta.pregunta, self.pregunta1)
-		self.assertEquals(respuesta.texto_respuesta, u"Sin Respuesta")
+		self.assertEquals(respuesta.texto_respuesta, settings.NO_ANSWER_DEFAULT_MESSAGE)
 
 	def test_get_absolute_url(self):
 		respuesta, created = Respuesta.objects.get_or_create(candidato = self.candidato1, pregunta = self.pregunta1)
@@ -61,7 +61,7 @@ class RespuestaTestCase(TestCase):
 
 	def test_is_not_answered_with_spaces(self):
 		respuesta = Respuesta.objects.create(candidato = self.candidato1, pregunta = self.pregunta1)
-		respuesta.texto_respuesta = u"Sin Respuesta     "#Many spaces at the end
+		respuesta.texto_respuesta = settings.NO_ANSWER_DEFAULT_MESSAGE+ "                          "#Many spaces at the end
 
 		self.assertFalse(respuesta.is_answered())
 
@@ -101,7 +101,7 @@ class AnswerNotificationTestCase(TestCase):
 		self.assertTrue(mail.outbox[0].to.index(self.pregunta1.email_sender) > -1)
 
 	def test_dont_notify_in_creation(self):
-		self.respuesta1.texto_respuesta = u"Sin Respuesta"
+		self.respuesta1.texto_respuesta = settings.NO_ANSWER_DEFAULT_MESSAGE
 		self.respuesta1.save()
 		self.assertEquals(len(mail.outbox), 0)
 

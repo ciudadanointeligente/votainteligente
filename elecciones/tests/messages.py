@@ -92,8 +92,8 @@ class MessageTestCase(TestCase):
 		pregunta = Pregunta.objects.create(
 											remitente='remitente1', 
 											texto_pregunta='texto_pregunta1')
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta, candidato=self.candidato1)
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta, candidato=self.candidato2)
+		Respuesta.objects.create(pregunta=pregunta, candidato=self.candidato1)
+		Respuesta.objects.create(pregunta=pregunta, candidato=self.candidato2)
 		#Se crea la pregunta con su respectivo texto y remitente?
 		self.assertTrue(pregunta)
 		self.assertEquals(pregunta.aprobada,False)
@@ -103,8 +103,8 @@ class MessageTestCase(TestCase):
 		respuesta_no_contestada1 = Respuesta.objects.filter(candidato=self.candidato1).filter(pregunta=pregunta)[0]
 		respuesta_no_contestada2 = Respuesta.objects.filter(candidato=self.candidato2).filter(pregunta=pregunta)[0]
 		#Se crean las respuestas, y se guardan en la bd con los valores iniciales que corresponden?
-		self.assertEquals(respuesta_no_contestada1.texto_respuesta,'Sin Respuesta')
-		self.assertEquals(respuesta_no_contestada2.texto_respuesta,'Sin Respuesta')
+		self.assertEquals(respuesta_no_contestada1.texto_respuesta, settings.NO_ANSWER_DEFAULT_MESSAGE)
+		self.assertEquals(respuesta_no_contestada2.texto_respuesta, settings.NO_ANSWER_DEFAULT_MESSAGE)
 		#Existe la asociación entre preguntas y candidatos?
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta).filter(nombre=self.candidato1.nombre).count(),1)
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta).filter(nombre=self.candidato2.nombre).count(),1)
@@ -125,11 +125,11 @@ class MessageTestCase(TestCase):
 	def test_create_answer_message(self):
 		#Se crea la pregunta y las respuestas asociadas
 		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato1)
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato2)
+		Respuesta.objects.create(pregunta=pregunta1, candidato=self.candidato1)
+		Respuesta.objects.create(pregunta=pregunta1, candidato=self.candidato2)
 		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2')
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato2)
+		Respuesta.objects.create(pregunta=pregunta2, candidato=self.candidato1)
+		Respuesta.objects.create(pregunta=pregunta2, candidato=self.candidato2)
 		#Se cambia la respuesta por defecto a la respuesta obtenida?
 		respuesta_candidato1_pregunta1 = Respuesta.objects.filter(candidato=self.candidato1).filter(pregunta=pregunta1)[0]
 		respuesta_candidato1_pregunta1.texto_respuesta ='texto_candidato1_respuesta1'
@@ -138,7 +138,7 @@ class MessageTestCase(TestCase):
 		self.assertEquals(respuesta_candidato1_pregunta1_db.texto_respuesta,'texto_candidato1_respuesta1')
 		#Se cambian accidentalmente otras respuestas?
 		respuesta_candidato1_pregunta2 = Respuesta.objects.filter(candidato=self.candidato1).filter(pregunta=pregunta2)[0]
-		self.assertEquals(respuesta_candidato1_pregunta2.texto_respuesta,'Sin Respuesta')
+		self.assertEquals(respuesta_candidato1_pregunta2.texto_respuesta, settings.NO_ANSWER_DEFAULT_MESSAGE)
 	
 	def test_mail_sending(self):
 
@@ -200,8 +200,8 @@ class MessageTestCase(TestCase):
 		#Se crean las respuestas, y se guardan en la bd con los valores iniciales que corresponden
 		respuesta_no_contestada1 = Respuesta.objects.filter(candidato=self.candidato1).filter(pregunta=pregunta_enviada)[0]
 		respuesta_no_contestada2 = Respuesta.objects.filter(candidato=self.candidato2).filter(pregunta=pregunta_enviada)[0]
-		self.assertEquals(respuesta_no_contestada1.texto_respuesta,'Sin Respuesta')
-		self.assertEquals(respuesta_no_contestada2.texto_respuesta,'Sin Respuesta')
+		self.assertEquals(respuesta_no_contestada1.texto_respuesta, settings.NO_ANSWER_DEFAULT_MESSAGE)
+		self.assertEquals(respuesta_no_contestada2.texto_respuesta, settings.NO_ANSWER_DEFAULT_MESSAGE)
 		#Existe la asociación entre preguntas y candidatos
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).filter(nombre=self.candidato1.nombre).count(),1)
 		self.assertEquals(Candidato.objects.filter(pregunta=pregunta_enviada).filter(nombre=self.candidato2.nombre).count(),1)
@@ -265,8 +265,8 @@ class MessageTestCase(TestCase):
 		response = self.client.get(url)
 		
 		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1')
-		respuesta1 = Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato1)
-		respuesta2 = Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato2)
+		respuesta1 = Respuesta.objects.create(pregunta=pregunta1, candidato=self.candidato1)
+		respuesta2 = Respuesta.objects.create(pregunta=pregunta1, candidato=self.candidato2)
 
 		self.assertEquals(response.status_code, 200)
 		#Check conversaciones
@@ -301,9 +301,9 @@ class MessageTestCase(TestCase):
 		pregunta1 = Pregunta.objects.create(texto_pregunta='texto_pregunta1', remitente='remitente1',aprobada=True)
 		pregunta2 = Pregunta.objects.create(texto_pregunta='texto_pregunta2', remitente='remitente2',aprobada=True)
 		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3',aprobada=True)
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta1, candidato=self.candidato1)
+		Respuesta.objects.create(pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
+		Respuesta.objects.create(pregunta=pregunta2, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta 2', pregunta=pregunta3, candidato=self.candidato3)
 
 		self.assertEqual(self.eleccion1.numero_preguntas(), 2)
@@ -316,9 +316,8 @@ class MessageTestCase(TestCase):
 		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3',aprobada=True)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c1', pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
+		r2 = Respuesta.objects.create(pregunta=pregunta2, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p3c3', pregunta=pregunta3, candidato=self.candidato3)
-
 		self.assertEqual(self.eleccion1.numero_respuestas(), 2)
 		self.assertEqual(self.eleccion2.numero_respuestas(), 1)
 		self.assertEqual(self.eleccion3.numero_respuestas(), 0)
@@ -329,7 +328,7 @@ class MessageTestCase(TestCase):
 		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3',aprobada=True)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c1', pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
+		r2= Respuesta.objects.create(pregunta=pregunta2, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p3c3', pregunta=pregunta3, candidato=self.candidato3)
 		
 		self.assertEqual(self.candidato1.numero_preguntas(), 2)
@@ -344,7 +343,7 @@ class MessageTestCase(TestCase):
 		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3',aprobada=True)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c1', pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
+		Respuesta.objects.create( pregunta=pregunta2, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p3c3', pregunta=pregunta3, candidato=self.candidato3)
 
 		self.assertEqual(self.candidato1.numero_respuestas(), 1)
@@ -358,7 +357,7 @@ class MessageTestCase(TestCase):
 		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3')
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c1', pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
+		Respuesta.objects.create(pregunta=pregunta2, candidato=self.candidato1)
 		preguntas_partido_1 = self.colectivo1.preguntas
 		preguntas_partido_2 = self.colectivo2.preguntas
 		preguntas_partido_3 = self.colectivo3.preguntas
@@ -376,7 +375,7 @@ class MessageTestCase(TestCase):
 		pregunta3 = Pregunta.objects.create(texto_pregunta='texto_pregunta3', remitente='remitente3')
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c1', pregunta=pregunta1, candidato=self.candidato1)
 		Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p1c2', pregunta=pregunta1, candidato=self.candidato2)
-		Respuesta.objects.create(texto_respuesta = 'Sin Respuesta', pregunta=pregunta2, candidato=self.candidato1)
+		Respuesta.objects.create(pregunta=pregunta2, candidato=self.candidato1)
 		# Respuesta.objects.create(texto_respuesta = 'Texto Respuesta p3c3', pregunta=pregunta3, candidato=self.candidato3)
 
 
