@@ -40,7 +40,7 @@ class PreguntaForm(forms.ModelForm):
         #self.fields['texto_pregunta'].label = 'Escribe tu pregunta'
 
         self.fields['remitente'].widget.attrs['class'] = 'input-xxlarge btn-block remitentePreguntale'
-        self.fields['remitente'].widget.attrs['placeholder'] = 'Estudiante, Profesora, Empresario, Campesino'
+        self.fields['remitente'].widget.attrs['placeholder'] = 'Nombre, Estudiante, Profesora, Empresario, Campesino'
         self.fields['texto_pregunta'].widget.attrs['class'] = 'input-xxlarge btn-block'
         self.fields['texto_pregunta'].widget.attrs['placeholder'] = 'Escribe una pregunta clara y respetuosa. Revisa si otros han preguntado lo que a ti te interesa saber.'
         self.fields['texto_pregunta'].widget.attrs['rows'] = '5'
