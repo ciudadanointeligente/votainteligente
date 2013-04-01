@@ -163,11 +163,10 @@ class RankingTestCase(TestCase):
 		self.assertEquals(response.context["malos"][2]["candidato"], self.candidato2)
 		self.assertEquals(response.context["malos"][3]["candidato"], self.candidato1)
 
-		self.assertEquals(len(response.context["buenos"]), 4)
+		self.assertEquals(len(response.context["buenos"]), 3)
 		self.assertEquals(response.context["buenos"][0]["candidato"], self.candidato1)
 		self.assertEquals(response.context["buenos"][1]["candidato"], self.candidato2)
 		self.assertEquals(response.context["buenos"][2]["candidato"], self.candidato4)
-		self.assertEquals(response.context["buenos"][3]["candidato"], self.candidato3)
 
 
 
@@ -176,7 +175,7 @@ class RankingTestCase(TestCase):
 		clasificados = view.clasificados()
 		los_mas_buenos = view.buenos(clasificados)
 
-		self.assertEquals(len(los_mas_buenos), 4)
+		self.assertEquals(len(los_mas_buenos), 3)
 		self.assertEquals(los_mas_buenos[0]["candidato"], self.candidato1)
 		self.assertEquals(los_mas_buenos[0]["pregunta_count"], 3)
 		self.assertEquals(los_mas_buenos[0]["preguntas_respondidas"], 3)
@@ -193,10 +192,6 @@ class RankingTestCase(TestCase):
 		self.assertEquals(los_mas_buenos[2]["preguntas_respondidas"], 1)
 		self.assertEquals(los_mas_buenos[2]["preguntas_no_respondidas"], 2)
 
-		self.assertEquals(los_mas_buenos[3]["candidato"], self.candidato3)
-		self.assertEquals(los_mas_buenos[3]["pregunta_count"], 3)
-		self.assertEquals(los_mas_buenos[3]["preguntas_respondidas"], 0)
-		self.assertEquals(los_mas_buenos[3]["preguntas_no_respondidas"], 3)
-
+		
 
 		

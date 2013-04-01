@@ -219,7 +219,12 @@ class Ranking(TemplateView):
 		return sorted(clasificados,  key=itemgetter('preguntas_no_respondidas'), reverse=True)[:15]
 
 	def buenos(self, clasificados):
-		return sorted(clasificados,  key=itemgetter('preguntas_respondidas'), reverse=True)[:15]
+		ordered_list = sorted(clasificados,  key=itemgetter('preguntas_respondidas'), reverse=True)[:15]
+		los_mas_buenos = []
+		for bueno in ordered_list:
+			if bueno["preguntas_respondidas"] > 0:
+				los_mas_buenos.append(bueno)
+		return los_mas_buenos
 
 
 	def clasificados(self):
