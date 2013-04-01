@@ -47,7 +47,7 @@ class MolestaAUnCandidato(TestCase):
 
 		self.assertEqual(template.render(context), expected_html)
 
-	def test_molesta_a_un_candidato_con_twitter_por_su_respuesta_via_twitter(self):
+	def test_molesta_a_un_candidato_con_twitter_por_que_no_ha_respondido(self):
 		template = Template("{% load twitter_tags %}{{ respuesta|twittrespuesta }}")
 		context = Context({"respuesta": self.respuesta1 })
 		template2 = Template("{{ request.get_host }}")
@@ -55,8 +55,19 @@ class MolestaAUnCandidato(TestCase):
 		answer_url = "http://"+current_site.domain+self.respuesta1.get_absolute_url()
 		url_respuesta = template2.render(Context())+answer_url
 		
-		expected_html = '<a href="https://twitter.com/intent/tweet?screen_name='+self.respuesta1.candidato.twitter + '&text=Yo%20tambien%20quiero%20saber%20tu%20opinion%20sobre%20este%20tema&url=' + answer_url + '" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Insiste con @'+self.respuesta1.candidato.twitter+'</a>'
+		expected_html = u'<a href="https://twitter.com/intent/tweet?screen_name='+self.respuesta1.candidato.twitter + u'&text=Yo%20tambi%C3%A9n%20quiero%20saber%20tu%20opini%C3%B3n%20sobre%20este%20tema&url=' + answer_url + u'" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Insistí con @'+self.respuesta1.candidato.twitter+u'</a>'
 		
 		self.assertEqual(template.render(context), expected_html)
 
-
+	def test_dale_las_gracias_a_un_candidato_que_si_respondio_por_twitter(self):
+		template = Template("{% load twitter_tags %}{{ respuesta|twittrespuesta }}")
+		context = Context({"respuesta": self.respuesta1 })
+		template2 = Template("{{ request.get_host }}")
+		current_site = Site.objects.get_current()
+		answer_url = "http://"+current_site.domain+self.respuesta1.get_absolute_url()
+		url_respuesta = template2.render(Context())+answer_url
+		self.respuesta1.texto_respuesta = u"A mi me gustan las papas fritas con harto ketchup"
+		
+		expected_html = u'<a href="https://twitter.com/intent/tweet?screen_name='+self.respuesta1.candidato.twitter + u'&text=Gracias%20por%20responder&url=' + answer_url + u'" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Seguí la conversación con @'+self.respuesta1.candidato.twitter+u'</a>'
+		
+		self.assertEqual(template.render(context), expected_html)

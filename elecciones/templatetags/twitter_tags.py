@@ -4,6 +4,7 @@ from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
 from django.template import Template, Context
 from django.contrib.sites.models import Site
+from django.utils.http import urlquote
 
 import socket
 
@@ -27,7 +28,12 @@ def twittrespuesta(respuesta):
 	current_site = Site.objects.get_current()
 	url_respuesta = respuesta.get_absolute_url()
 	answer_url = "http://"+current_site.domain+url_respuesta
-	anchor = u'<a href="https://twitter.com/intent/tweet?screen_name='+respuesta.candidato.twitter + '&text=Yo%20tambien%20quiero%20saber%20tu%20opinion%20sobre%20este%20tema&url=' + answer_url + '" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">Insiste con @'+respuesta.candidato.twitter+'</a>'
+	twitter_message = u"Yo también quiero saber tu opinión sobre este tema"
+	action_to_take = u"Insistí con"
+	if respuesta.is_answered():
+		twitter_message = "Gracias por responder"
+		action_to_take = u"Seguí la conversación con"
+	anchor = u'<a href="https://twitter.com/intent/tweet?screen_name='+respuesta.candidato.twitter + u'&text='+urlquote(twitter_message)+'&url=' + answer_url + u'" class="twitter-mention-button" data-lang="es" data-related="ciudadanoi">'+action_to_take+' @'+respuesta.candidato.twitter+u'</a>'
 	return mark_safe(anchor)
 
 
